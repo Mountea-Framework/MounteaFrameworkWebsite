@@ -27,22 +27,33 @@ document.addEventListener('DOMContentLoaded', () => {
     let scrollTimeout;
     const originalCards = [...allDetails];
     const totalCards = originalCards.length;
+    const clonesCount = 3;
 
     function cloneCards() {
-      originalCards.forEach(card => {
-        const cloneBefore = card.cloneNode(true);
-        const cloneAfter = card.cloneNode(true);
-        wrapper.insertBefore(cloneBefore, wrapper.firstChild);
-        wrapper.appendChild(cloneAfter);
-      });
+      for (let i = 0; i < clonesCount; i++) {
+        originalCards.forEach(card => {
+          const cloneBefore = card.cloneNode(true);
+          const cloneAfter = card.cloneNode(true);
+          wrapper.insertBefore(cloneBefore, wrapper.firstChild);
+          wrapper.appendChild(cloneAfter);
+        });
+      }
+    }
+
+    function getCardWidth() {
+      const allCards = wrapper.querySelectorAll('details');
+      if (allCards.length === 0) return window.innerWidth * 0.7;
+      
+      const cardStyle = getComputedStyle(allCards[0]);
+      const wrapperStyle = getComputedStyle(wrapper);
+      return parseFloat(cardStyle.width) + parseFloat(wrapperStyle.gap);
     }
 
     function updateActiveCard() {
       const scrollLeft = wrapper.scrollLeft;
-      const cardWidth = window.innerWidth * 0.7;
+      const cardWidth = getCardWidth();
       const allCards = wrapper.querySelectorAll('details');
       const centerIndex = Math.round(scrollLeft / cardWidth);
-      const originalIndex = centerIndex % totalCards;
       
       allCards.forEach(card => {
         card.classList.remove('active', 'animate-in');
@@ -57,42 +68,44 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function handleInfiniteScroll() {
-      const cardWidth = window.innerWidth * 0.7;
-      const maxScroll = wrapper.scrollWidth - wrapper.clientWidth;
+      const cardWidth = getCardWidth();
+      const totalWidth = cardWidth * totalCards;
       const currentScroll = wrapper.scrollLeft;
+      const scrollWidth = wrapper.scrollWidth;
+      const clientWidth = wrapper.clientWidth;
       
       if (currentScroll <= cardWidth) {
-        wrapper.scrollLeft = currentScroll + (totalCards * cardWidth);
-      } else if (currentScroll >= maxScroll - cardWidth) {
-        wrapper.scrollLeft = currentScroll - (totalCards * cardWidth);
+        wrapper.scrollLeft = currentScroll + totalWidth;
+      } else if (currentScroll >= scrollWidth - clientWidth - cardWidth) {
+        wrapper.scrollLeft = currentScroll - totalWidth;
       }
     }
 
     wrapper.addEventListener('scroll', () => {
       handleInfiniteScroll();
       clearTimeout(scrollTimeout);
-      scrollTimeout = setTimeout(updateActiveCard, 150);
+      scrollTimeout = setTimeout(updateActiveCard, 100);
     });
 
     originalCards.forEach((detail, index) => {
       detail.addEventListener('click', (e) => {
         e.preventDefault();
-        const cardWidth = window.innerWidth * 0.7;
+        const cardWidth = getCardWidth();
         const currentScroll = wrapper.scrollLeft;
-        const currentCenter = Math.round(currentScroll / cardWidth);
-        const targetScroll = currentCenter * cardWidth + (index - (currentCenter % totalCards)) * cardWidth;
+        const currentIndex = Math.round(currentScroll / cardWidth);
+        const targetIndex = currentIndex + (index - (currentIndex % totalCards));
         
         wrapper.scrollTo({
-          left: targetScroll,
+          left: targetIndex * cardWidth,
           behavior: 'smooth'
         });
       });
     });
 
     cloneCards();
-    const cardWidth = window.innerWidth * 0.7;
-    wrapper.scrollLeft = totalCards * cardWidth;
-    updateActiveCard();
+    const cardWidth = getCardWidth();
+    wrapper.scrollLeft = clonesCount * totalCards * cardWidth;
+    setTimeout(updateActiveCard, 100);
   }
 
   function handleResize() {
