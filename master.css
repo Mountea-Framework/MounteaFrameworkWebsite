@@ -10,10 +10,12 @@ body {
    -ms-overflow-style: none;
 }
 
+/*
 * {
   scrollbar-width: none;
    -ms-overflow-style: none;
 }
+*/
 
 main {
   display: flex;
@@ -286,11 +288,11 @@ details:not([open]) h3 {
   }
 
   details[open] {
-    flex: 0 0 90vw;
+    flex: 0 0 100vw;
   }
 
   details:hover {
-    flex: 0 0 90vw;
+    flex: 0 0 100vw;
   }
 
   summary {
@@ -299,12 +301,12 @@ details:not([open]) h3 {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0.2rem;
+    padding: 0rem;
   }
 
   .details-content-wrapper {
     max-width: 95%;
-    padding: 0.5rem;
+    padding: 1rem;
   }
 
   .details-content-wrapper p {
