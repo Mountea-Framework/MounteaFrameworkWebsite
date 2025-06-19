@@ -1,0 +1,25 @@
+{
+  "name": "Mountea Framework",
+  "short_name": "Mountea",
+  "description": "An open-source library of plugins and tools for Unreal Engine developers (Interaction, Dialogue, Inventory, Launcher, Dialoguer, Inventory Manager).",
+  "lang": "en-US",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#000000",
+  "theme_color": "#1E88E5",
+  "icons": [
+    {
+      "src": "/icons/icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "categories": [
+    "developer",
+    "productivity",
+    "game"
+  ]
+}
