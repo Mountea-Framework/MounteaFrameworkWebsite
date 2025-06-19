@@ -1,17 +1,23 @@
-(function() {
-  const items = document.querySelectorAll('details[name="accordion"]');
-  items.forEach((el) => {
-    el.addEventListener('toggle', () => {
-      if (el.open) {
-        // close others
-        //items.forEach((other) => { if (other !== el) other.open = false; });
-      } else {
-        // prevent closing all
-        const anyOpen = Array.from(items).some(item => item.open);
-        if (!anyOpen) {
-          //el.open = true;
-        }
+document.addEventListener('DOMContentLoaded', () => {
+  const allDetails = Array.from(document.querySelectorAll('details'));
+
+  allDetails.forEach(detail => {
+    detail.addEventListener('toggle', () => {
+      if (detail.open) {
+        // Close any other open details
+        allDetails.forEach(other => {
+          if (other !== detail && other.open) {
+            other.open = false;
+          }
+        });
+      }
+
+      // Handle animation class
+      detail.classList.remove('animate-in');
+      if (detail.open) {
+        void detail.offsetWidth;
+        detail.classList.add('animate-in');
       }
     });
   });
-})();
+});
