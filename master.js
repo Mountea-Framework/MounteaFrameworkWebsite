@@ -108,8 +108,9 @@ document.addEventListener('DOMContentLoaded', () => {
     allCards.forEach((detail, index) => {
       detail.addEventListener('click', (e) => {
         e.preventDefault();
+        const targetScroll = index * cardWidth;
         wrapper.scrollTo({
-          left: index * cardWidth,
+          left: targetScroll,
           behavior: 'smooth'
         });
       });
@@ -118,7 +119,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const interactionIndex = Array.from(allCards).findIndex(card => card.id === 'interaction');
     
     if (interactionIndex !== -1) {
-      wrapper.scrollLeft = interactionIndex * cardWidth;
+      const targetScroll = interactionIndex * cardWidth;
+      wrapper.scrollLeft = targetScroll;
     } else {
       wrapper.scrollLeft = clonesCount * totalCards * cardWidth;
     }
