@@ -10,13 +10,6 @@ body {
    -ms-overflow-style: none;
 }
 
-/*
-* {
-  scrollbar-width: none;
-   -ms-overflow-style: none;
-}
-*/
-
 main {
   display: flex;
   width: 100%;
@@ -267,15 +260,16 @@ details:not([open]) h3 {
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
-    gap: 0.5rem;
+    gap: 0;
+    scroll-padding: 0;
   }
 
   details {
-    flex: 0 0 70vw;
-    min-width: 70vw;
+    flex: 0 0 100vw;
+    min-width: 100vw;
     scroll-snap-align: center;
     filter: none;
-    transition: flex 10ms ease transition-delay 0.5s;
+    transition: filter 0.3s ease;
   }
 
   details:not(.active) {
@@ -283,7 +277,6 @@ details:not([open]) h3 {
   }
 
   details.active {
-    transform: scale(1);
     filter: none;
   }
 
@@ -301,12 +294,12 @@ details:not([open]) h3 {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0rem;
+    padding: 0.2rem;
   }
 
   .details-content-wrapper {
     max-width: 95%;
-    padding: 1rem;
+    padding: 0.5rem;
   }
 
   .details-content-wrapper p {
