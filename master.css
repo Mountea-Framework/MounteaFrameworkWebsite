@@ -1,5 +1,3 @@
-
-
 html,
 body {
   margin: 0;
@@ -8,6 +6,13 @@ body {
   height: 100%;
   overflow: hidden;
   background-color: black;
+  scrollbar-width: none;
+   -ms-overflow-style: none;
+}
+
+* {
+  scrollbar-width: none;
+   -ms-overflow-style: none;
 }
 
 main {
@@ -76,9 +81,14 @@ details:not([open]):hover {
   filter: none;
 }
 
+details::marker, 
 summary::marker {
   content: '';
 }
+
+summary::-webkit-details-marker {
+   display: none;
+ }
 
 summary {
   width: 100%;
@@ -91,7 +101,8 @@ summary {
   font-size: 3rem;
   font-weight: bold;
   transition: opacity 0.5s ease;
-  opacity: 1;  
+  opacity: 1;
+  list-style: none;  
 }
 
 details[open] summary {
@@ -237,5 +248,82 @@ details:not([open]) h3 {
     border: 1px solid rgba(0, 0, 0, 0.2);
     padding: 0.1rem 0.3rem;
     border-radius: 0.2rem;
+  }
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+
+  * {
+    font-size: 0.8rem !important;
+  }
+
+  .accordion-wrapper {
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    gap: 0.5rem;
+  }
+
+  details {
+    flex: 0 0 70vw;
+    min-width: 70vw;
+    scroll-snap-align: center;
+    filter: none;
+    transition: transform 0.3s ease;
+  }
+
+  details:not(.active) {
+    filter: grayscale(50%) brightness(0.2);
+  }
+
+  details.active {
+    transform: scale(1);
+    filter: none;
+  }
+
+  details[open] {
+    flex: 0 0 70vw;
+  }
+
+  details:hover {
+    flex: 0 0 70vw;
+    transform: scale(1);
+  }
+
+  summary {
+    writing-mode: horizontal-tb;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.2rem;
+  }
+
+  .details-content-wrapper {
+    max-width: 95%;
+    padding: 0.5rem;
+  }
+
+  .details-content-wrapper p {
+    font-size: 0.6rem;
+  }
+
+  details[open] h3,
+  details:not([open]) h3 {
+    font-size: 2rem !important;
+  }
+
+  .card-actions {
+    flex-wrap: wrap;
+    gap: 0.3rem;
+  }
+
+  .btn {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem !important;
   }
 }
