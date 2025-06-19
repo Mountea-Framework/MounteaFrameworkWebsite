@@ -1,0 +1,96 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: black;
+}
+
+main {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  padding: 0.1rem;
+}
+
+.accordion-wrapper {
+  flex: 1;
+  display: flex;
+  gap: 0.1rem;
+}
+
+/* Background images defined by id */
+details#interaction      { --bg: url('/assets/interactionPluginCover.png'); }
+details#dialogue         { --bg: url('/assets/dialoguePluginCover.png'); }
+details#inventory        { --bg: url('/assets/inventoryPluginCover.png'); }
+details#launcher         { --bg: url('/assets/projectLauncherCover.png'); }
+details#dialoguer        { --bg: url('/assets/dialoguerToolCover.png'); }
+details#inventoryManager { --bg: url('/assets/inventoryManagerCover.png'); }
+
+/* Card styling */
+details {
+  flex: 1 1 0%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  background: var(--bg) center/cover no-repeat;
+  transform-origin: center center;
+  border: none;
+
+  filter: grayscale(100%) blur(4px);
+  transition: flex 0.5s ease, transform 0.3s ease, filter 0.5s ease;
+}
+
+details[open] {
+  flex: 0 0 60%;
+  border: none;
+  transform: none;
+  filter: none;
+}
+
+details:not([open]):hover {
+  flex: 2 1 0%;
+  filter: none;
+}
+
+details::marker { content: ''; }
+
+summary {
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+summary::marker {
+  content: '';
+}
+
+details summary:focus {
+  outline: none;
+}
+
+details:hover,
+details:has(summary:focus) {
+  outline: 3px solid transparent;
+  outline-offset: 3px;
+}
+
+/* Reset & base */
+@layer reset {
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { font-size: 14px; }
+}
+
+@layer baselayout {
+  html { color: #444; font-family: system-ui; line-height: 1.42; }
+}
+
+@layer code {
+  pre { border: 1px solid #dedede; padding: 1em; background: #f7f7f7; overflow-x: auto; }
+  code { background: #f7f7f7; border: 1px solid rgba(0,0,0,0.2); padding: 0.1rem 0.3rem; border-radius: 0.2rem; }
+}
