@@ -273,7 +273,7 @@ details:not([open]) h3 {
     min-width: 70vw;
     scroll-snap-align: center;
     filter: none;
-    transition: transform 0.3s ease;
+    transition: flex 10ms ease transition-delay 0.5s;
   }
 
   details:not(.active) {
@@ -286,12 +286,11 @@ details:not([open]) h3 {
   }
 
   details[open] {
-    flex: 0 0 70vw;
+    flex: 0 0 90vw;
   }
 
   details:hover {
-    flex: 0 0 70vw;
-    transform: scale(1);
+    flex: 0 0 90vw;
   }
 
   summary {
