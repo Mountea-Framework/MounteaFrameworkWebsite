@@ -24,58 +24,52 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function initMobile() {
     const wrapper = document.querySelector('.accordion-wrapper');
-    let scrollTimeout;
-
+    
     function updateActiveCard() {
-      const scrollLeft = wrapper.scrollLeft;
-      const wrapperWidth = wrapper.clientWidth;
-      const wrapperCenter = wrapperWidth / 2;
-      const allCards = wrapper.querySelectorAll('details');
+      const wrapperRect = wrapper.getBoundingClientRect();
+      const wrapperCenter = wrapperRect.left + wrapperRect.width / 2;
       
-      let activeCard = null;
+      let closestCard = null;
       let minDistance = Infinity;
       
-      allCards.forEach(card => {
+      allDetails.forEach(card => {
         const cardRect = card.getBoundingClientRect();
-        const wrapperRect = wrapper.getBoundingClientRect();
-        const cardCenter = cardRect.left - wrapperRect.left + cardRect.width / 2;
+        const cardCenter = cardRect.left + cardRect.width / 2;
         const distance = Math.abs(cardCenter - wrapperCenter);
         
         if (distance < minDistance) {
           minDistance = distance;
-          activeCard = card;
+          closestCard = card;
         }
       });
       
-      allCards.forEach(card => {
+      allDetails.forEach(card => {
         card.classList.remove('active', 'animate-in');
         card.open = false;
       });
       
-      if (activeCard) {
-        activeCard.classList.add('active');
-        activeCard.open = true;
-        activeCard.classList.add('animate-in');
+      if (closestCard) {
+        closestCard.classList.add('active');
+        closestCard.open = true;
+        closestCard.classList.add('animate-in');
       }
     }
 
     wrapper.addEventListener('scroll', () => {
-      clearTimeout(scrollTimeout);
-      scrollTimeout = setTimeout(updateActiveCard, 50);
+      updateActiveCard();
     });
 
-    allDetails.forEach(detail => {
+    allDetails.forEach((detail, index) => {
       detail.addEventListener('click', (e) => {
         e.preventDefault();
-        detail.scrollIntoView({ 
-          behavior: 'smooth', 
-          block: 'nearest', 
-          inline: 'center' 
+        const cardWidth = wrapper.clientWidth * 0.7 + 16;
+        wrapper.scrollTo({
+          left: index * cardWidth,
+          behavior: 'smooth'
         });
       });
     });
 
-    // Set initial active card
     const interactionCard = allDetails.find(card => card.id === 'interaction');
     if (interactionCard) {
       interactionCard.scrollIntoView({ 
@@ -92,17 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const newIsMobile = window.innerWidth <= 768;
     if (newIsMobile !== isMobile) {
       isMobile = newIsMobile;
-      
-      allDetails.forEach(detail => {
-        detail.classList.remove('active', 'animate-in');
-        detail.open = false;
-      });
-
-      if (isMobile) {
-        initMobile();
-      } else {
-        initDesktop();
-      }
+      location.reload();
     }
   }
 
