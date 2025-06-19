@@ -101,24 +101,20 @@ document.addEventListener('DOMContentLoaded', () => {
       scrollTimeout = setTimeout(updateActiveCard, 100);
     });
 
-    originalCards.forEach((detail, index) => {
+    cloneCards();
+    const cardWidth = getCardWidth();
+    const allCards = wrapper.querySelectorAll('details');
+    
+    allCards.forEach((detail, index) => {
       detail.addEventListener('click', (e) => {
         e.preventDefault();
-        const cardWidth = getCardWidth();
-        const currentScroll = wrapper.scrollLeft;
-        const currentIndex = Math.round(currentScroll / cardWidth);
-        const targetIndex = currentIndex + (index - (currentIndex % totalCards));
-        
         wrapper.scrollTo({
-          left: targetIndex * cardWidth,
+          left: index * cardWidth,
           behavior: 'smooth'
         });
       });
     });
-
-    cloneCards();
-    const cardWidth = getCardWidth();
-    const allCards = wrapper.querySelectorAll('details');
+    
     const interactionIndex = Array.from(allCards).findIndex(card => card.id === 'interaction');
     
     if (interactionIndex !== -1) {
@@ -126,6 +122,16 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       wrapper.scrollLeft = clonesCount * totalCards * cardWidth;
     }
+
+    allCards.forEach((detail, index) => {
+      detail.addEventListener('click', (e) => {
+        e.preventDefault();
+        wrapper.scrollTo({
+          left: index * cardWidth,
+          behavior: 'smooth'
+        });
+      });
+    });
     
     setTimeout(updateActiveCard, 100);
   }
