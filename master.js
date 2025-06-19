@@ -25,115 +25,65 @@ document.addEventListener('DOMContentLoaded', () => {
   function initMobile() {
     const wrapper = document.querySelector('.accordion-wrapper');
     let scrollTimeout;
-    const originalCards = [...allDetails];
-    const totalCards = originalCards.length;
-    const clonesCount = 3;
-
-    function cloneCards() {
-      for (let i = 0; i < clonesCount; i++) {
-        originalCards.forEach(card => {
-          const cloneBefore = card.cloneNode(true);
-          const cloneAfter = card.cloneNode(true);
-          wrapper.insertBefore(cloneBefore, wrapper.firstChild);
-          wrapper.appendChild(cloneAfter);
-        });
-      }
-    }
-
-    function getCardWidth() {
-      const allCards = wrapper.querySelectorAll('details');
-      if (allCards.length === 0) return window.innerWidth * 0.7;
-      
-      const cardStyle = getComputedStyle(allCards[0]);
-      const wrapperStyle = getComputedStyle(wrapper);
-      return parseFloat(cardStyle.width) + parseFloat(wrapperStyle.gap);
-    }
 
     function updateActiveCard() {
       const scrollLeft = wrapper.scrollLeft;
-      const cardWidth = getCardWidth();
-      const wrapperCenter = wrapper.clientWidth / 2;
+      const wrapperWidth = wrapper.clientWidth;
+      const wrapperCenter = wrapperWidth / 2;
       const allCards = wrapper.querySelectorAll('details');
       
-      let closestIndex = 0;
-      let closestDistance = Infinity;
+      let activeCard = null;
+      let minDistance = Infinity;
       
-      allCards.forEach((card, index) => {
-        const cardLeft = index * cardWidth;
-        const cardCenter = cardLeft + cardWidth / 2;
-        const distance = Math.abs(cardCenter - (scrollLeft + wrapperCenter));
+      allCards.forEach(card => {
+        const cardRect = card.getBoundingClientRect();
+        const wrapperRect = wrapper.getBoundingClientRect();
+        const cardCenter = cardRect.left - wrapperRect.left + cardRect.width / 2;
+        const distance = Math.abs(cardCenter - wrapperCenter);
         
-        if (distance < closestDistance) {
-          closestDistance = distance;
-          closestIndex = index;
+        if (distance < minDistance) {
+          minDistance = distance;
+          activeCard = card;
         }
       });
       
-      allCards.forEach((card, index) => {
+      allCards.forEach(card => {
         card.classList.remove('active', 'animate-in');
         card.open = false;
-        
-        if (index === closestIndex) {
-          card.classList.add('active');
-          card.open = true;
-          card.classList.add('animate-in');
-        }
       });
-    }
-
-    function handleInfiniteScroll() {
-      const cardWidth = getCardWidth();
-      const totalWidth = cardWidth * totalCards;
-      const currentScroll = wrapper.scrollLeft;
-      const scrollWidth = wrapper.scrollWidth;
-      const clientWidth = wrapper.clientWidth;
       
-      if (currentScroll <= cardWidth) {
-        wrapper.scrollLeft = currentScroll + totalWidth;
-      } else if (currentScroll >= scrollWidth - clientWidth - cardWidth) {
-        wrapper.scrollLeft = currentScroll - totalWidth;
+      if (activeCard) {
+        activeCard.classList.add('active');
+        activeCard.open = true;
+        activeCard.classList.add('animate-in');
       }
     }
 
     wrapper.addEventListener('scroll', () => {
-      handleInfiniteScroll();
       clearTimeout(scrollTimeout);
-      scrollTimeout = setTimeout(updateActiveCard, 100);
+      scrollTimeout = setTimeout(updateActiveCard, 50);
     });
 
-    cloneCards();
-    const cardWidth = getCardWidth();
-    const allCards = wrapper.querySelectorAll('details');
-    
-    allCards.forEach((detail, index) => {
+    allDetails.forEach(detail => {
       detail.addEventListener('click', (e) => {
         e.preventDefault();
-        const targetScroll = index * cardWidth;
-        wrapper.scrollTo({
-          left: targetScroll,
-          behavior: 'smooth'
+        detail.scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'nearest', 
+          inline: 'center' 
         });
       });
     });
-    
-    const interactionIndex = Array.from(allCards).findIndex(card => card.id === 'interaction');
-    
-    if (interactionIndex !== -1) {
-      const targetScroll = interactionIndex * cardWidth;
-      wrapper.scrollLeft = targetScroll;
-    } else {
-      wrapper.scrollLeft = clonesCount * totalCards * cardWidth;
+
+    // Set initial active card
+    const interactionCard = allDetails.find(card => card.id === 'interaction');
+    if (interactionCard) {
+      interactionCard.scrollIntoView({ 
+        behavior: 'auto', 
+        block: 'nearest', 
+        inline: 'center' 
+      });
     }
-
-    allCards.forEach((detail, index) => {
-      detail.addEventListener('click', (e) => {
-        e.preventDefault();
-        wrapper.scrollTo({
-          left: index * cardWidth,
-          behavior: 'smooth'
-        });
-      });
-    });
     
     setTimeout(updateActiveCard, 100);
   }
