@@ -52,19 +52,33 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateActiveCard() {
       const scrollLeft = wrapper.scrollLeft;
       const cardWidth = getCardWidth();
+      const wrapperCenter = wrapper.clientWidth / 2;
       const allCards = wrapper.querySelectorAll('details');
-      const centerIndex = Math.round(scrollLeft / cardWidth);
       
-      allCards.forEach(card => {
-        card.classList.remove('active', 'animate-in');
-        card.open = false;
+      let closestIndex = 0;
+      let closestDistance = Infinity;
+      
+      allCards.forEach((card, index) => {
+        const cardLeft = index * cardWidth;
+        const cardCenter = cardLeft + cardWidth / 2;
+        const distance = Math.abs(cardCenter - (scrollLeft + wrapperCenter));
+        
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          closestIndex = index;
+        }
       });
       
-      if (allCards[centerIndex]) {
-        allCards[centerIndex].classList.add('active');
-        allCards[centerIndex].open = true;
-        allCards[centerIndex].classList.add('animate-in');
-      }
+      allCards.forEach((card, index) => {
+        card.classList.remove('active', 'animate-in');
+        card.open = false;
+        
+        if (index === closestIndex) {
+          card.classList.add('active');
+          card.open = true;
+          card.classList.add('animate-in');
+        }
+      });
     }
 
     function handleInfiniteScroll() {
@@ -104,7 +118,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     cloneCards();
     const cardWidth = getCardWidth();
-    wrapper.scrollLeft = clonesCount * totalCards * cardWidth;
+    const allCards = wrapper.querySelectorAll('details');
+    const interactionIndex = Array.from(allCards).findIndex(card => card.id === 'interaction');
+    
+    if (interactionIndex !== -1) {
+      wrapper.scrollLeft = interactionIndex * cardWidth;
+    } else {
+      wrapper.scrollLeft = clonesCount * totalCards * cardWidth;
+    }
+    
     setTimeout(updateActiveCard, 100);
   }
 
