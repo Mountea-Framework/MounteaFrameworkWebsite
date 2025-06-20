@@ -146,6 +146,10 @@ details.animate-in .details-content-wrapper {
   gap: 0.5rem;
 }
 
+.btn, .btn * {
+  pointer-events: all;
+}
+
 .btn {
   display: flex;
   gap: 0.25rem;

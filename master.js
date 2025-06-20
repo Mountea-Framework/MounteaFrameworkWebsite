@@ -59,15 +59,26 @@ document.addEventListener('DOMContentLoaded', () => {
       updateActiveCard();
     });
 
-    allDetails.forEach((detail, index) => {
+    allDetails.forEach(detail => {
       detail.addEventListener('click', (e) => {
+        if (e.target.closest('.btn')) {
+          return;
+        }
         e.preventDefault();
-        const cardWidth = wrapper.clientWidth * 0.7 + 16;
-        wrapper.scrollTo({
-          left: index * cardWidth,
-          behavior: 'smooth'
+        detail.scrollIntoView({
+          behavior: 'smooth',
+          block: 'nearest',
+          inline: 'center'
         });
       });
+    });
+
+    document.addEventListener('click', (e) => {
+      const btn = e.target.closest('.btn');
+      if (btn && btn.href) {
+        e.stopPropagation();
+        //window.open(btn.href, '_blank');
+      }
     });
 
     const interactionCard = allDetails.find(card => card.id === 'interaction');
