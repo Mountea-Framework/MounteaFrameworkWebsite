@@ -24,30 +24,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function initMobile() {
     const wrapper = document.querySelector('.accordion-wrapper');
-    
+
     function updateActiveCard() {
       const wrapperRect = wrapper.getBoundingClientRect();
       const wrapperCenter = wrapperRect.left + wrapperRect.width / 2;
-      
+
       let closestCard = null;
       let minDistance = Infinity;
-      
+
       allDetails.forEach(card => {
         const cardRect = card.getBoundingClientRect();
         const cardCenter = cardRect.left + cardRect.width / 2;
         const distance = Math.abs(cardCenter - wrapperCenter);
-        
+
         if (distance < minDistance) {
           minDistance = distance;
           closestCard = card;
         }
       });
-      
+
       allDetails.forEach(card => {
         card.classList.remove('active', 'animate-in');
         card.open = false;
       });
-      
+
       if (closestCard) {
         closestCard.classList.add('active');
         closestCard.open = true;
@@ -83,14 +83,30 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const interactionCard = allDetails.find(card => card.id === 'interaction');
     if (interactionCard) {
-      interactionCard.scrollIntoView({ 
-        behavior: 'auto', 
-        block: 'nearest', 
-        inline: 'center' 
+      interactionCard.scrollIntoView({
+        behavior: 'auto',
+        block: 'nearest',
+        inline: 'center'
       });
     }
-    
+
     setTimeout(updateActiveCard, 100);
+
+    const contactBox = document.getElementById('contactBox');
+
+    contactBox.addEventListener('click', function (e) {
+      e.stopPropagation();
+      this.classList.toggle('expanded');
+    });
+    document.addEventListener('click', function () {
+      contactBox.classList.remove('expanded');
+    });
+    const contactItems = document.querySelectorAll('.contact-item');
+    contactItems.forEach(item => {
+      item.addEventListener('click', function (e) {
+        e.stopPropagation();
+      });
+    });
   }
 
   function handleResize() {

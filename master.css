@@ -7,7 +7,8 @@ body {
   overflow: hidden;
   background-color: black;
   scrollbar-width: none;
-   -ms-overflow-style: none;
+  -ms-overflow-style: none;
+  color: #dedede;
 }
 
 main {
@@ -19,7 +20,8 @@ main {
   transition: all 1s;
 }
 
-text, p {
+text,
+p {
   pointer-events: none;
 }
 
@@ -76,14 +78,14 @@ details:not([open]):hover {
   filter: none;
 }
 
-details::marker, 
+details::marker,
 summary::marker {
   content: '';
 }
 
 summary::-webkit-details-marker {
-   display: none;
- }
+  display: none;
+}
 
 summary {
   width: 100%;
@@ -97,11 +99,11 @@ summary {
   font-weight: bold;
   transition: opacity 0.5s ease;
   opacity: 1;
-  list-style: none;  
+  list-style: none;
 }
 
 details[open] summary {
-  opacity: 0;  
+  opacity: 0;
 }
 
 details:not([open]) summary {
@@ -129,7 +131,7 @@ details:has(summary:focus) {
   transform: translateY(20px);
   flex-wrap: nowrap;
   align-items: flex-start;
-  pointer-events: none;  
+  pointer-events: none;
 }
 
 ul {
@@ -146,7 +148,8 @@ details.animate-in .details-content-wrapper {
   gap: 0.5rem;
 }
 
-.btn, .btn * {
+.btn,
+.btn * {
   pointer-events: all;
 }
 
