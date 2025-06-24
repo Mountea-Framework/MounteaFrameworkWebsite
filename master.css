@@ -181,6 +181,10 @@ details.animate-in .details-content-wrapper {
   background: rgba(0, 0, 0, 0.6);
 }
 
+.btn img {
+  margin-right: 0.4em;
+}
+
 .deprecated {
   text-decoration: line-through;
 }
@@ -188,8 +192,7 @@ details.animate-in .details-content-wrapper {
 img {
   width: 1em;
   height: 1em;
-  vertical-align: middle;
-  margin-right: 0.4em;
+  vertical-align: middle;  
   filter: drop-shadow(3px 5px 4px black);
 }
 
@@ -259,6 +262,10 @@ details:not([open]) h3 {
 
   * {
     font-size: 0.8rem !important;
+  }
+
+  h3 {
+    font-size: 1.2rem !important;
   }
 
   .accordion-wrapper {

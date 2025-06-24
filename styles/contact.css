@@ -19,7 +19,7 @@
     background: rgba(0, 0, 0, 0.85);
     backdrop-filter: blur(10px);
     padding: 1rem;
-    width: 25vh;
+    width: 35vh;
     height: 4rem;
     overflow: hidden;
     transition: all 0.3s ease;
@@ -118,7 +118,7 @@
 @media (max-width: 768px) {
     .contact-box {
         padding: 0.75rem;
-        min-width: 160px;
+        min-width: 240px;
         font-size: 0.8rem;
     }
 
