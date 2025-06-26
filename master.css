@@ -44,6 +44,10 @@ details#inventory {
   --bg: url('/assets/inventoryPluginCover.webp');
 }
 
+details#director {
+  --bg: url('/assets/gameDiractorCover.webp');
+}
+
 details#launcher {
   --bg: url('/assets/projectLauncherCover.webp');
 }
@@ -54,6 +58,11 @@ details#dialoguer {
 
 details#inventoryManager {
   --bg: url('/assets/inventoryManagerCover.webp');
+}
+
+details > * {
+  position: relative;
+  z-index: 1;
 }
 
 details {
@@ -67,6 +76,20 @@ details {
   border: none;
   filter: grayscale(100%) blur(4px);
   transition: flex 0.5s ease, filter 0.5s ease;
+}
+
+details::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0);
+  pointer-events: none;
+  z-index: 0;
+  transition: background 0.3s ease;
+}
+
+details[open]::before {
+  background: rgba(0, 0, 0, 0.4);
 }
 
 details[open] {
@@ -259,7 +282,7 @@ details:not([open]) h3 {
 }
 
 /* Mobile styles */
-@media (max-width: 768px) {
+@media (max-width: 1000px) {
 
   * {
     font-size: 0.8rem !important;
