@@ -19,7 +19,7 @@
     background: rgba(0, 0, 0, 0.85);
     backdrop-filter: blur(10px);
     padding: 1rem;
-    width: 35vh;
+    width: 20rem;
     height: 4rem;
     overflow: hidden;
     transition: all 0.3s ease;
@@ -39,6 +39,10 @@
     color: #dedede;
 }
 
+.contact-box a:hover {
+    font-weight: 600;
+}
+
 .contact-box::before {
     display: none;
 }
@@ -46,7 +50,7 @@
 /* Desktop hover */
 @media (hover: hover) {
     .contact-box:hover {
-        height: 30vh;
+        height: 20rem;
     }
 
     .contact-box:hover .contact-box-content {
@@ -57,7 +61,7 @@
 
 /* Mobile/touch expanded state */
 .contact-box.expanded {
-    height: 30vh;
+    height: 20rem;
 }
 
 .contact-box.expanded .contact-box-content {

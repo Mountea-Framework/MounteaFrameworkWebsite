@@ -159,6 +159,22 @@ details:has(summary:focus) {
   pointer-events: none;
 }
 
+.wip::after {
+  content: "WIP";
+  position: absolute;
+  top: -1rem;
+  left: 1rem;
+  background: rgba(255, 165, 0, 0.8);
+  color: black;
+  font-weight: bold;
+  font-size: 0.8rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  z-index: 10;
+  pointer-events: none;
+  text-shadow: none;
+}
+
 ul {
   list-style-position: inside;
 }
@@ -301,6 +317,12 @@ details:not([open]) h3 {
     -webkit-overflow-scrolling: touch;
     gap: 0;
     scroll-padding: 0;
+  }
+
+  .wip::after {
+    top: -1.2rem;
+    left: 0.5rem;
+    padding: 0.2rem 0.5rem;
   }
 
   details {
