@@ -367,6 +367,7 @@ details:not([open]) h3 {
   .details-content-wrapper {
     max-width: 95%;
     padding: 0.5rem;
+    padding-bottom: 1rem;
   }
 
   .details-content-wrapper p {
