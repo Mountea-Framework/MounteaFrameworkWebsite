@@ -68,6 +68,7 @@ body,
   border-radius: 0 !important;
   transition: all 0.15s ease !important;
   box-shadow: none !important;
+  background: var(--prose-bg) !important;
 }
 
 /*.md-tabs__item:hover,*/
@@ -321,6 +322,19 @@ body,
 
   .md-content__inner {
     padding: 1rem !important;
+  }
+
+  .md-nav__list {
+    margin-left: 0rem;
+  }
+
+  .md-nav--primary .md-nav__title~.md-nav__list {
+    background-color: var(--prose-bg);
+  }
+
+  .md-typeset p {
+    line-height: 1.1rem;
+    font-size: 0.9rem;
   }
 }
 
