@@ -17,9 +17,6 @@ This guide walks you through configuring the **Mountea Advanced Inventory** plug
    | Input Mapping           | `UInputMappingContext` for inventory hotkeys         |
    | Equipment Input Mapping | Separate context for equipment panel                 |
 
-3. **Restart Editor**
-   Some new entries (e.g. custom inventory types) load only at startup.
-
 ---
 
 ## 2. Inventory Types & Defaults
@@ -46,7 +43,7 @@ Inventories control how items are stored, stacked, and capped. The plugin provid
 
 ```cpp
 // Get the project settings instance
-UMounteaAdvancedInventorySettings* Settings = UMounteaInventoryStatics::GetInventorySettings();
+UMounteaAdvancedInventorySettings* Settings = GetDefault<UMounteaAdvancedInventorySettings>();
 
 // Read or fall back to defaults
 TArray<FString> Categories = Settings->GetAllowedCategories();
@@ -61,7 +58,7 @@ The plugin auto-registers a set of UI commands. You can retrieve or customize th
 // After loading settings
 const TArray<FString>& Commands = Settings->GetWidgetCommands();
 for (const FString& Cmd : Commands) {
-    UE_LOG(LogTemp, Log, TEXT("Inventory listens to: %s"), *Cmd);
+    LOG_INFO(TEXT("Inventory listens to: %s"), *Cmd);
 }
 ```
 
@@ -77,7 +74,8 @@ UMounteaInventoryUIStatics::ApplyTheme(this);
 
 !!! warning "Important"
 
-    In order to be able to receive the `ApplyTheme` event, your User widget must implement `IMounteaInventoryGenericWidgetInterface` or be a child of `UMounteaAdvancedInventoryBaseWidget`.
+    In order to be able to receive the `ApplyTheme` event, your User widget must implement `IMounteaInventoryGenericWidgetInterface` 
+    or be a child of `UMounteaAdvancedInventoryBaseWidget`.
 
 ---
 
@@ -135,7 +133,7 @@ UMounteaInventoryUIStatics::ApplyTheme(this);
 ```cpp
 // Example: Adding a new "Backpack" slot
 FMounteaEquipmentSlotHeaderData Backpack;
-Backpack.DisplayName = FText::FromString("Backpack");
+Backpack.DisplayName = LOCTEXT("SlotNames_Backpack", "Backpack");
 Backpack.TagContainer.AddTag(BackpackTag);
 SettingsConfig->AllowedEquipmentSlots.Add("Backpack", Backpack);
 ```
