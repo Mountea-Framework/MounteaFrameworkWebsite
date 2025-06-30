@@ -1,0 +1,66 @@
+site_name: Mountea Framework Docs
+site_url: https://mountea.tools/docs/
+site_dir: site
+
+theme:
+  name: material
+  favicon: ../assets/icon.png
+  logo: ../assets/icon.png
+  palette:
+    scheme: slate
+    primary: black
+    accent: blue
+  features:
+    - navigation.sections
+    - navigation.tabs
+    - navigation.top
+    - search.highlight
+    - search.suggest
+    - content.code.annotate
+    - content.tabs.link
+    - content.action.edit
+    - toc.integrate
+
+nav:
+  - Home: index.md
+  - Advanced Inventory & Equipment System:
+      - Overview: AdvancedInventoryEquipmentSystem/index.md
+      - Inventory System:
+          - Core: AdvancedInventoryEquipmentSystem/InventorySystem/index.md
+          - Items: AdvancedInventoryEquipmentSystem/InventorySystem/Items.md
+          - Item Templates: AdvancedInventoryEquipmentSystem/InventorySystem/ItemTemplates.md
+          - Categories: AdvancedInventoryEquipmentSystem/InventorySystem/Categories.md
+          - Rarity System: AdvancedInventoryEquipmentSystem/InventorySystem/Rarity.md
+          - Search & Filtering: AdvancedInventoryEquipmentSystem/InventorySystem/Search.md
+          - Notifications: AdvancedInventoryEquipmentSystem/InventorySystem/Notifications.md
+      - Equipment System:
+          - Core: AdvancedInventoryEquipmentSystem/EquipmentSystem/index.md
+          - Attachment System: AdvancedInventoryEquipmentSystem/EquipmentSystem/AttachmentSystem.md
+      - User Interface:
+          - Overview: AdvancedInventoryEquipmentSystem/UserInterface/index.md
+          - Inventory UI: AdvancedInventoryEquipmentSystem/UserInterface/InventoryUI.md
+          - Grid System: AdvancedInventoryEquipmentSystem/UserInterface/GridSystem.md
+          - Item Widgets: AdvancedInventoryEquipmentSystem/UserInterface/ItemWidgets.md
+          - Item Preview: AdvancedInventoryEquipmentSystem/UserInterface/ItemPreview.md
+          - Slate Elements: AdvancedInventoryEquipmentSystem/UserInterface/SlateElements.md
+      - Configuration:
+          - Settings: AdvancedInventoryEquipmentSystem/Configuration/Settings.md
+          - Inventory Types: AdvancedInventoryEquipmentSystem/Configuration/InventoryTypes.md
+          - Replication: AdvancedInventoryEquipmentSystem/Configuration/Replication.md
+  - Back to Main Site: https://mountea.tools
+
+extra_css:
+  - stylesheets/custom.css
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - def_list
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
+  - pymdownx.details
+  - pymdownx.tabbed:
+      alternate_style: true
+  - toc:
+      permalink: true

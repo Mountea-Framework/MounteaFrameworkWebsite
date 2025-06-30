@@ -1,0 +1,25 @@
+# MkDocs build output
+/site/
+/docs/site/*
+
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Virtual environments
+.venv/
+env/
+venv/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor-specific
+.vscode/
+.idea/
+
+# Logs or temporary files
+*.log
+*.tmp
