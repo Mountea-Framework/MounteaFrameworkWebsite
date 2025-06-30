@@ -1,6 +1,7 @@
 # MkDocs build output
 /site/
-/docs/site/*
+/docs/*
+docs/
 
 # Python cache
 __pycache__/
