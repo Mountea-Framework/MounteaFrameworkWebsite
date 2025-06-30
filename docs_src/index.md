@@ -21,9 +21,7 @@
     <p class="card-description">Find practical examples and use cases to help you get started.</p>
     <a href="examples.md" class="card-link"></a>
   </div>
-</div>
 
-<div class="card-grid">
   <div class="card">
     <div class="card-icon">❓</div>
     <h3 class="card-title">FAQ</h3>
