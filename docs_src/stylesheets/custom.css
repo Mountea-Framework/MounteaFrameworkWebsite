@@ -239,6 +239,16 @@ body,
   color: var(--prose-text) !important;
 }
 
+.admonition {
+  padding: 0rem !important;
+}
+
+/* Admonitions */
+.admonition p {
+    font-size: 1rem;
+    padding: 0 .6rem;
+}
+
 /* Cards */
 .card-grid {
   display: grid;
