@@ -1,0 +1,1486 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://mountea.tools/docs/AdvancedInventoryEquipmentSystem/InventorySystem/Categories/">
+      
+      
+        <link rel="prev" href="../ItemTemplates/">
+      
+      
+        <link rel="next" href="../Rarity/">
+      
+      
+      <link rel="icon" href="../../../../assets/icon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Categories - Mountea Framework Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/custom.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#categories" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Mountea Framework Docs" class="md-header__button md-logo" aria-label="Mountea Framework Docs" data-md-component="logo">
+      
+  <img src="../../../../assets/icon.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Mountea Framework Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Categories
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+  Advanced Inventory & Equipment System
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Mountea Framework Docs" class="md-nav__button md-logo" aria-label="Mountea Framework Docs" data-md-component="logo">
+      
+  <img src="../../../../assets/icon.png" alt="logo">
+
+    </a>
+    Mountea Framework Docs
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Advanced Inventory & Equipment System
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Advanced Inventory & Equipment System
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Inventory System
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Inventory System
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Core
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Items/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Items
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ItemTemplates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Item Templates
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Categories
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Categories
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#core-data-structures" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Data Structures
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Core Data Structures">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#finventorycategorydata" class="md-nav__link">
+    <span class="md-ellipsis">
+      FInventoryCategoryData
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#finventorycategory" class="md-nav__link">
+    <span class="md-ellipsis">
+      FInventoryCategory
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#category-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Category Configuration
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Category Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#basic-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Basic Setup
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#subcategories" class="md-nav__link">
+    <span class="md-ellipsis">
+      Subcategories
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#item-actions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Item Actions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Item Actions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#allowed-actions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Allowed Actions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#action-filtering" class="md-nav__link">
+    <span class="md-ellipsis">
+      Action Filtering
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ui-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      UI Integration
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="UI Integration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#category-selection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Category Selection
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#category-widgets" class="md-nav__link">
+    <span class="md-ellipsis">
+      Category Widgets
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#settings-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Settings Integration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#runtime-access" class="md-nav__link">
+    <span class="md-ellipsis">
+      Runtime Access
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#category-flags" class="md-nav__link">
+    <span class="md-ellipsis">
+      Category Flags
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Category Flags">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#behavior-properties" class="md-nav__link">
+    <span class="md-ellipsis">
+      Behavior Properties
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#flag-inheritance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Flag Inheritance
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#best-practices" class="md-nav__link">
+    <span class="md-ellipsis">
+      Best Practices
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Best Practices">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#organization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Organization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#performance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Performance
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#localization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Localization
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integration
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Rarity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Rarity System
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Search & Filtering
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Notifications/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Notifications
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Equipment System
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Equipment System
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../EquipmentSystem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Core
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../EquipmentSystem/AttachmentSystem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Attachment System
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    User Interface
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            User Interface
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UserInterface/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UserInterface/InventoryUI/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Inventory UI
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UserInterface/GridSystem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Grid System
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UserInterface/ItemWidgets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Item Widgets
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UserInterface/ItemPreview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Item Preview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UserInterface/SlateElements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Slate Elements
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Configuration
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            Configuration
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Configuration/Settings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Settings
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Configuration/InventoryTypes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Inventory Types
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Configuration/Replication/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Replication
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="categories">Categories<a class="headerlink" href="#categories" title="Permanent link">&para;</a></h1>
+<p>Item classification and organization system with hierarchical subcategories.</p>
+<h2 id="core-data-structures">Core Data Structures<a class="headerlink" href="#core-data-structures" title="Permanent link">&para;</a></h2>
+<h3 id="finventorycategorydata"><code>FInventoryCategoryData</code><a class="headerlink" href="#finventorycategorydata" title="Permanent link">&para;</a></h3>
+<p>Category configuration containing:</p>
+<ul>
+<li><strong>Display Properties</strong> - Localized name, priority, icon</li>
+<li><strong>Classification</strong> - Gameplay tags for filtering</li>
+<li><strong>Behavior Flags</strong> - Category-specific properties</li>
+<li><strong>Allowed Actions</strong> - Available item operations</li>
+</ul>
+<h3 id="finventorycategory"><code>FInventoryCategory</code><a class="headerlink" href="#finventorycategory" title="Permanent link">&para;</a></h3>
+<p>Complete category with nested subcategories:</p>
+<ul>
+<li><strong>Primary Category</strong> - Main classification</li>
+<li><strong>Subcategories</strong> - Hierarchical organization</li>
+</ul>
+<h2 id="category-configuration">Category Configuration<a class="headerlink" href="#category-configuration" title="Permanent link">&para;</a></h2>
+<h3 id="basic-setup">Basic Setup<a class="headerlink" href="#basic-setup" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">FInventoryCategoryData</span><span class="w"> </span><span class="n">CategoryData</span><span class="p">;</span>
+<span class="n">CategoryData</span><span class="p">.</span><span class="n">CategoryDisplayName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LOCTEXT</span><span class="p">(</span><span class="s">&quot;Weapons&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Weapons&quot;</span><span class="p">);</span>
+<span class="n">CategoryData</span><span class="p">.</span><span class="n">CategoryPriority</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<span class="n">CategoryData</span><span class="p">.</span><span class="n">CategoryTags</span><span class="p">.</span><span class="n">AddTag</span><span class="p">(</span><span class="n">FGameplayTag</span><span class="o">::</span><span class="n">RequestGameplayTag</span><span class="p">(</span><span class="s">&quot;Item.Category.Weapon&quot;</span><span class="p">));</span>
+<span class="n">CategoryData</span><span class="p">.</span><span class="n">CategoryFlags</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">uint8</span><span class="o">&gt;</span><span class="p">(</span><span class="n">EInventoryItemFlags</span><span class="o">::</span><span class="n">EIIF_Dropable</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="subcategories">Subcategories<a class="headerlink" href="#subcategories" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">FInventoryCategory</span><span class="w"> </span><span class="n">WeaponCategory</span><span class="p">;</span>
+<span class="n">WeaponCategory</span><span class="p">.</span><span class="n">CategoryData</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">WeaponCategoryData</span><span class="p">;</span>
+
+<span class="c1">// Add subcategories</span>
+<span class="n">FInventoryCategoryData</span><span class="w"> </span><span class="n">SwordData</span><span class="p">;</span>
+<span class="n">SwordData</span><span class="p">.</span><span class="n">CategoryDisplayName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LOCTEXT</span><span class="p">(</span><span class="s">&quot;Swords&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Swords&quot;</span><span class="p">);</span>
+<span class="n">WeaponCategory</span><span class="p">.</span><span class="n">SubCategories</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="s">&quot;Sword&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">SwordData</span><span class="p">);</span>
+
+<span class="n">FInventoryCategoryData</span><span class="w"> </span><span class="n">BowData</span><span class="p">;</span>
+<span class="n">BowData</span><span class="p">.</span><span class="n">CategoryDisplayName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LOCTEXT</span><span class="p">(</span><span class="s">&quot;Bows&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Bows&quot;</span><span class="p">);</span>
+<span class="n">WeaponCategory</span><span class="p">.</span><span class="n">SubCategories</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="s">&quot;Bow&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">BowData</span><span class="p">);</span>
+</code></pre></div>
+<h2 id="item-actions">Item Actions<a class="headerlink" href="#item-actions" title="Permanent link">&para;</a></h2>
+<h3 id="allowed-actions">Allowed Actions<a class="headerlink" href="#allowed-actions" title="Permanent link">&para;</a></h3>
+<p>Categories define available item operations:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Set allowed actions for category</span>
+<span class="n">TSet</span><span class="o">&lt;</span><span class="n">TSoftClassPtr</span><span class="o">&lt;</span><span class="n">UMounteaInventoryItemAction</span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="n">Actions</span><span class="p">;</span>
+<span class="n">Actions</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">ConsumeActionClass</span><span class="p">);</span>
+<span class="n">Actions</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">EquipActionClass</span><span class="p">);</span>
+<span class="n">CategoryData</span><span class="p">.</span><span class="n">AllowedActions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Actions</span><span class="p">;</span>
+</code></pre></div>
+<h3 id="action-filtering">Action Filtering<a class="headerlink" href="#action-filtering" title="Permanent link">&para;</a></h3>
+<p>Items inherit actions from their category:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Get item category</span>
+<span class="n">FInventoryCategory</span><span class="w"> </span><span class="n">Category</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UMounteaInventoryStatics</span><span class="o">::</span><span class="n">GetInventoryCategory</span><span class="p">(</span><span class="n">Item</span><span class="p">);</span>
+
+<span class="c1">// Check available actions</span>
+<span class="kt">bool</span><span class="w"> </span><span class="n">CanConsume</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Category</span><span class="p">.</span><span class="n">CategoryData</span><span class="p">.</span><span class="n">AllowedActions</span><span class="p">.</span><span class="n">Contains</span><span class="p">(</span><span class="n">ConsumeActionClass</span><span class="p">);</span>
+</code></pre></div>
+<h2 id="ui-integration">UI Integration<a class="headerlink" href="#ui-integration" title="Permanent link">&para;</a></h2>
+<h3 id="category-selection">Category Selection<a class="headerlink" href="#category-selection" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1">// Handle category selection in UI</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">OnCategorySelected</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">FString</span><span class="o">&amp;</span><span class="w"> </span><span class="n">CategoryId</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">InventoryUI</span><span class="o">-&gt;</span><span class="n">CategorySelected</span><span class="p">(</span><span class="n">CategoryId</span><span class="p">);</span>
+
+<span class="w">    </span><span class="c1">// Filter items by category</span>
+<span class="w">    </span><span class="n">FilterItemsByCategory</span><span class="p">(</span><span class="n">CategoryId</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="category-widgets">Category Widgets<a class="headerlink" href="#category-widgets" title="Permanent link">&para;</a></h3>
+<p>Category widgets implement <code>IMounteaAdvancedInventoryCategoryWidgetInterface</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Set category data</span>
+<span class="n">CategoryWidget</span><span class="o">-&gt;</span><span class="n">SetInventoryCategoryKey</span><span class="p">(</span><span class="s">&quot;Weapons&quot;</span><span class="p">);</span>
+<span class="n">CategoryWidget</span><span class="o">-&gt;</span><span class="n">SetActiveState</span><span class="p">(</span><span class="nb">true</span><span class="p">);</span>
+</code></pre></div>
+<h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">&para;</a></h2>
+<h3 id="settings-integration">Settings Integration<a class="headerlink" href="#settings-integration" title="Permanent link">&para;</a></h3>
+<p>Categories configured in <code>UMounteaAdvancedInventorySettingsConfig</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// Access categories from settings</span>
+<span class="n">UMounteaAdvancedInventorySettingsConfig</span><span class="o">*</span><span class="w"> </span><span class="n">Config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GetInventoryConfig</span><span class="p">();</span>
+<span class="n">TMap</span><span class="o">&lt;</span><span class="n">FString</span><span class="p">,</span><span class="w"> </span><span class="n">FInventoryCategory</span><span class="o">&gt;</span><span class="w"> </span><span class="n">Categories</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Config</span><span class="o">-&gt;</span><span class="n">AllowedCategories</span><span class="p">;</span>
+
+<span class="c1">// Get specific category</span>
+<span class="n">FInventoryCategory</span><span class="o">*</span><span class="w"> </span><span class="n">WeaponCategory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Categories</span><span class="p">.</span><span class="n">Find</span><span class="p">(</span><span class="s">&quot;Weapons&quot;</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="runtime-access">Runtime Access<a class="headerlink" href="#runtime-access" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1">// Get category for item</span>
+<span class="n">FString</span><span class="w"> </span><span class="n">CategoryKey</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UMounteaInventoryStatics</span><span class="o">::</span><span class="n">GetInventoryCategoryKey</span><span class="p">(</span><span class="n">Item</span><span class="p">);</span>
+<span class="n">FInventoryCategory</span><span class="w"> </span><span class="n">Category</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UMounteaInventoryStatics</span><span class="o">::</span><span class="n">GetInventoryCategory</span><span class="p">(</span><span class="n">Item</span><span class="p">);</span>
+</code></pre></div>
+<h2 id="category-flags">Category Flags<a class="headerlink" href="#category-flags" title="Permanent link">&para;</a></h2>
+<h3 id="behavior-properties">Behavior Properties<a class="headerlink" href="#behavior-properties" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1">// Available category flags (bitmask)</span>
+<span class="k">enum</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">EInventoryItemFlags</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">uint8</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">EIIF_Tradeable</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">  </span><span class="c1">// Items can be traded</span>
+<span class="w">    </span><span class="n">EIIF_Stackable</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">  </span><span class="c1">// Items can stack</span>
+<span class="w">    </span><span class="n">EIIF_Craftable</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">  </span><span class="c1">// Used in crafting</span>
+<span class="w">    </span><span class="n">EIIF_Dropable</span><span class="w">    </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">  </span><span class="c1">// Can be dropped</span>
+<span class="w">    </span><span class="n">EIIF_Consumable</span><span class="w">  </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">  </span><span class="c1">// Single-use items</span>
+<span class="w">    </span><span class="n">EIIF_QuestItem</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">  </span><span class="c1">// Quest-related</span>
+<span class="w">    </span><span class="n">EIIF_Unique</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">  </span><span class="c1">// One per inventory</span>
+<span class="w">    </span><span class="n">EIIF_Durable</span><span class="w">     </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">7</span><span class="w">   </span><span class="c1">// Has durability</span>
+<span class="p">};</span>
+</code></pre></div>
+<h3 id="flag-inheritance">Flag Inheritance<a class="headerlink" href="#flag-inheritance" title="Permanent link">&para;</a></h3>
+<p>Items inherit default behaviors from category flags, overrideable per template.</p>
+<h2 id="best-practices">Best Practices<a class="headerlink" href="#best-practices" title="Permanent link">&para;</a></h2>
+<h3 id="organization">Organization<a class="headerlink" href="#organization" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Use logical hierarchy (Weapons → Swords → Longswords)</li>
+<li>Consistent naming conventions</li>
+<li>Meaningful priority values for UI sorting</li>
+</ul>
+<h3 id="performance">Performance<a class="headerlink" href="#performance" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Limit subcategory depth (2-3 levels max)</li>
+<li>Cache category lookups for frequently accessed items</li>
+<li>Use gameplay tags for efficient filtering</li>
+</ul>
+<h3 id="localization">Localization<a class="headerlink" href="#localization" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Provide localized display names</li>
+<li>Consider cultural differences in categorization</li>
+<li>Test category names across target languages</li>
+</ul>
+<h2 id="integration">Integration<a class="headerlink" href="#integration" title="Permanent link">&para;</a></h2>
+<p>Categories integrate with:</p>
+<ul>
+<li><a href="../ItemTemplates/">Item Templates</a> - Template classification</li>
+<li><a href="../Search/">Search &amp; Filtering</a> - Category-based queries</li>
+<li><a href="../../UserInterface/">User Interface</a> - Category selection widgets</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.sections", "navigation.tabs", "navigation.top", "search.highlight", "search.suggest", "content.code.annotate", "content.tabs.link", "content.action.edit", "toc.integrate"], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

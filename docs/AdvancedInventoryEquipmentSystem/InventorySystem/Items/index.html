@@ -1,0 +1,1568 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://mountea.tools/docs/AdvancedInventoryEquipmentSystem/InventorySystem/Items/">
+      
+      
+        <link rel="prev" href="../">
+      
+      
+        <link rel="next" href="../ItemTemplates/">
+      
+      
+      <link rel="icon" href="../../../../assets/icon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.14">
+    
+    
+      
+        <title>Items - Mountea Framework Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.342714a4.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/custom.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="slate" data-md-color-primary="black" data-md-color-accent="blue">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#inventory-items" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Mountea Framework Docs" class="md-header__button md-logo" aria-label="Mountea Framework Docs" data-md-component="logo">
+      
+  <img src="../../../../assets/icon.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Mountea Framework Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Items
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+    
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  
+  Advanced Inventory & Equipment System
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+  
+
+<nav class="md-nav md-nav--primary md-nav--lifted md-nav--integrated" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Mountea Framework Docs" class="md-nav__button md-logo" aria-label="Mountea Framework Docs" data-md-component="logo">
+      
+  <img src="../../../../assets/icon.png" alt="logo">
+
+    </a>
+    Mountea Framework Docs
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Advanced Inventory & Equipment System
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Advanced Inventory & Equipment System
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2_2" id="__nav_2_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Inventory System
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_2">
+            <span class="md-nav__icon md-icon"></span>
+            Inventory System
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Core
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Items
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Items
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#core-data-structures" class="md-nav__link">
+    <span class="md-ellipsis">
+      Core Data Structures
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Core Data Structures">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#finventoryitem" class="md-nav__link">
+    <span class="md-ellipsis">
+      FInventoryItem
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#finventoryitemsnapshot" class="md-nav__link">
+    <span class="md-ellipsis">
+      FInventoryItemSnapshot
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#finventoryitemarray" class="md-nav__link">
+    <span class="md-ellipsis">
+      FInventoryItemArray
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#item-creation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Item Creation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Item Creation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#from-template" class="md-nav__link">
+    <span class="md-ellipsis">
+      From Template
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#manual-construction" class="md-nav__link">
+    <span class="md-ellipsis">
+      Manual Construction
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#item-properties" class="md-nav__link">
+    <span class="md-ellipsis">
+      Item Properties
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Item Properties">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#template-data-access" class="md-nav__link">
+    <span class="md-ellipsis">
+      Template Data Access
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#runtime-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      Runtime Data
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quantity-management" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quantity Management
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Quantity Management">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#stack-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Stack Operations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stack-rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      Stack Rules
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#durability-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      Durability System
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Durability System">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#durability-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Durability Operations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#durability-events" class="md-nav__link">
+    <span class="md-ellipsis">
+      Durability Events
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-data-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom Data System
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Custom Data System">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#metadata-tags" class="md-nav__link">
+    <span class="md-ellipsis">
+      Metadata Tags
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-cases" class="md-nav__link">
+    <span class="md-ellipsis">
+      Use Cases
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#affector-slots" class="md-nav__link">
+    <span class="md-ellipsis">
+      Affector Slots
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Affector Slots">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#attachment-system" class="md-nav__link">
+    <span class="md-ellipsis">
+      Attachment System
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Integration
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#network-replication" class="md-nav__link">
+    <span class="md-ellipsis">
+      Network Replication
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Network Replication">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#delta-serialization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Delta Serialization
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#replication-events" class="md-nav__link">
+    <span class="md-ellipsis">
+      Replication Events
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#item-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Item Validation
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Item Validation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#checks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Checks
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#common-issues" class="md-nav__link">
+    <span class="md-ellipsis">
+      Common Issues
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ItemTemplates/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Item Templates
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Categories/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Categories
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Rarity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Rarity System
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Search/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Search & Filtering
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Notifications/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Notifications
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_3" id="__nav_2_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Equipment System
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_3">
+            <span class="md-nav__icon md-icon"></span>
+            Equipment System
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../EquipmentSystem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Core
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../EquipmentSystem/AttachmentSystem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Attachment System
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_4" id="__nav_2_4_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    User Interface
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_4">
+            <span class="md-nav__icon md-icon"></span>
+            User Interface
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UserInterface/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UserInterface/InventoryUI/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Inventory UI
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UserInterface/GridSystem/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Grid System
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UserInterface/ItemWidgets/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Item Widgets
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UserInterface/ItemPreview/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Item Preview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../UserInterface/SlateElements/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Slate Elements
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+        
+          
+          
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_5" id="__nav_2_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Configuration
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_5">
+            <span class="md-nav__icon md-icon"></span>
+            Configuration
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Configuration/Settings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Settings
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Configuration/InventoryTypes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Inventory Types
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Configuration/Replication/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Replication
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="inventory-items">Inventory Items<a class="headerlink" href="#inventory-items" title="Permanent link">&para;</a></h1>
+<p>Runtime item instances with network replication and state management.</p>
+<h2 id="core-data-structures">Core Data Structures<a class="headerlink" href="#core-data-structures" title="Permanent link">&para;</a></h2>
+<h3 id="finventoryitem"><code>FInventoryItem</code><a class="headerlink" href="#finventoryitem" title="Permanent link">&para;</a></h3>
+<p>Runtime item instance containing:</p>
+<ul>
+<li><strong>Template Reference</strong> - Links to static item definition</li>
+<li><strong>Quantity</strong> - Current stack size for stackable items</li>
+<li><strong>Durability</strong> - Current condition (0.0 to 1.0)</li>
+<li><strong>Custom Data</strong> - Gameplay tags for item-specific metadata</li>
+<li><strong>Affector Slots</strong> - Map of attached items by slot</li>
+<li><strong>Owning Inventory</strong> - Reference to container inventory</li>
+</ul>
+<h3 id="finventoryitemsnapshot"><code>FInventoryItemSnapshot</code><a class="headerlink" href="#finventoryitemsnapshot" title="Permanent link">&para;</a></h3>
+<p>Lightweight replication tracking for:</p>
+<ul>
+<li>Quantity changes</li>
+<li>Durability modifications</li>
+<li>Custom data updates</li>
+</ul>
+<h3 id="finventoryitemarray"><code>FInventoryItemArray</code><a class="headerlink" href="#finventoryitemarray" title="Permanent link">&para;</a></h3>
+<p>Replicated container using FastArraySerializer for efficient network updates.</p>
+<h2 id="item-creation">Item Creation<a class="headerlink" href="#item-creation" title="Permanent link">&para;</a></h2>
+<h3 id="from-template">From Template<a class="headerlink" href="#from-template" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1">// Create item from template</span>
+<span class="n">FInventoryItem</span><span class="w"> </span><span class="nf">NewItem</span><span class="p">(</span><span class="n">ItemTemplate</span><span class="p">,</span><span class="w"> </span><span class="n">Quantity</span><span class="p">,</span><span class="w"> </span><span class="n">Durability</span><span class="p">,</span><span class="w"> </span><span class="n">OwningInventory</span><span class="p">);</span>
+
+<span class="c1">// Using static function</span>
+<span class="n">FInventoryItem</span><span class="w"> </span><span class="n">Item</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UMounteaInventoryStatics</span><span class="o">::</span><span class="n">NewInventoryItem</span><span class="p">(</span><span class="n">ItemGuid</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="manual-construction">Manual Construction<a class="headerlink" href="#manual-construction" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="n">FInventoryItem</span><span class="w"> </span><span class="n">Item</span><span class="p">;</span>
+<span class="n">Item</span><span class="p">.</span><span class="n">SetTemplate</span><span class="p">(</span><span class="n">WeaponTemplate</span><span class="p">);</span>
+<span class="n">Item</span><span class="p">.</span><span class="n">SetQuantity</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+<span class="n">Item</span><span class="p">.</span><span class="n">SetDurability</span><span class="p">(</span><span class="mf">0.8f</span><span class="p">);</span>
+<span class="n">Item</span><span class="p">.</span><span class="n">SetCustomData</span><span class="p">(</span><span class="n">CustomTags</span><span class="p">);</span>
+</code></pre></div>
+<h2 id="item-properties">Item Properties<a class="headerlink" href="#item-properties" title="Permanent link">&para;</a></h2>
+<h3 id="template-data-access">Template Data Access<a class="headerlink" href="#template-data-access" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1">// Get item name from template</span>
+<span class="n">FText</span><span class="w"> </span><span class="n">ItemName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Item</span><span class="p">.</span><span class="n">GetItemName</span><span class="p">();</span>
+
+<span class="c1">// Get descriptions</span>
+<span class="n">FText</span><span class="w"> </span><span class="n">ShortInfo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Item</span><span class="p">.</span><span class="n">GetItemShortInfo</span><span class="p">();</span>
+<span class="n">FText</span><span class="w"> </span><span class="n">LongInfo</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Item</span><span class="p">.</span><span class="n">GetItemLongInfo</span><span class="p">();</span>
+
+<span class="c1">// Get visual assets</span>
+<span class="n">UTexture2D</span><span class="o">*</span><span class="w"> </span><span class="n">Cover</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Item</span><span class="p">.</span><span class="n">GetCover</span><span class="p">();</span>
+</code></pre></div>
+<h3 id="runtime-data">Runtime Data<a class="headerlink" href="#runtime-data" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1">// Current state</span>
+<span class="n">FGuid</span><span class="w"> </span><span class="n">ItemGuid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Item</span><span class="p">.</span><span class="n">GetGuid</span><span class="p">();</span>
+<span class="n">int32</span><span class="w"> </span><span class="n">CurrentQuantity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Item</span><span class="p">.</span><span class="n">GetQuantity</span><span class="p">();</span>
+<span class="kt">float</span><span class="w"> </span><span class="n">CurrentDurability</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Item</span><span class="p">.</span><span class="n">GetDurability</span><span class="p">();</span>
+
+<span class="c1">// Validation</span>
+<span class="kt">bool</span><span class="w"> </span><span class="n">IsValid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Item</span><span class="p">.</span><span class="n">IsItemValid</span><span class="p">();</span>
+<span class="kt">bool</span><span class="w"> </span><span class="n">IsInInventory</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Item</span><span class="p">.</span><span class="n">IsItemInInventory</span><span class="p">();</span>
+</code></pre></div>
+<h2 id="quantity-management">Quantity Management<a class="headerlink" href="#quantity-management" title="Permanent link">&para;</a></h2>
+<h3 id="stack-operations">Stack Operations<a class="headerlink" href="#stack-operations" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1">// Modify quantities</span>
+<span class="n">Item</span><span class="p">.</span><span class="n">SetQuantity</span><span class="p">(</span><span class="n">NewQuantity</span><span class="p">);</span>
+
+<span class="c1">// Through inventory interface</span>
+<span class="n">Inventory</span><span class="o">-&gt;</span><span class="n">IncreaseItemQuantity</span><span class="p">(</span><span class="n">ItemGuid</span><span class="p">,</span><span class="w"> </span><span class="n">Amount</span><span class="p">);</span>
+<span class="n">Inventory</span><span class="o">-&gt;</span><span class="n">DecreaseItemQuantity</span><span class="p">(</span><span class="n">ItemGuid</span><span class="p">,</span><span class="w"> </span><span class="n">Amount</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="stack-rules">Stack Rules<a class="headerlink" href="#stack-rules" title="Permanent link">&para;</a></h3>
+<p>Items stack based on template flags:</p>
+<ul>
+<li><code>EIIF_Stackable</code> - Can combine with identical items</li>
+<li><code>MaxStackSize</code> - Maximum items per stack</li>
+<li>Template matching required for stacking</li>
+</ul>
+<h2 id="durability-system">Durability System<a class="headerlink" href="#durability-system" title="Permanent link">&para;</a></h2>
+<h3 id="durability-operations">Durability Operations<a class="headerlink" href="#durability-operations" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1">// Set durability</span>
+<span class="n">Item</span><span class="p">.</span><span class="n">SetDurability</span><span class="p">(</span><span class="mf">0.5f</span><span class="p">);</span><span class="w"> </span><span class="c1">// 50% condition</span>
+
+<span class="c1">// Modify through inventory</span>
+<span class="n">Inventory</span><span class="o">-&gt;</span><span class="n">ModifyItemDurability</span><span class="p">(</span><span class="n">ItemGuid</span><span class="p">,</span><span class="w"> </span><span class="n">DeltaDurability</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="durability-events">Durability Events<a class="headerlink" href="#durability-events" title="Permanent link">&para;</a></h3>
+<ul>
+<li><code>OnItemDurabilityChanged</code> - Fired when durability changes</li>
+<li>Automatic notifications for threshold events</li>
+<li>Integration with item condition visuals</li>
+</ul>
+<h2 id="custom-data-system">Custom Data System<a class="headerlink" href="#custom-data-system" title="Permanent link">&para;</a></h2>
+<h3 id="metadata-tags">Metadata Tags<a class="headerlink" href="#metadata-tags" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1">// Set custom data</span>
+<span class="n">FGameplayTagContainer</span><span class="w"> </span><span class="n">CustomTags</span><span class="p">;</span>
+<span class="n">CustomTags</span><span class="p">.</span><span class="n">AddTag</span><span class="p">(</span><span class="n">FGameplayTag</span><span class="o">::</span><span class="n">RequestGameplayTag</span><span class="p">(</span><span class="s">&quot;Item.State.Enchanted&quot;</span><span class="p">));</span>
+<span class="n">Item</span><span class="p">.</span><span class="n">SetCustomData</span><span class="p">(</span><span class="n">CustomTags</span><span class="p">);</span>
+
+<span class="c1">// Check for specific tags</span>
+<span class="kt">bool</span><span class="w"> </span><span class="n">IsEnchanted</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Item</span><span class="p">.</span><span class="n">GetCustomData</span><span class="p">().</span><span class="n">HasTag</span><span class="p">(</span><span class="n">EnchantedTag</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="use-cases">Use Cases<a class="headerlink" href="#use-cases" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Item states (broken, enchanted, blessed)</li>
+<li>Temporary effects and buffs</li>
+<li>Quest-specific markers</li>
+<li>Player customization data</li>
+</ul>
+<h2 id="affector-slots">Affector Slots<a class="headerlink" href="#affector-slots" title="Permanent link">&para;</a></h2>
+<h3 id="attachment-system">Attachment System<a class="headerlink" href="#attachment-system" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1">// Get affector mappings</span>
+<span class="k">const</span><span class="w"> </span><span class="n">TMap</span><span class="o">&lt;</span><span class="n">FGameplayTag</span><span class="p">,</span><span class="w"> </span><span class="n">FGuid</span><span class="o">&gt;&amp;</span><span class="w"> </span><span class="n">Slots</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Item</span><span class="p">.</span><span class="n">GetAffectorSlots</span><span class="p">();</span>
+
+<span class="c1">// Set affector slots</span>
+<span class="n">TMap</span><span class="o">&lt;</span><span class="n">FGameplayTag</span><span class="p">,</span><span class="w"> </span><span class="n">FGuid</span><span class="o">&gt;</span><span class="w"> </span><span class="n">NewSlots</span><span class="p">;</span>
+<span class="n">NewSlots</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">GemSlotTag</span><span class="p">,</span><span class="w"> </span><span class="n">GemItemGuid</span><span class="p">);</span>
+<span class="n">Item</span><span class="p">.</span><span class="n">SetAffectorSlots</span><span class="p">(</span><span class="n">NewSlots</span><span class="p">);</span>
+</code></pre></div>
+<h3 id="integration">Integration<a class="headerlink" href="#integration" title="Permanent link">&para;</a></h3>
+<p>Affector slots link to the <a href="../../EquipmentSystem/AttachmentSystem/">Attachment System</a> for:</p>
+<ul>
+<li>Weapon modifications</li>
+<li>Armor enhancements  </li>
+<li>Tool upgrades</li>
+</ul>
+<h2 id="network-replication">Network Replication<a class="headerlink" href="#network-replication" title="Permanent link">&para;</a></h2>
+<h3 id="delta-serialization">Delta Serialization<a class="headerlink" href="#delta-serialization" title="Permanent link">&para;</a></h3>
+<p><code>FInventoryItemArray</code> provides efficient replication:</p>
+<ul>
+<li>Only changed items replicated</li>
+<li>Automatic bandwidth optimization</li>
+<li>Conflict resolution on authority</li>
+</ul>
+<h3 id="replication-events">Replication Events<a class="headerlink" href="#replication-events" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1">// Called on replication</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">PreReplicatedRemove</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">FInventoryItemArray</span><span class="o">&amp;</span><span class="w"> </span><span class="n">ArraySerializer</span><span class="p">);</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">PostReplicatedAdd</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">FInventoryItemArray</span><span class="o">&amp;</span><span class="w"> </span><span class="n">ArraySerializer</span><span class="p">);</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">PostReplicatedChange</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">FInventoryItemArray</span><span class="o">&amp;</span><span class="w"> </span><span class="n">ArraySerializer</span><span class="p">);</span>
+</code></pre></div>
+<h2 id="item-validation">Item Validation<a class="headerlink" href="#item-validation" title="Permanent link">&para;</a></h2>
+<h3 id="checks">Checks<a class="headerlink" href="#checks" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code><span class="c1">// Validate item instance</span>
+<span class="kt">bool</span><span class="w"> </span><span class="n">IsValid</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UMounteaInventoryStatics</span><span class="o">::</span><span class="n">IsInventoryItemValid</span><span class="p">(</span><span class="n">Item</span><span class="p">);</span>
+
+<span class="c1">// Template validation</span>
+<span class="kt">bool</span><span class="w"> </span><span class="n">HasTemplate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">IsValid</span><span class="p">(</span><span class="n">Item</span><span class="p">.</span><span class="n">GetTemplate</span><span class="p">());</span>
+
+<span class="c1">// Quantity validation</span>
+<span class="kt">bool</span><span class="w"> </span><span class="n">ValidQuantity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Item</span><span class="p">.</span><span class="n">GetQuantity</span><span class="p">()</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+</code></pre></div>
+<h3 id="common-issues">Common Issues<a class="headerlink" href="#common-issues" title="Permanent link">&para;</a></h3>
+<ul>
+<li>Invalid template references</li>
+<li>Negative quantities</li>
+<li>Invalid durability values (&lt; 0.0 or &gt; 1.0)</li>
+<li>Missing owning inventory for networked items</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.sections", "navigation.tabs", "navigation.top", "search.highlight", "search.suggest", "content.code.annotate", "content.tabs.link", "content.action.edit", "toc.integrate"], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.13a4f30d.min.js"></script>
+      
+    
+  </body>
+</html>

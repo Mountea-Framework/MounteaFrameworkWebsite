@@ -1,6 +1,7 @@
 site_name: Mountea Framework Docs
 site_url: https://mountea.tools/docs/
-site_dir: site
+docs_dir: docs_src
+site_dir: docs
 
 theme:
   name: material
@@ -47,7 +48,6 @@ nav:
           - Settings: AdvancedInventoryEquipmentSystem/Configuration/Settings.md
           - Inventory Types: AdvancedInventoryEquipmentSystem/Configuration/InventoryTypes.md
           - Replication: AdvancedInventoryEquipmentSystem/Configuration/Replication.md
-  - Back to Main Site: https://mountea.tools
 
 extra_css:
   - stylesheets/custom.css
