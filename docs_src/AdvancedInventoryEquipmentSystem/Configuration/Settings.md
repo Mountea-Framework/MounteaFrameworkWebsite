@@ -1,177 +1,209 @@
-# Mountea Advanced Inventory: Configuration Guide
+# Mountea Advanced Inventory Settings
 
-This guide walks you through configuring the **Mountea Advanced Inventory** plugin—combining clear explanations, default-value tables, and code snippets to help both designers and developers.
+## What You'll Learn
 
----
+- Basic settings access and configuration
+- Setting up inventory types, categories, and rarities
+- Applying themes to widgets
+- Configuring equipment slots and notifications
 
-## 1. Quick Setup
-
-1. **Project Settings**
-   Open **Edit → Project Settings → Mountea Framework → Inventory System**.
-2. **Assign Data Assets & Mappings**
-
-   | Property                | What to Assign                                       |
-   | ----------------------- | ---------------------------------------------------- |
-   | Inventory Config        | Your `UMounteaAdvancedInventorySettingsConfig` asset |
-   | Equipment Config        | Your `UMounteaAdvancedEquipmentSettingsConfig` asset |
-   | Input Mapping           | `UInputMappingContext` for inventory hotkeys         |
-   | Equipment Input Mapping | Separate context for equipment panel                 |
-
----
-
-## 2. Inventory Types & Defaults
-
-Inventories control how items are stored, stacked, and capped. The plugin provides sensible defaults, which you can override in your Data Asset.
-
-| Type            | Slots Min→Max | Limit Type | Default Cap    | Stackable | Persistent | Notes                                    |
-| --------------- | ------------- | ---------- | -------------- | --------- | ---------- | ---------------------------------------- |
-| **Player**      | 30 → 50       | Weight     | 75.0 kg        | ✔         | ✔          | Speed scales at weight thresholds        |
-| **NPC**         | 15 → 30       | Weight     | 50.0 kg        | ✔         | ✘          | Lootable after death                     |
-| **Storage**     | 50 → 200      | Weight     | 300.0 kg       | ✔         | ✔          | Shared chest-like inventory              |
-| **Merchant**    | 50 → 50       | Value      | 5000.0 credits | ✔         | ✘          | Buy/sell interface                       |
-| **Loot**        | 1 → 30        | —          | —              | ✔         | Temporary  | Public pickup container                  |
-| **Specialized** | 20 → 20       | —          | —              | ✘         | ✘          | Custom behavior (e.g. quest item holder) |
-
-> **Override example:**
-> In your `InventoryConfig` Data Asset, edit the row for `Player` to increase max slots to 60.
-
----
-
-## 3. Code Usage Examples
-
-### 3.1 Accessing Settings Singleton
+## Quick Start
 
 ```cpp
-// Get the project settings instance
+// Access settings singleton
 UMounteaAdvancedInventorySettings* Settings = GetDefault<UMounteaAdvancedInventorySettings>();
-
-// Read or fall back to defaults
 TArray<FString> Categories = Settings->GetAllowedCategories();
-TArray<FString> Rarities  = Settings->GetAllowedRarities();
+
+// Use Statics wrapper
+UMounteaAdvancedInventorySettings* Settings = UMounteaInventoryStatics::GetInventorySettings();
 ```
 
-### 3.2 Widget Commands
+!!! tip "Result"
+    Access to all inventory system configuration from any code location.
 
-The plugin auto-registers a set of UI commands. You can retrieve or customize them:
+## Core Concepts
+
+### Settings Access Pattern
+
+All settings follow a consistent two-level access pattern: **Project Settings** → **Data Asset Config**.
 
 ```cpp
-// After loading settings
-const TArray<FString>& Commands = Settings->GetWidgetCommands();
-for (const FString& Cmd : Commands) {
-    LOG_INFO(TEXT("Inventory listens to: %s"), *Cmd);
+// 1. Get project settings
+auto Settings = UMounteaInventoryStatics::GetInventorySettings();
+
+// 2. Load specific config
+auto InventoryConfig = Settings->InventorySettingsConfig.LoadSynchronous();
+auto EquipmentConfig = Settings->EquipmentSettingsConfig.LoadSynchronous();
+```
+
+!!! tip "Key Points"
+    - Settings are singletons accessible anywhere via `GetDefault<>()` or by pre-defined `UMounteaInventoryStatics`
+    - Data assets are soft references loaded synchronously when needed
+    - Always validate objects before use
+
+### Categories and Rarities
+
+Categories and rarities are defined in data assets but accessed through convenience functions:
+
+```cpp
+// Get available categories for dropdown/validation
+TArray<FString> UMounteaInventoryItemTemplate::GetAllowedCategories()
+{
+    auto Settings = UMounteaInventoryStatics::GetInventorySettings();
+    return IsValid(Settings) ? Settings->GetAllowedCategories() : TArray<FString>{TEXT("Miscellaneous")};
+}
+
+// Access category data for items
+FInventoryCategory Category = UMounteaInventoryStatics::GetInventoryCategory(Item);
+FLinearColor RarityColor = UMounteaInventoryStatics::GetInventoryRarity(Item).RarityColor;
+```
+
+!!! note "When & Why"
+    - Item creation, UI display, validation
+    - Centralized configuration prevents hardcoded values
+
+## Common Patterns
+
+### Pattern 1: Equipment Slot Discovery
+
+!!! note "When & Why"
+    - Building equipment UI or validation
+    - Dynamic slot configuration without hardcoding
+
+```cpp
+TArray<FName> UMounteaAdvancedAttachmentSlotBase::GetAvailableSlotNames() const
+{
+    const auto Settings = UMounteaInventoryStatics::GetInventorySettings();
+    if (!Settings) return {};
+
+    const auto EquipmentConfig = Settings->EquipmentSettingsConfig.LoadSynchronous();
+    if (!IsValid(EquipmentConfig)) return {};
+
+    TArray<FName> SlotNames;
+    EquipmentConfig->AllowedEquipmentSlots.GetKeys(SlotNames);
+    return SlotNames;
 }
 ```
 
-### 3.3 Applying a Theme
+### Pattern 2: Theme Application
 
-Call this in your widget’s `NativeConstruct()` to apply colors defined in your theme Data Asset:
-
-```cpp
-Super::NativeConstruct();
-// Apply plugin theme to this widget
-UMounteaInventoryUIStatics::ApplyTheme(this);
-```
-
-!!! warning "Important"
-
-    In order to be able to receive the `ApplyTheme` event, your User widget must implement `IMounteaInventoryGenericWidgetInterface` 
-    or be a child of `UMounteaAdvancedInventoryBaseWidget`.
-
----
-
-## 4. UI Layout & Behavior Defaults
-
-| Setting             | Default Value      | Description                             |
-| ------------------- | ------------------ | --------------------------------------- |
-| Grid Dimensions     | 5 columns × 8 rows | Number of item slots in inventory panel |
-| Item Slot Size      | 128 × 128 px       | Width and height per slot               |
-| Slot Padding        | 5 px               | Spacing between slots                   |
-| Auto-Stack          | Enabled            | Merge identical items on pick-up        |
-| Drag & Drop         | Enabled            | Allow manual rearrangement              |
-| Notification Widget | Default class      | Pop-up when items are added/removed     |
-
-> **Tip:** Tweak `Slot Size` and `Padding` for mobile vs desktop layouts.
-
----
-
-## 5. Categories & Rarities
-
-### Categories (Editor Defaults)
-
-| Key         | Display Name | Priority | Flags                 |
-| ----------- | ------------ | -------- | --------------------- |
-| Weapons     | Weapons      | 0        | Durable, Droppable    |
-| Armors      | Armor        | 1        | Durable, Droppable    |
-| Consumables | Consumables  | 2        | Consumable, Stackable |
-| Materials   | Materials    | 3        | Craftable, Stackable  |
-| Quest Items | Quest Items  | 4        | QuestItem             |
-| Keys        | Keys         | 4        | QuestItem             |
-
-### Rarities (Editor Defaults)
-
-| Key       | Display Name | Color (RGB)     | Price × |
-| --------- | ------------ | --------------- | ------- |
-| Common    | Common       | (0.5, 0.5, 0.5) | 1.0     |
-| Uncommon  | Uncommon     | (0.2, 0.8, 0.2) | 2.0     |
-| Rare      | Rare         | (0.2, 0.2, 1.0) | 4.0     |
-| Epic      | Epic         | (0.6, 0.2, 0.8) | 8.0     |
-| Legendary | Legendary    | (1.0, 0.5, 0.0) | 16.0    |
-
-> **Customization:** Drag entries in the Data Asset list to reorder display or change priority.
-
----
-
-## 6. Equipment Slot Configuration
-
-| Slot Name | Display Name | Tags Allowed    |
-| --------- | ------------ | --------------- |
-| MainHand  | Main Hand    | Weapon.Tag      |
-| OffHand   | Off Hand     | Shield.Tag      |
-| Helmet    | Helmet       | Armor.Head.Tag  |
-| Chest     | Chest        | Armor.Chest.Tag |
+!!! note "When & Why"
+    - Widget construction
+    - Consistent visual styling across all UI
 
 ```cpp
-// Example: Adding a new "Backpack" slot
-FMounteaEquipmentSlotHeaderData Backpack;
-Backpack.DisplayName = LOCTEXT("SlotNames_Backpack", "Backpack");
-Backpack.TagContainer.AddTag(BackpackTag);
-SettingsConfig->AllowedEquipmentSlots.Add("Backpack", Backpack);
+void UMounteaAdvancedInventoryBaseWidget::NativeConstruct()
+{
+    Super::NativeConstruct();
+    Execute_ApplyTheme(this);
+}
+
+// In your widget class
+void UMyInventoryWidget::ApplyTheme_Implementation()
+{
+    // Access settings is not needed in this case, as UMounteaInventorySystemStatics 
+    // provides functions to get the Config directly
+    /*
+    auto Settings = UMounteaInventoryStatics::GetInventorySettings();
+    if (!Settings)
+        return;
+    */
+
+    // Access theme config and apply colors/styles
+    auto Config = UMounteaInventorySystemStatics::GetMounteaAdvancedInventoryConfig();
+    if (Config && Config->BaseTheme.LoadSynchronous())
+    {
+        auto Theme = Config->BaseTheme.LoadSynchronous();
+        // Apply theme colors to your widgets
+    }
+}
 ```
 
----
+### Pattern 3: Subcategory Access
 
-## 7. 3D Preview Widget
+!!! note "When & Why"
+    - Hierarchical item organization
+    - Support complex categorization systems
 
-| Property             | Default   | Purpose                                    |
-| -------------------- | --------- | ------------------------------------------ |
-| Rotation Sensitivity | 1.0       | Speed of model rotation                    |
-| Zoom Limits          | 0.5 - 2.0 | Min/max camera distance multiplier         |
-| Pan Enabled          | Yes       | Whether the model can be dragged on screen |
+```cpp
+TArray<FString> UMounteaInventoryItemTemplate::GetAllowedSubCategories() const
+{
+    auto Settings = UMounteaInventoryStatics::GetInventorySettings();
+    auto Config = Settings->InventorySettingsConfig.LoadSynchronous();
+    
+    if (const auto* CategoryConfig = Config->AllowedCategories.Find(ItemCategory))
+    {
+        TArray<FString> SubCategories;
+        CategoryConfig->SubCategories.GetKeys(SubCategories);
+        return SubCategories;
+    }
+    return {};
+}
+```
 
-> **Bind Inputs:** In your `InteractiveWidgetConfig`, map `Rotate`, `Zoom`, and `Pan` actions to player input.
+## Advanced Usage
 
----
+### Static Helper Functions
 
-## 8. Notification Defaults
+Use static utility functions for common access patterns:
 
-| Event                 | Category | Template                       | Duration (s)   | Closeable |
-| --------------------- | -------- | ------------------------------ | -------------- | --------- |
-| InventoryLimitReached | Warning  | "Inventory Limit Reached"      | Engine default | Yes       |
-| QuantityLimitReached  | Warning  | "\${itemName} Max Quantity"    | Engine default | Yes       |
-| ItemAdded             | Info     | "\${quantity}x \${itemName}"   | 2.0            | Yes       |
-| ItemRemoved           | Info     | "- \${quantity}x \${itemName}" | 2.0            | Yes       |
-| ItemNotFound          | Error    | "\${itemName} Not Found"       | Engine default | Yes       |
+```cpp
+// Centralized access pattern
+UMounteaAdvancedInventorySettingsConfig* Config = 
+    UMounteaInventorySystemStatics::GetMounteaAdvancedInventoryConfig();
 
----
+// Item-specific data access
+FInventoryCategory Category = UMounteaInventoryStatics::GetInventoryCategory(Item);
+FString CategoryKey = UMounteaInventoryStatics::GetInventoryCategoryKey(Item);
+FInventoryRarity Rarity = UMounteaInventoryStatics::GetInventoryRarity(Item);
+```
 
-## 9. Best Practices & Tips
+!!! warning "Performance Impact & Thread Safety"
+    - `LoadSynchronous()` can cause hitches - cache configs when possible
+    - Settings access is safe, but avoid calling from non-game threads
 
-* **Define Early:** Set core types and categories before major feature work.
-* **Data-First Workflow:** Encourage designers to use Data Assets for tuning.
-* **Version Assets:** Track your `.uasset` files in source control.
-* **Playtest UI:** Adjust grid and padding based on resolution and aspect ratio.
-* **Balance Limits:** Slot counts and weight caps should align with gameplay progression.
+## Project Settings Configuration
 
----
+Open **Edit → Project Settings → Mountea Framework → Inventory System**:
 
-*For code snippets, defaults, and more details, reference the plugin’s sample content or dive into the C++ classes.*
+| Property | Purpose | Default Plugin Value |
+|----------|---------|---------------|
+| Inventory Config | Main data asset | `DefaultInventoryConfig` |
+| Equipment Config | Equipment slots | `DefaultEquipmentConfig` |
+| Input Mapping | Inventory hotkeys | `IMC_Inventory` |
+| Equipment Input Mapping | Equipment UI | `IMC_Equipment` |
+
+## Troubleshooting
+
+### Config Returns Null
+
+!!! tip "Problem & Solution"
+    - Settings or configs return nullptr
+    - Verify data assets are assigned in Project Settings
+
+```cpp
+if (!Settings || !Settings->InventorySettingsConfig.IsValid())
+{
+    LOG_WARNING(TEXT("Inventory config not assigned"));
+    return;
+}
+```
+
+### Theme Not Applied
+
+!!! tip "Problem & Solution"
+    - Widgets don't receive theme styling
+    - Ensure widget implements `IMounteaInventoryGenericWidgetInterface` or inherits from `UMounteaAdvancedInventoryBaseWidget`
+
+## Best Practices
+
+- **Validate Everything:** Always check for null before accessing configs
+- **Cache Configs:** Store frequently-used configs in member variables
+- **Use Statics:** Prefer static helper functions for common patterns
+- **Theme Early:** Apply themes in `NativeConstruct()` for consistent timing
+
+## Next Steps
+
+- **[Inventory Types Configuration](InventoryTypes.md):** Configure different inventory behaviors
+- **[UI Theming Guide](UIThemingGuide.md):** Complete theme customization
+- **[Equipment System](../EquipmentSystem/EquipmentSystem.md):** Equipment slot setup and management
