@@ -13,7 +13,7 @@ The Mountea Advanced Inventory & Equipment System provides complete item managem
 Complete item storage and management system with:
 
 - [Core functionality](InventorySystem/InventorySystem.md) - Basic inventory operations
-- [Items](InventorySystem/Items.md) - Runtime item instances and data structures
+- [Item Instances](InventorySystem/ItemInstances.md) - Runtime item instances and data structures
 - [Item Templates](InventorySystem/ItemTemplates.md) - Static item definitions and properties
 - [Categories](InventorySystem/Categories.md) - Item classification and organization
 - [Rarity System](InventorySystem/Rarity.md) - Visual and economic item tiers

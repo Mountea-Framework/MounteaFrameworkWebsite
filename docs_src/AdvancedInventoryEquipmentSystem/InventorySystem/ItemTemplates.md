@@ -1,193 +1,412 @@
 # Item Templates
 
-Static item definitions that serve as blueprints for creating inventory item instances.
+## What You'll Learn
 
-## Core Class
+- Creating item templates as data assets
+- Configuring item properties, categories, and rarities
+- Understanding template vs runtime item distinction
+- Using templates to spawn inventory items
+- Validation and editor workflow optimization
 
-### `UMounteaInventoryItemTemplate`
-
-Data asset defining static item properties:
-
-- **Primary Data** - Core identification and behavior
-- **Secondary Data** - Visual assets and economic properties
-- **Durability System** - Condition and degradation rules
-- **Economic Data** - Pricing and trading information
-
-## Primary Properties
-
-### Identification
+## Quick Start
 
 ```cpp
-// Core identification
+// Create item from template
+bool Success = UMounteaInventoryStatics::AddItemFromTemplate(
+    InventoryInterface, 
+    ItemTemplate, 
+    Quantity, 
+    Durability
+);
+
+// Access template properties from item
+FText ItemName = UMounteaInventoryStatics::GetInventoryItemName(Item);
+FInventoryCategory Category = UMounteaInventoryStatics::GetInventoryCategory(Item);
+```
+
+!!! tip "Result"
+    Data-driven item system where designers create reusable templates and code spawns runtime instances.
+
+## Core Concepts
+
+### Template vs Item Distinction
+
+The system separates static item definitions from runtime instances:
+
+```cpp
+// Template: Static data asset (UMounteaInventoryItemTemplate)
+// - Display name, category, rarity
+// - Max quantity, stack size, flags
+// - Durability settings, price, weight
+// - Mesh, textures, special effects
+
+// Item: Runtime instance (FInventoryItem)  
+// - Current quantity, durability
+// - Custom data tags
+// - Owning inventory reference
+// - Affector slots for attachments
+```
+
+!!! info "Key Benefits"
+    - **Memory Efficient:** Templates shared across multiple item instances
+    - **Designer Friendly:** Visual editor for item properties
+    - **Data Driven:** No code changes needed for new items
+    - **Network Optimized:** Templates referenced by ID, not duplicated
+
+### Template Structure
+
+Templates define all static properties items need:
+
+```cpp
+// Primary properties
 FGuid Guid;                    // Unique template identifier
-FText DisplayName;             // Localized item name
-FString ItemCategory;          // Primary category (Weapon, Armor, etc.)
-FString ItemSubCategory;       // Secondary classification
-FString ItemRarity;            // Rarity tier (Common, Rare, Epic)
-```
+FText DisplayName;             // Item name shown to players
+FString ItemCategory;          // Main category (Weapons, Armor, etc.)
+FString ItemSubCategory;       // Subcategory within main category
+FString ItemRarity;            // Rarity level (Common, Rare, etc.)
+uint8 ItemFlags;               // Behavioral flags (stackable, tradeable)
+int32 MaxQuantity;             // Maximum per inventory slot
+int32 MaxStackSize;            // Maximum stack size
+FGameplayTagContainer Tags;    // Gameplay tags for filtering
+TSoftClassPtr<AActor> SpawnActor; // Actor to spawn when used/dropped
 
-### Behavior Flags
-
-```cpp
-// Item behavior (bitmask)
-uint8 ItemFlags;
-// Available flags:
-// - EIIF_Tradeable: Can be traded between players
-// - EIIF_Stackable: Can combine with identical items  
-// - EIIF_Craftable: Used in crafting recipes
-// - EIIF_Dropable: Can be dropped into world
-// - EIIF_Consumable: Single-use items
-// - EIIF_QuestItem: Required for quests
-// - EIIF_Unique: Only one allowed per inventory
-// - EIIF_Durable: Has durability system
-```
-
-### Quantity Rules
-
-```cpp
-int32 MaxQuantity;             // Max items per inventory
-int32 MaxStackSize;            // Max items per stack
-FGameplayTagContainer Tags;    // Filtering and categorization tags
-TSoftClassPtr<AActor> SpawnActor; // Actor spawned when used/dropped
-```
-
-## Visual Assets
-
-### UI Elements
-
-```cpp
+// Secondary properties
 FText ItemShortInfo;           // Brief description
 FText ItemLongInfo;            // Detailed description
-TSoftObjectPtr<UTexture2D> ItemThumbnail;  // Small icon
-TSoftObjectPtr<UTexture2D> ItemCover;      // Large preview image
+TSoftObjectPtr<UTexture2D> ItemThumbnail; // Small icon
+TSoftObjectPtr<UTexture2D> ItemCover;     // Large image
+TObjectPtr<UStreamableRenderAsset> ItemMesh; // 3D mesh
+
+// Optional systems
+bool bHasDurability;           // Enable durability system
+float MaxDurability;          // Maximum durability value
+bool bHasPrice;               // Enable pricing system
+float BasePrice;              // Base monetary value
+bool bHasWeight;              // Enable weight system
+float Weight;                 // Item weight
 ```
 
-### 3D Assets
+## Configuration Setup
+
+### Creating Item Templates
+
+![Item Template Editor](https://cdn2.unrealengine.com/hlod-water-support-in-unreal-engine-5-1-1920x1080-e402b5c30a87.jpg?resize=1&w=1920)
+
+Templates are Primary Data Assets created through the Content Browser:
+
+1. **Right-click** in Content Browser → **Advanced Inventory & Equipment** → **Templates** → **Item Template**
+2. **Select** `Mountea Inventory Item Template` base class
+3. **Configure** primary properties (name, category, rarity)
+4. **Set** behavioral flags and limits
+5. **Add** visual assets (icons, meshes)
+
+### Dynamic Dropdown Integration
+
+The system automatically populates dropdowns from your configuration:
 
 ```cpp
-TObjectPtr<UStreamableRenderAsset> ItemMesh;  // StaticMesh or SkeletalMesh
-```
+// Category dropdown population
+UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Primary Data",
+    meta=(GetOptions="GetAllowedCategories"))
+FString ItemCategory;
 
-## Durability System
-
-### Configuration
-
-```cpp
-bool bHasDurability;           // Enable durability
-float MaxDurability;          // Maximum condition value
-float BaseDurability;         // Starting condition
-float DurabilityPenalization; // Damage per use
-float DurabilityToPriceCoefficient; // Price impact
-```
-
-### Usage
-
-```cpp
-// Check if item uses durability
-if (Template->bHasDurability)
+// Implementation
+TArray<FString> UMounteaInventoryItemTemplate::GetAllowedCategories()
 {
-    float StartingCondition = Template->BaseDurability;
-    float MaxCondition = Template->MaxDurability;
+    auto Settings = GetMutableDefault<UMounteaAdvancedInventorySettings>();
+    return IsValid(Settings) ? Settings->GetAllowedCategories() : 
+        TArray<FString>{TEXT("Miscellaneous")};
 }
 ```
 
-## Economic Properties
+!!! tip "Dynamic Behavior"
+    - **Categories** update when you modify Inventory Settings Config
+    - **Subcategories** filter based on selected main category  
+    - **Rarities** reflect your configured rarity system
 
-### Pricing
+### Automatic Flag Inheritance
 
-```cpp
-bool bHasPrice;               // Enable pricing
-float BasePrice;              // Base monetary value
-float SellPriceCoefficient;   // Sell price multiplier
-```
-
-### Weight System
+Templates inherit flags from their categories automatically:
 
 ```cpp
-bool bHasWeight;              // Enable weight
-float Weight;                 // Item weight in kg
+// Editor post-edit processing
+void UMounteaInventoryItemTemplate::PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent)
+{
+    if (PropertyChangedEvent.Property->GetFName() == GET_MEMBER_NAME_CHECKED(UMounteaInventoryItemTemplate, ItemCategory))
+    {
+        auto Config = GetInventorySettingsConfig();
+        if (Config)
+        {
+            auto CategoryConfig = Config->AllowedCategories.Find(ItemCategory);
+            ItemFlags = CategoryConfig->CategoryData.CategoryFlags; // Auto-inherit flags
+        }
+        ItemSubCategory = TEXT(""); // Reset subcategory
+    }
+}
 ```
 
-## Attachment Support
+!!! warning "Flag Inheritance"
+    Changing item category automatically updates flags to match category defaults. Override manually if needed.
 
-### Slot Definitions
+## Common Patterns
+
+### Pattern 1: Template-Based Item Creation
+
+!!! note "When & Why"
+    - Spawning loot from templates
+    - Adding items to player inventory
+    - Creating items with specific durability/quantity
 
 ```cpp
-FGameplayTagContainer AttachmentSlots; // Compatible attachment types
-TObjectPtr<UObject> ItemSpecialAffect; // Special effects/abilities
+// Direct template usage
+bool UMounteaInventoryStatics::AddItemFromTemplate(
+    const TScriptInterface<IMounteaAdvancedInventoryInterface>& Target, 
+    UMounteaInventoryItemTemplate* Template, 
+    const int32 Quantity, 
+    const float Durability)
+{
+    return Target.GetObject() ? 
+        Target->Execute_AddItemFromTemplate(Target.GetObject(), Template, Quantity, Durability) : 
+        false;
+}
+
+// Manual item construction
+FInventoryItem Item(Template, Quantity, Durability, OwningInventory);
+bool Success = UMounteaInventoryStatics::AddItem(InventoryInterface, Item);
 ```
 
-### Slot Usage
+### Pattern 2: Template Property Access
+
+!!! note "When & Why"
+    - UI display of item information
+    - Gameplay logic based on item properties
+    - Validation and filtering
 
 ```cpp
-// Check attachment compatibility
-bool CanAttachGem = Template->AttachmentSlots.HasTag(GemSlotTag);
+// Access template data through items
+void UpdateItemUI(const FInventoryItem& Item)
+{
+    // Direct template access
+    UMounteaInventoryItemTemplate* Template = Item.GetTemplate();
+    if (!Template) return;
+    
+    // Static utility functions
+    FText Name = UMounteaInventoryStatics::GetInventoryItemName(Item);
+    UTexture2D* Icon = UMounteaInventoryStatics::GetInventoryItemCover(Item);
+    FInventoryCategory Category = UMounteaInventoryStatics::GetInventoryCategory(Item);
+    FInventoryRarity Rarity = UMounteaInventoryStatics::GetInventoryRarity(Item);
+    
+    // Apply to UI elements
+    NameLabel->SetText(Name);
+    IconImage->SetBrushFromTexture(Icon);
+    BorderWidget->SetColorAndOpacity(Rarity.RarityColor);
+}
 ```
 
-## Template Creation
+### Pattern 3: Template Validation
 
-### In Editor
-
-1. Create new **Inventory Item Template** data asset
-2. Set primary identification data
-3. Configure behavior flags
-4. Add visual assets
-5. Set up economic properties
-6. Define attachment slots
-
-### In Code
+!!! note "When & Why"
+    - Preventing invalid item creation
+    - Editor validation feedback
+    - Runtime safety checks
 
 ```cpp
-// Access template data
-UMounteaInventoryItemTemplate* Template = LoadObject<UMounteaInventoryItemTemplate>(
-    nullptr, TEXT("/Game/Items/Weapons/Sword_Template"));
-
-// Get properties
-FText ItemName = Template->DisplayName;
-bool IsStackable = Template->ItemFlags & static_cast<uint8>(EInventoryItemFlags::EIIF_Stackable);
+// Template validation during creation
+bool IsValidTemplate(UMounteaInventoryItemTemplate* Template)
+{
+    if (!IsValid(Template)) return false;
+    
+    // Check required properties
+    if (Template->DisplayName.IsEmpty()) return false;
+    if (Template->ItemCategory.IsEmpty()) return false;
+    if (Template->MaxQuantity <= 0) return false;
+    
+    // Validate category exists
+    auto Config = UMounteaInventorySystemStatics::GetMounteaAdvancedInventoryConfig();
+    if (!Config || !Config->AllowedCategories.Contains(Template->ItemCategory))
+        return false;
+    
+    // Validate rarity exists
+    if (!Config->AllowedRarities.Contains(Template->ItemRarity))
+        return false;
+    
+    return true;
+}
 ```
 
-## Categories & Rarities
+## Advanced Usage
 
-### Template Configuration
+### Custom Template Properties
 
-Categories and rarities defined in [Settings](../Configuration/Settings.md):
+Extend templates with game-specific data using gameplay tags:
 
 ```cpp
-// Get allowed values
-TArray<FString> Categories = UMounteaInventoryStatics::GetInventorySettings()->GetAllowedCategories();
-TArray<FString> Rarities = UMounteaInventoryStatics::GetInventorySettings()->GetAllowedRarities();
+// In template configuration
+FGameplayTagContainer Tags;  // Weapon.Type.Sword, Armor.Material.Steel
+
+// Runtime usage
+bool IsWeapon = Item.GetTemplate()->Tags.HasTag(FGameplayTag::RequestGameplayTag("Weapon"));
+bool IsMagical = Item.GetTemplate()->Tags.HasTag(FGameplayTag::RequestGameplayTag("Enchanted"));
 ```
 
-### Dropdown Population
+### Template-Based Spawning
 
-Template editor automatically populates dropdowns from settings configuration.
+Templates can specify actors to spawn when used:
+
+```cpp
+// Template configuration
+TSoftClassPtr<AActor> SpawnActor;  // BP_HealthPotion_Actor
+
+// Runtime spawning
+if (Item.GetTemplate()->SpawnActor.IsValid())
+{
+    UClass* ActorClass = Item.GetTemplate()->SpawnActor.LoadSynchronous();
+    AActor* SpawnedActor = GetWorld()->SpawnActor<AActor>(ActorClass, Location, Rotation);
+}
+```
+
+### Durability System Integration
+
+Templates define durability behavior:
+
+```cpp
+// Template setup
+bool bHasDurability = true;
+float MaxDurability = 100.0f;
+float BaseDurability = 100.0f;
+float DurabilityPenalization = 5.0f;      // Damage per use
+float DurabilityToPriceCoefficient = 0.8f; // Price scaling
+
+// Runtime durability management
+bool ModifyDurability(const FInventoryItem& Item, float DamageAmount)
+{
+    if (!Item.GetTemplate()->bHasDurability) return false;
+    
+    float NewDurability = FMath::Clamp(
+        Item.GetDurability() - DamageAmount,
+        0.0f,
+        Item.GetTemplate()->MaxDurability
+    );
+    
+    return UMounteaInventoryStatics::ModifyItemDurability(
+        Item.GetOwningInventory(),
+        Item.GetGuid(),
+        -DamageAmount
+    );
+}
+```
+
+## Template Workflow
+
+### Designer Workflow
+
+1. **Configure** categories and rarities in Inventory Settings Config
+2. **Create** item template data asset
+3. **Select** category from dropdown (auto-inherits flags)
+4. **Choose** rarity level
+5. **Set** quantity limits and behavioral flags
+6. **Add** visual assets (icons, meshes)
+7. **Test** in-game through template spawning
+
+### Programmer Integration
+
+```cpp
+// Load template by reference
+UPROPERTY(EditAnywhere, Category="Items")
+TSoftObjectPtr<UMounteaInventoryItemTemplate> HealthPotionTemplate;
+
+// Runtime spawning
+void SpawnHealthPotion()
+{
+    UMounteaInventoryItemTemplate* Template = HealthPotionTemplate.LoadSynchronous();
+    UMounteaInventoryStatics::AddItemFromTemplate(PlayerInventory, Template, 1, 1.0f);
+}
+```
+
+### Blueprint Integration
+
+```cpp
+// Blueprint-callable functions
+UFUNCTION(BlueprintCallable, Category="Inventory")
+bool AddItemFromTemplate(UMounteaInventoryItemTemplate* Template, int32 Quantity = 1);
+
+UFUNCTION(BlueprintPure, Category="Inventory")
+FText GetItemName(const FInventoryItem& Item);
+
+UFUNCTION(BlueprintPure, Category="Inventory")
+bool IsItemValid(const FInventoryItem& Item);
+```
+
+## Performance Considerations
+
+!!! warning "Optimization Tips"
+    - **Soft References:** Use `TSoftObjectPtr` for template references
+    - **Template Caching:** Cache frequently-used templates in memory
+    - **Validation Frequency:** Validate templates once at startup, not per-use
+
+```cpp
+// Efficient template management
+class UTemplateManager : public UGameInstanceSubsystem
+{
+private:
+    TMap<FString, UMounteaInventoryItemTemplate*> CachedTemplates;
+    
+public:
+    UMounteaInventoryItemTemplate* GetTemplate(const FString& TemplateID)
+    {
+        if (UMounteaInventoryItemTemplate** Found = CachedTemplates.Find(TemplateID))
+            return *Found;
+        
+        // Load and cache
+        UMounteaInventoryItemTemplate* Template = LoadTemplateFromID(TemplateID);
+        if (Template)
+            CachedTemplates.Add(TemplateID, Template);
+        
+        return Template;
+    }
+};
+```
+
+## Troubleshooting
+
+### Template Not Loading
+
+!!! tip "Problem & Solution"
+    - Template reference returns null
+    - Verify template asset exists in Content Browser
+    - Check soft reference path validity
+
+### Dropdown Shows Wrong Options
+
+!!! tip "Problem & Solution"
+    - Category/rarity dropdowns don't match config
+    - Refresh editor after modifying Inventory Settings Config
+    - Verify `GetAllowedCategories()` implementation
+
+### Flag Inheritance Issues
+
+!!! tip "Problem & Solution"
+    - Template flags don't match category
+    - Category change triggers automatic flag inheritance
+    - Override manually if different behavior needed
+
+### Runtime Item Creation Fails
+
+!!! tip "Problem & Solution"
+    - `AddItemFromTemplate` returns false
+    - Check template validity and inventory capacity
+    - Verify item flags allow addition to target inventory
 
 ## Best Practices
 
-### Naming Conventions
+- **Naming Convention:** Use descriptive template names (`T_Sword_Iron`, `T_Potion_Health`)
+- **Asset Organization:** Group templates in category-based folders
+- **Validation Early:** Validate templates during packaging, not runtime
+- **Soft References:** Avoid hard references to prevent memory bloat
+- **Default Values:** Set sensible defaults for all template properties
 
-- Use descriptive display names
-- Consistent category naming
-- Logical subcategory hierarchy
+## Next Steps
 
-### Asset Organization
-
-- Group templates by category in project
-- Use consistent folder structure
-- Prefix template names for sorting
-
-### Performance
-
-- Use soft references for large assets
-- Load meshes on-demand for previews
-- Cache frequently accessed templates
-
-## Integration
-
-Templates integrate with:
-
-- [Items](Items.md) - Runtime item creation
-- [Categories](Categories.md) - Classification system
-- [Rarity](Rarity.md) - Visual and economic effects
-- [Attachment System](../EquipmentSystem/AttachmentSystem.md) - Equipment modifications
+- **[Item Actions](ItemActions.md):** Define what players can do with items
+- **[Inventory Component](InventoryComponent.md):** Implement inventory functionality
+- **[Equipment System](../EquipmentSystem/EquipmentSystem.md):** Equip items from templates
