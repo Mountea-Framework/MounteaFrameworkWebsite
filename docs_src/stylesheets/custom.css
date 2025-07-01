@@ -264,6 +264,15 @@ body,
   margin: 0rem !important;
 }
 
+article img {
+    border-radius: 0.2rem;
+    transition: all 0.15s ease !important;    
+}
+
+article img:hover {
+  box-shadow: var(--prose-accent) 4px 4px 8px 0px;
+}
+
 /* Cards */
 .card-grid {
   display: grid;
