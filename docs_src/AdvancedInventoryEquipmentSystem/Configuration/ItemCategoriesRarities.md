@@ -32,18 +32,18 @@ Categories provide hierarchical item organization with main categories and optio
 // Category structure
 struct FInventoryCategory
 {
-    FInventoryCategoryData CategoryData;              // Main category properties
+    FInventoryCategoryData CategoryData;                  // Main category properties
     TMap<FString, FInventoryCategoryData> SubCategories;  // Optional subcategories
 };
 
 // Category properties
 struct FInventoryCategoryData
 {
-    FText CategoryDisplayName;        // Localized display name
-    int32 CategoryPriority;          // Sorting order
-    FGameplayTagContainer CategoryTags; // Gameplay tags
-    TSoftObjectPtr<UTexture> DisplayIcon; // UI icon
-    uint8 CategoryFlags;             // Behavioral flags
+    FText CategoryDisplayName;                                       // Localized display name
+    int32 CategoryPriority;                                          // Sorting order
+    FGameplayTagContainer CategoryTags;                              // Gameplay tags
+    TSoftObjectPtr<UTexture> DisplayIcon;                            // UI icon
+    uint8 CategoryFlags;                                             // Behavioral flags
     TSet<TSoftClassPtr<UMounteaInventoryItemAction>> AllowedActions; // Available actions
 };
 ```
@@ -56,9 +56,9 @@ Rarities define visual appearance and economic value:
 // Rarity structure
 struct FInventoryRarity
 {
-    FText RarityDisplayName;         // Localized name
-    FLinearColor RarityColor;        // Visual color
-    float BasePriceMultiplier;       // Economic scaling
+    FText RarityDisplayName;          // Localized name
+    FLinearColor RarityColor;         // Visual color
+    float BasePriceMultiplier;        // Economic scaling
     FGameplayTagContainer RarityTags; // Gameplay tags
 };
 ```
@@ -117,6 +117,13 @@ void UMounteaAdvancedInventorySettingsConfig::SetDefaultValues()
 }
 ```
 
+### How Dropdown Population Works
+
+- `GetAllowedCategories()` is called by Unreal's property system when `meta=(GetOptions="GetAllowedCategories")` is specified
+- The function queries your configured categories and returns available options
+- If no configuration exists, fallback values ensure the system remains functional
+- This creates dynamic dropdowns that update when you modify your data assets
+
 ## Common Patterns
 
 ### Pattern 1: Category Validation
@@ -143,13 +150,6 @@ bool IsValidCategory(const FString& CategoryKey)
     return Config ? Config->AllowedCategories.Contains(CategoryKey) : false;
 }
 ```
-
-**How Dropdown Population Works:**
-
-- `GetAllowedCategories()` is called by Unreal's property system when `meta=(GetOptions="GetAllowedCategories")` is specified
-- The function queries your configured categories and returns available options
-- If no configuration exists, fallback values ensure the system remains functional
-- This creates dynamic dropdowns that update when you modify your data assets
 
 ### Pattern 2: Subcategory Access
 
@@ -262,18 +262,16 @@ bool CanPerformAction(const FInventoryItem& Item, TSubclassOf<UMounteaInventoryI
 TArray<FInventoryItem> GetItemsByTag(const FGameplayTag& FilterTag)
 {
     TArray<FInventoryItem> FilteredItems;
-    
-    for (const FInventoryItem& Item : AllItems)
+
+    Algo::CopyIf(AllItems, FilteredItems, [&FilterTag](const FInventoryItem& Item)
     {
-        FInventoryCategory Category = UMounteaInventoryStatics::GetInventoryCategory(Item);
-        FInventoryRarity Rarity = UMounteaInventoryStatics::GetInventoryRarity(Item);
-        
-        if (Category.CategoryData.CategoryTags.HasTag(FilterTag) ||
-            Rarity.RarityTags.HasTag(FilterTag))
-        {
-            FilteredItems.Add(Item);
-        }
-    }
+        const FInventoryCategory Category = UMounteaInventoryStatics::GetInventoryCategory(Item);
+        const FInventoryRarity Rarity = UMounteaInventoryStatics::GetInventoryRarity(Item);
+
+        return Category.CategoryData.CategoryTags.HasTag(FilterTag) ||
+               Rarity.RarityTags.HasTag(FilterTag);
+    });
+
     return FilteredItems;
 }
 ```
@@ -311,19 +309,16 @@ UPROPERTY(EditAnywhere, Category="Classification", meta=(GetOptions="GetAllowedR
 FString ItemRarity = "Common";
 ```
 
-**How Dynamic Dropdowns Work:**
-
-- `meta=(GetOptions="FunctionName")` tells Unreal to call the specified function
-- The function queries your data assets and returns available options
-- Dropdowns automatically update when you modify categories/rarities in config
-- Invalid selections are highlighted in red, providing immediate feedback
+!!! question "How Dynamic Dropdowns Work"
+    - The function queries your data from [Inventory Config](Settings.md) and returns available options
+    - Dropdowns automatically update when you modify categories/rarities in config
 
 **Editor Workflow:**
 
 1. Configure categories and rarities in your Inventory Settings Config
 2. Item templates automatically show available options in dropdowns
 3. Changes to config immediately reflect in all item template editors
-4. Validation prevents invalid combinations before runtime
+4. Validation prevents invalid combinations in runtime
 
 ### Template Validation
 
@@ -333,7 +328,7 @@ bool UMounteaInventoryItemTemplate::ValidateTemplate() const
     // Validate category exists
     if (!IsValidCategory(ItemCategory))
     {
-        UE_LOG(LogInventory, Warning, TEXT("Invalid category: %s"), *ItemCategory);
+        LOG_WARNING(TEXT("Invalid category: %s"), *ItemCategory);
         return false;
     }
     
@@ -341,7 +336,7 @@ bool UMounteaInventoryItemTemplate::ValidateTemplate() const
     auto Config = UMounteaInventorySystemStatics::GetMounteaAdvancedInventoryConfig();
     if (!Config->AllowedRarities.Contains(ItemRarity))
     {
-        UE_LOG(LogInventory, Warning, TEXT("Invalid rarity: %s"), *ItemRarity);
+        LOG_WARNING(TEXT("Invalid rarity: %s"), *ItemRarity);
         return false;
     }
     
@@ -353,7 +348,7 @@ bool UMounteaInventoryItemTemplate::ValidateTemplate() const
 
 ### Automatic Inheritance
 
-Subcategories inherit properties from parent categories:
+Subcategories inherit properties from parent categories, reducing configuration overhead and ensuring consistency. This automatic inheritance happens when you modify categories in the editor:
 
 ```cpp
 // Editor post-edit processing
@@ -361,28 +356,47 @@ void UMounteaAdvancedInventorySettingsConfig::PostEditChangeProperty(FPropertyCh
 {
     if (PropertyChangedEvent.GetMemberPropertyName() == GET_MEMBER_NAME_CHECKED(UMounteaAdvancedInventorySettingsConfig, AllowedCategories))
     {
-        for (auto& Category : AllowedCategories)
+        Algo::ForEach(AllowedCategories, [](TPair<FGameplayTag, FInventoryCategory>& CategoryPair)
         {
-            for (auto& Subcategory : Category.Value.SubCategories)
+            FInventoryCategoryData& ParentData = CategoryPair.Value.CategoryData;
+            
+            Algo::ForEach(CategoryPair.Value.SubCategories, [&ParentData](TPair<FGameplayTag, FInventoryCategoryData>& SubcategoryPair)
             {
-                FInventoryCategoryData& SubCategoryData = Subcategory.Value;
-                
+                FInventoryCategoryData& SubCategoryData = SubcategoryPair.Value;
+
                 // Inherit flags if not set
                 if (SubCategoryData.CategoryFlags == 0)
-                    SubCategoryData.CategoryFlags = Category.Value.CategoryData.CategoryFlags;
-                
+                {
+                    SubCategoryData.CategoryFlags = ParentData.CategoryFlags;
+                }
+
                 // Inherit actions if empty
-                if (SubCategoryData.AllowedActions.Num() == 0)
-                    SubCategoryData.AllowedActions = Category.Value.CategoryData.AllowedActions;
-                
+                if (SubCategoryData.AllowedActions.IsEmpty())
+                {
+                    SubCategoryData.AllowedActions = ParentData.AllowedActions;
+                }
+
                 // Inherit tags
                 if (SubCategoryData.CategoryTags.IsEmpty())
-                    SubCategoryData.CategoryTags.AppendTags(Category.Value.CategoryData.CategoryTags);
-            }
-        }
+                {
+                    SubCategoryData.CategoryTags.AppendTags(ParentData.CategoryTags);
+                }
+            });
+        });
     }
 }
 ```
+
+!!! question "Why Inheritance Matters"
+    - **Reduced Configuration:** Set flags once on parent, auto-apply to all subcategories
+    - **Consistency:** Ensures subcategories behave similarly to parent categories
+    - **Flexibility:** Override specific properties on subcategories when needed
+    - **Maintenance:** Update parent category to affect all subcategories at once
+
+!!! example "Inheritance Example"
+    - **Weapons** category has `Durable` and `Droppable` flags
+    - **Melee**, **Ranged**, **Magic** subcategories automatically inherit these flags
+    - **Magic** subcategory can override with additional `Consumable` flag for spell scrolls
 
 ## Performance Considerations
 
@@ -451,5 +465,5 @@ public:
 ## Next Steps
 
 - **[Inventory Types](InventoryTypes.md):** Configure inventory behavior per type
-- **[Item Templates](ItemTemplates.md):** Create items with categories and rarities
+- **[Item Templates](../InventorySystem/ItemTemplates.md):** Create items with categories and rarities
 - **[UI Theming](UIThemingGuide.md):** Apply rarity colors in UI widgets
