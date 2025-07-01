@@ -12,11 +12,11 @@ theme:
     primary: black
     accent: cyan
   features:
+    - navigation.instant
     - navigation.sections
-    - navigation.tabs
+    #- navigation.tabs
     - navigation.top
-    - navigation.expand 
-    - navigation.indexes
+    - navigation.expand
     - search.highlight
     - search.suggest
     - content.code.annotate
@@ -26,38 +26,36 @@ theme:
 
 nav:
   - Home: index.md
-  - Advanced Inventory & Equipment System:
-      - Overview: AdvancedInventoryEquipmentSystem/index.md
-      - Inventory System:
-          - Overview: AdvancedInventoryEquipmentSystem/InventorySystem/InventorySystem.md
-          - Items: AdvancedInventoryEquipmentSystem/InventorySystem/Items.md
-          - Item Templates: AdvancedInventoryEquipmentSystem/InventorySystem/ItemTemplates.md
-          - Categories: AdvancedInventoryEquipmentSystem/InventorySystem/Categories.md
-          - Rarity System: AdvancedInventoryEquipmentSystem/InventorySystem/Rarity.md
-          - Search & Filtering: AdvancedInventoryEquipmentSystem/InventorySystem/Search.md
-          - Notifications: AdvancedInventoryEquipmentSystem/InventorySystem/Notifications.md
-      - Equipment System:
-          - Overview: AdvancedInventoryEquipmentSystem/EquipmentSystem/EquipmentSystem.md
-          - Attachment System: AdvancedInventoryEquipmentSystem/EquipmentSystem/AttachmentSystem.md
-      - User Interface:
-          - Overview: AdvancedInventoryEquipmentSystem/UserInterface/UserInterface.md
-          - Inventory UI: AdvancedInventoryEquipmentSystem/UserInterface/InventoryUI.md
-          - Grid System: AdvancedInventoryEquipmentSystem/UserInterface/GridSystem.md
-          - Item Widgets: AdvancedInventoryEquipmentSystem/UserInterface/ItemWidgets.md
-          - Item Preview: AdvancedInventoryEquipmentSystem/UserInterface/ItemPreview.md
-          - Slate Elements: AdvancedInventoryEquipmentSystem/UserInterface/SlateElements.md
-      - Configuration:
-          - Settings: AdvancedInventoryEquipmentSystem/Configuration/Settings.md
-          - Inventory Types: AdvancedInventoryEquipmentSystem/Configuration/InventoryTypes.md
-          - Categories & Rarities: AdvancedInventoryEquipmentSystem\Configuration\ItemCategoriesRarities.md
-          - UI Theming: AdvancedInventoryEquipmentSystem\Configuration\UIThemingGuide.md
-          - Replication: AdvancedInventoryEquipmentSystem/Configuration/Replication.md
+  - Projects:
+    - Advanced Inventory & Equipment System:
+        - Overview: AdvancedInventoryEquipmentSystem/Overview.md
+        - Inventory System:
+            - Overview: AdvancedInventoryEquipmentSystem/InventorySystem/InventorySystem.md
+            - Items: AdvancedInventoryEquipmentSystem/InventorySystem/Items.md
+            - Item Templates: AdvancedInventoryEquipmentSystem/InventorySystem/ItemTemplates.md
+            - Categories: AdvancedInventoryEquipmentSystem/InventorySystem/Categories.md
+            - Rarity System: AdvancedInventoryEquipmentSystem/InventorySystem/Rarity.md
+            - Search & Filtering: AdvancedInventoryEquipmentSystem/InventorySystem/Search.md
+            - Notifications: AdvancedInventoryEquipmentSystem/InventorySystem/Notifications.md
+        - Equipment System:
+            - Overview: AdvancedInventoryEquipmentSystem/EquipmentSystem/EquipmentSystem.md
+            - Attachment System: AdvancedInventoryEquipmentSystem/EquipmentSystem/AttachmentSystem.md
+        - User Interface:
+            - Overview: AdvancedInventoryEquipmentSystem/UserInterface/UserInterface.md
+            - Inventory UI: AdvancedInventoryEquipmentSystem/UserInterface/InventoryUI.md
+            - Grid System: AdvancedInventoryEquipmentSystem/UserInterface/GridSystem.md
+            - Item Widgets: AdvancedInventoryEquipmentSystem/UserInterface/ItemWidgets.md
+            - Item Preview: AdvancedInventoryEquipmentSystem/UserInterface/ItemPreview.md
+            - Slate Elements: AdvancedInventoryEquipmentSystem/UserInterface/SlateElements.md
+        - Configuration:
+            - Settings: AdvancedInventoryEquipmentSystem/Configuration/Settings.md
+            - Inventory Types: AdvancedInventoryEquipmentSystem/Configuration/InventoryTypes.md
+            - Categories & Rarities: AdvancedInventoryEquipmentSystem/Configuration/ItemCategoriesRarities.md
+            - UI Theming: AdvancedInventoryEquipmentSystem\Configuration\UIThemingGuide.md
+            - Replication: AdvancedInventoryEquipmentSystem/Configuration/Replication.md
 
 extra_css:
   - stylesheets/custom.css
-
-extra_javascript:
-  - js/nav-toggle.js
 
 markdown_extensions:
   - admonition
