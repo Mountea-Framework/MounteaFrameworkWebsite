@@ -1,141 +1,209 @@
-# Settings
+# Mountea Advanced Inventory Settings
 
-System-wide configuration for inventory types, themes, and behavior.
+## What You'll Learn
 
-## Core Classes
+- Basic settings access and configuration
+- Setting up inventory types, categories, and rarities
+- Applying themes to widgets
+- Configuring equipment slots and notifications
 
-### Settings Overview
-
-- **`UMounteaAdvancedInventorySettings`** - Project settings (Editor > Project Settings)
-- **`UMounteaAdvancedInventorySettingsConfig`** - Runtime configuration data asset
-- **`UMounteaAdvancedInventoryThemeConfig`** - Visual theming
-- **`UMounteaAdvancedEquipmentSettingsConfig`** - Equipment slots
-- **`UMounteaAdvancedInventoryInteractiveWidgetConfig`** - 3D preview setup
-
-## Project Settings
-
-### Main Configuration
+## Quick Start
 
 ```cpp
-// Access in code
-UMounteaAdvancedInventorySettings* Settings = UMounteaInventoryStatics::GetInventorySettings();
-
-// Key properties
-TSoftObjectPtr<UInputMappingContext> InputMapping;
-TSoftObjectPtr<UMounteaAdvancedInventorySettingsConfig> InventoryConfig;
-TSoftObjectPtr<UMounteaAdvancedEquipmentSettingsConfig> EquipmentConfig;
-uint8 LogVerbosity; // Logging levels
-```
-
-### Accessing Data
-
-```cpp
-// Get allowed categories/rarities
+// Access settings singleton
+UMounteaAdvancedInventorySettings* Settings = GetDefault<UMounteaAdvancedInventorySettings>();
 TArray<FString> Categories = Settings->GetAllowedCategories();
-TArray<FString> Rarities = Settings->GetAllowedRarities();
+
+// Use Statics wrapper
+UMounteaAdvancedInventorySettings* Settings = UMounteaInventoryStatics::GetInventorySettings();
 ```
 
-## Runtime Configuration
+!!! tip "Result"
+    Access to all inventory system configuration from any code location.
 
-### Inventory Settings Config
+## Core Concepts
+
+### Settings Access Pattern
+
+All settings follow a consistent two-level access pattern: **Project Settings** → **Data Asset Config**.
 
 ```cpp
-// Main configuration data asset
-UMounteaAdvancedInventorySettingsConfig* Config = GetInventorySettingsConfig();
+// 1. Get project settings
+auto Settings = UMounteaInventoryStatics::GetInventorySettings();
 
-// Core data
-TMap<EInventoryType, FInventoryTypeConfig> AllowedInventoryTypes;
-TMap<FString, FInventoryRarity> AllowedRarities;  
-TMap<FString, FInventoryCategory> AllowedCategories;
+// 2. Load specific config
+auto InventoryConfig = Settings->InventorySettingsConfig.LoadSynchronous();
+auto EquipmentConfig = Settings->EquipmentSettingsConfig.LoadSynchronous();
 ```
 
-### UI Configuration
+!!! tip "Key Points"
+    - Settings are singletons accessible anywhere via `GetDefault<>()` or by pre-defined `UMounteaInventoryStatics`
+    - Data assets are soft references loaded synchronously when needed
+    - Always validate objects before use
+
+### Categories and Rarities
+
+Categories and rarities are defined in data assets but accessed through convenience functions:
 
 ```cpp
-// Widget classes
-TSoftClassPtr<UUserWidget> InventoryWidgetClass;
-TSoftClassPtr<UUserWidget> ItemSlotWidgetClass;
-TSoftClassPtr<UUserWidget> NotificationWidgetClass;
+// Get available categories for dropdown/validation
+TArray<FString> UMounteaInventoryItemTemplate::GetAllowedCategories()
+{
+    auto Settings = UMounteaInventoryStatics::GetInventorySettings();
+    return IsValid(Settings) ? Settings->GetAllowedCategories() : TArray<FString>{TEXT("Miscellaneous")};
+}
 
-// Grid settings
-FIntPoint InventoryGridDimensions = FIntPoint(5, 8);
-FVector2D ItemSlotSize = FVector2D(128.0f, 128.0f);
-float ItemSlotPadding = 5.0f;
-
-// Behavior
-uint8 bAlwaysStackStackableItems : 1;
-uint8 bAllowDragAndDrop : 1;
+// Access category data for items
+FInventoryCategory Category = UMounteaInventoryStatics::GetInventoryCategory(Item);
+FLinearColor RarityColor = UMounteaInventoryStatics::GetInventoryRarity(Item).RarityColor;
 ```
 
-## Theme System
+!!! note "When & Why"
+    - Item creation, UI display, validation
+    - Centralized configuration prevents hardcoded values
 
-### Theme Configuration
+## Common Patterns
+
+### Pattern 1: Equipment Slot Discovery
+
+!!! note "When & Why"
+    - Building equipment UI or validation
+    - Dynamic slot configuration without hardcoding
 
 ```cpp
-UMounteaAdvancedInventoryThemeConfig* Theme = GetThemeConfig();
+TArray<FName> UMounteaAdvancedAttachmentSlotBase::GetAvailableSlotNames() const
+{
+    const auto Settings = UMounteaInventoryStatics::GetInventorySettings();
+    if (!Settings) return {};
 
-// Color hierarchy
-FLinearColor BackgroundPrimary;     // Main backgrounds
-FLinearColor BackgroundSecondary;   // Secondary areas
-FLinearColor PrimaryNormal;         // Default state
-FLinearColor PrimaryHovered;        // Mouse over
-FLinearColor PrimaryActive;         // Pressed/selected
+    const auto EquipmentConfig = Settings->EquipmentSettingsConfig.LoadSynchronous();
+    if (!IsValid(EquipmentConfig)) return {};
 
-// Text colors
-FLinearColor PrimaryText;
-FLinearColor SecondaryText;
-int PrimaryTextSize = 16;
+    TArray<FName> SlotNames;
+    EquipmentConfig->AllowedEquipmentSlots.GetKeys(SlotNames);
+    return SlotNames;
+}
 ```
 
-### Applying Themes
+### Pattern 2: Theme Application
+
+!!! note "When & Why"
+    - Widget construction
+    - Consistent visual styling across all UI
 
 ```cpp
-// Auto-apply to widgets
-UMounteaInventoryUIStatics::ApplyTheme(Widget);
+void UMounteaAdvancedInventoryBaseWidget::NativeConstruct()
+{
+    Super::NativeConstruct();
+    Execute_ApplyTheme(this);
+}
 
-// Manual color access
-UMounteaAdvancedInventoryThemeConfig* Theme = UMounteaInventoryUIStatics::GetThemeConfig();
-Widget->SetColorAndOpacity(Theme->PrimaryNormal);
+// In your widget class
+void UMyInventoryWidget::ApplyTheme_Implementation()
+{
+    // Access settings is not needed in this case, as UMounteaInventorySystemStatics 
+    // provides functions to get the Config directly
+    /*
+    auto Settings = UMounteaInventoryStatics::GetInventorySettings();
+    if (!Settings)
+        return;
+    */
+
+    // Access theme config and apply colors/styles
+    auto Config = UMounteaInventorySystemStatics::GetMounteaAdvancedInventoryConfig();
+    if (Config && Config->BaseTheme.LoadSynchronous())
+    {
+        auto Theme = Config->BaseTheme.LoadSynchronous();
+        // Apply theme colors to your widgets
+    }
+}
 ```
 
-## Equipment Configuration
+### Pattern 3: Subcategory Access
 
-### Slot Definition
+!!! note "When & Why"
+    - Hierarchical item organization
+    - Support complex categorization systems
 
 ```cpp
-// Equipment settings config
-UMounteaAdvancedEquipmentSettingsConfig* EquipConfig;
-
-// Slot mapping
-TMap<FName, FMounteaEquipmentSlotHeaderData> AllowedEquipmentSlots;
-
-// Example slot
-FMounteaEquipmentSlotHeaderData WeaponSlot;
-WeaponSlot.TagContainer.AddTag(WeaponTag);
-WeaponSlot.DisplayName = LOCTEXT("MainHand", "Main Hand");
+TArray<FString> UMounteaInventoryItemTemplate::GetAllowedSubCategories() const
+{
+    auto Settings = UMounteaInventoryStatics::GetInventorySettings();
+    auto Config = Settings->InventorySettingsConfig.LoadSynchronous();
+    
+    if (const auto* CategoryConfig = Config->AllowedCategories.Find(ItemCategory))
+    {
+        TArray<FString> SubCategories;
+        CategoryConfig->SubCategories.GetKeys(SubCategories);
+        return SubCategories;
+    }
+    return {};
+}
 ```
 
-## Notifications
+## Advanced Usage
 
-### Notification Setup
+### Static Helper Functions
+
+Use static utility functions for common access patterns:
 
 ```cpp
-// Style per category
-TMap<EInventoryNotificationCategory, FInventoryNotificationStyle> NotificationCategoryStyle;
+// Centralized access pattern
+UMounteaAdvancedInventorySettingsConfig* Config = 
+    UMounteaInventorySystemStatics::GetMounteaAdvancedInventoryConfig();
 
-// Configuration per type
-TMap<FString, FInventoryNotificationConfig> NotificationConfigs;
-
-FInventoryNotificationConfig ItemAddedConfig;
-ItemAddedConfig.bIsEnabled = true;
-ItemAddedConfig.DefaultDuration = 3.0f;
-ItemAddedConfig.MessageTemplate = LOCTEXT("Added", "{ItemName} x{Quantity} added");
+// Item-specific data access
+FInventoryCategory Category = UMounteaInventoryStatics::GetInventoryCategory(Item);
+FString CategoryKey = UMounteaInventoryStatics::GetInventoryCategoryKey(Item);
+FInventoryRarity Rarity = UMounteaInventoryStatics::GetInventoryRarity(Item);
 ```
+
+!!! warning "Performance Impact & Thread Safety"
+    - `LoadSynchronous()` can cause hitches - cache configs when possible
+    - Settings access is safe, but avoid calling from non-game threads
+
+## Project Settings Configuration
+
+Open **Edit → Project Settings → Mountea Framework → Inventory System**:
+
+| Property | Purpose | Default Plugin Value |
+|----------|---------|---------------|
+| Inventory Config | Main data asset | `DefaultInventoryConfig` |
+| Equipment Config | Equipment slots | `DefaultEquipmentConfig` |
+| Input Mapping | Inventory hotkeys | `IMC_Inventory` |
+| Equipment Input Mapping | Equipment UI | `IMC_Equipment` |
+
+## Troubleshooting
+
+### Config Returns Null
+
+!!! tip "Problem & Solution"
+    - Settings or configs return nullptr
+    - Verify data assets are assigned in Project Settings
+
+```cpp
+if (!Settings || !Settings->InventorySettingsConfig.IsValid())
+{
+    LOG_WARNING(TEXT("Inventory config not assigned"));
+    return;
+}
+```
+
+### Theme Not Applied
+
+!!! tip "Problem & Solution"
+    - Widgets don't receive theme styling
+    - Ensure widget implements `IMounteaInventoryGenericWidgetInterface` or inherits from `UMounteaAdvancedInventoryBaseWidget`
 
 ## Best Practices
 
-- Configure settings early in project development
-- Use data assets for runtime-modifiable settings
-- Test theme colors across all UI states
-- Balance notification frequency to avoid spam
-- Organize widget classes by functionality
+- **Validate Everything:** Always check for null before accessing configs
+- **Cache Configs:** Store frequently-used configs in member variables
+- **Use Statics:** Prefer static helper functions for common patterns
+- **Theme Early:** Apply themes in `NativeConstruct()` for consistent timing
+
+## Next Steps
+
+- **[Inventory Types Configuration](InventoryTypes.md):** Configure different inventory behaviors
+- **[UI Theming Guide](UIThemingGuide.md):** Complete theme customization
+- **[Equipment System](../EquipmentSystem/EquipmentSystem.md):** Equipment slot setup and management
