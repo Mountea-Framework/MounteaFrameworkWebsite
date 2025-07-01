@@ -33,6 +33,7 @@ nav:
             - Overview: AdvancedInventoryEquipmentSystem/InventorySystem/InventorySystem.md
             - Item Instances: AdvancedInventoryEquipmentSystem/InventorySystem/ItemInstances.md
             - Item Templates: AdvancedInventoryEquipmentSystem/InventorySystem/ItemTemplates.md
+            - Item Actions: AdvancedInventoryEquipmentSystem/InventorySystem/ItemActions.md
             - Categories: AdvancedInventoryEquipmentSystem/InventorySystem/Categories.md
             - Rarity System: AdvancedInventoryEquipmentSystem/InventorySystem/Rarity.md
             - Search & Filtering: AdvancedInventoryEquipmentSystem/InventorySystem/Search.md
