@@ -349,4 +349,4 @@ void DebugInventoryFlags(const FInventoryTypeConfig& TypeConfig)
 
 - **[Settings Overview](Settings.md):** Basic settings configuration
 - **[UI Theming Guide](UIThemingGuide.md):** Visual customization
-- **[Item Categories](ItemCategories.md):** Item organization system
+- **[Item Categories](ItemCategoriesRarities.md):** Item organization system
