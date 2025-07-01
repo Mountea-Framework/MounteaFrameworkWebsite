@@ -52,7 +52,7 @@ void UMyCustomWidget::ApplyTheme_Implementation()
 }
 ```
 
-!!! tip "Key Points"
+!!! info "Key Points"
     - Widgets must implement `IMounteaInventoryGenericWidgetInterface` or inherit from `UMounteaAdvancedInventoryBaseWidget`
     - Theme application happens in `NativeConstruct()` for consistent timing
     - Override `ApplyTheme_Implementation()` for custom theming logic
@@ -194,7 +194,7 @@ FScrollBarStyle HoveredScrollBar = UMounteaInventoryUIStatics::MakeScrollBarStyl
 );
 ```
 
-!!! note "Keep in mind"
+!!! info "Keep in mind"
     - **Performance Impact:** Helper functions are lightweight - safe to call in `ApplyTheme_Implementation()`
     - **Caching:** Theme config loading is expensive - cache results when possible
 
