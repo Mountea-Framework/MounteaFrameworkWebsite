@@ -244,9 +244,24 @@ body,
 }
 
 /* Admonitions */
-.admonition p {
-    font-size: 1rem;
+.admonition {
+  border-radius: 0.4rem !important;
+}
+
+.admonition *{
+  font-size: 1rem;
+}
+
+.admonition p {    
     padding: 0 .6rem;
+}
+
+.admonition ul {
+  margin-left: 1rem !important;
+}
+
+.admonition li {
+  margin: 0rem !important;
 }
 
 /* Cards */
