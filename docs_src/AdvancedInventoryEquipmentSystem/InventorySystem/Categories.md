@@ -171,4 +171,4 @@ Categories integrate with:
 
 - [Item Templates](ItemTemplates.md) - Template classification
 - [Search & Filtering](Search.md) - Category-based queries
-- [User Interface](../UserInterface/index.md) - Category selection widgets
+- [User Interface](../UserInterface/UserInterface.md) - Category selection widgets

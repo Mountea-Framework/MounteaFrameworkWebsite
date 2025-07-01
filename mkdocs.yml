@@ -15,6 +15,8 @@ theme:
     - navigation.sections
     - navigation.tabs
     - navigation.top
+    - navigation.expand 
+    - navigation.indexes
     - search.highlight
     - search.suggest
     - content.code.annotate
@@ -27,7 +29,7 @@ nav:
   - Advanced Inventory & Equipment System:
       - Overview: AdvancedInventoryEquipmentSystem/index.md
       - Inventory System:
-          - Core: AdvancedInventoryEquipmentSystem/InventorySystem/index.md
+          - Overview: AdvancedInventoryEquipmentSystem/InventorySystem/InventorySystem.md
           - Items: AdvancedInventoryEquipmentSystem/InventorySystem/Items.md
           - Item Templates: AdvancedInventoryEquipmentSystem/InventorySystem/ItemTemplates.md
           - Categories: AdvancedInventoryEquipmentSystem/InventorySystem/Categories.md
@@ -35,10 +37,10 @@ nav:
           - Search & Filtering: AdvancedInventoryEquipmentSystem/InventorySystem/Search.md
           - Notifications: AdvancedInventoryEquipmentSystem/InventorySystem/Notifications.md
       - Equipment System:
-          - Core: AdvancedInventoryEquipmentSystem/EquipmentSystem/index.md
+          - Overview: AdvancedInventoryEquipmentSystem/EquipmentSystem/EquipmentSystem.md
           - Attachment System: AdvancedInventoryEquipmentSystem/EquipmentSystem/AttachmentSystem.md
       - User Interface:
-          - Overview: AdvancedInventoryEquipmentSystem/UserInterface/index.md
+          - Overview: AdvancedInventoryEquipmentSystem/UserInterface/UserInterface.md
           - Inventory UI: AdvancedInventoryEquipmentSystem/UserInterface/InventoryUI.md
           - Grid System: AdvancedInventoryEquipmentSystem/UserInterface/GridSystem.md
           - Item Widgets: AdvancedInventoryEquipmentSystem/UserInterface/ItemWidgets.md
@@ -53,6 +55,9 @@ nav:
 
 extra_css:
   - stylesheets/custom.css
+
+extra_javascript:
+  - js/nav-toggle.js
 
 markdown_extensions:
   - admonition

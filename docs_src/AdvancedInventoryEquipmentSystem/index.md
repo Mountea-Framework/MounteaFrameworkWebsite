@@ -8,11 +8,11 @@ The Mountea Advanced Inventory & Equipment System provides complete item managem
 
 ## Core Systems
 
-### [Inventory System](InventorySystem/index.md)
+### [Inventory System](InventorySystem/InventorySystem.md)
 
 Complete item storage and management system with:
 
-- [Core functionality](InventorySystem/index.md) - Basic inventory operations
+- [Core functionality](InventorySystem/InventorySystem.md) - Basic inventory operations
 - [Items](InventorySystem/Items.md) - Runtime item instances and data structures
 - [Item Templates](InventorySystem/ItemTemplates.md) - Static item definitions and properties
 - [Categories](InventorySystem/Categories.md) - Item classification and organization
@@ -20,18 +20,18 @@ Complete item storage and management system with:
 - [Search & Filtering](InventorySystem/Search.md) - Advanced item queries
 - [Notifications](InventorySystem/Notifications.md) - User feedback system
 
-### [Equipment System](EquipmentSystem/index.md)
+### [Equipment System](EquipmentSystem/EquipmentSystem.md)
 
 Advanced equipment management featuring:
 
-- [Core equipment](EquipmentSystem/index.md) - Equipment slots and management
+- [Core equipment](EquipmentSystem/EquipmentSystem.md) - Equipment slots and management
 - [Attachment System](EquipmentSystem/AttachmentSystem.md) - Dynamic item attachment with sockets
 
-### [User Interface](UserInterface/index.md)
+### [User Interface](UserInterface/UserInterface.md)
 
 Complete widget framework with:
 
-- [UI Overview](UserInterface/index.md) - Widget interfaces and base classes
+- [UI Overview](UserInterface/UserInterface.md) - Widget interfaces and base classes
 - [Inventory UI](UserInterface/InventoryUI.md) - Main inventory interface components
 - [Grid System](UserInterface/GridSystem.md) - 2D spatial inventory layouts
 - [Item Widgets](UserInterface/ItemWidgets.md) - Individual item presentation
@@ -80,7 +80,7 @@ System-wide settings and data:
 
 1. **Setup**: Configure system in [Settings](Configuration/Settings.md)
 2. **Items**: Create templates using [Item Templates](InventorySystem/ItemTemplates.md)
-3. **UI**: Implement widgets with [User Interface](UserInterface/index.md)
+3. **UI**: Implement widgets with [User Interface](UserInterface/UserInterface.md)
 4. **Network**: Enable [Replication](Configuration/Replication.md) for multiplayer
 
 ## Architecture
