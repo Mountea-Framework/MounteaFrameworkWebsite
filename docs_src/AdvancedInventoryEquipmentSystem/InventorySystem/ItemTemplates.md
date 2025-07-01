@@ -280,18 +280,17 @@ bool ValidateTemplateData(FString& ErrorMessage) const
         return false;
     }
     
-    // Additional validation rules...
+    // Feel free to apply additional validation rules...
     return true;
 }
 ```
 
-**Validation Rules:**
-
-- Display name must not be empty
-- Category must exist in configuration
-- Max quantity must be greater than 0
-- Durability settings only available when enabled
-- Subcategory must belong to selected category
+!!! question "Validation Rules"
+    - Display name must not be empty
+    - Category must exist in configuration
+    - Max quantity must be greater than 0
+    - Durability settings only available when enabled
+    - Subcategory must belong to selected category
 
 ### Dirty State Tracking
 
@@ -325,20 +324,18 @@ bool CheckForUnsavedChanges()
 
 For teams without engine access, use the [Mountea Inventory Manager](https://mountea-framework.github.io/InventoryManager/) web editor:
 
-**Features:**
+!!! success "Features"
+    - **1:1 Interface Mirror**: Identical property editing experience
+    - **Export/Import**: Seamless integration with engine workflow using `mnteaitem` or `mnteaitems` items
+    - **Configuration Sync**: Category and rarity system matching
+    - **Collaborative Editing**: Multiple team members can create templates
+    - **Template Validation**: Same validation rules as engine editor
 
-- **1:1 Interface Mirror**: Identical property editing experience
-- **JSON Export/Import**: Seamless integration with engine workflow
-- **Configuration Sync**: Category and rarity system matching
-- **Collaborative Editing**: Multiple team members can create templates
-- **Template Validation**: Same validation rules as engine editor
-
-**Workflow:**
-
-1. **Configure** categories/rarities in web editor
-2. **Create** templates with full property support
-3. **Export** templates as JSON files
-4. **Import** into engine via custom import functionality
+!!! question "Workflow"
+    1. **Configure** categories/rarities in web editor
+    2. **Create** templates with full property support
+    3. **Export** templates as `mnteaitem` or `mnteaitems` files
+    4. **Import** into engine via custom import functionality
 
 ## Common Patterns
 
@@ -610,6 +607,7 @@ public:
 
 ## Next Steps
 
+- **[Item Instances](ItemInstances.md):** Instances of Templates which are being managed by Inventory Component
 - **[Item Actions](ItemActions.md):** Define what players can do with items
 - **[Inventory Component](InventoryComponent.md):** Implement inventory functionality
 - **[Equipment System](../EquipmentSystem/EquipmentSystem.md):** Equip items from templates

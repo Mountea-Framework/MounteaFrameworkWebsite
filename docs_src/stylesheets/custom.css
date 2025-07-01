@@ -256,7 +256,8 @@ body,
     padding: 0 .6rem;
 }
 
-.admonition ul {
+.admonition ul,
+.admonition ol {
   margin-left: 1rem !important;
 }
 
