@@ -6,7 +6,8 @@
 - Configuring item properties, categories, and rarities
 - Understanding template vs runtime item distinction
 - Using templates to spawn inventory items
-- Validation and editor workflow optimization
+- Editor workflow and template management
+- Validation and optimization techniques
 
 ## Quick Start
 
@@ -147,6 +148,197 @@ void UMounteaInventoryItemTemplate::PostEditChangeProperty(FPropertyChangedEvent
 
 !!! warning "Flag Inheritance"
     Changing item category automatically updates flags to match category defaults. Override manually if needed.
+
+## Editor Workflow
+
+### Template Editor Interface
+
+![Item Template Editor](https://cdn2.unrealengine.com/hlod-water-support-in-unreal-engine-5-1-1920x1080-e402b5c30a87.jpg?resize=1&w=1920)
+
+The Template Editor provides a comprehensive dual-pane interface for managing item templates efficiently:
+
+#### Left Pane: Template List
+
+- Browse all existing templates with visual status indicators
+- Create new transient templates for immediate editing
+- Template status indicators:
+  - **Yellow text**: Transient (unsaved) templates
+  - **Red text**: Modified templates with unsaved changes
+  - **White text**: Saved templates
+  
+##### Quick action buttons per template
+
+- **Folder icon**: Navigate to asset location in Content Browser
+- **Duplicate icon**: Create copy with automatic "_Copy" suffix
+- **Delete icon**: Remove template from disk (with confirmation)
+
+#### Right Pane: Property Details
+
+- Full property editing with real-time validation
+- Multi-select support for bulk template editing
+- Dynamic dropdown population from Inventory Settings Config
+- Automatic flag inheritance when changing categories
+- Live preview of template changes
+
+### Creating New Templates
+
+The editor streamlines template creation with intelligent defaults:
+
+```cpp
+// Editor creates transient template automatically
+FReply SMounteaInventoryTemplateEditor::OnCreateNewTemplate()
+{
+    // Check for unsaved changes first
+    if (bIsShowingTransient && CurrentTemplate.IsValid() && DirtyTemplates.Contains(CurrentTemplate))
+    {
+        if (!CheckForUnsavedChanges())
+            return FReply::Handled();
+    }
+    
+    CreateTransientTemplate();
+    RefreshTemplateList();
+    return FReply::Handled();
+}
+```
+
+**Creation Workflow:**
+
+1. **Click "New Template"** → Creates transient template with default values
+2. **Edit Properties** → Real-time validation and dynamic dropdown updates
+3. **Category Selection** → Automatic flag inheritance and subcategory reset
+4. **Save Template** → Opens asset creation dialog
+5. **Choose Location** → Creates permanent data asset in Content Browser
+
+### Template Operations
+
+**Save System:**
+
+```cpp
+// Save individual template
+FReply SaveTemplate()
+{
+    FString validationError;
+    if (!ValidateTemplateData(validationError))
+    {
+        ShowTemplateEditorNotification(FString::Printf(TEXT("Cannot save: %s"), *validationError), false);
+        return FReply::Unhandled();
+    }
+    
+    return CurrentTemplate.Get()->HasAnyFlags(RF_Transient) 
+        ? SaveNewTemplate() 
+        : SaveExistingTemplate();
+}
+
+// Bulk save all dirty templates
+FReply SaveAllDirtyTemplates()
+{
+    int32 savedCount = 0;
+    for (auto& dirtyTemplate : DirtyTemplates)
+    {
+        if (UMounteaInventoryItemTemplate* itemTemplate = dirtyTemplate.Get())
+        {
+            // Save logic with error handling
+            savedCount++;
+        }
+    }
+    ShowTemplateEditorNotification(FString::Printf(TEXT("Saved %d templates"), savedCount), true);
+}
+```
+
+**Asset Management Operations:**
+
+- **Duplicate Template**: Creates copy with validation and automatic naming
+- **Delete Template**: Removes from disk with confirmation dialog
+- **Navigate to Folder**: Opens Content Browser at template location
+- **Import/Export**: Bulk operations for template data management
+
+### Validation System
+
+The editor enforces data integrity through comprehensive validation:
+
+```cpp
+// Template validation rules
+bool ValidateTemplateData(FString& ErrorMessage) const
+{
+    if (!CurrentTemplate.IsValid())
+    {
+        ErrorMessage = TEXT("No template selected");
+        return false;
+    }
+    
+    UMounteaInventoryItemTemplate* itemTemplate = CurrentTemplate.Get();
+    
+    if (itemTemplate->DisplayName.IsEmpty())
+    {
+        ErrorMessage = TEXT("Display name cannot be empty");
+        return false;
+    }
+    
+    if (itemTemplate->ItemCategory.IsEmpty())
+    {
+        ErrorMessage = TEXT("Item category cannot be empty");
+        return false;
+    }
+    
+    // Additional validation rules...
+    return true;
+}
+```
+
+**Validation Rules:**
+
+- Display name must not be empty
+- Category must exist in configuration
+- Max quantity must be greater than 0
+- Durability settings only available when enabled
+- Subcategory must belong to selected category
+
+### Dirty State Tracking
+
+The editor tracks unsaved changes and prevents data loss:
+
+```cpp
+// Track template modifications
+void TrackDirtyAsset(UMounteaInventoryItemTemplate* Template)
+{
+    if (Template)
+        DirtyTemplates.Add(Template);
+}
+
+// Handle unsaved changes on navigation
+bool CheckForUnsavedChanges()
+{
+    if (!HasUnsavedChanges())
+        return true;
+    
+    EAppReturnType::Type result = FMessageDialog::Open(
+        EAppMsgType::YesNoCancel, 
+        LOCTEXT("UnsavedChangesMessage", "You have unsaved changes. Save them?"),
+        LOCTEXT("UnsavedChangesTitle", "Unsaved Changes")
+    );
+    
+    // Handle user choice...
+}
+```
+
+### External Web Editor
+
+For teams without engine access, use the [Mountea Inventory Manager](https://mountea-framework.github.io/InventoryManager/) web editor:
+
+**Features:**
+
+- **1:1 Interface Mirror**: Identical property editing experience
+- **JSON Export/Import**: Seamless integration with engine workflow
+- **Configuration Sync**: Category and rarity system matching
+- **Collaborative Editing**: Multiple team members can create templates
+- **Template Validation**: Same validation rules as engine editor
+
+**Workflow:**
+
+1. **Configure** categories/rarities in web editor
+2. **Create** templates with full property support
+3. **Export** templates as JSON files
+4. **Import** into engine via custom import functionality
 
 ## Common Patterns
 
@@ -301,12 +493,14 @@ bool ModifyDurability(const FInventoryItem& Item, float DamageAmount)
 ### Designer Workflow
 
 1. **Configure** categories and rarities in Inventory Settings Config
-2. **Create** item template data asset
-3. **Select** category from dropdown (auto-inherits flags)
-4. **Choose** rarity level
-5. **Set** quantity limits and behavioral flags
-6. **Add** visual assets (icons, meshes)
-7. **Test** in-game through template spawning
+2. **Open** Template Editor from Tools menu
+3. **Create** new template via "New Template" button
+4. **Select** category from dropdown (auto-inherits flags)
+5. **Choose** rarity level and set behavioral properties
+6. **Configure** quantity limits and stack settings
+7. **Add** visual assets (icons, meshes)
+8. **Save** template to Content Browser location
+9. **Test** in-game through template spawning
 
 ### Programmer Integration
 
@@ -397,6 +591,13 @@ public:
     - Check template validity and inventory capacity
     - Verify item flags allow addition to target inventory
 
+### Editor Shows Unsaved Changes
+
+!!! tip "Problem & Solution"
+    - Templates marked as dirty unexpectedly
+    - Automatic tracking triggers on any property change
+    - Use "Save All" to bulk save or "Close Template" to discard
+
 ## Best Practices
 
 - **Naming Convention:** Use descriptive template names (`T_Sword_Iron`, `T_Potion_Health`)
@@ -404,6 +605,8 @@ public:
 - **Validation Early:** Validate templates during packaging, not runtime
 - **Soft References:** Avoid hard references to prevent memory bloat
 - **Default Values:** Set sensible defaults for all template properties
+- **Editor Workflow:** Use transient templates for experimentation before saving
+- **Bulk Operations:** Leverage multi-select editing for similar templates
 
 ## Next Steps
 
