@@ -47,6 +47,8 @@ nav:
       - Configuration:
           - Settings: AdvancedInventoryEquipmentSystem/Configuration/Settings.md
           - Inventory Types: AdvancedInventoryEquipmentSystem/Configuration/InventoryTypes.md
+          - Categories: AdvancedInventoryEquipmentSystem\Configuration\ItemCategories.md
+          - UI Theming: AdvancedInventoryEquipmentSystem\Configuration\UIThemingGuide.md
           - Replication: AdvancedInventoryEquipmentSystem/Configuration/Replication.md
 
 extra_css:
