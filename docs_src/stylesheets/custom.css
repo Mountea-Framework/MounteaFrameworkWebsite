@@ -340,7 +340,7 @@ article img:hover {
 }
 
 .md-grid {
-  max-width: 70rem !important;
+  max-width: 75rem !important;
 }
 
 /* style our little toggle button */
@@ -413,5 +413,13 @@ article img:hover {
 
   [dir=ltr] .md-sidebar__inner {
       padding-right: 0rem !important;
+  }
+
+  [dir=ltr] .md-sidebar--primary:not([hidden])~.md-content>.md-content__inner {
+    margin-left: 0rem !important;
+  }
+
+  .md-content__inner {
+    padding: 1.5rem !important;
   }
 }
