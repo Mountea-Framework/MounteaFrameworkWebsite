@@ -1,45 +1,43 @@
-# Overview
-
 <div class="card-grid">
   <div class="card">
-    <div class="card-icon">🚀</div>
+    <div class="card-icon">🎬</div>
     <h3 class="card-title">Getting Started</h3>
-    <p class="card-description">Learn the basics of using our product with step-by-step guides.</p>
-    <a href="" class="card-link"></a>
+    <p class="card-description">Watch our introduction and tutorials on YouTube.</p>
+    <a href="https://www.youtube.com/channel/UC5JFJ5Ly8kC_gMT_ghxp3cw" class="card-link"></a>
   </div>
-  
+
   <div class="card">
-    <div class="card-icon">📚</div>
-    <h3 class="card-title">API Reference</h3>
-    <p class="card-description">Explore the detailed documentation for all available APIs.</p>
-    <a href="" class="card-link"></a>
+    <div class="card-icon">🐙</div>
+    <h3 class="card-title">GitHub</h3>
+    <p class="card-description">Browse the Mountea Framework source code and repositories.</p>
+    <a href="https://github.com/Mountea-Framework" class="card-link"></a>
   </div>
-  
+
   <div class="card">
-    <div class="card-icon">💡</div>
+    <div class="card-icon">🛠️</div>
     <h3 class="card-title">Examples</h3>
-    <p class="card-description">Find practical examples and use cases to help you get started.</p>
+    <p class="card-description">Explore practical examples and use cases.</p>
     <a href="https://github.com/Mountea-Framework/Examples" class="card-link"></a>
   </div>
 
   <div class="card">
     <div class="card-icon">❓</div>
     <h3 class="card-title">FAQ</h3>
-    <p class="card-description">Find answers to frequently asked questions about our product.</p>
-    <a href="faq.md" class="card-link"></a>
+    <p class="card-description">Find answers to common questions.</p>
+    <a href="faq" class="card-link"></a>
   </div>
-  
+
   <div class="card">
     <div class="card-icon">❤️</div>
-    <h3 class="card-title">Donate</h3>
-    <p class="card-description">If you want to appreciate our work here we are providing official Patreon page.</p>
+    <h3 class="card-title">Sponsor</h3>
+    <p class="card-description">Support development via GitHub Sponsors.</p>
     <a href="https://github.com/sponsors/Mountea-Framework" class="card-link"></a>
   </div>
-  
+
   <div class="card">
-    <div class="card-icon">🎧</div>
-    <h3 class="card-title">Support</h3>
-    <p class="card-description">Join our support Discord Channel for assistance with any issues.</p>
+    <div class="card-icon">💬</div>
+    <h3 class="card-title">Community</h3>
+    <p class="card-description">Join our Discord for support and discussion.</p>
     <a href="https://discord.gg/G66XvQTv3E" class="card-link"></a>
   </div>
 </div>

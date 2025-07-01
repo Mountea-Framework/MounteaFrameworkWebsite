@@ -16,7 +16,7 @@ theme:
     - navigation.sections
     #- navigation.tabs
     - navigation.top
-    - navigation.expand
+    #- navigation.expand
     - search.highlight
     - search.suggest
     - content.code.annotate
@@ -35,8 +35,6 @@ nav:
             - Item Templates: AdvancedInventoryEquipmentSystem/InventorySystem/ItemTemplates.md
             - Item Instances: AdvancedInventoryEquipmentSystem/InventorySystem/ItemInstances.md            
             - Item Actions: AdvancedInventoryEquipmentSystem/InventorySystem/ItemActions.md
-            - Categories: AdvancedInventoryEquipmentSystem/InventorySystem/Categories.md
-            - Rarity System: AdvancedInventoryEquipmentSystem/InventorySystem/Rarity.md
             - Search & Filtering: AdvancedInventoryEquipmentSystem/InventorySystem/Search.md
             - Notifications: AdvancedInventoryEquipmentSystem/InventorySystem/Notifications.md
         - Equipment System:

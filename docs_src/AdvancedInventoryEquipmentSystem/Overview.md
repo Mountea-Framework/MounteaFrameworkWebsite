@@ -15,8 +15,8 @@ Complete item storage and management system with:
 - [Core functionality](InventorySystem/InventorySystem.md) - Basic inventory operations
 - [Item Instances](InventorySystem/ItemInstances.md) - Runtime item instances and data structures
 - [Item Templates](InventorySystem/ItemTemplates.md) - Static item definitions and properties
-- [Categories](InventorySystem/Categories.md) - Item classification and organization
-- [Rarity System](InventorySystem/Rarity.md) - Visual and economic item tiers
+- [Categories](Configuration/ItemCategoriesRarities.md) - Item classification and organization
+- [Rarity System](Configuration/ItemCategoriesRarities.md) - Visual and economic item tiers
 - [Search & Filtering](InventorySystem/Search.md) - Advanced item queries
 - [Notifications](InventorySystem/Notifications.md) - User feedback system
 
