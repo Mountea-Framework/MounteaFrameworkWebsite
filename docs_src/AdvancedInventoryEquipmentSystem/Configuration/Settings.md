@@ -206,4 +206,4 @@ if (!Settings || !Settings->InventorySettingsConfig.IsValid())
 
 - **[Inventory Types Configuration](InventoryTypes.md):** Configure different inventory behaviors
 - **[UI Theming Guide](UIThemingGuide.md):** Complete theme customization
-- **[Equipment System](../EquipmentSystem/EquipmentSystem.md):** Equipment slot setup and management
+- **[Equipment System](../EquipmentSystem/index.md):** Equipment slot setup and management
