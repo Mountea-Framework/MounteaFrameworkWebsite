@@ -16,7 +16,7 @@
 ```cpp
 // Add component to actor
 UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Inventory")
-class UMounteaInventoryComponent* InventoryComponent;
+class TObjectPtr<UMounteaInventoryComponent> InventoryComponent;
 
 // Add item to inventory
 bool Success = InventoryComponent->Execute_AddItem(InventoryComponent, Item);
@@ -51,7 +51,7 @@ class UMounteaInventoryComponent : public UActorComponent, public IMounteaAdvanc
     FInventoryItemArray InventoryItems;           // Replicated item storage
     EInventoryType InventoryType;                 // Player, Chest, Vendor, etc.
     EInventoryFlags InventoryTypeFlag;            // Private, Public, ReadOnly
-    TObjectPtr<UUserWidget> InventoryWidget;     // Associated UI widget
+    TObjectPtr<UUserWidget> InventoryWidget;      // Associated UI widget
     
     // Event Delegates
     FOnItemAdded OnItemAdded;
@@ -219,7 +219,8 @@ bool UMounteaInventoryComponent::AddItem_Implementation(const FInventoryItem& It
 ```
 
 !!! note "Smart Merging Logic"
-    The system automatically combines compatible items while respecting unique flags, stack limits, and template differences. Non-mergeable items create new entries.
+    The system automatically combines compatible items while respecting unique flags, stack limits, and template differences. Non-mergeable items create new entries.<br>
+    Unique items are automatically discarded as unique items can exist only once in the Inventory.
 
 ### Removing Items
 
@@ -488,19 +489,19 @@ The component provides comprehensive event notifications:
 ```cpp
 // Core item events
 UPROPERTY(BlueprintAssignable, Category="Events")
-FOnItemAdded OnItemAdded;                        // Item added to inventory
+FOnItemAdded OnItemAdded;                          // Item added to inventory
 
 UPROPERTY(BlueprintAssignable, Category="Events")  
-FOnItemRemoved OnItemRemoved;                    // Item removed from inventory
+FOnItemRemoved OnItemRemoved;                      // Item removed from inventory
 
 UPROPERTY(BlueprintAssignable, Category="Events")
-FOnItemQuantityChanged OnItemQuantityChanged;   // Stack size changed
+FOnItemQuantityChanged OnItemQuantityChanged;      // Stack size changed
 
 UPROPERTY(BlueprintAssignable, Category="Events")
-FOnItemDurabilityChanged OnItemDurabilityChanged; // Item condition changed
+FOnItemDurabilityChanged OnItemDurabilityChanged;  // Item condition changed
 
 UPROPERTY(BlueprintAssignable, Category="Events")
-FOnNotificationProcessed OnNotificationProcessed; // General notifications
+FOnNotificationProcessed OnNotificationProcessed;  // General notifications
 ```
 
 ### Event Binding Examples
