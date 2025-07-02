@@ -451,14 +451,14 @@ bool ValidateAttachment(const FName& SlotId, UObject* Equipment)
     // Check slot exists
     if (!AttachmentContainer->Execute_IsValidSlot(AttachmentContainer, SlotId))
     {
-        UE_LOG(LogTemp, Warning, TEXT("Slot %s does not exist"), *SlotId.ToString());
+        LOG_WARNING(TEXT("Slot %s does not exist"), *SlotId.ToString());
         return false;
     }
     
     // Check slot availability
     if (AttachmentContainer->Execute_IsSlotOccupied(AttachmentContainer, SlotId))
     {
-        UE_LOG(LogTemp, Warning, TEXT("Slot %s is already occupied"), *SlotId.ToString());
+        LOG_WARNING(TEXT("Slot %s is already occupied"), *SlotId.ToString());
         return false;
     }
     
@@ -468,7 +468,7 @@ bool ValidateAttachment(const FName& SlotId, UObject* Equipment)
         auto Slot = AttachmentContainer->Execute_GetSlot(AttachmentContainer, SlotId);
         if (!Slot->MatchesTags(AttachableComp->GetTags_Implementation(), true))
         {
-            UE_LOG(LogTemp, Warning, TEXT("Equipment not compatible with slot %s"), *SlotId.ToString());
+            LOG_WARNING(TEXT("Equipment not compatible with slot %s"), *SlotId.ToString());
             return false;
         }
     }
