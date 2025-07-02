@@ -1066,5 +1066,5 @@ void ValidateInventoryIntegrity()
 ## Next Steps
 
 - **[Equipment System](../EquipmentSystem/EquipmentSystem.md):** Equip and manage worn items from inventory
-- **[UI System](../UserInterface/InventoryUI.md):** Create responsive inventory interfaces
-- **[Trading System](../Trading/TradingSystem.md):** Enable item exchange between players
+- **[UI System](../UserInterface/InventoryUIComponent.md):** Create responsive inventory interfaces
+- **[Trading System](../TradingSystem/TBD.md):** Enable item exchange between players

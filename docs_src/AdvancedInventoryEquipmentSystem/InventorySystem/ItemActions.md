@@ -745,4 +745,4 @@ bool ExecuteActionSafely(UMounteaInventoryItemAction* Action, const FInventoryIt
 
 - **[Inventory Component](InventoryComponent.md):** Manage collections of item instances
 - **[Equipment System](../EquipmentSystem/EquipmentSystem.md):** Equip and manage worn items  
-- **[UI System](../UserInterface/InventoryUI.md):** Create responsive inventory interfaces
+- **[UI System](../UserInterface/UserInterface.md):** Create responsive inventory interfaces
