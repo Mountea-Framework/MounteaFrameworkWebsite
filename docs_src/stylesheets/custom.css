@@ -356,6 +356,15 @@ article img:hover {
 
 /* Responsive */
 @media (max-width: 768px) {
+
+  * {
+    font-size: 1rem !important;
+  }
+
+  .md-typeset code span {
+    font-size: 0.8rem !important;
+  }
+
   .card-grid {
     grid-template-columns: 1fr;
     gap: 1rem;
@@ -384,6 +393,11 @@ article img:hover {
   .md-typeset p {
     line-height: 1.1rem;
     font-size: 0.9rem;
+  }
+
+  .md-typeset li {
+    margin-bottom: 0.1rem !important;
+    margin-top: 0.1rem !important;
   }
 }
 
