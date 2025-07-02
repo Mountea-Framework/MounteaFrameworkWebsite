@@ -39,7 +39,11 @@ nav:
             - Notifications: AdvancedInventoryEquipmentSystem/InventorySystem/Notifications.md
         - Equipment System:
             - Overview: AdvancedInventoryEquipmentSystem/EquipmentSystem/EquipmentSystem.md
-            - Attachment System: AdvancedInventoryEquipmentSystem/EquipmentSystem/AttachmentSystem.md
+            - Attachment Containers: AdvancedInventoryEquipmentSystem/EquipmentSystem/AttachmentContainers.md
+            - Attachment Slots: AdvancedInventoryEquipmentSystem/EquipmentSystem/AttachmentSlots.md
+            - Attachable Component: AdvancedInventoryEquipmentSystem/EquipmentSystem/AttachableComponents.md
+            - Loadout Configuration: AdvancedInventoryEquipmentSystem/EquipmentSystem/LoadoutConfiguration.md
+            - Equipment Component: AdvancedInventoryEquipmentSystem/EquipmentSystem/EquipmentComponent.md
         - Trading System:
             - Overview:  AdvancedInventoryEquipmentSystem/TradingSystem/TBD.md
         - Crafting System:

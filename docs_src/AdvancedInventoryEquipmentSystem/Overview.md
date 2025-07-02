@@ -24,8 +24,7 @@ Complete item storage and management system with:
 
 Advanced equipment management featuring:
 
-- [Core equipment](EquipmentSystem/EquipmentSystem.md) - Equipment slots and management
-- [Attachment System](EquipmentSystem/AttachmentSystem.md) - Dynamic item attachment with sockets
+- [Equipment & Attachment System](EquipmentSystem/EquipmentSystem.md) - Equipment slots and management & Dynamic item attachment with sockets
 
 ### [User Interface](UserInterface/UserInterface.md)
 
