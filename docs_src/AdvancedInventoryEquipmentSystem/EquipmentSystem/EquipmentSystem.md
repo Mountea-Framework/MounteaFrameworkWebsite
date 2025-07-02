@@ -1,142 +1,218 @@
-# Equipment System Core
+# Equipment System
 
-Specialized equipment management extending attachment containers with RPG-style functionality.
+## What You'll Learn
 
-## Core Components
+- Understanding the attachment-based equipment architecture
+- How containers, slots, and attachables work together
+- Tag-based compatibility and filtering systems
+- Network replication patterns for multiplayer
+- Integration with inventory and item actions
+- Performance considerations and best practices
 
-### Classes
-
-- **`UMounteaEquipmentComponent`** - Enhanced attachment container for character equipment
-- **`UMounteaAttachmentContainerComponent`** - Base attachment slot management
-
-### Interfaces
-
-- **`IMounteaAdvancedEquipmentInterface`** - Equipment-specific operations
-- **`IMounteaAdvancedAttachmentContainerInterface`** - Container management
-
-## Key Features
-
-- **Equipment Slots** - Predefined attachment points (helmet, chest, weapon, etc.)
-- **Slot Validation** - Tag-based compatibility checking
-- **Equipment Switching** - RPG-style weapon/armor swapping
-- **Dual-wield Logic** - Two-handed vs single-handed equipment rules
-- **Network Replication** - Multiplayer equipment synchronization
-
-## Basic Setup
-
-### Component Configuration
+## Quick Start
 
 ```cpp
-// Add to character
-UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Equipment")
-UMounteaEquipmentComponent* EquipmentComponent;
+// Add equipment component to actor
+UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category="Equipment")
+class UMounteaEquipmentComponent* EquipmentComponent;
 
-// In constructor
-EquipmentComponent = CreateDefaultSubobject<UMounteaEquipmentComponent>(TEXT("Equipment"));
+// Attach item to equipment slot
+bool Success = EquipmentComponent->Execute_TryAttach(EquipmentComponent, SlotName, AttachableObject);
 ```
 
-### Slot Definition
+!!! tip "Result"
+    Flexible attachment system supporting both visual equipment (weapons, armor) and abstract items (buffs, abilities) with full multiplayer support.
 
-```cpp
-// Configure equipment slots in settings
-TMap<FName, FMounteaEquipmentSlotHeaderData> EquipmentSlots;
-EquipmentSlots.Add("MainHand", WeaponSlotData);
-EquipmentSlots.Add("OffHand", ShieldSlotData);
-EquipmentSlots.Add("Helmet", HelmetSlotData);
+## System Overview
+
+### Core Architecture
+
+The equipment system uses a modular attachment-based architecture with three main components:
+
+!!! info "Component Hierarchy"
+    - **Equipment Component**: Main equipment manager extending attachment containers
+    - **Attachment Container**: Manages collections of attachment slots with networking
+    - **Attachment Slots**: Individual locations where items can be attached
+    - **Attachable Components**: Items that can attach to compatible slots
+
+### How It Works
+
+The system operates on a **container-slot-attachable** model similar to a tool belt with specific pockets for different tools.
+
+**Containers** manage multiple attachment slots and handle networking, events, and validation. **Slots** define specific attachment points with rules about what can attach there. **Attachables** are items or components that can attach to compatible slots based on gameplay tags.
+
+### Key Features
+
+!!! example "Equipment Capabilities"
+    - **Tag-Based Filtering**: Slots specify compatible items using gameplay tags
+    - **Physical Attachment**: Items attach to sockets or components visually
+    - **Network Replication**: Full multiplayer support with server authority
+    - **Dynamic Management**: Add/remove attachments at runtime
+    - **Event System**: React to attachment changes for gameplay and UI
+    - **Validation**: Comprehensive editor and runtime validation
+
+## System Components
+
+### Equipment Component
+
+`UMounteaEquipmentComponent` extends the attachment container with equipment-specific functionality. It provides the main interface for equipment management and implements specialized equipment behaviors.
+
+!!! info "Key Responsibilities"
+    - Managing equipment slots and their states
+    - Handling attachment operations with validation
+    - Processing network replication for multiplayer
+    - Broadcasting equipment change events
+    - Integrating with inventory item actions
+
+### Attachment Container
+
+`UMounteaAttachmentContainerComponent` manages collections of attachment slots with full network support. It handles the core attachment logic and provides the foundation for equipment systems.
+
+!!! success "Core Features"
+    - Slot management and validation
+    - Network replication with server authority
+    - Event broadcasting for attachment changes
+    - Smart slot finding based on tags
+    - Batch operations for performance
+
+### Attachment Slots
+
+`UMounteaAdvancedAttachmentSlot` defines individual attachment points with specific rules and behaviors. Slots support both socket-based visual attachment and component-based logical attachment.
+
+!!! tip "Slot Properties"
+    - Unique name and display text
+    - Gameplay tags defining compatibility
+    - Current state (Empty, Occupied, Locked)
+    - Physical attachment configuration
+    - Network replication support
+
+### Attachable Components
+
+`UMounteaAttachableComponent` represents items that can attach to slots. Components define their compatibility through gameplay tags and manage their attachment state.
+
+!!! example "Attachable Features"
+    - Identification and display information
+    - Compatibility tags for slot matching
+    - Attachment state tracking
+    - Container relationship management
+    - Interface-based attachment operations
+
+## Tag-Based Compatibility
+
+### How Tags Work
+
+The system uses hierarchical gameplay tags to determine compatibility between slots and attachables.
+
+!!! example "Tag Matching"
+    - **Slot Tags**: `Equipment.Weapon.Melee` (accepts melee weapons)
+    - **Item Tags**: `Equipment.Weapon.Sword` (is a sword weapon)
+    - **Result**: Compatible because sword is a type of melee weapon
+
+### Common Tag Hierarchies
+
+```text
+Equipment
+├── Weapon (MainHand, OffHand slots)
+│   ├── Melee (Sword, Axe, Dagger)
+│   └── Ranged (Bow, Crossbow)
+├── Armor (Head, Body, Legs, Feet slots)
+├── Accessory (Ring, Necklace slots)
+└── Consumable (Quick-use slots)
 ```
 
-## Equipment Operations
+### Flexible Matching
 
-### Basic Equipping
+Tags support both strict and flexible matching. Slots can require exact tags or accept tag hierarchies, enabling both specific and general compatibility rules.
 
-```cpp
-// Equip item to specific slot
-bool Success = EquipmentComponent->TryAttach("MainHand", WeaponActor);
+## Network Architecture
 
-// Auto-find compatible slot
-FName SlotId = EquipmentComponent->FindFirstFreeSlotWithTags(WeaponTags);
-EquipmentComponent->TryAttach(SlotId, WeaponActor);
-```
+### Server Authority
 
-### Equipment Validation
+All equipment operations follow server authority patterns. Clients request changes through server RPCs, and the server validates and executes operations before replicating results.
 
-```cpp
-// Check slot compatibility
-bool CanEquip = EquipmentComponent->IsValidSlot("MainHand");
-bool IsOccupied = EquipmentComponent->IsSlotOccupied("MainHand");
+### Efficient Replication
 
-// Validate item compatibility
-UMounteaAttachableComponent* Attachable = WeaponActor->FindComponentByClass<UMounteaAttachableComponent>();
-bool CanAttach = Attachable->CanAttach();
-```
+The system uses sub-object replication for slots, only sending changes when attachment states modify. This minimizes network traffic while maintaining synchronization.
 
-### Equipment Switching
+### State Synchronization
 
-```cpp
-// Unequip current weapon
-EquipmentComponent->TryDetach("MainHand");
+Slots handle their own replication callbacks, automatically performing physical attachment/detachment when state changes arrive from the server.
 
-// Equip new weapon
-EquipmentComponent->TryAttach("MainHand", NewWeaponActor);
+## Integration Points
 
-// Force equipment (replaces existing)
-EquipmentComponent->ForceAttach("MainHand", NewWeaponActor);
-```
+### Inventory System
 
-## Slot Configuration
+Equipment integrates seamlessly with the inventory system through item actions. The `UMounteaEquipItemAction` spawns equipment actors from inventory item templates and attaches them to compatible slots.
 
-### Equipment Slot Data
+### Item Actions
 
-```cpp
-struct FMounteaEquipmentSlotHeaderData
-{
-    FGameplayTagContainer TagContainer;  // Compatible item tags
-    FText DisplayName;                   // UI display name
-};
-```
+Equipment actions automatically find compatible slots using tag matching, providing intelligent equipment behavior without manual slot specification.
 
-### Tag-Based Filtering
+### Character Systems
 
-```cpp
-// Define weapon slot
-FMounteaEquipmentSlotHeaderData WeaponSlot;
-WeaponSlot.TagContainer.AddTag(FGameplayTag::RequestGameplayTag("Equipment.Weapon"));
-WeaponSlot.TagContainer.AddTag(FGameplayTag::RequestGameplayTag("Equipment.OneHanded"));
-WeaponSlot.DisplayName = LOCTEXT("MainHand", "Main Hand");
-```
+Equipment components integrate with character meshes and skeletal systems, supporting both socket-based visual attachment and component-based logical attachment.
 
-## Events
+## Advanced Features
 
-Equipment component inherits attachment container events:
+### Dynamic Slot Management
 
-- `OnAttachmentChanged` - Equipment equipped/unequipped
-- `OnSlotStateChanged` - Slot availability changes
-- `OnContainerCleared` - All equipment removed
+The system supports runtime slot creation and modification, enabling modular equipment systems where base items can add additional attachment points.
 
-## Integration
+### Equipment Sets
 
-### With Inventory System
+Built-in support for equipment set bonuses by tracking equipped items and applying bonuses when complete sets are worn.
 
-```cpp
-// Equip item from inventory
-FInventoryItem InventoryItem = Inventory->FindItem(SearchParams);
-if (InventoryItem.IsItemValid())
-{
-    // Spawn equipment actor
-    AActor* EquipmentActor = SpawnEquipmentFromTemplate(InventoryItem.GetTemplate());
-    
-    // Attach to equipment
-    EquipmentComponent->TryAttach(SlotName, EquipmentActor);
-}
-```
+### Conditional Slots
 
-### With Animation
+Slots can have prerequisites, such as off-hand slots only becoming available when specific main-hand weapons are equipped.
 
-Equipment changes can trigger animation blueprints for visual updates and attachment point adjustments.
+### Performance Optimization
 
-## Use Cases
+The system includes caching mechanisms, batch operations, and efficient memory management for large-scale equipment systems.
 
-- **RPG Character Equipment** - Armor, weapons, accessories
-- **Weapon Switching** - Combat loadout management  
-- **Vehicle Customization** - Modular vehicle parts
-- **Tool Systems** - Construction/crafting equipment
+## Configuration
+
+### Editor Integration
+
+Slots integrate with the editor through dropdown helpers and automatic configuration from settings. The system validates slot configurations and provides helpful error messages.
+
+### Settings-Driven
+
+Equipment slots and compatibility rules are defined through centralized configuration, enabling designers to modify equipment behavior without code changes.
+
+### Validation System
+
+Comprehensive validation in both editor and runtime ensures equipment configurations are valid and functional.
+
+## Documentation Structure
+
+!!! note "Detailed Guides"
+    This overview introduces the equipment system concepts. For implementation details, see:
+
+- **[Attachment Containers](AttachmentContainers.md):** Managing slot collections and networking
+- **[Attachment Slots](AttachmentSlots.md):** Configuring individual attachment points  
+- **[Attachable Components](AttachableComponents.md):** Creating attachable items and objects
+- **[Equipment Component](EquipmentComponent.md):** Creating and managing Actor's equipment
+- **[Loadout Configuration](LoadoutConfiguration.md):** Create and manage loadouts to load Equipment from
+- **[Tag Configuration](TagConfiguration.md)**: Setting up compatibility tag hierarchies
+
+## Best Practices
+
+!!! tip "Design Guidelines"
+    - **Use hierarchical tags** for maximum compatibility flexibility
+    - **Design slots around gameplay** rather than visual attachment points
+    - **Plan tag hierarchies** before implementing equipment items
+    - **Validate configurations** early in the editor
+    - **Consider performance** when designing large equipment systems
+
+!!! warning "Common Pitfalls"
+    - Don't create overly specific tags that limit compatibility
+    - Avoid complex slot dependencies that confuse players
+    - Remember server authority for all attachment operations
+    - Plan for network bandwidth with large equipment collections
+
+## Next Steps
+
+- **[Attachment Containers](AttachmentContainers.md):** Defines the foundation of the Equipment system
+- **[Attachment Slots](AttachmentSlots.md):** Basic configuration for individual Equipment slots
+- **[Equipment Settings](../Configuration/Settings.md):** Equip and manage item instances
