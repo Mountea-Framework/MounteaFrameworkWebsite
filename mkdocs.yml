@@ -40,9 +40,13 @@ nav:
         - Equipment System:
             - Overview: AdvancedInventoryEquipmentSystem/EquipmentSystem/EquipmentSystem.md
             - Attachment System: AdvancedInventoryEquipmentSystem/EquipmentSystem/AttachmentSystem.md
+        - Trading System:
+            - Overview:  AdvancedInventoryEquipmentSystem/TradingSystem/TBD.md
+        - Crafting System:
+            - Overview:  AdvancedInventoryEquipmentSystem/CraftingSystem/TBD.md
         - User Interface:
             - Overview: AdvancedInventoryEquipmentSystem/UserInterface/UserInterface.md
-            - Inventory UI: AdvancedInventoryEquipmentSystem/UserInterface/InventoryUI.md
+            - Inventory UI Component: AdvancedInventoryEquipmentSystem/UserInterface/InventoryUIComponent.md
             - Grid System: AdvancedInventoryEquipmentSystem/UserInterface/GridSystem.md
             - Item Widgets: AdvancedInventoryEquipmentSystem/UserInterface/ItemWidgets.md
             - Item Preview: AdvancedInventoryEquipmentSystem/UserInterface/ItemPreview.md

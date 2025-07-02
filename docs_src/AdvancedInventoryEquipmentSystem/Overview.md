@@ -32,7 +32,7 @@ Advanced equipment management featuring:
 Complete widget framework with:
 
 - [UI Overview](UserInterface/UserInterface.md) - Widget interfaces and base classes
-- [Inventory UI](UserInterface/InventoryUI.md) - Main inventory interface components
+- [Inventory UI](UserInterface/InventoryUIComponent.md) - Main inventory interface components
 - [Grid System](UserInterface/GridSystem.md) - 2D spatial inventory layouts
 - [Item Widgets](UserInterface/ItemWidgets.md) - Individual item presentation
 - [Item Preview](UserInterface/ItemPreview.md) - 3D item visualization
