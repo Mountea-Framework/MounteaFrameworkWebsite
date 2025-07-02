@@ -983,7 +983,7 @@ void DebugPrintItem(const FGuid& ItemGuid)
 {
     if (FInventoryItem* Item = FindItemByGuid(ItemGuid))
     {
-        UE_LOG(LogTemp, Warning, TEXT("%s"), *Item->ToString());
+        LOG_WARNING(TEXT("%s"), *Item->ToString());
     }
 }
 ```
