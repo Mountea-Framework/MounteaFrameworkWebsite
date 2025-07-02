@@ -89,7 +89,7 @@ UMounteaAdvancedInventoryThemeConfig* Theme = UMounteaInventoryUIStatics::GetThe
 
 ## Related Systems
 
-- [Inventory UI](InventoryUI.md) - Main interface components
+- [Inventory UI](InventoryUIComponent.md) - Main interface components
 - [Grid System](GridSystem.md) - Spatial item layouts
 - [Item Widgets](ItemWidgets.md) - Individual item presentation
 - [Item Preview](ItemPreview.md) - 3D visualization

@@ -24,15 +24,14 @@ Complete item storage and management system with:
 
 Advanced equipment management featuring:
 
-- [Core equipment](EquipmentSystem/EquipmentSystem.md) - Equipment slots and management
-- [Attachment System](EquipmentSystem/AttachmentSystem.md) - Dynamic item attachment with sockets
+- [Equipment & Attachment System](EquipmentSystem/EquipmentSystem.md) - Equipment slots and management & Dynamic item attachment with sockets
 
 ### [User Interface](UserInterface/UserInterface.md)
 
 Complete widget framework with:
 
 - [UI Overview](UserInterface/UserInterface.md) - Widget interfaces and base classes
-- [Inventory UI](UserInterface/InventoryUI.md) - Main inventory interface components
+- [Inventory UI](UserInterface/InventoryUIComponent.md) - Main inventory interface components
 - [Grid System](UserInterface/GridSystem.md) - 2D spatial inventory layouts
 - [Item Widgets](UserInterface/ItemWidgets.md) - Individual item presentation
 - [Item Preview](UserInterface/ItemPreview.md) - 3D item visualization

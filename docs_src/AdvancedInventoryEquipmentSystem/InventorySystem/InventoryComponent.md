@@ -1017,11 +1017,11 @@ void AutoSortInventory()
 UFUNCTION(CallInEditor=true, Category="Debug")
 void DebugPrintInventory()
 {
-    UE_LOG(LogTemp, Warning, TEXT("Inventory Contents:"));
+    LOG_WARNING(TEXT("Inventory Contents:"));
     for (int32 i = 0; i < InventoryItems.Items.Num(); ++i)
     {
         const auto& Item = InventoryItems.Items[i];
-        UE_LOG(LogTemp, Warning, TEXT("[%d] %s"), i, *Item.ToString());
+        LOG_WARNING(TEXT("[%d] %s"), i, *Item.ToString());
     }
 }
 
@@ -1038,7 +1038,7 @@ void ValidateInventoryIntegrity()
             ErrorCount++;
         }
     }
-    UE_LOG(LogTemp, Warning, TEXT("Validation complete. %d errors found."), ErrorCount);
+    LOG_WARNING(TEXT("Validation complete. %d errors found."), ErrorCount);
 }
 ```
 
@@ -1066,5 +1066,5 @@ void ValidateInventoryIntegrity()
 ## Next Steps
 
 - **[Equipment System](../EquipmentSystem/EquipmentSystem.md):** Equip and manage worn items from inventory
-- **[UI System](../UserInterface/InventoryUI.md):** Create responsive inventory interfaces
-- **[Trading System](../Trading/TradingSystem.md):** Enable item exchange between players
+- **[UI System](../UserInterface/InventoryUIComponent.md):** Create responsive inventory interfaces
+- **[Trading System](../TradingSystem/TBD.md):** Enable item exchange between players

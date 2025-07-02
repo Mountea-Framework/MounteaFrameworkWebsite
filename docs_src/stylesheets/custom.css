@@ -10,9 +10,9 @@
   --prose-border: #262626;
   --prose-code-bg: #171717;
 
-  --font-system: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+  --font-system: "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto,
     sans-serif;
-  --font-mono: "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas,
+  --font-mono: "JetBrains Mono", "SF Mono", Monaco, "Cascadia Code", "Roboto Mono", Consolas,
     monospace;
   
   --box-radius-sm: 0.2rem;
@@ -356,6 +356,15 @@ article img:hover {
 
 /* Responsive */
 @media (max-width: 768px) {
+
+  * {
+    font-size: 1rem !important;
+  }
+
+  .md-typeset code span {
+    font-size: 0.8rem !important;
+  }
+
   .card-grid {
     grid-template-columns: 1fr;
     gap: 1rem;
@@ -366,7 +375,7 @@ article img:hover {
   }
 
   .md-content__inner {
-    padding: 1rem !important;
+    padding: 0rem !important;
   }
 
   .md-nav__list {
@@ -377,9 +386,18 @@ article img:hover {
     background-color: var(--prose-bg);
   }
 
+  .md-content__inner>.highlight {
+      margin: 0em !important;
+  }
+
   .md-typeset p {
     line-height: 1.1rem;
     font-size: 0.9rem;
+  }
+
+  .md-typeset li {
+    margin-bottom: 0.1rem !important;
+    margin-top: 0.1rem !important;
   }
 }
 
