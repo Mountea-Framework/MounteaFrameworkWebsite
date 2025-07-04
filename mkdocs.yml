@@ -27,8 +27,15 @@ theme:
 nav:
   - Home: index.md
   - Projects:
+    - Dialogue System:
+          - Getting Started:
+            - First Steps: DialogueSystem/GettingStarted/FirstSteps.md
+            - Configuration: DialogueSystem/GettingStarted/PluginConfiguration.md
+            - Dialogue Manager: DialogueSystem/GettingStarted/SetupDialogueManager.md
+            - Dialogue Participant: DialogueSystem/GettingStarted/SetupDialogueParticipant.md
+            - Create New Dialogue: DialogueSystem/GettingStarted/CreateNewDialogueTree.md
     - Advanced Inventory & Equipment System:
-        - Overview: AdvancedInventoryEquipmentSystem/Overview.md
+        - Overview: AdvancedInventoryEquipmentSystem/Overview.md        
         - Inventory System:
             - Overview: AdvancedInventoryEquipmentSystem/InventorySystem/InventorySystem.md
             - Inventory Component: AdvancedInventoryEquipmentSystem/InventorySystem/InventoryComponent.md
