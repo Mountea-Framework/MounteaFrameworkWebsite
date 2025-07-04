@@ -281,7 +281,7 @@ body,
 
 .admonition ul,
 .admonition ol {
-  margin-left: 1rem !important;
+  margin: 1rem !important;
 }
 
 .admonition li {
@@ -307,10 +307,12 @@ article img:hover {
   border: 0.5px solid var(--prose-border);
 }
 
+/*
 .md-typeset p strong:not(.admonition p strong) {
   display: inline-block;
   width: 100%;
 }
+*/
 
 /* Cards */
 .card-grid {
@@ -462,10 +464,16 @@ article img:hover {
     margin-top: 0.1rem !important;
   }
 
+  .md-nav--primary .md-nav__link .md-nav__icon {
+    width: 1rem !important;
+    height: 1rem !important;
+  }
+
   .md-nav--primary .md-nav__link[for=__toc] .md-icon:after {
     -webkit-mask-image: var(--md-annotation-bg-icon) !important;
     mask-image: var(--md-annotation-bg-icon) !important;
-    transform: rotate(90);
+    width: 16px !important;
+    height: 16px !important;
   }
 
   .md-nav--integrated .md-nav__link {
