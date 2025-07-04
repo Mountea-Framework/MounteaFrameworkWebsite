@@ -2,9 +2,7 @@
 
 The Dialogue Manager Component orchestrates dialogue flow and handles the conversation state.
 
-## What It Does
-
-The Manager Component:
+## What Does It Do
 - Initializes and manages dialogue sessions
 - Controls UI creation and destruction
 - Processes player input and choices
@@ -42,8 +40,7 @@ That's all needed for Player State setup.
 
 ### Main Settings
 
-**Dialogue Widget Class**
-
+#### Dialogue Widget Class
 - **Type:** Widget Blueprint Class
 - **Purpose:** UI class for this specific manager
 - **Requirement:** Either this OR Project Settings default must be set
@@ -51,8 +48,7 @@ That's all needed for Player State setup.
 !!! info "Widget Class Rules"
     Widget must implement `IMounteaDialogueWBPInterface` to appear in dropdown.
 
-**Default Manager State**
-
+#### Default Manager State
 - **Type:** Enum
 - **Options:** Ready, Disabled
 - **Purpose:** Initial state when component starts
@@ -64,6 +60,7 @@ That's all needed for Player State setup.
 ### Debug Information
 
 Read-only values for debugging:
+
 - Current manager state
 - Active participants
 - Current dialogue context
@@ -75,103 +72,89 @@ The component provides extensive events for dialogue integration:
 
 ### Core Dialogue Events
 
-**On Dialogue Initialized**
-
+#### On Dialogue Initialized
 - Called when dialogue successfully starts
 - Provides Dialogue Context
 - Use for setup logic
 
-**On Dialogue Started** 
-
+#### On Dialogue Started
 - Called when participants enter dialogue
 - Provides Dialogue Context
 - Use for gameplay state changes
 
-**On Dialogue Closed**
-
+#### On Dialogue Closed
 - Called when dialogue ends (any reason)
 - Provides Dialogue Context  
 - Use for cleanup logic
 
-**On Dialogue Context Updated**
-
+#### On Dialogue Context Updated
 - Called when any dialogue data changes
 - Provides updated Dialogue Context
 - Use for reactive UI updates
 
 ### UI Events
 
-**On Dialogue UI Changed**
-
+#### On Dialogue UI Changed
 - Called when UI is created or destroyed
 - Provides UI Class and Reference
 - May contain null values - validate before use
 
 ### Node Events
 
-**On Dialogue Node Selected**
-
+#### On Dialogue Node Selected
 - Called when any node becomes active
 - Provides Dialogue Context
 - Use for node-specific logic
 
-**On Dialogue Node Started**
-
+#### On Dialogue Node Started
 - Called when node begins execution
 - Triggers before dialogue rows execute
 - Provides Dialogue Context
 
-**On Dialogue Node Finished**
-
+#### On Dialogue Node Finished
 - Called when node completes
 - Triggers after all rows finish
 - Provides Dialogue Context
 
 ### Row Events
 
-**On Dialogue Row Started**
-
+#### On Dialogue Row Started
 - Called for each dialogue row
 - Provides Dialogue Context
 - Use for row-specific effects
 
-**On Dialogue Row Finished**
-
+#### On Dialogue Row Finished
 - Called when row completes
 - Provides Dialogue Context
 - Triggers before next row or node finish
 
 ### Audio Events
 
-**On Dialogue Voice Start Request**
-
+#### On Dialogue Voice Start Request
 - Called when voice should play
 - Provides Voice Sound Base
 - Use for custom audio implementation
 
-**On Dialogue Voice Skip Request** 
-
+#### On Dialogue Voice Skip Request
 - Called when voice should stop
 - Provides Voice Sound Base
 - Use for audio interruption logic
 
 ### Error Handling
 
-**On Dialogue Failed**
-
+#### On Dialogue Failed
 - Called when dialogue cannot proceed
 - Provides Error Message
 - Use for error recovery or user feedback
 
-**On Dialogue Manager State Changed**
-
+#### On Dialogue Manager State Changed
 - Called when manager state updates
 - Provides new state value
 - Use for state-dependent logic
 
 ## Event Implementation Example
 
-```blueprint
+```txt
 // On Dialogue Started event
 Event On Dialogue Started
 ├── Set Input Mode (UI Only)
@@ -199,20 +182,17 @@ Event On Dialogue Started
 
 ## Common Issues
 
-**UI Not Appearing**
-
+### UI Not Appearing
 - Check Widget Class is set (Manager or Project Settings)
 - Verify widget implements required interface
 - Ensure Manager is on Player State
 
-**Events Not Firing**
-
+### Events Not Firing
 - Confirm component is properly added
 - Check Manager state (must be Ready/Active)
 - Verify dialogue has valid participants
 
-**State Problems**
-
+### State Problems
 - Don't set Active as default state
 - Use events to track state changes
 - Reset states properly on dialogue end
@@ -228,4 +208,4 @@ With Manager Component configured:
 ---
 
 ## Next Steps
-[Setup Dialogue Participant Component →](SetupDialogueParticipant.md)
+[Setup Dialogue Participant Component →](SetupDialogueParticipant.md) Setup Dialogue Participants so NPCs can talk with the Player
