@@ -160,12 +160,22 @@ body,
   color: var(--prose-text-high) !important;
   font-family: var(--font-system) !important;
   font-weight: 600 !important;
-  font-size: 1.25rem !important;
+  font-size: 1.35rem !important;
   margin: 1.5rem 0 0.75rem 0 !important;
 }
 
+.md-typeset h4 {
+  color: var(--prose-text-high) !important;
+  font-family: var(--font-system) !important;
+  font-weight: 600 !important;
+  font-size: 1.15rem !important;
+  margin: 0.8rem 0 !important;
+  display: inline-block;
+  width: 100%;
+}
+
 .md-typeset p {
-  margin: 0 0 1.25rem 0 !important;
+  margin: 0rem !important; /*0 0 0.15rem 0 !important;*/
   color: var(--prose-text) !important;
 }
 
@@ -223,6 +233,7 @@ body,
   border-radius: 8px !important;
   overflow: hidden !important;
   margin: 1.25rem 0 !important;
+  display: inline-table !important;
 }
 
 .md-typeset table:not([class]) th {
@@ -246,6 +257,8 @@ body,
 /* Admonitions */
 .admonition {
   border-radius: 0.4rem !important;
+  min-height: 6rem !important;
+  margin-top: 0.8rem !important;
 }
 
 .admonition * {
@@ -254,6 +267,10 @@ body,
 
 .admonition p {
   padding: 0 .6rem;
+}
+
+.admonition p:not(.admonition-title) {
+  margin: 1rem 0 !important;
 }
 
 .admonition ul,
@@ -265,17 +282,23 @@ body,
   margin: 0rem !important;
 }
 
-.admonition.tip.inline {
+.md-typeset .admonition-title:before, .md-typeset summary:before {
+  top: 30% !important;
+}
+
+.admonition.inline {
   width: 48% !important;
 }
 
 article img {
   border-radius: 0.2rem;
-  transition: all 0.15s ease !important;
+  transition: all 0.35s ease !important;
+  border:  0.5px solid transparent;
 }
 
 article img:hover {
-  box-shadow: var(--prose-accent) 4px 4px 8px 0px;
+  transform: translateY(-0.1rem);
+  border: 0.5px solid var(--prose-border);
 }
 
 /* Cards */
@@ -344,7 +367,7 @@ article img:hover {
 }
 
 .md-grid {
-  max-width: 75rem !important;
+  max-width: 90% !important;
 }
 
 /* style our little toggle button */
@@ -363,6 +386,7 @@ article img:hover {
 }
 
 .md-typeset__table {
+  width: 100%;
   padding: 0em !important;
 }
 
@@ -468,8 +492,12 @@ article img:hover {
     box-shadow: 6px 0 16px 4px #81818126;
   }
 
-  .admonition.tip.inline {
+  .admonition.inline {
     width: 100% !important;
+  }
+
+  article img:hover {
+    box-shadow: none !important;
   }
 }
 
@@ -517,6 +545,6 @@ article img:hover {
   }
 
   .md-content__inner {
-    padding: 1.5rem !important;
+    padding: 1rem !important;
   }
 }
