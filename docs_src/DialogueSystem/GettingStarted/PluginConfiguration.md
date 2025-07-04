@@ -55,6 +55,7 @@ The system provides two configuration categories:
 **Purpose:** How often UI elements update (progress bars, color lerping, etc.)
 
 **Performance Impact:**
+
 - Lower values = Smoother visuals, higher performance cost
 - Higher values = Less smooth visuals, better performance
 
@@ -215,7 +216,7 @@ Control what information appears on dialogue nodes:
 **Type:** Float  
 **Default:** 100  
 **Purpose:** Spacing between nodes during auto-arrangement
-<br>
+
 !!! inline warning "Clipping Warning"
     Lower values may cause visual overlap between nodes.
 
@@ -283,4 +284,4 @@ YourProject/Config/DefaultEditor.ini
 ---
 
 ## Next Steps
-[Setup Dialogue Manager →](SetupDialogueManager.md) Setup Dialogue Manager who handles your dialogue in the game
+[Setup Dialogue Manager →](SetupDialogueManager.md) Setup Dialogue Manager with bindable events and replication authority
