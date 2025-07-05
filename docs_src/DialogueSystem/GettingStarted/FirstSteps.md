@@ -83,8 +83,8 @@ Plugin should be enabled by default. If not:
 3. **Restart Editor**
 
 <p align="center" width="100%">
-    <img width="42.5%" src="https://media.discordapp.net/attachments/805485498692796436/1390780655876575304/OpenPlugins.webp?ex=686980eb&is=68682f6b&hm=e9717b801851c379402befb4135faf9d2daa4ca6bedd3f69f6d4b391145edd34&=&format=webp&width=1032&height=523">
-    <img width="42.5%" src="https://media.discordapp.net/attachments/805485498692796436/1391132763641348147/PluginsView.webp?ex=686ac8d8&is=68697758&hm=4598cd2a4f92d6a02724d8c6a324d872197cb98dc7f4a4c0650c17fef5ad0941&=&format=webp&width=1032&height=523">
+    <img width="42.5%" src="https://media.discordapp.net/attachments/1391143698191876096/1391143733705052160/OpenPlugins.webp?ex=686ad310&is=68698190&hm=86889b91fe40254978428ce3db5a288029054ea3518736fd5ff81c3e1836ff7c&=&format=webp&width=928&height=471">
+    <img width="42.5%" src="https://media.discordapp.net/attachments/1391143698191876096/1391143735072391280/PluginsView.webp?ex=686ad310&is=68698190&hm=e4a057860b00d33a1e4124e472f65f6877270d74525641000afac3125a9099b6&=&format=webp&width=928&height=471">
 </p>
 
 ## Project Settings Configuration
@@ -95,9 +95,8 @@ After installation, configure basic settings:
 **Window** → **Project Settings** → **Mountea Framework**
 
 <p align="center" width="100%" class="image-preview">
-    <img width="42.5%" src="https://media.discordapp.net/attachments/805485498692796436/1390768527161688104/QuickAccess.webp?ex=686975a0&is=68682420&hm=6dec6cc6a944b523565f4cebca8f800a61ca0fa1da39ec962180073ddaa309a0&=&format=webp&width=1672&height=848">
-
-    <img width="42.5%" src="https://media.discordapp.net/attachments/805485498692796436/1390775170762805428/QuickAccess2.webp?ex=68697bd0&is=68682a50&hm=71a92ff32cd838827647bdec74bac5163bb39fb8456f4d40f2ff396dc21c9e42&=&format=webp&width=1032&height=523">
+    <img width="42.5%" src="https://media.discordapp.net/attachments/1391143698191876096/1391143734132867132/QuickAccess.webp?ex=686ad310&is=68698190&hm=e98d2b6412d35d746e5fc1aa004e3b031dd21abbdb30033f7615703566825d84&=&format=webp&width=928&height=471">
+    <img width="42.5%" src="https://media.discordapp.net/attachments/1391143698191876096/1391143734602891284/QuickAccess2.webp?ex=686ad310&is=68698190&hm=a6e0e3d1226229b0aef7a8d8ecbb00228776b2ddda1cf5d422808d0e4202e561&=&format=webp&width=928&height=471">
 </p>
 
 !!! tip "Quick Access"
