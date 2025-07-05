@@ -16,7 +16,8 @@ The system provides two configuration categories:
 ### User Interface Settings
 
 <p align="center" width="100%">
-    <img width="50%" src="https://user-images.githubusercontent.com/37410226/230910342-31220324-9d49-4d3b-808f-8c2df4ec8cb2.png">
+    <img width="85%" src="https://media.discordapp.net/attachments/1391143698191876096/1391143735504666817/SettingsPage.webp?ex=686ad310&is=68698190&hm=6607d936fce498a835efbab1e552afe0f82a3ccf36030002d116fd7bd6ffd023&=&format=webp&width=928&height=471">
+    <img width="85%" src="https://media.discordapp.net/attachments/1391143698191876096/1391146501001973760/ConfigPage.webp?ex=686ad5a4&is=68698424&hm=3a962d0792cd426214979b7ba76b76ba17f5e9e7e0eb3d535049cf9fe4b9d954&=&format=webp&width=1032&height=523">
 </p>
 
 #### Default Dialogue Widget Class

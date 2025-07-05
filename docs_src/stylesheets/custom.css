@@ -403,6 +403,10 @@ article img:hover {
   padding: 0em !important;
 }
 
+.image-preview {
+  padding: 0.5rem 0 !important;
+}
+
 /* Responsive */
 @media screen and (max-width: 90em) {
   [dir=ltr] .md-sidebar--primary {

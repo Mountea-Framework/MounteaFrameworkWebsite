@@ -83,8 +83,8 @@ Plugin should be enabled by default. If not:
 3. **Restart Editor**
 
 <p align="center" width="100%">
-    <img width="35%" src="https://user-images.githubusercontent.com/37410226/229511704-64b48aad-2f52-4dbd-a6e3-90f056396067.png">
-    <img width="45%" src="https://user-images.githubusercontent.com/37410226/229511430-c27513bd-f0bb-4643-a06c-891f04ce9502.png">
+    <img width="42.5%" src="https://media.discordapp.net/attachments/1391143698191876096/1391143733705052160/OpenPlugins.webp?ex=686ad310&is=68698190&hm=86889b91fe40254978428ce3db5a288029054ea3518736fd5ff81c3e1836ff7c&=&format=webp&width=928&height=471">
+    <img width="42.5%" src="https://media.discordapp.net/attachments/1391143698191876096/1391143735072391280/PluginsView.webp?ex=686ad310&is=68698190&hm=e4a057860b00d33a1e4124e472f65f6877270d74525641000afac3125a9099b6&=&format=webp&width=928&height=471">
 </p>
 
 ## Project Settings Configuration
@@ -94,8 +94,9 @@ After installation, configure basic settings:
 ### Access Settings
 **Window** → **Project Settings** → **Mountea Framework**
 
-<p align="center" width="100%">
-    <img width="50%" src="https://user-images.githubusercontent.com/37410226/229558550-e43385a7-079c-46b8-a969-f452de0020cc.png">
+<p align="center" width="100%" class="image-preview">
+    <img width="42.5%" src="https://media.discordapp.net/attachments/1391143698191876096/1391143734132867132/QuickAccess.webp?ex=686ad310&is=68698190&hm=e98d2b6412d35d746e5fc1aa004e3b031dd21abbdb30033f7615703566825d84&=&format=webp&width=928&height=471">
+    <img width="42.5%" src="https://media.discordapp.net/attachments/1391143698191876096/1391143734602891284/QuickAccess2.webp?ex=686ad310&is=68698190&hm=a6e0e3d1226229b0aef7a8d8ecbb00228776b2ddda1cf5d422808d0e4202e561&=&format=webp&width=928&height=471">
 </p>
 
 !!! tip "Quick Access"
