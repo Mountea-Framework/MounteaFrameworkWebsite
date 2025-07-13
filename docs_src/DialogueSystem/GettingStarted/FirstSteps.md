@@ -83,8 +83,8 @@ Plugin should be enabled by default. If not:
 3. **Restart Editor**
 
 <p align="center" width="100%">
-    <img width="42.5%" src="https://media.discordapp.net/attachments/1391143698191876096/1391143733705052160/OpenPlugins.webp?ex=686ad310&is=68698190&hm=86889b91fe40254978428ce3db5a288029054ea3518736fd5ff81c3e1836ff7c&=&format=webp&width=928&height=471">
-    <img width="42.5%" src="https://media.discordapp.net/attachments/1391143698191876096/1391143735072391280/PluginsView.webp?ex=686ad310&is=68698190&hm=e4a057860b00d33a1e4124e472f65f6877270d74525641000afac3125a9099b6&=&format=webp&width=928&height=471">
+    <img width="42.5%" src="https://raw.githubusercontent.com/Mountea-Framework/MounteaDialogueSystem/refs/heads/master/DocumentationResources/OpenPlugins.webp">
+    <img width="42.5%" src="https://raw.githubusercontent.com/Mountea-Framework/MounteaDialogueSystem/refs/heads/master/DocumentationResources/PluginsView.webp">
 </p>
 
 ## Project Settings Configuration
@@ -95,8 +95,8 @@ After installation, configure basic settings:
 **Window** → **Project Settings** → **Mountea Framework**
 
 <p align="center" width="100%" class="image-preview">
-    <img width="42.5%" src="https://media.discordapp.net/attachments/1391143698191876096/1391143734132867132/QuickAccess.webp?ex=686ad310&is=68698190&hm=e98d2b6412d35d746e5fc1aa004e3b031dd21abbdb30033f7615703566825d84&=&format=webp&width=928&height=471">
-    <img width="42.5%" src="https://media.discordapp.net/attachments/1391143698191876096/1391143734602891284/QuickAccess2.webp?ex=686ad310&is=68698190&hm=a6e0e3d1226229b0aef7a8d8ecbb00228776b2ddda1cf5d422808d0e4202e561&=&format=webp&width=928&height=471">
+    <img width="42.5%" src="https://raw.githubusercontent.com/Mountea-Framework/MounteaDialogueSystem/refs/heads/master/DocumentationResources/QuickAccess.webp">
+    <img width="42.5%" src="https://raw.githubusercontent.com/Mountea-Framework/MounteaDialogueSystem/refs/heads/master/DocumentationResources/QuickAccess2.webp">
 </p>
 
 !!! tip "Quick Access"
@@ -138,4 +138,11 @@ Confirm successful installation:
 ---
 
 ## Next Steps
-[Configuration →](PluginConfiguration.md) How to setup the plugin so everything works
+<div class="card-grid">
+    <div class="card next-steps configuration">
+        <div class="card-icon">💬</div>
+        <h3 class="card-title">Configuration →</h3>
+        <p class="card-description">How to setup the plugin so everything works</p>
+        <a href="../PluginConfiguration" class="card-link"></a>
+    </div>
+</div>
