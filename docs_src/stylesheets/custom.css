@@ -338,6 +338,30 @@ article img:hover {
   box-shadow: 0 8px 25px rgba(6, 182, 212, 0.15);
 }
 
+.card.next-steps {
+  overflow: hidden;
+}
+
+.card.next-steps::before {
+  content: "";
+  position: absolute;
+  inset: 0;  
+  opacity: 0.25;
+  pointer-events: none;
+  transition: all 0.2s ease;
+}
+
+.card.next-steps:hover::before {
+  opacity: 0.5;
+}
+
+.card.setupDialogueManager::before,
+.card.configuration::before {
+  background: 
+      url(../../assets/Documentation/Configuration.webp) 
+      no-repeat right center / contain;
+}
+
 .card-icon {
   font-size: 2.5rem;
   margin-bottom: 1rem;
