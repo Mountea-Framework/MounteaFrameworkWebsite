@@ -1,147 +1,104 @@
-# Installation Guide
+---
+tags:
+  - start
+  - tutorial
+  - dialogue
+---
 
-Complete installation process for the Mountea Dialogue System plugin.
+# Getting Started
+
+Welcome! This guide will help you install and set up the Mountea Dialogue System plugin in Unreal Engine. No advanced skills needed—just follow these easy steps.
 
 ## 1. Download the Plugin
 
-### Marketplace Download
+**From the Unreal Marketplace**
 
-If you already claimed the plugin, install it to your Engine version. Marketplace releases support the last three major engine versions per Epic Games policies.
+* Open the Epic Games Launcher and sign in.
+* Search for **Mountea Dialogue System** and add it to your engine version.
+* *Tip:* Marketplace versions support the last three major engine releases.
 
-!!! info "Engine Version Support"
-    If your engine version isn't listed, use the GitHub release instead.
+**From GitHub**
 
-### GitHub Download
-
-For experimental features or older projects, use [GitHub Releases](https://github.com/Mountea-Framework/MounteaDialogueSystem/releases).
-
-**Two versions available:**
-
-- **MounteaDialogueSystem** - Full source code
-- **MounteaDialogueSystem_Binaries** - Pre-compiled (recommended for Blueprint projects)
-
-!!! tip "Blueprint Projects"
-    Binaries version skips code compilation when opening projects.
+* Go to [GitHub Releases](https://github.com/Mountea-Framework/MounteaDialogueSystem/releases).
+* Pick **MounteaDialogueSystem** (full source) or **MounteaDialogueSystem\_Binaries** (pre-built, best for Blueprint-only projects).
+* Download and unzip the one you want.
 
 ## 2. Install the Plugin
 
-### Marketplace Installation
+### If You Used the Marketplace
 
-Epic Games Launcher handles installation automatically.
+The Epic Games Launcher will put everything in the right place for you—no extra steps required.
 
-### GitHub Installation
+### If You Used GitHub
 
-**Two installation methods:**
+Choose where to keep the plugin:
 
-#### Game Folder Installation
-Plugin available only for this specific project.
+* **Project-specific:** Drag the plugin folder into your project’s `Plugins/` folder.
+* **Engine-wide:** Drop it into `UnrealEngine/Engine/Plugins/` so all your projects can use it.
 
-**Path:** `/ProjectFolder/Plugins/`
+!!! question "I Don't Have *Plugins* Folder" 
+    If your project doesn’t have a `Plugins` folder yet, just create one.
 
-!!! note inline "Create Plugins Folder"
-    Create `/Plugins/` folder if it doesn't exist.
+## 3. Turn On the Plugin
 
-!!! warning inline end "Blueprint Projects"
-    May require creating a dummy C++ class for packaging.
-
-#### Engine Folder Installation  
-Plugin available for all projects using this engine version.
-
-**Path:** `/EngineFolder/EngineVersionFolder/Engine/Plugins/`
-
-**Default Engine Location:** `C:/Users/{user}/UnrealEngine/{engine_version}`
-
-## 3. Open the Project
-
-### Welcome Screen
-
-First-time project opening shows the Welcome Screen popup:
-
-- Appears for first-time opens
-- Shows when new version is released
-- Contains useful links and full changelog
-- Fetches data from GitHub (requires internet)
+After installing, you’ll see a popup with release notes and links.
 
 !!! warning "Internet Required"
-    Welcome Screen requires internet access to display changelog information.
+    The welcome popup requires an internet connection to load changelog details and helpful links.
 
-### 3.1 Enable the Plugin
-
-#### Marketplace
-
-1. **Open project** for the first time
-2. Go to **Edit** → **Plugins** → **Mountea Framework**
-3. **Enable** the plugin
-4. **Restart Editor** when prompted
-
-#### GitHub
-
-Plugin should be enabled by default. If not:
-
-1. **Edit** → **Plugins** → **Mountea Framework** 
-2. **Enable** if unchecked
-3. **Restart Editor**
+1. In Unreal Engine, click **Edit → Plugins**.
+2. Find **Mountea Framework** and turn on **Mountea Dialogue System**.
+3. Restart the Editor when prompted.
 
 <p align="center" width="100%">
     <img width="42.5%" src="https://raw.githubusercontent.com/Mountea-Framework/MounteaDialogueSystem/refs/heads/master/DocumentationResources/OpenPlugins.webp">
     <img width="42.5%" src="https://raw.githubusercontent.com/Mountea-Framework/MounteaDialogueSystem/refs/heads/master/DocumentationResources/PluginsView.webp">
 </p>
 
-## Project Settings Configuration
+## 4. Tweak the Basic Settings
 
-After installation, configure basic settings:
+1. Go to **Edit → Project Settings → Mountea Framework**.
+2. Choose your default dialogue widget, set how input works during conversations, and style your subtitles.
 
-### Access Settings
-**Window** → **Project Settings** → **Mountea Framework**
-
-<p align="center" width="100%" class="image-preview">
+<p align="center" width="100%">
     <img width="42.5%" src="https://raw.githubusercontent.com/Mountea-Framework/MounteaDialogueSystem/refs/heads/master/DocumentationResources/QuickAccess.webp">
     <img width="42.5%" src="https://raw.githubusercontent.com/Mountea-Framework/MounteaDialogueSystem/refs/heads/master/DocumentationResources/QuickAccess2.webp">
 </p>
 
-!!! tip "Quick Access"
-    You can use the toolbar `Mountea Dialogue System` button to open a dropdown which offers quick access to settings
+!!! tip "Quick Tip"
+    Use the **Mountea Dialogue System** button on the toolbar to jump straight to these settings.
 
-### Essential Configuration
+## 5. Verify It’s Working
 
-- **Default Dialogue Widget Class** - Set your UI class (optional)
-- **Input Mode** - Choose input restrictions during dialogues
-- **Subtitle Settings** - Configure default appearance
+* You should see the Toolbar menu **Mountea Dialogue System**.
+* Open **Add Component** on any Actor and search for **Mountea Dialogue** — you should see options.
+* In the **Content Browser**, under `Plugins/MounteaDialogueSystem/Content`, you can explore example assets.
 
-!!! tip "Quick Start"
-    You can use default settings initially. The system includes example data and widgets.
+If both are visible, you’re all set!
 
-## Verification
+!!! bug "Plugin Doesn't Work"
+    **Plugin Not Visible**
 
-Confirm successful installation:
+    - Make sure the **Mountea Dialogue System** plugin is enabled under **Edit → Plugins**.
+    - Verify it matches your Unreal Engine version.
 
-1. **Components Available** - Search "Mountea Dialogue" in Add Component menu
-2. **Content Accessible** - Find `/Plugins/MounteaDialogueSystem/Content/` in Content Browser  
-3. **Welcome Screen** - May appear automatically (with internet)
+    **Packaging Issues (Blueprint Only)**
 
-## Troubleshooting
+    - For Blueprint-only projects, create a dummy C++ class: **File → New C++ Class → None**.
+    - Or use the pre-built Binaries version downloaded from GitHub.
 
-!!! warning "Plugin Not Visible"
-    - Verify enabled in Edit → Plugins
-    - Check engine version compatibility  
-    - Restart editor completely
+    **Source Version Setup**
 
-!!! warning inline "Packiging Issues (Blueprint Projects)"
-    - Create dummy C++ class: **File** → **New C++ Class** → **None**
-    - Or use Binaries version instead
-
-!!! warning inline end "Packiging Issues (Source Version)"
-    - Install Visual Studio or Xcode
-    - Verify engine version compatibility
-    - Clean and rebuild project
+    - Ensure you have Visual Studio (Windows) or Xcode (macOS) installed.
+    - Rebuild the plugin from source via your IDE.
 
 ---
 
 ## Next Steps
+
 <div class="card-grid">
     <div class="card next-steps configuration">
-        <div class="card-icon">💬</div>
-        <h3 class="card-title">Configuration →</h3>
+        <h4 class="card-title">Configuration</h4>
         <p class="card-description">How to setup the plugin so everything works</p>
         <a href="../PluginConfiguration" class="card-link"></a>
     </div>

@@ -40,6 +40,8 @@ body,
 
 .md-top {
 	transition: var(--base-transition) !important;
+	display: flex;
+	gap: .6rem;
 }
 
 .md-top:hover {
@@ -112,6 +114,13 @@ p {
 	font-weight: 500 !important;
 }
 
+.md-nav--primary .md-nav__link[for="__toc"] .md-icon:after {
+	-webkit-mask-image: var(--md-annotation-bg-icon) !important;
+	mask-image: var(--md-annotation-bg-icon) !important;
+	width: 16px !important;
+	height: 16px !important;
+}
+
 /* Tabs */
 .md-tabs {
 	background: var(--prose-surface) !important;
@@ -130,6 +139,22 @@ p {
 	font-weight: 500 !important;
 }
 
+/* Copy */
+.md-clipboard:focus, .md-clipboard:hover {
+	color: var(--accent-fg-color);
+}
+
+/* Tags */
+.md-typeset .md-tag {
+    border-radius: 0.4rem;
+    font-size: .7rem !important;
+    font-weight: 700;
+    line-height: 1;
+    padding: .3em .65em;
+	border: 1px solid var(--prose-border) !important;
+    pointer-events: none !important;
+}
+
 /* Search */
 .md-search__input {
 	background: var(--prose-surface-raised) !important;
@@ -138,11 +163,11 @@ p {
 	font-family: var(--font-system) !important;
 	border-radius: 8px !important;
 	padding: 0.5rem !important;
+	padding-left: 2rem !important;
 }
 
 .md-search__input::placeholder {
 	color: var(--prose-text-low) !important;
-	padding-left: 2rem !important;
 }
 
 [data-md-toggle=search]:checked~.md-header .md-search__form {
