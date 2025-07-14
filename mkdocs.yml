@@ -71,6 +71,9 @@ nav:
 extra_css:
   - stylesheets/custom.css
 
+extra_javascript:
+  - javascripts/extra.js
+
 plugins:
   - tags
   - search
