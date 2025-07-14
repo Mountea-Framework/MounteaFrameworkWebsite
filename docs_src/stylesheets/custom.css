@@ -552,7 +552,8 @@ article img:hover {
 	td,
 	tr,
 	strong,
-	a {
+	a,
+	.md-typeset code {
 		font-size: var(--mobile-text-size) !important;
 	}
 
@@ -645,7 +646,8 @@ article img:hover {
 	td,
 	tr,
 	strong,
-	a {
+	a,
+	.md-typeset code {
 		font-size: var(--base-text-size) !important;
 	}
 

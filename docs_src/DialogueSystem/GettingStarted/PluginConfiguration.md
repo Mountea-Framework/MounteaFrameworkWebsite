@@ -1,295 +1,188 @@
-# Configuration Reference
+---
+tags:
+    - configuration
+    - tutorial
+    - dialogue
+---
 
-Complete reference for all Mountea Dialogue System settings and their effects.
+# Configuring the Dialogue System
 
-## Project Settings Overview
+**Before You Start**
+Make sure the Mountea Dialogue System plugin is installed and enabled in **Edit → Plugins**. Then, open **Project Settings → Mountea Framework → Dialogue System**—your central dashboard for all dialogue behavior and style. No code changes are required here: every tweak you make will apply across your project automatically.
 
-Access via: **Window** → **Project Settings** → **Mountea Framework**
+This guide is written for designers, narrative leads, and producers. You’ll learn how to set up your default UI, style subtitles, leverage built‑in and custom commands, adjust editor visuals, and follow best practices to keep your workflow smooth and consistent.
 
-The system provides two configuration categories:
+---
 
-- **Dialogue Defaults:** Runtime (game) settings
-- **Dialogue Editor Defaults:** Editor appearance and behavior
+## 1. Open the Configuration Panel
 
-## Runtime Settings (Dialogue Defaults)
+1. In the Unreal Editor, go to **Edit → Project Settings**.
+2. Scroll down and expand **Mountea Framework** in the sidebar.
+3. Click **Dialogue System** to reveal game‑time and editor‑only settings.
 
-### User Interface Settings
-
-<p align="center" width="100%">
-    <img width="42.5%" src="https://raw.githubusercontent.com/Mountea-Framework/MounteaDialogueSystem/refs/heads/master/DocumentationResources/SettingsPage.webp">
-    <img width="42.5%" src="https://raw.githubusercontent.com/Mountea-Framework/MounteaDialogueSystem/refs/heads/master/DocumentationResources/ConfigPage.webp">
+<p align="center">
+  <img class="preview" width="85%" src="https://raw.githubusercontent.com/Mountea-Framework/MounteaDialogueSystem/refs/heads/master/DocumentationResources/SettingsPage.webp">  
 </p>
 
-#### Default Dialogue Widget Class
-**Type:** Widget Blueprint Class  
-**Default:** None  
-**Purpose:** Sets the default UI class for all dialogues
+!!! tip "Quick Tip"
+    You can use a toolbar menu **Mountea Dialogue System** to access Settings and Configuration.
 
-```cpp
-// Must implement IMounteaDialogueWBPInterface
+<p align="center" width="100%">
+    <img class="preview" width="42.5%" src="https://raw.githubusercontent.com/Mountea-Framework/MounteaDialogueSystem/refs/heads/master/DocumentationResources/QuickAccess.webp">
+    <img class="preview" width="42.5%" src="https://raw.githubusercontent.com/Mountea-Framework/MounteaDialogueSystem/refs/heads/master/DocumentationResources/QuickAccess2.webp">
+</p>
+
+---
+
+## 2. Dialogue Defaults (Runtime)
+
+These settings define how every conversation behaves in your game. Once set, every Dialogue Manager component uses these values automatically. In newer version of the system (since version `2.x`) the runtime settings are replaced with `Dialogue Configuration` asset which contains all the runtime configuration properties.
+
+Runtime settings now provide 3 main categories:
+
+* **Dialogue Configuration:** Asset reference which contains the actual settings
+* **Widget Commands:** A list of widget commands used for class-independent communication across the Dialogue System
+* **Logging:** Provides a way to allow certain verbosity of logs
+
+### 2.1 Dialogue Configuration
+
+<p align="center">
+  <img class="preview" width="85%" src="https://raw.githubusercontent.com/Mountea-Framework/MounteaDialogueSystem/refs/heads/master/DocumentationResources/ConfigPage.webp">
+</p>
+
+* **Default Dialogue Widget Class**
+  Select the Blueprint or C++ widget that renders your conversations. Your widget must implement `IMounteaDialogueWBPInterface` to appear in this list.
+
+!!! warning "Define Base Widget"
+    If you leave this blank, you’ll need to assign a widget on every Dialogue Manager actor instead.
+
+* **Input Mode**
+  Choose how players interact during dialogue:
+
+  * **UI Only** locks movement and input to the dialogue UI.
+  * **Game and UI** lets players move freely and use the dialogue UI at once.
+    *Default: Game and UI*
+
+* **Fade Animations**
+  Control how quickly the dialogue window fades in and out. Adjust this to match your game’s pacing.  *Default: 0.2s*
+
+### 2.2 Subtitle Defaults
+
+* **Update Interval**
+  Determines how often subtitle text updates for effects like typewriter or progress bars. Lower values feel smoother but cost more CPU.  *Default: 0.05s*
+
+* **Skip Fade Duration**
+  Sets how fast voice‑over stops when a player skips ahead. This helps sync text and audio.  *Default: 0.1s*
+
+* **Enable Subtitles**
+  Master switch to show or hide subtitles globally. Toggling at runtime requires a small C++ override to apply immediately.  *Default: On*
+
+* **Row-Level Overrides**
+  Give each dialogue row (ID 0–255) its own font, color, or effect. Perfect for highlighting narrator lines, special characters, or tutorial hints without creating new widgets.
+
+!!! tip "Row-Level Highlighting"
+    Use a distinct color for tutorial or narrator lines so players immediately know context.
+
+---
+
+## 3. Styling Your Dialogue
+
+Make every line look on‑brand without touching widget Blueprints.
+
+* **Text Color & Opacity**: Match your UI theme and legibility requirements.
+* **Font Family & Size**: Pick a readable font that fits your art style.
+* **Shadow & Outline**: Improve contrast on busy backgrounds or add a stylistic flair.
+
+!!! note "Design Consistency"
+    Keep your dialogue style consistent with HUD and menus for a cohesive experience.
+
+---
+
+## 4. Commands: Built‑In and Custom
+
+Commands are simple text keys in your dialogue data that tell the system which UI actions to run. You won’t need to touch Blueprint wiring inside the plugin itself.
+
+### 4.1 Core Commands (Fixed)
+
+These commands are provided by the plugin’s C++ core. They trigger standard UI behavior and should never be renamed or removed:
+
+| Command                 | What It Does                     |
+| ----------------------- | -------------------------------- |
+| `CreateDialogueWidget`  | Opens the dialogue window.       |
+| `ShowDialogueRow`       | Displays a new line of dialogue. |
+| `UpdateDialogueRow`     | Edits the current dialogue line. |
+| `AddDialogueOptions`    | Shows player choice buttons.     |
+| `RemoveDialogueOptions` | Clears old choice buttons.       |
+| `HideDialogueRow`       | Fades out the current line.      |
+| `CloseDialogueWidget`   | Closes the dialogue window.      |
+
+!!! warning "Core Commands"
+    These are baked into the plugin’s code. Changing them breaks core functionality.
+
+### 4.2 Custom Commands
+
+You can also fire your own commands from dialogue data to hook into game logic. Just list the command name in your text; your Blueprint or C++ must handle it:
+
+```txt
+OpenInventory
+PlayCameraShake
+ShowCharacterPortrait
+StartQuest
 ```
 
-!!! inline warning inline "Important"
-    Either this setting OR the Manager Component's Widget Class must be set for UI to appear.
+Your game’s code listens for these strings and runs matching events or functions.
 
-!!! inline end tip inline end "Best Practice"
-    Set this globally if you have one standard dialogue UI. Use Manager Component setting for special cases.
+---
 
-#### Input Mode
-**Type:** Enum  
-**Options:**
+## 5. Dialogue Editor Defaults
 
-- `UI Only` - Player can only interact with dialogue UI
-- `Game and UI` - Player can use both game and UI inputs
+Customize the look and feel of the Dialogue Graph editor for smoother content creation.
 
-**Default:** `Game and UI`
+### 5.1 Node Settings
 
-!!! question "How to use Input Mode?"  
-    This setting is informational only. Implement actual input restriction logic in your UI or input handling code.
+* **Corners**: Soft (default) or hard edges.
+* **Theme**: Dark (default) or light background.
+* **Decorator Style**: Unified bubbles or stacked panels for inheritance and implementation info.
+* **Auto Names**: Show class names instead of manual labels.
+* **Background Overrides**: Assign custom colors to node types for quick visual grouping.
+* **Native Decorator Edit**: If turned on, clicking native C++ decorators opens your IDE.
 
-### Subtitle Settings
+<p align="center">
+  <img class="preview" width="45%" src="https://raw.githubusercontent.com/Mountea-Framework/MounteaDialogueSystem/refs/heads/master/DocumentationResources/NodeSettings1.webp">
+  <img class="preview" width="45%" src="https://raw.githubusercontent.com/Mountea-Framework/MounteaDialogueSystem/refs/heads/master/DocumentationResources/NodeSettings2.webp">
+</p>
 
-#### Update Frequency
-**Type:** Float (seconds)  
-**Range:** 0.01 - 1.0  
-**Default:** 0.05  
-**Purpose:** How often UI elements update (progress bars, color lerping, etc.)
+!!! tip "Visual Workflow"
+    Color‑coding nodes by type or purpose helps navigate large dialogue trees at a glance.
 
-**Performance Impact:**
+### 5.2 Wiring & Layout
 
-- Lower values = Smoother visuals, higher performance cost
-- Higher values = Less smooth visuals, better performance
+* **Wire Thickness**: Increase for clarity in dense graphs.  *Default: 0.5*
+* **Wire Color**: Pick a contrasting hue to stand out against your theme.
+* **Auto‑Arrange** (Experimental): Let the plugin tidy your nodes automatically—always save before using.
 
-#### Audio Cut Off Speed  
-**Type:** Float (seconds)  
-**Default:** 0.1  
-**Purpose:** How quickly voice audio stops when player skips dialogue
+### 5.3 Decorator Display
 
-!!! tip "Recommendation"  
-    Leave at default unless you experience audio timing issues.
+Toggle whether to show decorator counts, inheritance icons, or both. This keeps your graph clean or richly annotated, depending on your workflow.
 
-#### Allow Subtitles
-**Type:** Boolean  
-**Default:** True  
-**Purpose:** Global toggle for subtitle display
+---
 
-!!! warning "Runtime Changes" 
-    If changed during runtime, you must override this in C++ for the change to take effect.
+## 6. Best Practices
 
-### Subtitle Appearance
-
-Configure default subtitle styling that propagates to Widget Classes:
-
-#### Text Styling
-- **Subtitles Color and Opacity** - Base text appearance
-- **Font Family** - Typography settings  
-- **Font Size** - Text scale
-- **Font Material** - Advanced font rendering
-
-#### Text Effects
-- **Shadow Offset** - Drop shadow positioning
-- **Shadow Color** - Shadow appearance
-
-#### Subtitle Overrides
-
-**Row ID System** allows specific styling per dialogue row:
-
-- **int index** (0-255) - Custom row type identifier
-- **Widget Class** - Specific widget for this override
-
-**Use Case:** Different styling for narrator vs character dialogue, important choices, etc.
-
-### Dialogue Widget Commands
-
-**Purpose:** String commands that define UI actions, simplifying the codebase with generic functionality.
-
-#### Core Commands (Cannot be deleted)
-- `CreateDialogueWidget` - Initialize dialogue UI
-- `CloseDialogueWidget` - Destroy dialogue UI  
-- `ShowDialogueRow` - Display dialogue content
-- `UpdateDialogueRow` - Refresh dialogue content
-- `HideDialogueRow` - Hide dialogue content
-- `AddDialogueOptions` - Show player choices
-- `RemoveDialogueOptions` - Hide player choices
-
-!!! warning "System Critical"
-    These commands are hardcoded in C++ libraries. Do not delete or modify.
-
-#### Custom Commands
-You can add custom commands for specialized UI behavior:
-
-```text
-CustomFadeIn
-PlayCameraShake  
-ShowPortrait
-```
-
-## Editor Settings (Dialogue Editor Defaults)
-
-### Nodes Settings
-
-#### Node Type
-**Options:**
-
-- `Soft Corners` (Default) - Rounded node edges
-- `Hard Corners` - Sharp rectangular nodes
-
-#### Node Theme  
-**Options:**
-
-- `Dark Theme` (Default) - Dark background, light text
-- `Light Theme` - Light background, dark text
-
-!!! note "Visual Impact"
-    Theme affects node validation colors and overall editor readability.
-
-#### Node Style
-**Options:**
-
-- `Unified` (Default) - Single large bubble with icons for inheritance
-- `Stack` - Separate text chunks for each element (Inheritance, Implementation, Node name)
-
-#### Show Node Class Names
-**Type:** Boolean  
-**Default:** False  
-**Purpose:** Display technical class names instead of user-friendly labels
-
-!!! tip "Non-Destructive"
-    Toggling this won't lose custom node names.
-
-#### Node Color Customization
-**Purpose:** Assign custom background colors to specific node types
-
-**Example Use Cases:**
-
-- Highlight important story nodes
-- Color-code different character types
-- Mark conditional or special nodes
-
-#### Native Decorators Edit
-**Type:** Boolean  
-**Default:** False  
-**Purpose:** Allow opening C++ decorators in IDE
-
-**When Enabled:** C++ decorators show tool icon for direct IDE access
-
-### Decorators Info Display
-
-Control what information appears on dialogue nodes:
-
-#### Show Number of Decorators
-**Type:** Boolean  
-**Default:** True  
-**Purpose:** Display decorator count on nodes
-
-#### Show Decorator Inheritance  
-**Type:** Boolean  
-**Default:** True  
-**Purpose:** Display whether node inherits decorators
-
-**Visibility Combinations:**
-
-- `Yes/Yes` - Show count and inheritance
-- `Yes/False` - Show count only  
-- `False/False` - Show nothing
-- `False/Yes` - Show inheritance only
-
-### Wiring Settings
-
-#### Wire Width
-**Type:** Float  
-**Range:** 0.1 - 1.5  
-**Default:** 0.5  
-**Purpose:** Thickness of connection lines between nodes
-
-#### Arrow Type
-**Options:**
-
-- `Simple Arrow` - Basic directional indicator
-- `Hollow Arrow` (Default) - Outlined arrow
-- `Fancy Arrow` - Stylized arrow design
-- `Bubble` - Circular indicator
-- `Nothing` - No arrow indicator
-
-### Auto Arrange Settings
-
-#### Node Distance
-**Type:** Float  
-**Default:** 100  
-**Purpose:** Spacing between nodes during auto-arrangement
-
-!!! inline warning "Clipping Warning"
-    Lower values may cause visual overlap between nodes.
-
-!!! inline end example "Alpha Feature"  
-    Auto-arrange is experimental and may cause editor crashes.
-
-## Configuration Best Practices
-
-### For Development
-1. **Start with defaults** - Don't over-configure initially
-2. **Test incrementally** - Change one setting at a time
-3. **Use validation** - Always run Graph Validation after changes
-
-### For Production
-1. **Lock down UI settings** - Avoid runtime subtitle changes
-2. **Optimize update frequency** - Balance visuals vs performance
-3. **Standardize themes** - Consistent editor experience for team
-
-### For Teams
-1. **Version control settings** - Include config files in source control
-2. **Document customizations** - Note any non-default settings
-3. **Test across platforms** - Verify settings work on target devices
-
-## Advanced Configuration
-
-### Custom Decorator Commands
-Add specialized UI commands for your game's needs:
-
-```text
-OpenShop
-StartMinigame
-TriggerCutscene
-UpdateQuestLog
-```
-
-### Subtitle Localization Setup
-1. Configure base subtitle settings
-2. Create override entries for different languages
-3. Use String Tables for text content
-4. Test with longest/shortest target languages
-
-### Performance Optimization
-- **Update Frequency:** 0.1s for 60fps, 0.05s for smooth animations
-- **Audio Cut Off:** Increase for longer voice lines
-- **Node Distance:** Increase for complex dialogue trees
-
-## Troubleshooting Configuration
-
-!!! warning "Settings Not Applied"
-    - Restart editor after major changes
-    - Check if settings require runtime override
-    - Verify configuration file permissions
-
-## Configuration Files Location
-
-Settings are stored in:
-```text
-YourProject/Config/DefaultGame.ini
-YourProject/Config/DefaultEditor.ini
-```
-
-!!! tip "Backup Recommendation"
-    Keep backups of working configuration files before major changes.
+1. **Start with Defaults**: Use the out‑of‑the‑box settings and only tweak as needed.
+2. **Work Incrementally**: Change one setting at a time and test in‑editor or in‑game immediately.
+3. **Document Custom Commands**: Keep a shared list of custom command names and their handlers.
+4. **Version Control**: Commit your `DefaultGame.ini` and `DefaultEditor.ini` so team members stay in sync.
+5. **Backup Before Auto‑Arrange**: Always save or branch before running experimental layout options.
 
 ---
 
 ## Next Steps
+
 <div class="card-grid">
-    <div class="card next-steps setupDialogueManager">
-        <div class="card-icon">💬</div>
-        <h3 class="card-title">Setup Dialogue Manager →</h3>
-        <p class="card-description">HSetup Dialogue Manager with bindable events and replication authority</p>
-        <a href="../SetupDialogueManager" class="card-link"></a>
-    </div>
+  <div class="card next-steps setupDialogueManager">
+    <h4 class="card-title">Setup Dialogue Manager</h4>
+    <p class="card-description">Connect your widget, data, and events</p>
+    <a href="../SetupDialogueManager" class="card-link"></a>
+  </div>
 </div>
