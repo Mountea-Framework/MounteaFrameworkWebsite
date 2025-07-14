@@ -14,15 +14,14 @@ theme:
   features:
     - navigation.instant
     - navigation.sections
-    #- navigation.tabs
     - navigation.top
-    #- navigation.expand
     - search.highlight
     - search.suggest
     - content.code.annotate
     - content.tabs.link
     - content.action.edit
     - toc.integrate
+    - content.code.copy
 
 nav:
   - Home: index.md
@@ -71,6 +70,10 @@ nav:
 
 extra_css:
   - stylesheets/custom.css
+
+plugins:
+  - tags
+  - search
 
 markdown_extensions:
   - admonition
