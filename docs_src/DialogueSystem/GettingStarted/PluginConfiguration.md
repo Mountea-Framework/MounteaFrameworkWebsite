@@ -21,8 +21,7 @@ This guide is written for designers, narrative leads, and producers. You’ll le
 3. Click **Dialogue System** to reveal game‑time and editor‑only settings.
 
 <p align="center">
-  <img class="preview" width="42.5%" src="https://raw.githubusercontent.com/Mountea-Framework/MounteaDialogueSystem/refs/heads/master/DocumentationResources/SettingsPage.webp">
-  <img class="preview" width="42.5%" src="https://raw.githubusercontent.com/Mountea-Framework/MounteaDialogueSystem/refs/heads/master/DocumentationResources/ConfigPage.webp">
+  <img class="preview" width="85%" src="https://raw.githubusercontent.com/Mountea-Framework/MounteaDialogueSystem/refs/heads/master/DocumentationResources/SettingsPage.webp">  
 </p>
 
 !!! tip "Quick Tip"
@@ -46,6 +45,10 @@ Runtime settings now provide 3 main categories:
 * **Logging:** Provides a way to allow certain verbosity of logs
 
 ### 2.1 Dialogue Configuration
+
+<p align="center">
+  <img class="preview" width="85%" src="https://raw.githubusercontent.com/Mountea-Framework/MounteaDialogueSystem/refs/heads/master/DocumentationResources/ConfigPage.webp">
+</p>
 
 * **Default Dialogue Widget Class**
   Select the Blueprint or C++ widget that renders your conversations. Your widget must implement `IMounteaDialogueWBPInterface` to appear in this list.
