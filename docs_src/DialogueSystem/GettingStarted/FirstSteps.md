@@ -55,9 +55,9 @@ Choose where to keep the plugin:
 2. Find **Mountea Framework** and turn on **Mountea Dialogue System**.
 3. Restart the Editor when prompted.
 
-<p align="center" width="100%">
-    <img width="42.5%" class="preview" src="https://raw.githubusercontent.com/Mountea-Framework/MounteaDialogueSystem/refs/heads/master/DocumentationResources/OpenPlugins.webp">
-    <img width="42.5%" class="preview" src="https://raw.githubusercontent.com/Mountea-Framework/MounteaDialogueSystem/refs/heads/master/DocumentationResources/PluginsView.webp">
+<p align="center" width="100%" class="preview-container">
+    <img class="preview" width="49%" src="https://raw.githubusercontent.com/Mountea-Framework/MounteaDialogueSystem/refs/heads/master/DocumentationResources/OpenPlugins.webp">
+    <img class="preview" width="49%" src="https://raw.githubusercontent.com/Mountea-Framework/MounteaDialogueSystem/refs/heads/master/DocumentationResources/PluginsView.webp">
 </p>
 
 After installing, you’ll see a popup with release notes and links.
