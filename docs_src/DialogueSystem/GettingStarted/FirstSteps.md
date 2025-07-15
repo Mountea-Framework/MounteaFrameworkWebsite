@@ -65,6 +65,10 @@ After installing, you’ll see a popup with release notes and links.
 !!! warning "Internet Required"
     The welcome popup requires an internet connection to load changelog details and helpful links.
 
+<p align="center" width="75%" class="preview-container">
+  <img class="preview" src="https://raw.githubusercontent.com/Mountea-Framework/MounteaDialogueSystem/refs/heads/master/DocumentationResources/PopupMessage.webp">
+</p>
+
 ---
 
 ## 4. Verify It’s Working
