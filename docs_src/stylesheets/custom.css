@@ -152,7 +152,22 @@ p {
 	line-height: 1;
 	padding: 0.3em 0.65em;
 	border: 1px solid var(--prose-border) !important;
-	pointer-events: none !important;
+}
+
+.md-typeset .md-tag:hover {
+	background-color: var(--accent-fg-color) !important;
+}
+
+.md-typeset .md-tag::before {
+	display: none !important;
+}
+
+.md-typeset .md-tag a {
+	text-decoration: none !important;
+}
+
+a.md-tag.md-tag-icon:hover {
+    text-decoration: none !important;
 }
 
 /* Clipboard */
@@ -357,6 +372,13 @@ p {
 }
 
 /* Images */
+.preview-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+	justify-content: space-between;
+}
+
 .md-typeset img,
 .image-preview {
 	margin: var(--base-element-margin) !important;
