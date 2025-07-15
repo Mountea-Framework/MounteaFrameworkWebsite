@@ -7,36 +7,53 @@ tags:
 
 # Configuring the Dialogue System
 
-**Before You Start**
-Make sure the Mountea Dialogue System plugin is installed and enabled in **Edit → Plugins**. Then, open **Project Settings → Mountea Framework → Dialogue System**—your central dashboard for all dialogue behavior and style. No code changes are required here: every tweak you make will apply across your project automatically.
-
 This guide is written for designers, narrative leads, and producers. You’ll learn how to set up your default UI, style subtitles, leverage built‑in and custom commands, adjust editor visuals, and follow best practices to keep your workflow smooth and consistent.
 
 ---
 
-## 1. Open the Configuration Panel
+## 1. Tutorial Page
+
+In order to simplify the process of setting up the system, we are providing in-engine tutorial which serves a purpose of quick tutorial. You can open the tutorial panel using the **Mountea Dialogue System** toolbar menu. This Tutorial page also has the ability to navigate you to specific parts, for example: *Project Settings*, *Plugin Folder* or specific *Config folder*.
+
+This Tutorial page should provide just enough information to kickstart your project.
+
+<p align="center" width="100%" class="preview-container">
+    <img class="preview" width="49%" src="https://raw.githubusercontent.com/Mountea-Framework/MounteaDialogueSystem/refs/heads/master/DocumentationResources/TutorialPage.webp">
+    <img class="preview" width="49%" src="https://raw.githubusercontent.com/Mountea-Framework/MounteaDialogueSystem/refs/heads/master/DocumentationResources/TutorialWindow.webp">
+</p>
+
+!!! tip "Quick Tip"
+    You can dock the Tutorial window so it never goes away.
+
+---
+
+## 2. Open the Configuration Panel
 
 1. In the Unreal Editor, go to **Edit → Project Settings**.
 2. Scroll down and expand **Mountea Framework** in the sidebar.
-3. Click **Dialogue System** to reveal game‑time and editor‑only settings.
+3. Click **Mountea Dialogue System** to reveal game‑time and editor‑only settings.
 
-<p align="center">
-  <img class="preview" width="85%" src="https://raw.githubusercontent.com/Mountea-Framework/MounteaDialogueSystem/refs/heads/master/DocumentationResources/SettingsPage.webp">  
+<p align="center" width="75%" class="preview-container">
+  <img class="preview" src="https://raw.githubusercontent.com/Mountea-Framework/MounteaDialogueSystem/refs/heads/master/DocumentationResources/SettingsPage.webp">  
 </p>
 
 !!! tip "Quick Tip"
     You can use a toolbar menu **Mountea Dialogue System** to access Settings and Configuration.
 
-<p align="center" width="100%">
-    <img class="preview" width="42.5%" src="https://raw.githubusercontent.com/Mountea-Framework/MounteaDialogueSystem/refs/heads/master/DocumentationResources/QuickAccess.webp">
-    <img class="preview" width="42.5%" src="https://raw.githubusercontent.com/Mountea-Framework/MounteaDialogueSystem/refs/heads/master/DocumentationResources/QuickAccess2.webp">
+<p align="center" width="100%" class="preview-container">
+    <img class="preview" width="49%" src="https://raw.githubusercontent.com/Mountea-Framework/MounteaDialogueSystem/refs/heads/master/DocumentationResources/QuickAccess.webp">
+    <img class="preview" width="49%" src="https://raw.githubusercontent.com/Mountea-Framework/MounteaDialogueSystem/refs/heads/master/DocumentationResources/QuickAccess2.webp">
 </p>
 
 ---
 
-## 2. Dialogue Defaults (Runtime)
+## 3. Dialogue Defaults (Runtime)
 
 These settings define how every conversation behaves in your game. Once set, every Dialogue Manager component uses these values automatically. In newer version of the system (since version `2.x`) the runtime settings are replaced with `Dialogue Configuration` asset which contains all the runtime configuration properties.
+
+<p align="center" width="75%" class="preview-container">
+  <img class="preview" src="https://raw.githubusercontent.com/Mountea-Framework/MounteaDialogueSystem/refs/heads/master/DocumentationResources/ConfigPage.webp">
+</p>
 
 Runtime settings now provide 3 main categories:
 
@@ -44,29 +61,22 @@ Runtime settings now provide 3 main categories:
 * **Widget Commands:** A list of widget commands used for class-independent communication across the Dialogue System
 * **Logging:** Provides a way to allow certain verbosity of logs
 
-### 2.1 Dialogue Configuration
+### 3.1 Dialogue Configuration
 
-<p align="center">
-  <img class="preview" width="85%" src="https://raw.githubusercontent.com/Mountea-Framework/MounteaDialogueSystem/refs/heads/master/DocumentationResources/ConfigPage.webp">
-</p>
-
-* **Default Dialogue Widget Class**
-  Select the Blueprint or C++ widget that renders your conversations. Your widget must implement `IMounteaDialogueWBPInterface` to appear in this list.
+| Property                     | Description                                                                                                                                                                   | Default |
+| ---------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| Default Dialogue Widget Class | Select the Blueprint or C++ widget that renders your conversations. Your widget must implement `IMounteaDialogueWBPInterface` to appear in this list.                         | `nullptr`     |
+| Input Mode                   | <ul><li>**UI Only**: locks movement and input to the dialogue UI</li><li>**Game and UI**: lets players move freely and use the dialogue UI at once</li></ul>                  | Game and UI   |
+| Fade Animations              | Control how quickly the dialogue window fades in and out. Adjust this to match your game’s pacing.                                                                            | 0.2s          |
 
 !!! warning "Define Base Widget"
     If you leave this blank, you’ll need to assign a widget on every Dialogue Manager actor instead.
 
-* **Input Mode**
-  Choose how players interact during dialogue:
+<p align="center" width="75%" class="preview-container">
+  <img class="preview" src="https://raw.githubusercontent.com/Mountea-Framework/MounteaDialogueSystem/refs/heads/master/DocumentationResources/DialogueUISelectionList.webp">
+</p>
 
-  * **UI Only** locks movement and input to the dialogue UI.
-  * **Game and UI** lets players move freely and use the dialogue UI at once.
-    *Default: Game and UI*
-
-* **Fade Animations**
-  Control how quickly the dialogue window fades in and out. Adjust this to match your game’s pacing.  *Default: 0.2s*
-
-### 2.2 Subtitle Defaults
+### 3.2 Subtitle Defaults
 
 * **Update Interval**
   Determines how often subtitle text updates for effects like typewriter or progress bars. Lower values feel smoother but cost more CPU.  *Default: 0.05s*
@@ -85,7 +95,7 @@ Runtime settings now provide 3 main categories:
 
 ---
 
-## 3. Styling Your Dialogue
+## 4. Styling Your Dialogue
 
 Make every line look on‑brand without touching widget Blueprints.
 
@@ -98,11 +108,11 @@ Make every line look on‑brand without touching widget Blueprints.
 
 ---
 
-## 4. Commands: Built‑In and Custom
+## 5. Commands: Built‑In and Custom
 
 Commands are simple text keys in your dialogue data that tell the system which UI actions to run. You won’t need to touch Blueprint wiring inside the plugin itself.
 
-### 4.1 Core Commands (Fixed)
+### 5.1 Core Commands (Fixed)
 
 These commands are provided by the plugin’s C++ core. They trigger standard UI behavior and should never be renamed or removed:
 
@@ -119,7 +129,7 @@ These commands are provided by the plugin’s C++ core. They trigger standard UI
 !!! warning "Core Commands"
     These are baked into the plugin’s code. Changing them breaks core functionality.
 
-### 4.2 Custom Commands
+### 5.2 Custom Commands
 
 You can also fire your own commands from dialogue data to hook into game logic. Just list the command name in your text; your Blueprint or C++ must handle it:
 
@@ -134,11 +144,11 @@ Your game’s code listens for these strings and runs matching events or functio
 
 ---
 
-## 5. Dialogue Editor Defaults
+## 6. Dialogue Editor Defaults
 
 Customize the look and feel of the Dialogue Graph editor for smoother content creation.
 
-### 5.1 Node Settings
+### 6.1 Node Settings
 
 * **Corners**: Soft (default) or hard edges.
 * **Theme**: Dark (default) or light background.
@@ -155,7 +165,7 @@ Customize the look and feel of the Dialogue Graph editor for smoother content cr
 !!! tip "Visual Workflow"
     Color‑coding nodes by type or purpose helps navigate large dialogue trees at a glance.
 
-### 5.2 Wiring & Layout
+### 6.2 Wiring & Layout
 
 * **Wire Thickness**: Increase for clarity in dense graphs.  *Default: 0.5*
 * **Wire Color**: Pick a contrasting hue to stand out against your theme.
@@ -167,7 +177,7 @@ Toggle whether to show decorator counts, inheritance icons, or both. This keeps 
 
 ---
 
-## 6. Best Practices
+## 7. Best Practices
 
 1. **Start with Defaults**: Use the out‑of‑the‑box settings and only tweak as needed.
 2. **Work Incrementally**: Change one setting at a time and test in‑editor or in‑game immediately.
@@ -177,7 +187,7 @@ Toggle whether to show decorator counts, inheritance icons, or both. This keeps 
 
 ---
 
-## Next Steps
+## 8. Next Steps
 
 <div class="card-grid">
   <div class="card next-steps setupDialogueManager">
