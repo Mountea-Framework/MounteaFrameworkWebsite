@@ -67,6 +67,7 @@ nav:
             - Categories & Rarities: AdvancedInventoryEquipmentSystem/Configuration/ItemCategoriesRarities.md
             - UI Theming: AdvancedInventoryEquipmentSystem\Configuration\UIThemingGuide.md
             - Replication: AdvancedInventoryEquipmentSystem/Configuration/Replication.md
+  - Tags: Tags.md
 
 extra_css:
   - stylesheets/custom.css
