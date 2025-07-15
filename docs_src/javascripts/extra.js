@@ -49,3 +49,14 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     document.addEventListener("keydown", e => { if (e.key === "Escape") closeModal() });
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll('.md-tag').forEach(span => {
+        const tag = span.textContent.toLowerCase();
+        const link = document.createElement('a');
+         link.href = `${window.location.origin}/docs/tags/#tag:${tag}`;
+        link.className = span.className + ' md-tag-icon';
+        link.innerHTML = span.innerHTML;
+        span.replaceWith(link);
+    });
+});
