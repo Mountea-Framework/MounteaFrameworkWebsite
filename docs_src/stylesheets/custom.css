@@ -379,13 +379,17 @@ a.md-tag.md-tag-icon:hover {
 	justify-content: space-between;
 }
 
+.preview {
+	cursor: pointer;
+}
+
 .md-typeset img,
 .image-preview {
 	margin: var(--base-element-margin) !important;
 }
 
 article img {
-	border-radius: 0.2rem;
+	border-radius: 0.4rem !important;
 	transition: var(--base-transition) !important;
 	border: 0.5px solid transparent;
 }
@@ -491,7 +495,7 @@ article img:hover {
 .modal-content {
   max-width: 90%;
   max-height: 90%;
-  border-radius: 8px !important;
+  border-radius: 0.4rem !important;
   transform: scale(0.85);
   transition: transform 0.3s ease;
 }
