@@ -10,11 +10,9 @@
 	--prose-border: #262626;
 	--prose-code-bg: #171717;
 	--accent-fg-color: #003f58;
-	--card-hover-gradient: linear-gradient(
-		15deg,
-		var(--prose-surface) 0 35%,
-		var(--accent-fg-color)
-	);
+	--card-hover-gradient: linear-gradient(15deg,
+			var(--prose-surface) 0 35%,
+			var(--accent-fg-color));
 	--font-system: "Segoe UI", Roboto, sans-serif;
 	--font-mono: "JetBrains Mono", monospace;
 	--box-radius-sm: 0.2rem;
@@ -167,7 +165,7 @@ p {
 }
 
 a.md-tag.md-tag-icon:hover {
-    text-decoration: none !important;
+	text-decoration: none !important;
 }
 
 /* Clipboard */
@@ -205,7 +203,7 @@ a.md-tag.md-tag-icon:hover {
 	border: none !important;
 }
 
-[data-md-toggle="search"]:checked ~ .md-header .md-search__form {
+[data-md-toggle="search"]:checked~.md-header .md-search__form {
 	border-radius: 2rem 2rem 0 0 !important;
 }
 
@@ -373,9 +371,9 @@ a.md-tag.md-tag-icon:hover {
 
 /* Images */
 .preview-container {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
 	justify-content: space-between;
 }
 
@@ -443,8 +441,7 @@ article img:hover {
 
 .card.setupDialogueManager::before,
 .card.configuration::before {
-	background: url(../../assets/Documentation/Configuration.webp) no-repeat right
-		center / contain;
+	background: url(../../assets/Documentation/Configuration.webp) no-repeat right center / contain;
 }
 
 .card-icon {
@@ -476,61 +473,62 @@ article img:hover {
 
 /* Gallery Modal */
 .modal {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(0,0,0,0.85);
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.3s ease;
+	position: fixed;
+	inset: 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: rgba(0, 0, 0, 0.85);
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 0.3s ease;
 }
 
 .modal.open {
-  opacity: 1;
-  visibility: visible;
+	opacity: 1;
+	visibility: visible;
+	z-index: 9999;
 }
 
 .modal-content {
-  max-width: 90%;
-  max-height: 90%;
-  border-radius: 0.4rem !important;
-  transform: scale(0.85);
-  transition: transform 0.3s ease;
+	max-width: 90%;
+	max-height: 90%;
+	border-radius: 0.4rem !important;
+	transform: scale(0.85);
+	transition: transform 0.3s ease;
 }
 
 .modal.open .modal-content {
-  transform: scale(1);
+	transform: scale(1);
 }
 
 .modal-close {
-  position: absolute;
-  top: 20px;
-  right: 30px;
-  color: var(--prose-accent);
-  font-size: 2.5rem;
-  font-weight: bold;
-  cursor: pointer;
-  opacity: 0;
-  transition: opacity 0.2s ease 0.2s;
+	position: absolute;
+	top: 20px;
+	right: 30px;
+	color: var(--prose-accent);
+	font-size: 2.5rem;
+	font-weight: bold;
+	cursor: pointer;
+	opacity: 0;
+	transition: opacity 0.2s ease 0.2s;
 }
 
 .modal.open .modal-close {
-  opacity: 1;
+	opacity: 1;
 }
 
 #modalCaption {
-  margin-top: 1rem;
-  color: var(--prose-accent);
-  text-align: center;
-  font-size: 0.9rem;
-  opacity: 0;
-  transition: opacity 0.2s ease 0.3s;
+	margin-top: 1rem;
+	color: var(--prose-accent);
+	text-align: center;
+	font-size: 0.9rem;
+	opacity: 0;
+	transition: opacity 0.2s ease 0.3s;
 }
 
 .modal.open #modalCaption {
-  opacity: 1;
+	opacity: 1;
 }
 
 /* Footer */
@@ -576,7 +574,7 @@ article img:hover {
 		left: -25rem;
 	}
 
-	[data-md-toggle="drawer"]:checked ~ .md-container .md-sidebar--primary {
+	[data-md-toggle="drawer"]:checked~.md-container .md-sidebar--primary {
 		transform: translateX(25rem);
 	}
 
@@ -626,11 +624,11 @@ article img:hover {
 		margin-left: 0 !important;
 	}
 
-	.md-nav--primary .md-nav__title ~ .md-nav__list {
+	.md-nav--primary .md-nav__title~.md-nav__list {
 		background-color: var(--prose-bg);
 	}
 
-	.md-content__inner > .highlight {
+	.md-content__inner>.highlight {
 		margin: 0 !important;
 	}
 
@@ -680,8 +678,7 @@ article img:hover {
 		margin-left: 0;
 	}
 
-	body[data-md-color-scheme="slate"]
-		.md-nav--primary:has(.md-nav__item--active a[href="."]) {
+	body[data-md-color-scheme="slate"] .md-nav--primary:has(.md-nav__item--active a[href="."]) {
 		display: none;
 	}
 
