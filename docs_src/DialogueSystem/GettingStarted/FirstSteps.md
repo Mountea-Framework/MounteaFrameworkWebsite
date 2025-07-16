@@ -9,7 +9,7 @@ tags:
 
 # Getting Started
 
-Welcome! This guide will help you install and set up the Mountea Dialogue System plugin in Unreal Engine. No advanced skills needed—just follow these easy steps.
+Welcome! This guide will help you install and set up the **Mountea Dialogue System** plugin in Unreal Engine. No advanced skills needed—just follow these easy steps.
 
 ---
 

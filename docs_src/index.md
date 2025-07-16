@@ -7,6 +7,27 @@
   </div>
 
   <div class="card">
+    <div class="card-icon">🗣️</div>
+    <h3 class="card-title">Dialogue System</h3>
+    <p class="card-description">Let's start with Dialogue System, free to use Unreal Plugin.</p>
+    <a href="/docs/DialogueSystem/GettingStarted/FirstSteps" class="card-link"></a>
+  </div>
+
+  <div class="card">
+    <div class="card-icon">👉🏻</div>
+    <h3 class="card-title">Interaction System</h3>
+    <p class="card-description">Let's start with Interaction System, free to use Unreal Plugin.</p>
+    <a href="/docs/DialogueSystem/GettingStarted/FirstSteps/" class="card-link"></a>
+  </div>
+
+  <div class="card">
+    <div class="card-icon">📦</div>
+    <h3 class="card-title">Inventory & Equipment System</h3>
+    <p class="card-description">Let's start with Inventory & Equipment System System, free to use Unreal Plugin.</p>
+    <a href="/docs/AdvancedInventoryEquipmentSystem/GettingStarted/FirstSteps" class="card-link"></a>
+  </div>
+
+  <div class="card">
     <div class="card-icon">🐙</div>
     <h3 class="card-title">GitHub</h3>
     <p class="card-description">Browse the Mountea Framework source code and repositories.</p>
