@@ -440,6 +440,7 @@ article img:hover {
 	opacity: 0.5;
 }
 
+.card.participantComponent::before,
 .card.setupDialogueManager::before,
 .card.configuration::before {
 	background: url(../../assets/Documentation/Configuration.webp) no-repeat right center / contain;
