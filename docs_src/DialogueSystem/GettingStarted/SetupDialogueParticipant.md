@@ -10,7 +10,7 @@ tags:
 
 # Dialogue Participant Component
 
-The **Mountea Dialogue Participant** component identifies and configures Actors that engage in dialogues, linking them to specific dialogue trees, managing participant state, and handling voice playback support. :contentReference[oaicite:0]{index=0}
+The **Mountea Dialogue Participant** component identifies and configures Actors that engage in dialogues, linking them to specific dialogue trees, managing participant state, and handling voice playback support.
 
 ---
 
