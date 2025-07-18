@@ -10,9 +10,13 @@
 	--prose-border: #262626;
 	--prose-code-bg: #171717;
 	--accent-fg-color: #003f58;
+	--danger-color: #440000;
 	--card-hover-gradient: linear-gradient(15deg,
 			var(--prose-surface) 0 35%,
 			var(--accent-fg-color));
+	--card-advanced-hover-gradient: linear-gradient(15deg,
+			var(--prose-surface) 0 35%,
+			var(--danger-color));
 	--font-system: "Segoe UI", Roboto, sans-serif;
 	--font-mono: "JetBrains Mono", monospace;
 	--box-radius-sm: 0.2rem;
@@ -427,6 +431,10 @@ article img:hover {
 .card.next-steps {
 	overflow: hidden;
 	padding: 1rem !important;
+}
+
+.card.next-steps.advanced:hover {
+	background: var(--card-advanced-hover-gradient) !important;
 }
 
 .card.next-steps::before {
