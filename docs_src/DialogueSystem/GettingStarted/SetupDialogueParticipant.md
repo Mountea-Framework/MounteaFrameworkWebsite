@@ -88,29 +88,25 @@ Choose between:
 
 ## 5. Component Configuration
 
-### Dialogue Graph
-- **Type:** Dialogue Tree Asset
-- **Purpose:** Defines which dialogue tree this participant uses.
-- **Requirement:** Must not be null for dialogue to start.
+Dialogue Participant has a lot propertis which can be set up and/or read. 
 
-!!! warning "Critical Setting"
+| Property                         | Description                                                                                                           |  Default  |
+|----------------------------------|-----------------------------------------------------------------------------------------------------------------------| --------- |
+| Dialogue Graph                   | Defines which dialogue tree this participant uses. Must not be null for dialogue to start.                            | `nullptr` |
+| Default Participant State        | Initial state on BeginPlay. Sets the actual State. Enum (`Enabled`, `Active`, `Disabled`).                            | Enabled   |
+| Participant State                | State of the Dialogue Participant. In order to start Dialogue, this value must not be Disabled.                       | Enabled   |
+| Audio Component Identification   | Links the Participant Component to the correct Audio Component. Searches by: <ul><li>Actor Tag</li><li>Name</li></ul> | empty     |
+| Audio Component                  | Audio Component for Dialogue Participant Voice. Editable using *Audio Component Identification*.                      | `nullptr` |
+| Starting Node                    | If this value is valid, this Participant's Dialogue will start from this Selected Node.                               | `nullptr` |
+| Traversed Path                   | Contains mapped list of Traversed Nodes by GUIDs. Defines what Nodes were passed through and how many tiems.          | empty     |
+| Participant Tag                  | Servers a purpose of being unique ID for Dialogues with multiple Participants.                                        | empty     |
+
+
+!!! warning inline "Critical Setting"
     Without a valid Dialogue Graph, the system cannot initiate a dialogue.
 
-### Default Participant State
-- **Type:** Enum (`Enabled`, `Active`, `Disabled`)
-- **Purpose:** Initial state on BeginPlay.
-- **Default:** `Enabled`
-
-!!! warning "Active State Restriction"
+!!! warning inline end "Active State Restriction"
     You **cannot** set `Active` as the default; it's reserved for runtime state transitions.
-
-### Audio Component ID
-- **Type:** String (Name or Tag)
-- **Purpose:** Links the Participant Component to the correct Audio Component.
-- **Alternative:** Use the `SetAudioComponent` function at runtime.
-
-!!! tip "Per-Instance Configuration"
-    Set this value per instance in the level, not in class defaults, for greater flexibility.
 
 ---
 
@@ -129,19 +125,23 @@ Hook into these Blueprint-assignable events to respond to Participant-specific c
 
 ## 7. Common Issues
 
-### Dialogue Won't Start
-- Verify **Dialogue Graph** is assigned and not null.
-- Check that participant state is **Ready**.
-- Ensure both **Mountea Dialogue Manager** and **Participant** components are attached.
+!!! bug "Dialogue Doesn't Start"
+    **Dialogue Won't Start**
 
-### No Audio Playback
-- Confirm the **Audio Component** exists and is tagged correctly.
-- Ensure **Auto Activate** is disabled.
-- Check **Audio Component ID** matches the component’s name or tag.
+    - Verify **Dialogue Graph** is assigned and not null.
+    - Check that participant state is **Ready**.
+    - Ensure both **Mountea Dialogue Manager** and **Participant** components are attached.
 
-### Component Reference Errors
-- Double-check spelling of the Audio Component **ID**.
-- Use `SetAudioComponent` in Blueprint or C++ as a fallback.
+    **No Audio Playback**
+
+    - Confirm the **Audio Component** exists and is tagged correctly.
+    - Ensure **Auto Activate** is disabled.
+    - Check **Audio Component ID** matches the component’s name or tag.
+
+    **Component Reference Errors**
+
+    - Double-check spelling of the Audio Component **ID**.
+    - Use `SetAudioComponent` in Blueprint or C++ as a fallback.
 
 ---
 
