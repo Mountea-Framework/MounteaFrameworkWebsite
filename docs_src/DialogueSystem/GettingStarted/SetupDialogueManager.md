@@ -33,6 +33,10 @@ This configuration exact page covers the **main** Dialogue Manager from the scop
 !!! warning inline end "Interface Implementation"
     Implements `IMounteaDialogueManagerInterface`, which contains essential flow functions.
 
+<p align="center" width="75%" class="preview-container">
+  <img class="preview" src="https://raw.githubusercontent.com/Mountea-Framework/MounteaDialogueSystem/refs/heads/master/DocumentationResources/PlayerState.webp">
+</p>
+
 ---
 
 ## 3. Adding the Component
@@ -99,7 +103,7 @@ Hook into these Blueprint-assignable events to drive your game logic at key poin
 | `OnDialogueRowFinished`          | Fired when an individual dialogue row ends.                                             |
 | `OnNextDialogueRowDataRequested` | Fired when the manager requests the next row’s data.                                    |
 | `OnDialogueFailed`               | Fired if the dialogue initialization or execution fails (provides an error message).    |
-| `OnDialogueManagerStateChanged`  | Fired when the manager transitions between states (e.g., Idle → Active).                |
+| `OnDialogueManagerStateChanged`  | Fired when the manager transitions between states (e.g., Enabled → Active).             |
 | `OnDialogueVoiceStartRequest`    | Fired when a voice line is requested to start playing.                                  |
 | `OnDialogueVoiceSkipRequest`     | Fired when a voice line skip is requested by the user.                                  |
 
@@ -111,6 +115,6 @@ Hook into these Blueprint-assignable events to drive your game logic at key poin
   <div class="card next-steps participantComponent">
     <h4 class="card-title">Participant Component</h4>
     <p class="card-description">Add and configure dialogue participants</p>
-    <a href="../DialogueParticipantComponent" class="card-link"></a>
+    <a href="../SetupDialogueParticipant" class="card-link"></a>
   </div>
 </div>

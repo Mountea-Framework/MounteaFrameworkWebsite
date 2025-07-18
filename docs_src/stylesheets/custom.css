@@ -344,6 +344,7 @@ a.md-tag.md-tag-icon:hover {
 	border-radius: 0.4rem !important;
 	min-height: 6rem !important;
 	margin: 0.8rem 0 !important;
+	width: 100% !important;
 }
 
 .admonition p:not(.admonition-title) {
@@ -440,6 +441,7 @@ article img:hover {
 	opacity: 0.5;
 }
 
+.card.createDialogueAsset::before,
 .card.participantComponent::before,
 .card.setupDialogueManager::before,
 .card.configuration::before {
@@ -458,6 +460,11 @@ article img:hover {
 	margin-bottom: 0.75rem;
 	color: var(--prose-text-high);
 	font-family: var(--font-system);
+	margin: 0 !important;
+}
+
+:is(h1, h2, h3, h4, h5, h6).card-title {
+  margin: 0 !important;
 }
 
 .card-description {
