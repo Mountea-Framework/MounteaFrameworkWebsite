@@ -153,6 +153,10 @@ Save—and expect a validation warning until you bind data!
 - Inspect errors/warnings in the Output Log.
 - Format: `{ComponentName}: {ErrorMessage}`—fix missing data or broken links.
 
+<p align="center" width="75%" class="preview-container">
+  <img class="preview" src="https://raw.githubusercontent.com/Mountea-Framework/MounteaDialogueSystem/refs/heads/master/DocumentationResources/ToolbarActions.webp">
+</p>
+
 ---
 
 ## 8. Common Pitfalls
