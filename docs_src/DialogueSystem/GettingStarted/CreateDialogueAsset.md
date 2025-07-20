@@ -119,8 +119,8 @@ Save—and expect a validation warning until you bind data!
    - **Optional Icon** or **Data Asset**
 
 <p align="center" width="100%" class="preview-container">
-  <img class="preview" width="45%" src="https://raw.githubusercontent.com/Mountea-Framework/MounteaDialogueSystem/refs/heads/master/DocumentationResources/CreateDataTable.webp">
-  <img class="preview" width="45%" src="https://raw.githubusercontent.com/Mountea-Framework/MounteaDialogueSystem/refs/heads/master/DocumentationResources/DataTable.webp">
+  <img class="preview" width="49%" src="https://raw.githubusercontent.com/Mountea-Framework/MounteaDialogueSystem/refs/heads/master/DocumentationResources/CreateDataTable.webp">
+  <img class="preview" width="49%" src="https://raw.githubusercontent.com/Mountea-Framework/MounteaDialogueSystem/refs/heads/master/DocumentationResources/DataTable.webp">
 </p>
 
 !!! warning
@@ -153,6 +153,10 @@ Save—and expect a validation warning until you bind data!
 - Inspect errors/warnings in the Output Log.
 - Format: `{ComponentName}: {ErrorMessage}`—fix missing data or broken links.
 
+<p align="center" width="75%" class="preview-container">
+  <img class="preview" src="https://raw.githubusercontent.com/Mountea-Framework/MounteaDialogueSystem/refs/heads/master/DocumentationResources/ToolbarActions.webp">
+</p>
+
 ---
 
 ## 8. Common Pitfalls
@@ -175,7 +179,7 @@ Save—and expect a validation warning until you bind data!
 ## 9. Next Steps
 
 <div class="card-grid">
-  <div class="card next-steps decorators">
+  <div class="card next-steps decorators advanced">
     <h4 class="card-title">(Advanced) Decorators for Dialogue</h4>
     <p class="card-description">Add conditional logic & flow controls</p>
     <a href="../Decorators" class="card-link"></a>
