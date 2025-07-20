@@ -743,4 +743,9 @@ article img:hover {
 	.preview {
 		max-width: 49% !important;
 	}
+
+	.grid > .preview {
+		max-width: 100% !important;
+	}
+
 }

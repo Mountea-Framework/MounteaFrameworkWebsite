@@ -32,7 +32,7 @@ nav:
             - Configuration: DialogueSystem/GettingStarted/PluginConfiguration.md
             - Dialogue Manager: DialogueSystem/GettingStarted/SetupDialogueManager.md
             - Dialogue Participant: DialogueSystem/GettingStarted/SetupDialogueParticipant.md
-            - Create New Dialogue: DialogueSystem/GettingStarted/CreateNewDialogueTree.md
+            - Create New Dialogue: DialogueSystem/GettingStarted/CreateDialogueAsset.md
     - Advanced Inventory & Equipment System:
         - Overview: AdvancedInventoryEquipmentSystem/Overview.md        
         - Inventory System:

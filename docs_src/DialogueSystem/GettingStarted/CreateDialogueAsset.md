@@ -32,6 +32,10 @@ A step‑by‑step guide to creating and testing your first dialogue tree with t
 !!! tip
     Dialogue Trees appear under **🗣️ Mountea Dialogue System** in the right‑click menu—no need to hunt through submenus.
 
+<p align="center" width="75%" class="preview-container">
+  <img class="preview" src="https://raw.githubusercontent.com/Mountea-Framework/MounteaDialogueSystem/refs/heads/master/DocumentationResources/CreatePanel.webp">
+</p>
+
 ---
 
 ## 3. Open & Explore the Dialogue Editor
@@ -42,6 +46,10 @@ A step‑by‑step guide to creating and testing your first dialogue tree with t
 4. Right side contains **Details** panel with properties of the Dialogue Tree itself
    1. You can change Tree Decorators (explained later)
    2. You can change Tree gameplay tags 
+
+<p align="center" width="75%" class="preview-container">
+  <img class="preview" src="https://raw.githubusercontent.com/Mountea-Framework/MounteaDialogueSystem/refs/heads/master/DocumentationResources/DialogueTreeWindow.webp">
+</p>
 
 ---
 
@@ -60,13 +68,29 @@ Dialogue Nodes are definitions of certain points in the Dialogue Flow. Each Node
 | Lead Node              | <ul><li>This Node represents NPC lines.</li><li>This Node starts automatically upon reaching the Dialogue Tree.</li><li>Requires Dialogue Data Table to work properly.</li></ul>                                                                                                | <ul><li>Documentation</li><li>Dialogue Data</li><li>Data Preview</li></ul> |
 | Return To Node         | <ul><li>Provides the ability to return from Dialogue Node to a different one.</li><li>Useful when dialogue branching disallows pin connections.</li></ul>                                                                                                                       | <ul><li>Documentation</li><li>Return Node Preview</li></ul>                |
 
+<p align="center" width="100%" class="preview-container grid">
+  <img class="preview" src="https://raw.githubusercontent.com/Mountea-Framework/MounteaDialogueSystem/refs/heads/master/DocumentationResources/AnswerNode.webp">
+  <img class="preview" src="https://raw.githubusercontent.com/Mountea-Framework/MounteaDialogueSystem/refs/heads/master/DocumentationResources/CompleteNode.webp">
+  <img class="preview" src="https://raw.githubusercontent.com/Mountea-Framework/MounteaDialogueSystem/refs/heads/master/DocumentationResources/DelayNode.webp">
+  <img class="preview" src="https://raw.githubusercontent.com/Mountea-Framework/MounteaDialogueSystem/refs/heads/master/DocumentationResources/NodeDetails.webp">
+  <img class="preview" src="https://raw.githubusercontent.com/Mountea-Framework/MounteaDialogueSystem/refs/heads/master/DocumentationResources/ReturnNode.webp">
+</p>
+
 ### 4.2. Adding Nodes
 - **Right‑click** on the canvas or on a node’s output pin.
 - Select from **Lead**, **Answer**, **Complete**, etc. 
 
+<p align="center" width="75%" class="preview-container">
+  <img class="preview" src="https://raw.githubusercontent.com/Mountea-Framework/MounteaDialogueSystem/refs/heads/master/DocumentationResources/NewNode.webp">
+</p>
+
 ### 4.3. Connecting Nodes
 1. **Drag** from an output pin to another node’s input pin.
 2. Release to create the link—invalid links show an error tooltip.
+
+<p align="center" width="75%" class="preview-container">
+  <img class="preview" src="https://raw.githubusercontent.com/Mountea-Framework/MounteaDialogueSystem/refs/heads/master/DocumentationResources/CreatePanelV2.webp">
+</p>
 
 ### 4.4. Quick Flow Example
 Build a simple greeting with Yes/No choices:
@@ -94,6 +118,11 @@ Save—and expect a validation warning until you bind data!
    - **Dialogue Row Data** (text & optional sound)
    - **Optional Icon** or **Data Asset**
 
+<p align="center" width="100%" class="preview-container">
+  <img class="preview" width="45%" src="https://raw.githubusercontent.com/Mountea-Framework/MounteaDialogueSystem/refs/heads/master/DocumentationResources/CreateDataTable.webp">
+  <img class="preview" width="45%" src="https://raw.githubusercontent.com/Mountea-Framework/MounteaDialogueSystem/refs/heads/master/DocumentationResources/DataTable.webp">
+</p>
+
 !!! warning
     Renaming a row after use will break any nodes bound to it—plan your IDs carefully.
 
@@ -104,6 +133,10 @@ Save—and expect a validation warning until you bind data!
 1. Select a **Lead**, **Answer**, or **Complete** node.
 2. In Details → **Data Table**, pick your table.
 3. Choose a **Row Name**—the editor previews text/audio inline. 
+
+<p align="center" width="75%" class="preview-container">
+  <img class="preview" src="https://raw.githubusercontent.com/Mountea-Framework/MounteaDialogueSystem/refs/heads/master/DocumentationResources/UsingTables.webp">
+</p>
 
 ---
 
@@ -124,9 +157,18 @@ Save—and expect a validation warning until you bind data!
 
 ## 8. Common Pitfalls
 
-- **No Preview?** Ensure your Data Table uses the correct struct (`DialogueRow`).
-- **Broken Links?** Check for renamed nodes or rows.
-- **Validation Errors** always point to missing data or improper connections—address them before playtesting.
+!!! bug "Common Issues"
+    **No Preview?**
+    
+    Ensure your Data Table uses the correct struct (`DialogueRow`).
+    
+    **Broken Links?**
+    
+    Check for renamed nodes or rows.
+
+    **Validation Errors** 
+    
+    Always point to missing data or improper connections—address them before playtesting.
 
 ---
 
