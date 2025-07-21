@@ -33,6 +33,7 @@ nav:
             - Dialogue Manager: DialogueSystem/GettingStarted/SetupDialogueManager.md
             - Dialogue Participant: DialogueSystem/GettingStarted/SetupDialogueParticipant.md
             - Create New Dialogue: DialogueSystem/GettingStarted/CreateDialogueAsset.md
+            - Start Dialogue: DialogueSystem/GettingStarted/StartDialogue.md
     - Advanced Inventory & Equipment System:
         - Overview: AdvancedInventoryEquipmentSystem/Overview.md        
         - Inventory System:
