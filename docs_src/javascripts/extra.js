@@ -84,3 +84,12 @@ document.addEventListener("DOMContentLoaded", () => {
     span.replaceWith(link);
   });
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+  const patch = () => {
+    document.querySelectorAll('rect.basic.label-container')
+      .forEach(r => { r.setAttribute('rx','8'); });
+  };
+  patch();
+  new MutationObserver(patch).observe(document.body, { childList: true, subtree: true });
+});
