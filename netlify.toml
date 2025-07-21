@@ -1,3 +1,3 @@
 [build]
-  command = "pip install mkdocs-material && python -m mkdocs build"
+  command = "pip install mkdocs mkdocs-material && python -m mkdocs build --config-file mkdocs.yml && python -m mkdocs build --config-file blog.yml"
   publish = "."
