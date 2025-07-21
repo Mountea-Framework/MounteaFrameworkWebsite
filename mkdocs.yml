@@ -22,6 +22,7 @@ theme:
     - content.action.edit
     - toc.integrate
     - content.code.copy
+    - mermaid
 
 nav:
   - Home: index.md
@@ -34,6 +35,7 @@ nav:
             - Dialogue Participant: DialogueSystem/GettingStarted/SetupDialogueParticipant.md
             - Create New Dialogue: DialogueSystem/GettingStarted/CreateDialogueAsset.md
             - Start Dialogue: DialogueSystem/GettingStarted/StartDialogue.md
+            - Dialogue Flow: DialogueSystem/GettingStarted/DialogueFlow.md
     - Advanced Inventory & Equipment System:
         - Overview: AdvancedInventoryEquipmentSystem/Overview.md        
         - Inventory System:
@@ -86,10 +88,15 @@ markdown_extensions:
   - def_list
   - pymdownx.highlight
   - pymdownx.inlinehilite
-  - pymdownx.superfences
   - pymdownx.details
   - pymdownx.tabbed:
       alternate_style: true
   - toc:
       permalink: true
       toc_depth: 2
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+
