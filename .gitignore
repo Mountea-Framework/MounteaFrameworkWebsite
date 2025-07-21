@@ -26,3 +26,5 @@ Thumbs.db
 # Logs or temporary files
 *.log
 *.tmp
+/blog/assets
+/blog
