@@ -449,6 +449,7 @@ article img:hover {
 	opacity: 0.5;
 }
 
+.card.startDialogue::before,
 .card.createDialogueAsset::before,
 .card.participantComponent::before,
 .card.setupDialogueManager::before,
