@@ -392,6 +392,11 @@ a.md-tag.md-tag-icon:hover {
 	margin: var(--base-element-margin) !important;
 }
 
+.md-author img {
+  margin: 0 !important;
+  pointer-events: none !important;
+}
+
 article img {
 	border-radius: 0.4rem !important;
 	transition: var(--base-transition) !important;

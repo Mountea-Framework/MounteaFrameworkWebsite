@@ -1,4 +1,4 @@
-site_name: Mountea Docs
+site_name: Mountea Blog
 site_url: https://mountea.tools/blog/
 docs_dir: blog_src
 site_dir: blog
@@ -38,7 +38,7 @@ plugins:
       draft: true
       draft_on_serve: true
       pagination: true
-      pagination_per_page: 1
+      pagination_per_page: 4
       pagination_url_format: "page/{page}"
       pagination_format: "~2~"
 
