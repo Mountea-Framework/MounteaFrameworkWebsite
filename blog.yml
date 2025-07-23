@@ -41,6 +41,7 @@ plugins:
       pagination_per_page: 4
       pagination_url_format: "page/{page}"
       pagination_format: "~2~"
+  - meta
 
 markdown_extensions:
   - meta
