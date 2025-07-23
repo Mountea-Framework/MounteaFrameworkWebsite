@@ -1,3 +1,5 @@
+<h1 class="hidden" style="display:none"></h1>
+
 <div class="card-grid">
   <div class="card">
     <div class="card-icon">🎬</div>
@@ -9,21 +11,21 @@
   <div class="card">
     <div class="card-icon">🗣️</div>
     <h3 class="card-title">Dialogue System</h3>
-    <p class="card-description">Let's start with Dialogue System, free to use Unreal Plugin.</p>
+    <p class="card-description">Open-source framework for creating (not just) complex dialogues! Provides its own Dialogue Tree editor and validation system.</p>
     <a href="/docs/DialogueSystem/GettingStarted/FirstSteps" class="card-link"></a>
   </div>
 
-  <div class="card">
+  <div class="card status-badge status-wip" data-status="Documentation WIP">
     <div class="card-icon">👉🏻</div>
     <h3 class="card-title">Interaction System</h3>
-    <p class="card-description">Let's start with Interaction System, free to use Unreal Plugin.</p>
+    <p class="card-description">Open-source components based tool for smart Actor to Actor interactions.</p>
     <a href="/docs/DialogueSystem/GettingStarted/FirstSteps/" class="card-link"></a>
   </div>
 
-  <div class="card">
+  <div class="card status-badge status-wip" data-status="Documentation WIP">
     <div class="card-icon">📦</div>
     <h3 class="card-title">Inventory & Equipment System</h3>
-    <p class="card-description">Let's start with Inventory & Equipment System System, free to use Unreal Plugin.</p>
+    <p class="card-description">Open-source components based framework designed to allow you to construct Inventory & Equipment systems.</p>
     <a href="/docs/AdvancedInventoryEquipmentSystem/GettingStarted/FirstSteps" class="card-link"></a>
   </div>
 
