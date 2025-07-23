@@ -38,6 +38,7 @@ extra_javascript:
 plugins:
   - tags
   - search
+  - meta
 
 markdown_extensions:
   - admonition
