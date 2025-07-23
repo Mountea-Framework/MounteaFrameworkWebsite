@@ -30,9 +30,6 @@ plugins:
       categories: true
       categories_name: Categories
       categories_url_format: "category/{slug}"
-      tags: true
-      tags_name: Tags
-      tags_url_format: "tag/{slug}"
       authors: true
       authors_file: "blog/author/authors.yml"
       draft: true
