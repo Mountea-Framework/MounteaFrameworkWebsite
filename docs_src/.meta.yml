@@ -1,0 +1,25 @@
+description: Official documentation of all Mountea open-source library of plugins and tools for (not just) Unreal Engine developers.
+author: Dominik Morse
+lang: en
+theme_color: "#1E88E5"
+canonical: https://mountea.tools/docs/
+robots: index, follow
+
+# Open Graph
+site_name: Mountea Framework
+type: website
+url: https://mountea.tools
+image: https://mountea.tools/assets/mounteaCover.png
+locale: en_US
+
+# Twitter
+twitter:
+  card: summary_large_image
+  site: "@MounteaFramework"
+  creator: "@DominikMorse"
+  image: https://mountea.tools/assets/mounteaCover.png
+
+# Custom meta
+extra:
+  keywords: unreal engine, documentation, plugins, mountea
+  viewport: width=device-width, initial-scale=1.0
