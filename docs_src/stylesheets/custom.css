@@ -27,6 +27,52 @@
 	--base-transition: all 0.3s ease;
 }
 
+.status-wip::after {
+	background: orange;
+	color: black;
+}
+
+.status-beta::after {
+	background: dodgerblue;
+	color: white;
+}
+
+.status-alpha::after {
+	background: crimson;
+	color: white;
+}
+
+.status-stable::after {
+	background: limegreen;
+	color: black;
+}
+
+.status-new::after {
+	background: cyan;
+	color: black;
+}
+
+.status-deprecated::after {
+	background: gray;
+	color: white;
+	text-decoration: line-through;
+}
+
+.status-badge::after {
+	content: attr(data-status);
+	position: absolute;
+	top: 0.45rem;
+	right: 0.45rem;
+	padding: 0.2rem 0.5rem;
+	font-size: 0.65rem;
+	font-weight: bold;
+	border-radius: 4px;
+	text-transform: uppercase;
+	z-index: 1;
+	pointer-events: none;
+	text-shadow: none;
+}
+
 /* Base overrides */
 html,
 body,
@@ -474,7 +520,7 @@ article img:hover {
 }
 
 :is(h1, h2, h3, h4, h5, h6).card-title {
-  margin: 0 !important;
+	margin: 0 !important;
 }
 
 .card-description {
@@ -746,7 +792,7 @@ article img:hover {
 		max-width: 49% !important;
 	}
 
-	.grid > .preview {
+	.grid>.preview {
 		max-width: 100% !important;
 	}
 
