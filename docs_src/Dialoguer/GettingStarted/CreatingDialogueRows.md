@@ -30,9 +30,9 @@ Populate each node with the actual lines and media.
 ## Next Steps
 
 <div class="card-grid">
-  <div class="card next-steps export">
+  <div class="card next-steps export configuration">
     <h4 class="card-title">Export Your Dialogue</h4>
     <p class="card-description">Bundle everything into a `.mnteadlg` file</p>
-    <a href="../ExportingDialogue.md" class="card-link"></a>
+    <a href="../ExportingDialogue" class="card-link"></a>
   </div>
 </div>
