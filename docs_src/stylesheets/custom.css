@@ -329,12 +329,12 @@ a.md-tag.md-tag-icon:hover {
 /* Lists */
 .md-typeset ul,
 .md-typeset ol {
-	margin: 0 0 1rem 0 !important;
+	margin: 0 0 0 0 !important;
 	padding-left: 1.5rem !important;
 }
 
 .md-typeset li {
-	margin: 0.5rem 0 !important;
+	margin: 0.5rem 0 0 0 !important;
 }
 
 /* Code */
