@@ -37,6 +37,27 @@ nav:
             - Create New Dialogue: DialogueSystem/GettingStarted/CreateDialogueAsset.md
             - Start Dialogue: DialogueSystem/GettingStarted/StartDialogue.md
             - Dialogue Flow: DialogueSystem/GettingStarted/DialogueFlow.md
+          - Dialogue Editor:
+            - Dialogue Tree Editor: DialogueSystem/DialogueEditor/DialogueEditor.md
+          - Dialogue Nodes:
+            - Dialogue Node Intro: DialogueSystem/DialogueNodes/DialogueNode.md
+            - Start Node: DialogueSystem/DialogueNodes/StartNode.md
+            - Lead Node: DialogueSystem/DialogueNodes/LeadNode.md
+            - Answer Node: DialogueSystem/DialogueNodes/AnswerNode.md
+            - Complete Node: DialogueSystem/DialogueNodes/CompleteNode.md
+            - Return To Node: DialogueSystem/DialogueNodes/ReturnToNode.md
+            - Delay Node: DialogueSystem/DialogueNodes/DelayNode.md
+            - Custom Node: DialogueSystem/DialogueNodes/CustomNode.md
+          - Dialogue Decorators:
+            - Dialogue Decorator Intro: DialogueSystem/DialogueDecorators/DialogueDecorator.md
+            - Only First Time (Base): DialogueSystem/DialogueDecorators/OnlyFirstTimeBase.md
+            - Override Only First Time: DialogueSystem/DialogueDecorators/OverrideOnlyFristTime.md
+            - Override Dialogue Participants: DialogueSystem/DialogueDecorators/OverrideDialogueParticipants.md
+            - Override Dialogue Row Data: DialogueSystem/DialogueDecorators/OverrideDialogueRowData.md
+            - Select Random Dialogue Row: DialogueSystem/DialogueDecorators/SelectRandomDialogueRow.md
+            - Send Command: DialogueSystem/DialogueDecorators/SendCommand.md
+            - Set Node As Start: DialogueSystem/DialogueDecorators/SetNodeAsStart.md
+            - Swap Participants: DialogueSystem/DialogueDecorators/SwapParticipants.md
     - Advanced Inventory & Equipment System:
         - Overview: AdvancedInventoryEquipmentSystem/Overview.md        
         - Inventory System:
