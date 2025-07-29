@@ -1,115 +1,188 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <!-- Basic Meta -->
+    <meta charset="UTF-8" />
+    <meta http-equiv="Content-Language" content="en" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Dominik Morse" />
+    <meta
+      name="description"
+      content="Mountea Framework — an open-source library of plugins and tools for Unreal Engine developers."
+    />
 
-<head>
-  <!-- Basic Meta -->
-  <meta charset="UTF-8" />
-  <meta http-equiv="Content-Language" content="en" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="author" content="Dominik Morse">
-  <meta name="description"
-    content="Mountea Framework — an open-source library of plugins and tools for Unreal Engine developers.">
+    <title>Mountea Framework</title>
+    <meta name="theme-color" content="#1E88E5" />
 
-  <title>Mountea Framework</title>
-  <meta name="theme-color" content="#1E88E5">
+    <!-- Favicons & Touch Icons -->
+    <link
+      rel="icon"
+      href="/assets/icon.webp"
+      sizes="192x192"
+      type="image/webp"
+    />
+    <link rel="icon" href="/assets/icon.png" sizes="192x192" type="image/png" />
+    <link rel="apple-touch-icon" href="/assets/icon.webp" sizes="512x512" />
+    <link rel="apple-touch-icon" href="/assets/icon.png" sizes="512x512" />
 
-  <!-- Favicons & Touch Icons -->
-  <link rel="icon" href="/assets/icon.webp" sizes="192x192" type="image/webp">
-  <link rel="icon" href="/assets/icon.png" sizes="192x192" type="image/png">
-  <link rel="apple-touch-icon" href="/assets/icon.webp" sizes="512x512">
-  <link rel="apple-touch-icon" href="/assets/icon.png" sizes="512x512">
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json" />
 
-  <!-- PWA Manifest -->
-  <link rel="manifest" href="/manifest.json">
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Mountea Framework" />
+    <meta
+      property="og:description"
+      content="Open-source library of plugins and tools for Unreal Engine (Interaction, Dialogue, Inventory, and more)."
+    />
+    <meta property="og:url" content="https://mountea.tools" />
+    <meta
+      property="og:image"
+      content="https://mountea.tools/assets/mounteaCover.png"
+    />
 
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="Mountea Framework">
-  <meta property="og:description"
-    content="Open-source library of plugins and tools for Unreal Engine (Interaction, Dialogue, Inventory, and more).">
-  <meta property="og:url" content="https://mountea.tools">
-  <meta property="og:image" content="https://mountea.tools/assets/mounteaCover.png">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@MounteaFramework" />
+    <meta name="twitter:title" content="Mountea Framework" />
+    <meta
+      name="twitter:description"
+      content="Open-source library of plugins and tools for Unreal Engine (Interaction, Dialogue, Inventory, and more)."
+    />
+    <meta
+      name="twitter:image"
+      content="https://mountea.tools/assets/mounteaCover.png"
+    />
 
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:site" content="@MounteaFramework">
-  <meta name="twitter:title" content="Mountea Framework">
-  <meta name="twitter:description"
-    content="Open-source library of plugins and tools for Unreal Engine (Interaction, Dialogue, Inventory, and more).">
-  <meta name="twitter:image" content="https://mountea.tools/assets/mounteaCover.png">
+    <!-- Stylesheet & Script -->
+    <link rel="stylesheet" href="master.css" />
+    <link rel="stylesheet" href="styles/contact.css" />
+    <script src="master.js" defer></script>
+    <script src="script/mobile.js" defer></script>
+  </head>
 
-  <!-- Stylesheet & Script -->
-  <link rel="stylesheet" href="master.css">
-  <link rel="stylesheet" href="styles/contact.css">
-  <script src="master.js" defer></script>
-  <script src="script/mobile.js" defer></script>
-</head>
-
-<body>
-  <div class="contact-top-line"></div>
-  <div class="contact-box" id="contactBox">
-    <div class="contact-box-header">
-      <h3>Contact</h3>
+  <body>
+    <div class="contact-top-line"></div>
+    <div class="contact-box" id="contactBox">
+      <div class="contact-box-header">
+        <h3>Contact</h3>
+      </div>
+      <div class="contact-box-content">
+        <a
+          href="mailto:dominikpavlicek.business@gmail.com"
+          class="contact-item"
+        >
+          <svg class="contact-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"
+            />
+          </svg>
+          info@mounteaframework.com
+        </a>
+        <a
+          href="https://discord.gg/pBgErZf"
+          target="_blank"
+          class="contact-item"
+        >
+          <img
+            src="https://cdn.prod.website-files.com/6257adef93867e50d84d30e2/66e3d7f4ef6498ac018f2c55_Symbol.svg"
+            alt="Discord"
+            class="contact-icon"
+          />
+          Discord Community
+        </a>
+        <a
+          href="https://github.com/Mountea-Framework"
+          target="_blank"
+          class="contact-item"
+        >
+          <svg class="contact-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.30.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
+            />
+          </svg>
+          GitHub Organization
+        </a>
+        <a
+          href="https://www.fab.com/sellers/Dominik%20Morse"
+          class="contact-item"
+        >
+          <svg
+            class="contact-icon"
+            viewBox="0 0 51 34"
+            width="24"
+            height="24"
+            xmlns="http://www.w3.org/2000/svg"
+            preserveAspectRatio="xMidYMid meet"
+            fill="currentColor"
+          >
+            <path
+              d="M49.7196 15.0277C50.0356 14.8193 50.2625 14.5619 50.4008 14.2543C50.539 13.9472 50.608 13.5655 50.608 13.1091C50.608 12.509 50.4243 12.0108 50.0581 11.6143C48.9725 14.8096 46.3271 18.2091 42.5476 21.3181H45.587C47.4729 21.3181 48.7615 20.8919 49.4528 20.0393C49.9365 19.4545 50.1787 18.6613 50.1787 17.6598C50.1787 17.0948 50.0231 16.6537 49.712 16.3364C49.4008 16.0191 48.9788 15.7861 48.4455 15.6375L48.4604 15.489C48.9344 15.4197 49.354 15.266 49.7196 15.028V15.0277Z"
+              fill="white"
+            />
+            <path
+              d="M8.71113 10.7005H2.9736L0.949402 21.3186C1.79934 17.8659 4.57334 14.1091 8.71078 10.7002L8.71113 10.7005Z"
+              fill="white"
+            />
+            <path
+              d="M26.5096 20.3516H20.8812L20.2146 21.3184H13.6676L15.4839 18.7754H7.35771L6.86882 21.3184H0.94938C0.618135 23.0554 0.580714 24.7151 1.19851 26.2152C3.99815 33.016 17.2109 33.9556 30.7101 28.3136C35.3014 26.3947 39.3342 23.9616 42.5476 21.3184H26.8204L26.5093 20.3516H26.5096Z"
+              fill="white"
+            />
+            <path
+              d="M24.6285 14.8198L22.7769 17.5413H25.606L24.7321 14.8198H24.6285Z"
+              fill="white"
+            />
+            <path
+              d="M17.1485 14.4479H8.18722L7.95023 15.6673H16.4226L15.9403 18.1362L21.2513 10.7002H29.4423L32.7527 20.5877L34.656 10.7002H47.0981C48.3125 10.7002 49.2013 10.9159 49.7643 11.3472C49.8731 11.4304 49.9708 11.5198 50.0585 11.6148C50.7632 9.54 50.8107 7.5515 50.0834 5.78461C47.2838 -1.01614 34.0711 -1.95577 20.5718 3.68618C15.9694 5.60962 11.9283 8.05002 8.71112 10.7005H17.8595L17.1485 14.4483V14.4479Z"
+              fill="white"
+            />
+            <path
+              d="M43.4544 13.541H40.0328L39.7663 14.9092H43.1879C43.5434 14.9092 43.805 14.8052 43.9731 14.5968C44.1113 14.4285 44.1806 14.2597 44.1806 14.0914C44.1806 13.7247 43.9384 13.541 43.4547 13.541H43.4544Z"
+              fill="white"
+            />
+            <path
+              d="M42.9356 17.1543H39.3363L39.055 18.6116H42.6394C43.0341 18.6116 43.3157 18.5027 43.4838 18.2846C43.543 18.2052 43.5922 18.1162 43.6317 18.0167C43.6712 17.9179 43.691 17.8285 43.691 17.7492C43.691 17.3526 43.4391 17.1543 42.9356 17.1543Z"
+              fill="white"
+            />
+          </svg>
+          Mountea on FAB
+        </a>
+        <a
+          href="https://www.linkedin.com/in/dominik-morse-447168126/"
+          target="_blank"
+          class="contact-item"
+        >
+          <svg class="contact-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"
+            />
+          </svg>
+          LinkedIn Profile
+        </a>
+      </div>
     </div>
-    <div class="contact-box-content">
-      <a href="mailto:dominikpavlicek.business@gmail.com" class="contact-item">
-        <svg class="contact-icon" viewBox="0 0 24 24" fill="currentColor">
-          <path
-            d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
-        </svg>
-        info@mounteaframework.com
-      </a>
-      <a href="https://discord.gg/pBgErZf" target="_blank" class="contact-item">
-        <img src="https://cdn.prod.website-files.com/6257adef93867e50d84d30e2/66e3d7f4ef6498ac018f2c55_Symbol.svg"
-          alt="Discord" class="contact-icon">
-        Discord Community
-      </a>
-      <a href="https://github.com/Mountea-Framework" target="_blank" class="contact-item">
-        <svg class="contact-icon" viewBox="0 0 24 24" fill="currentColor">
-          <path
-            d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.30.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-        </svg>
-        GitHub Organization
-      </a>
-      <a href="https://www.fab.com/sellers/Dominik%20Morse" class="contact-item">
-        <svg class="contact-icon" viewBox="0 0 51 34" width="24" height="24" xmlns="http://www.w3.org/2000/svg"
-          preserveAspectRatio="xMidYMid meet" fill="currentColor">
-          <path
-            d="M49.7196 15.0277C50.0356 14.8193 50.2625 14.5619 50.4008 14.2543C50.539 13.9472 50.608 13.5655 50.608 13.1091C50.608 12.509 50.4243 12.0108 50.0581 11.6143C48.9725 14.8096 46.3271 18.2091 42.5476 21.3181H45.587C47.4729 21.3181 48.7615 20.8919 49.4528 20.0393C49.9365 19.4545 50.1787 18.6613 50.1787 17.6598C50.1787 17.0948 50.0231 16.6537 49.712 16.3364C49.4008 16.0191 48.9788 15.7861 48.4455 15.6375L48.4604 15.489C48.9344 15.4197 49.354 15.266 49.7196 15.028V15.0277Z"
-            fill="white" />
-          <path
-            d="M8.71113 10.7005H2.9736L0.949402 21.3186C1.79934 17.8659 4.57334 14.1091 8.71078 10.7002L8.71113 10.7005Z"
-            fill="white" />
-          <path
-            d="M26.5096 20.3516H20.8812L20.2146 21.3184H13.6676L15.4839 18.7754H7.35771L6.86882 21.3184H0.94938C0.618135 23.0554 0.580714 24.7151 1.19851 26.2152C3.99815 33.016 17.2109 33.9556 30.7101 28.3136C35.3014 26.3947 39.3342 23.9616 42.5476 21.3184H26.8204L26.5093 20.3516H26.5096Z"
-            fill="white" />
-          <path d="M24.6285 14.8198L22.7769 17.5413H25.606L24.7321 14.8198H24.6285Z" fill="white" />
-          <path
-            d="M17.1485 14.4479H8.18722L7.95023 15.6673H16.4226L15.9403 18.1362L21.2513 10.7002H29.4423L32.7527 20.5877L34.656 10.7002H47.0981C48.3125 10.7002 49.2013 10.9159 49.7643 11.3472C49.8731 11.4304 49.9708 11.5198 50.0585 11.6148C50.7632 9.54 50.8107 7.5515 50.0834 5.78461C47.2838 -1.01614 34.0711 -1.95577 20.5718 3.68618C15.9694 5.60962 11.9283 8.05002 8.71112 10.7005H17.8595L17.1485 14.4483V14.4479Z"
-            fill="white" />
-          <path
-            d="M43.4544 13.541H40.0328L39.7663 14.9092H43.1879C43.5434 14.9092 43.805 14.8052 43.9731 14.5968C44.1113 14.4285 44.1806 14.2597 44.1806 14.0914C44.1806 13.7247 43.9384 13.541 43.4547 13.541H43.4544Z"
-            fill="white" />
-          <path
-            d="M42.9356 17.1543H39.3363L39.055 18.6116H42.6394C43.0341 18.6116 43.3157 18.5027 43.4838 18.2846C43.543 18.2052 43.5922 18.1162 43.6317 18.0167C43.6712 17.9179 43.691 17.8285 43.691 17.7492C43.691 17.3526 43.4391 17.1543 42.9356 17.1543Z"
-            fill="white" />
-        </svg>
-        Mountea on FAB
-      </a>
-      <a href="https://www.linkedin.com/in/dominik-morse-447168126/" target="_blank" class="contact-item">
-        <svg class="contact-icon" viewBox="0 0 24 24" fill="currentColor">
-          <path
-            d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-        </svg>
-        LinkedIn Profile
-      </a>
-    </div>
-  </div>
 
-  <main>
-    <div class="accordion-wrapper">
-      <!-- Cards will be loaded dynamically for desktop, or remain here for mobile -->
-    </div>
-  </main>
-</body>
+    <main>
+      <div class="accordion-wrapper">
+        <!-- Cards will be loaded dynamically for desktop, or remain here for mobile -->
+      </div>
+    </main>
+  </body>
+  <!-- Google tag (gtag.js) -->
+  <script
+    async
+    src="https://www.googletagmanager.com/gtag/js?id=G-5Z7M76TSZK"
+  ></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+
+    gtag('config', 'G-5Z7M76TSZK', {
+      'anonymize_ip': true
+    });
+
+  </script>
 </html>

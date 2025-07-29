@@ -8,7 +8,7 @@
     <a href="https://www.youtube.com/channel/UC5JFJ5Ly8kC_gMT_ghxp3cw" class="card-link"></a>
   </div>
 
-  <div class="card">
+  <div class="card status-badge status-beta" data-status="Documentation BETA">
     <div class="card-icon">🗣️</div>
     <h3 class="card-title">Dialogue System</h3>
     <p class="card-description">Open-source framework for creating (not just) complex dialogues! Provides its own Dialogue Tree editor and validation system.</p>
