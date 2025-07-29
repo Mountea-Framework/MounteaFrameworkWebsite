@@ -57,7 +57,15 @@ nav:
             - Select Random Dialogue Row: DialogueSystem/DialogueDecorators/SelectRandomDialogueRow.md
             - Send Command: DialogueSystem/DialogueDecorators/SendCommand.md
             - Set Node As Start: DialogueSystem/DialogueDecorators/SetNodeAsStart.md
-            - Swap Participants: DialogueSystem/DialogueDecorators/SwapParticipants.md
+            - Swap Participants: DialogueSystem/DialogueDecorators/SwapParticipants.md            
+    - Dialoguer:
+          - Getting Started:
+            - First Steps: Dialoguer/GettingStarted/FirstSteps.md
+            - New Project: Dialoguer/GettingStarted/CreateNewProject.md
+            - Creating Nodes: Dialoguer/GettingStarted/CreatingNodes.md
+            - New Project: Dialoguer/GettingStarted/CreateNewProject.md
+            - Dialogue Row Data: Dialoguer/GettingStarted/CreatingDialogueRows.md
+            - Export Dialogue: Dialoguer/GettingStarted/ExportingDialogue.md
     - Advanced Inventory & Equipment System:
         - Overview: AdvancedInventoryEquipmentSystem/Overview.md        
         - Inventory System:
