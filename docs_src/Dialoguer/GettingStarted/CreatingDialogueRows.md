@@ -1,7 +1,8 @@
 ---
 tags:
   - rows
-  - dialogue
+  - dialoguer
+  - tutorial
 ---
 
 # Adding Dialogue Rows
