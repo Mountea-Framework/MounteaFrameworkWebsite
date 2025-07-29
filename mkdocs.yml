@@ -39,6 +39,7 @@ nav:
             - Dialogue Flow: DialogueSystem/GettingStarted/DialogueFlow.md
           - Dialogue Editor:
             - Dialogue Tree Editor: DialogueSystem/DialogueEditor/DialogueEditor.md
+            - Import Dialogue: DialogueSystem/DialogueEditor/ImportDialogue.md
           - Dialogue Nodes:
             - Dialogue Node Intro: DialogueSystem/DialogueNodes/DialogueNode.md
             - Start Node: DialogueSystem/DialogueNodes/StartNode.md
