@@ -15,7 +15,7 @@ This guide walks you through every step of designing, configuring, and exporting
 
 1. **Open the Dialoguer Tool**
 
-   Navigate to the live version at [https://mountea-framework.github.io/MounteaDialoguer/](https://mountea-framework.github.io/MounteaDialoguer/).
+   Navigate to the live version at [https://mountea.tools/dialoguer](https://mountea.tools/dialoguer).
 
 2. **Landing Page: Create Project**
 

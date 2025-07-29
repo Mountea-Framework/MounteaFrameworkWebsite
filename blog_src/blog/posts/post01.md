@@ -46,7 +46,7 @@ Everything above is documented with real examples, not theory.
 
 ## Two tools, one workflow
 
-You’ve got the Unreal plugin. And you’ve got [**Dialoguer**](https://mountea-framework.github.io/MounteaDialoguer/), a browser-based editor for writers and designers.
+You’ve got the Unreal plugin. And you’ve got [**Dialoguer**](https://mountea.tools/dialoguer), a browser-based editor for writers and designers.
 
 * Write and structure dialogue in the web app.
 * Export to Unreal.
@@ -80,7 +80,7 @@ The Graph Editor is documented like a tool you’ll live in: themes, node relati
 ## Jump in
 
 * 🚀 Getting Started: [https://mountea.tools/docs/dialoguesystem/gettingstarted/firststeps/](https://mountea.tools/docs/dialoguesystem/gettingstarted/firststeps/)
-* 🌐 Dialoguer (web tool): [https://mountea-framework.github.io/MounteaDialoguer/](https://mountea-framework.github.io/MounteaDialoguer/)
+* 🌐 Dialoguer (web tool): [https://mountea.tools/dialoguer](https://mountea.tools/dialoguer)
 * 💾 GitHub: [https://github.com/Mountea-Framework/MounteaDialogueSystem](https://github.com/Mountea-Framework/MounteaDialogueSystem)
 * 💬 Discord: [https://discord.com/invite/pBgErZf](https://discord.com/invite/pBgErZf)
 

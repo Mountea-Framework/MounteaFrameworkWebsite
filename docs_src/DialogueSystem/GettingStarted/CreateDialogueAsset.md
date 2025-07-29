@@ -194,7 +194,7 @@ Dialogue Row Data is a structure which contains the actual Dialogue body. This i
 - Exported file should have the same name as your graph with `mnteadlg` extension.
 
 !!! feature "Import & Export"
-    Mountea Dialogue provides a way to import/export Graphs. We also provide online dialogue editor <a href="https://mountea-framework.github.io/MounteaDialoguer/" target="_blank">Mountea Dialoguer</a>.
+    Mountea Dialogue provides a way to import/export Graphs. We also provide online dialogue editor <a href="https://mountea.tools/dialoguer" target="_blank">Mountea Dialoguer</a>.
 
 <p align="center" width="75%" class="preview-container">
   <img class="preview" src="https://raw.githubusercontent.com/Mountea-Framework/MounteaDialogueSystem/refs/heads/master/DocumentationResources/ToolbarActions.webp">
