@@ -30,18 +30,32 @@ The whole purpose of this tool is to visually connect nodes in order to create d
     - Click on the canvas to drop the node.
     - Drag its connector dots to link to other nodes, defining your flow.
 
-## 2. Node Types
 
-| Node              | Description                  |
-| ----------------- | ---------------------------- |
-| **Lead**          | Narrator/NPC or system line. |
-| **Answer**        | Player response.             |
-| **JumpTo**        | Branch jump to another Node. |
-| **CloseDialogue** | Ends the dialogue with text. |
+<p align="center" width="100%" class="preview-container">
+    <img class="preview" width="49%" src="https://raw.githubusercontent.com/Mountea-Framework/MounteaDialoguer/refs/heads/master/DocumentationSource/NewNodeConnection.webp">
+    <img class="preview" width="49%" src="https://raw.githubusercontent.com/Mountea-Framework/MounteaDialoguer/refs/heads/master/DocumentationSource/NewNodeMouse.webp">
+</p>
+
+!!! feature inline "From Connection"
+    If you drag a connector from existing node and release it, the Nodes selection page will appear with Node to select.
+
+!!! info inline end "Right-click"
+    The modal window shows if you draw from existing Node or anytime you right-click with a mouse on the canvas.
 
 ---
 
-## Next Steps
+## 2. Node Types
+
+| Node               | Description                  |
+| ------------------ | ---------------------------- |
+| **Lead**           | Narrator/NPC or system line. |
+| **Answer**         | Player response.             |
+| **Jump To**        | Branch jump to another Node. |
+| **Close Dialogue** | Ends the dialogue with text. |
+
+---
+
+## 3. Next Steps
 
 <div class="card-grid">
   <div class="card next-steps export configuration">
