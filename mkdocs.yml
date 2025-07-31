@@ -29,6 +29,7 @@ nav:
   - Home: index.md
   - Projects:
     - Dialogue System:
+          - Home: DialogueSystem/home.md
           - Getting Started:
             - First Steps: DialogueSystem/GettingStarted/FirstSteps.md
             - Configuration: DialogueSystem/GettingStarted/PluginConfiguration.md
