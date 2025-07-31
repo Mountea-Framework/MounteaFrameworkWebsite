@@ -61,6 +61,7 @@ nav:
             - Set Node As Start: DialogueSystem/DialogueDecorators/SetNodeAsStart.md
             - Swap Participants: DialogueSystem/DialogueDecorators/SwapParticipants.md            
     - Dialoguer:
+          - Home: Dialoguer/home.md
           - Getting Started:
             - First Steps: Dialoguer/GettingStarted/FirstSteps.md
             - New Project: Dialoguer/GettingStarted/CreateNewProject.md
