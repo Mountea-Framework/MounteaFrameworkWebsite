@@ -19,7 +19,7 @@
     <div class="card-icon">🗨️</div>
     <h3 class="card-title">Dialoguer</h3>
     <p class="card-description">Open-source Dialogue Editor Tool, a comprehensive solution for creating and managing dialogue systems for various applications.</p>
-    <a href="/docs/Dialoguer/GettingStarted/FirstSteps" class="card-link"></a>
+    <a href="/docs/Dialoguer/home" class="card-link"></a>
   </div>
 
   <div class="card status-badge status-wip" data-status="Documentation WIP">
