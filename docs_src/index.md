@@ -12,7 +12,7 @@
     <div class="card-icon">🗣️</div>
     <h3 class="card-title">Dialogue System</h3>
     <p class="card-description">Open-source framework for creating (not just) complex dialogues! Provides its own Dialogue Tree editor and validation system.</p>
-    <a href="/docs/DialogueSystem/GettingStarted/FirstSteps" class="card-link"></a>
+    <a href="/docs/DialogueSystem/home" class="card-link"></a>
   </div>
 
    <div class="card status-badge status-wip" data-status="Documentation WIP">
@@ -33,7 +33,7 @@
     <div class="card-icon">📦</div>
     <h3 class="card-title">Inventory & Equipment System</h3>
     <p class="card-description">Open-source components based framework designed to allow you to construct Inventory & Equipment systems.</p>
-    <a href="/docs/AdvancedInventoryEquipmentSystem/GettingStarted/FirstSteps" class="card-link"></a>
+    <a href="/docs/AdvancedInventoryEquipmentSystem/Overview" class="card-link"></a>
   </div>
 
   <div class="card">
