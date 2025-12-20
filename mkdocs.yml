@@ -72,7 +72,7 @@ nav:
     - Advanced Inventory & Equipment System:
         - Overview: AdvancedInventoryEquipmentSystem/Overview.md
         - Architecture: 
-            - System Architecture: AdvancedInventoryEquipmentSystem/SystemArchitecture.md
+            - System Architecture: AdvancedInventoryEquipmentSystem/Architecture/SystemArchitecture.md
         - Inventory System:
             - Overview: AdvancedInventoryEquipmentSystem/InventorySystem/InventorySystem.md
             - Inventory Component: AdvancedInventoryEquipmentSystem/InventorySystem/InventoryComponent.md
