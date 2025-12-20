@@ -42,41 +42,37 @@
 │                          CORE LOGIC LAYER                                   │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │                                                                             │
-│  ┌──────────────────────┐     ┌──────────────────────┐                      │
-│  │  INVENTORY SUBSYSTEM │     │  EQUIPMENT SUBSYSTEM │                      │
-│  └──────────────────────┘     └──────────────────────┘                      │
-│           │                              │                                  │
-│           ├─ UInventoryManagerComponent  ├─ UEquipmentManagerComponent      │
-│           │  (Database)                  │  (Attachment Database)           │
-│           │                              │                                  │
-│           └─ Operations:                 └─ Operations:                     │
-│              - Add/Remove Items             - Equip/Unequip                 │
-│              - Modify Quantity              - Get Slots                     │
-│              - Find/Get Items               - Validate Equipment            │
-│              - Sort/Filter                  - Save/Load                     │
-│              - Save/Load                                                    │
+│  GAME INSTANCE SUBSYSTEMS (Global, Cached Data)                             │
+│  ├─ UInventoryConfigSubsystem                                               │
+│  │  └─ Cache configurations & templates for fast access                     │
 │                                                                             │
-│  ┌──────────────────────┐     ┌──────────────────────┐                      │
-│  │   CRAFTING SUBSYSTEM │     │   RECIPE SUBSYSTEM   │                      │
-│  └──────────────────────┘     └──────────────────────┘                      │
-│           │                              │                                  │
-│           ├─ UCraftingComponent          ├─ URecipeKnowledgeComponent       │
-│           │  (Recipe Execution)          │  (Recipe Storage)                │
-│           │                              │                                  │
-│           └─ Operations:                 └─ Operations:                     │
-│              - Can Craft                    - Learn Recipe                  │
-│              - Craft Item                   - Forget Recipe                 │
-│              - Validate Ingredients         - Get Known Recipes             │
-│              - Execute Recipe               - Is Recipe Known               │
-│                                             - Save/Load                     │
+│  LOCAL PLAYER SUBSYSTEMS (Per-Player, Persistent)                           │
+│  ├─ URecipeKnowledgeSubsystem (Recipe Storage)                              │
+│  │  └─ Operations: Learn/Forget Recipe, Get Known Recipes, Save/Load        │
+│  ├─ UNotificationSubsystem (Event Processing)                               │
+│  │  └─ Operations: Process/Queue Notifications, Create Widgets              │
+│  ├─ UInventoryUISubsystem (Inventory UI Bridge)                             │
+│  │  └─ Operations: Open/Close Inventory, Refresh Display, Handle Actions    │
+│  └─ UEquipmentUISubsystem (Equipment UI Bridge)                             │
+│     └─ Operations: Open/Close Equipment, Refresh Slots, Show Quick Access   │
 │                                                                             │
-│  ┌──────────────────────┐                                                   │
-│  │ NOTIFICATION SYSTEM  │                                                   │
-│  └──────────────────────┘                                                   │
-│           │                                                                 │
-│           └─ UNotificationManagerComponent                                  │
-│              (Event Processing)                                             │
+│  WORLD SUBSYSTEMS (Per-Level, Shared Logic)                                 │
+│  ├─ ULootingSubsystem (Loot Session Management)                             │
+│  │  └─ Operations: Request/Close Loot Access, Transfer Items                │
+│  ├─ UVendorSubsystem (Trading Logic)                                        │
+│  │  └─ Operations: Buy/Sell Transactions, Calculate Prices                  │
+│  └─ UPickupSpawningSubsystem (Pickup Pooling)                               │
+│     └─ Operations: Spawn/Despawn Pickups, Object Pooling                    │
 │                                                                             │
+│  ACTOR COMPONENTS (Per-Actor, Replicated)                                   │
+│  ├─ UInventoryManagerComponent (Database)                                   │
+│  │  └─ Operations: Add/Remove Items, Modify Quantity, Find/Get, Sort/Filter │
+│  ├─ UEquipmentManagerComponent (Attachment Database)                        │
+│  │  └─ Operations: Equip/Unequip, Get Slots, Validate Equipment             │
+│  └─ UCraftingComponent (Recipe Execution)                                   │
+│     └─ Operations: Can Craft, Craft Item, Validate Ingredients              │
+│                                                                             │
+
 └─────────────────────────────────────────────────────────────────────────────┘
 
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -87,14 +83,19 @@
 │  │   PICKUP/DROP SYSTEM │     │  LOOTING/VENDOR SYS  │                      │
 │  └──────────────────────┘     └──────────────────────┘                      │
 │           │                              │                                  │
-│           ├─ IMounteaPickupInterface     ├─ IMounteaLootableInterface       │
-│           └─ IMounteaDroppableInterface  └─ IMounteaVendorInterface         │
+│           ├─ UPickupSpawningSubsystem    ├─ ULootingSubsystem               │
+│           │  (WorldSubsystem)            │  (WorldSubsystem)                │
+│           ├─ IMounteaPickupInterface     ├─ UVendorSubsystem                │
+│           └─ IMounteaDroppableInterface  │  (WorldSubsystem)                │
+│                                          ├─ IMounteaLootableInterface       │
+│                                          └─ IMounteaVendorInterface         │
 │                                                                             │
 │           Operations:                    Operations:                        │
 │           - Pickup Item                  - Request Loot Access              │
 │           - Drop Item                    - Transfer Items                   │
 │           - Spawn Pickup Actor           - Buy/Sell                         │
-│                                          - Calculate Price                  │
+│           - Pickup Pooling               - Calculate Price                  │
+│                                          - Manage Sessions                  │
 │                                                                             │
 └─────────────────────────────────────────────────────────────────────────────┘
 
@@ -106,8 +107,9 @@
 │  │   INVENTORY UI       │     │    EQUIPMENT UI      │                      │
 │  └──────────────────────┘     └──────────────────────┘                      │
 │           │                              │                                  │
-│           ├─ UInventoryUIComponent       ├─ UEquipmentUIComponent           │
+│           ├─ UInventoryUISubsystem       ├─ UEquipmentUISubsystem           │
 │           │  (UI Bridge)                 │  (UI Bridge)                     │
+│           │  LocalPlayerSubsystem        │  LocalPlayerSubsystem            │
 │           │                              │                                  │
 │           └─ Widget Hierarchy:           └─ Widget Hierarchy:               │
 │              - Wrapper Widget               - Equipment Panel               │
@@ -122,6 +124,10 @@
 │  ┌──────────────────────┐                                                   │
 │  │  NOTIFICATION UI     │                                                   │
 │  └──────────────────────┘                                                   │
+│           │                                                                 │
+│           ├─ UNotificationSubsystem                                         │
+│           │  (Event Processing)                                             │
+│           │  LocalPlayerSubsystem                                           │
 │           │                                                                 │
 │           └─ Notification Widgets                                           │
 │              - Container                                                    │
@@ -155,101 +161,122 @@
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                   SUBSYSTEM & COMPONENT RELATIONSHIPS                       │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+GAME INSTANCE SUBSYSTEMS (Global, Persistent)
+    ┌──────────────────────────────┐
+    │ UInventoryConfigSubsystem    │
+    │ ───────────────────────────  │
+    │ Type: GameInstanceSubsystem  │
+    │                              │
+    │ Contains:                    │
+    │ - Cached Inventory Configs   │
+    │ - Cached Equipment Configs   │
+    │ - Cached Item Templates      │
+    │ - Cached Recipe Templates    │
+    └──────────────────────────────┘
+
+LOCAL PLAYER SUBSYSTEMS (Per-Player, Persistent)
+    ┌──────────────────────────────┐
+    │ URecipeKnowledgeSubsystem    │
+    │ ───────────────────────────  │
+    │ Type: LocalPlayerSubsystem   │
+    │ Implements:                  │
+    │ - IRecipeKnowledgeInterface  │
+    │                              │
+    │ Contains:                    │
+    │ - Known Recipes (SaveGame)   │
+    │                              │
+    │ Operations:                  │
+    │ - LearnRecipe()              │
+    │ - ForgetRecipe()             │
+    │ - IsRecipeKnown()            │
+    │ - GetKnownRecipes()          │
+    └──────────────────────────────┘
+
+    ┌──────────────────────────────┐         ┌──────────────────────────────┐
+    │ UInventoryUISubsystem        │         │ UEquipmentUISubsystem        │
+    │ ───────────────────────────  │         │ ───────────────────────────  │
+    │ Type: LocalPlayerSubsystem   │         │ Type: LocalPlayerSubsystem   │
+    │ Implements:                  │         │ Implements:                  │
+    │ - IInventoryUIInterface      │         │ - IEquipmentUIInterface      │
+    │                              │         │                              │
+    │ References:                  │         │ References:                  │
+    │ - InventoryManagerComponent  │         │ - EquipmentManagerComponent  │
+    │ - Active Inventory Widget    │         │ - Active Equipment Widget    │
+    │ - UI State (sort, filters)   │         │ - Quick Access State         │
+    └──────────────────────────────┘         └──────────────────────────────┘
+
+    ┌──────────────────────────────┐
+    │ UNotificationSubsystem       │
+    │ ───────────────────────────  │
+    │ Type: LocalPlayerSubsystem   │
+    │ Implements:                  │
+    │ - INotificationInterface     │
+    │                              │
+    │ Contains:                    │
+    │ - Notification Queue         │
+    │ - Active Notifications       │
+    │ - Notification Container     │
+    └──────────────────────────────┘
+
+WORLD SUBSYSTEMS (Per-Level, Non-Persistent)
+    ┌──────────────────────────────┐
+    │ ULootingSubsystem            │
+    │ ───────────────────────────  │
+    │ Type: WorldSubsystem         │
+    │ Implements:                  │
+    │ - ILootingSystemInterface    │
+    │                              │
+    │ Contains:                    │
+    │ - Active Loot Sessions       │
+    │ - Loot Access Rules          │
+    └──────────────────────────────┘
+
+    ┌──────────────────────────────┐         ┌──────────────────────────────┐
+    │ UVendorSubsystem             │         │ UPickupSpawningSubsystem     │
+    │ ───────────────────────────  │         │ ───────────────────────────  │
+    │ Type: WorldSubsystem         │         │ Type: WorldSubsystem         │
+    │ Implements:                  │         │ Implements:                  │
+    │ - IVendorSystemInterface     │         │ - IPickupSystemInterface     │
+    │                              │         │                              │
+    │ Contains:                    │         │ Contains:                    │
+    │ - Active Vendor Sessions     │         │ - Pickup Object Pool         │
+    │ - Price Calculation Rules    │         │ - Active Pickups             │
+    └──────────────────────────────┘         └──────────────────────────────┘
+
+ACTOR COMPONENTS (Per-Actor, Replicated)
+┌─────────────────────────────────────────────────────────────────────────────┐
 │                              ACTOR (Player/NPC)                             │
 └─────────────────────────────────────────────────────────────────────────────┘
                                       │
                     ┌─────────────────┼─────────────────┐
                     │                 │                 │
                     ▼                 ▼                 ▼
-    ┌───────────────────────┐ ┌──────────────┐ ┌─────────────────────┐
-    │ UInventoryManager     │ │ UEquipment   │ │ URecipeKnowledge    │
-    │ Component             │ │ Manager      │ │ Component           │
-    │ ──────────────────    │ │ Component    │ │ ──────────────────  │
-    │ Implements:           │ │ ──────────   │ │ Stores:             │
-    │ - IInventoryInterface │ │ Implements:  │ │ - Known Recipes     │
-    │                       │ │ - IEquipment │ │ - Recipe States     │
-    │ Contains:             │ │   Interface  │ │                     │
-    │ - FInventoryItemArray │ │ - IAttachment│ │ Operations:         │
-    │                       │ │   Container  │ │ - LearnRecipe()     │
-    │ References:           │ │              │ │ - ForgetRecipe()    │
-    │ - EquipmentManager ───┼─┼─────────────>│ │ - IsKnown()         │
-    │ - NotificationMgr     │ │              │ │ - GetKnownRecipes() │
-    └───────────────────────┘ │ Contains:    │ └─────────────────────┘
-                │             │ - FEquipment │
-                │             │   SlotArray  │           │
-                │             │ - Attachment │           │
-                │             │   Slots      │           │
-                │             └──────────────┘           │
-                │                      │                 │
-                │                      │                 │
-                └──────────┬───────────┴─────────────────┘
-                           │
-                           ▼
-              ┌────────────────────────┐
-              │ UCraftingComponent     │
-              │ ─────────────────────  │
-              │ Implements:            │
-              │ - ICraftingInterface   │
-              │                        │
-              │ Requires:              │
-              │ - InventoryManager     │
-              │ - RecipeKnowledge      │
-              │                        │
-              │ Operations:            │
-              │ - CanCraft()           │
-              │ - CraftItem()          │
-              │ - ValidateIngredients()│
-              └────────────────────────┘
+    ┌───────────────────────┐ ┌───────────────┐ ┌─────────────────────┐
+    │ UInventoryManager     │ │ UEquipment    │ │ UCrafting           │
+    │ Component             │ │ Manager       │ │ Component           │
+    │ ──────────────────    │ │ Component     │ │ ──────────────────  │
+    │ Implements:           │ │ ───────────   │ │ Implements:         │
+    │ - IInventoryInterface │ │ Implements:   │ │ - ICraftingInterface│
+    │                       │ │ - IEquipment  │ │                     │
+    │ Contains:             │ │   Interface   │ │ Requires:           │
+    │ - FInventoryItemArray │ │ - IAttachment │ │ - InventoryManager  │
+    │   (Replicated)        │ │   Container   │ │ - RecipeKnowledge   │
+    │                       │ │               │ │   Subsystem         │
+    │ References:           │ │ Contains:     │ │                     │
+    │ - EquipmentManager ───┼─┼─────────────> │ │ Operations:         │
+    │ - NotificationSubsys  │ │ - FEquipment  │ │ - CanCraft()        │
+    │ - ConfigSubsystem     │ │   SlotArray   │ │ - CraftItem()       │
+    └───────────────────────┘ │   (Replicated)│ │ - ValidateIngr()    │
+                              │ - Attachment  │ └─────────────────────┘
+                              │   Slots       │
+                              └───────────────┘
 
-┌─────────────────────────────────────────────────────────────────────────────┐
-│                            UI COMPONENTS LAYER                              │
-└─────────────────────────────────────────────────────────────────────────────┘
+Widget Hierarchy remains unchanged (see original diagram)
 
-    ┌───────────────────────┐         ┌───────────────────────┐
-    │ UInventoryUIComponent │         │ UEquipmentUIComponent │
-    │ ────────────────────  │         │ ────────────────────  │
-    │ Implements:           │         │ Implements:           │
-    │ - IInventoryUI        │         │ - IEquipmentUI        │
-    │   Interface           │         │   Interface           │
-    │                       │         │                       │
-    │ References:           │         │ References:           │
-    │ - InventoryManager ───┼────────>│ - EquipmentManager ───┼────┐
-    │ - InventoryWidget     │         │ - EquipmentWidget     │    │
-    └───────────────────────┘         └───────────────────────┘    │
-                │                                │                 │
-                │                                │                 │
-                ▼                                ▼                 │
-    ┌───────────────────────┐         ┌──────────────────────┐     │
-    │ Inventory Widget Tree │         │ Equipment Widget Tree│     │
-    │ ────────────────────  │         │ ───────────────────  │     │
-    │ - WrapperWidget       │         │ - EquipmentPanel     │     │
-    │ - InventoryWidget     │         │ - EquipmentSlots     │     │
-    │ - ItemGridWidget      │         │ - QuickAccessSlots   │     │
-    │ - ItemSlotWidgets     │         │   (tagged slots)     │     │
-    │ - ItemWidgets         │         │ - SlotTooltips       │     │
-    │ - CategoryWidgets     │         └──────────────────────┘     │
-    │ - TooltipWidgets      │                                      │
-    │ - ActionMenuWidgets   │                                      │
-    └───────────────────────┘                                      │
-                                                                   │
-┌──────────────────────────────────────────────────────────────────┘
-│
-│   ┌─────────────────────────────┐
-└──>│ UNotificationManager        │
-    │ Component                   │
-    │ ──────────────────────────  │
-    │ Implements:                 │
-    │ - INotificationInterface    │
-    │                             │
-    │ Operations:                 │
-    │ - ProcessNotification()     │
-    │ - CreateNotificationWidget()│
-    │ - QueueNotification()       │
-    │                             │
-    │ References:                 │
-    │ - NotificationContainer     │
-    │   Widget                    │
-    └─────────────────────────────┘
 
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                          INTERACTION INTERFACES                             │
@@ -292,9 +319,47 @@
 
 ## 3. Class Hierarchy
 
-### 3.1 Component Hierarchy
+### 3.1 Subsystem & Component Hierarchy
 
 ```
+UGameInstanceSubsystem
+│
+└─ UInventoryConfigSubsystem
+   ├─ Implements: IMounteaConfigProviderInterface
+   └─ Contains: Cached Configs & Templates
+
+ULocalPlayerSubsystem
+│
+├─ URecipeKnowledgeSubsystem
+│  ├─ Implements: IMounteaRecipeKnowledgeInterface
+│  └─ Contains: TMap<FGuid, FRecipeKnowledge>
+│
+├─ UInventoryUISubsystem
+│  ├─ Implements: IMounteaInventoryUIInterface
+│  └─ References: UInventoryManagerComponent
+│
+├─ UEquipmentUISubsystem
+│  ├─ Implements: IMounteaEquipmentUIInterface
+│  └─ References: UEquipmentManagerComponent
+│
+└─ UNotificationSubsystem
+   ├─ Implements: IMounteaNotificationInterface
+   └─ Contains: TArray<FInventoryNotificationData>
+
+UWorldSubsystem
+│
+├─ ULootingSubsystem
+│  ├─ Implements: IMounteaLootingSystemInterface
+│  └─ Contains: TMap<APlayerController*, FActiveLootSession>
+│
+├─ UVendorSubsystem
+│  ├─ Implements: IMounteaVendorSystemInterface
+│  └─ Contains: TMap<APlayerController*, FActiveVendorSession>
+│
+└─ UPickupSpawningSubsystem
+   ├─ Implements: IMounteaPickupSystemInterface
+   └─ Contains: Pickup Object Pool
+
 UActorComponent
 │
 ├─ UInventoryManagerComponent
@@ -306,26 +371,11 @@ UActorComponent
 │  ├─ Implements: IMounteaAdvancedAttachmentContainerInterface
 │  └─ Contains: FEquipmentSlotArray, TArray<UAttachmentSlot*>
 │
-├─ UCraftingComponent
-│  ├─ Implements: IMounteaCraftingInterface
-│  └─ Requires: UInventoryManagerComponent, URecipeKnowledgeComponent
-│
-├─ URecipeKnowledgeComponent
-│  ├─ Implements: IMounteaRecipeKnowledgeInterface
-│  └─ Contains: TMap<FGuid, FRecipeKnowledge>
-│
-├─ UInventoryUIComponent
-│  ├─ Implements: IMounteaInventoryUIInterface
-│  └─ References: UInventoryManagerComponent
-│
-├─ UEquipmentUIComponent
-│  ├─ Implements: IMounteaEquipmentUIInterface
-│  └─ References: UEquipmentManagerComponent
-│
-└─ UNotificationManagerComponent
-   ├─ Implements: IMounteaNotificationInterface
-   └─ Contains: TArray<FInventoryNotificationData>
+└─ UCraftingComponent
+   ├─ Implements: IMounteaCraftingInterface
+   └─ Requires: UInventoryManagerComponent, URecipeKnowledgeSubsystem
 ```
+
 
 ### 3.2 Data Asset Hierarchy
 
@@ -443,6 +493,9 @@ UUserWidget
 ```
 UInterface (Unreal Base)
 │
+├─ IMounteaConfigProviderInterface
+│  └─ Configuration caching and retrieval
+│
 ├─ IMounteaAdvancedInventoryInterface
 │  └─ Core inventory operations
 │
@@ -460,6 +513,15 @@ UInterface (Unreal Base)
 │
 ├─ IMounteaRecipeKnowledgeInterface
 │  └─ Recipe storage and retrieval
+│
+├─ IMounteaLootingSystemInterface
+│  └─ Loot session management
+│
+├─ IMounteaVendorSystemInterface
+│  └─ Vendor transaction management
+│
+├─ IMounteaPickupSystemInterface
+│  └─ Pickup spawning and pooling
 │
 ├─ IMounteaPickupInterface
 │  └─ Pickup operations
@@ -492,6 +554,7 @@ UInterface (Unreal Base)
    ├─ IMounteaEquipmentSlotWidgetInterface
    └─ IMounteaNotificationWidgetInterface
 ```
+
 
 ---
 
@@ -721,7 +784,7 @@ Player → Opens Loot/Vendor Interface
 
 **Purpose:** Recipe storage and learning system
 
-**Implementers:** URecipeKnowledgeComponent
+**Implementers:** URecipeKnowledgeSubsystem
 
 **Responsibilities:**
 
@@ -732,6 +795,73 @@ Player → Opens Loot/Vendor Interface
 - Get recipes by category/tags
 - Save/load recipe knowledge
 - Handle recipe discovery
+
+---
+
+#### IMounteaConfigProviderInterface
+
+**Purpose:** Configuration caching and fast access
+
+**Implementers:** UInventoryConfigSubsystem
+
+**Responsibilities:**
+
+- Cache inventory configurations
+- Cache equipment configurations
+- Cache item templates
+- Cache recipe templates
+- Provide fast config lookups
+- Preload configurations at startup
+
+---
+
+#### IMounteaLootingSystemInterface
+
+**Purpose:** Loot session management
+
+**Implementers:** ULootingSubsystem
+
+**Responsibilities:**
+
+- Request loot access
+- Close loot sessions
+- Validate loot distance
+- Transfer items between inventories
+- Manage active loot sessions
+- Apply loot filters
+
+---
+
+#### IMounteaVendorSystemInterface
+
+**Purpose:** Vendor transaction management
+
+**Implementers:** UVendorSubsystem
+
+**Responsibilities:**
+
+- Calculate buy prices
+- Calculate sell prices
+- Process buy transactions
+- Process sell transactions
+- Validate transactions
+- Manage active vendor sessions
+
+---
+
+#### IMounteaPickupSystemInterface
+
+**Purpose:** Pickup spawning and object pooling
+
+**Implementers:** UPickupSpawningSubsystem
+
+**Responsibilities:**
+
+- Spawn pickup actors
+- Despawn pickup actors
+- Manage pickup object pool
+- Return pickups to pool
+- Clear all pickups in level
 
 ---
 
@@ -809,7 +939,7 @@ Player → Opens Loot/Vendor Interface
 
 **Purpose:** Bridge between inventory logic and UI
 
-**Implementers:** UInventoryUIComponent
+**Implementers:** UInventoryUISubsystem
 
 **Responsibilities:**
 
@@ -826,7 +956,7 @@ Player → Opens Loot/Vendor Interface
 
 **Purpose:** Bridge between equipment logic and UI
 
-**Implementers:** UEquipmentUIComponent
+**Implementers:** UEquipmentUISubsystem
 
 **Responsibilities:**
 
@@ -843,7 +973,7 @@ Player → Opens Loot/Vendor Interface
 
 **Purpose:** Notification processing and display
 
-**Implementers:** UNotificationManagerComponent
+**Implementers:** UNotificationSubsystem
 
 **Responsibilities:**
 
