@@ -663,10 +663,13 @@ Player → Opens Loot/Vendor Interface
 ### 5.1 Core Interfaces
 
 #### IMounteaAdvancedInventoryInterface
+
 **Purpose:** Core inventory database operations
+
 **Implementers:** UInventoryManagerComponent
 
 **Responsibilities:**
+
 - Add/Remove items
 - Find items by GUID/template/tags
 - Modify item quantity/durability
@@ -679,10 +682,13 @@ Player → Opens Loot/Vendor Interface
 ---
 
 #### IMounteaAdvancedEquipmentInterface
+
 **Purpose:** Equipment slot management and attachment
+
 **Implementers:** UEquipmentManagerComponent
 
 **Responsibilities:**
+
 - Equip/unequip items
 - Get equipment slots by name/tag
 - Validate equipment compatibility
@@ -694,10 +700,13 @@ Player → Opens Loot/Vendor Interface
 ---
 
 #### IMounteaCraftingInterface
+
 **Purpose:** Crafting execution and validation
+
 **Implementers:** UCraftingComponent
 
 **Responsibilities:**
+
 - Validate recipe requirements
 - Check ingredient availability
 - Execute crafting recipe
@@ -709,10 +718,13 @@ Player → Opens Loot/Vendor Interface
 ---
 
 #### IMounteaRecipeKnowledgeInterface
+
 **Purpose:** Recipe storage and learning system
+
 **Implementers:** URecipeKnowledgeComponent
 
 **Responsibilities:**
+
 - Learn recipe (permanent or temporary)
 - Forget recipe
 - Check if recipe is known
@@ -724,10 +736,13 @@ Player → Opens Loot/Vendor Interface
 ---
 
 #### IMounteaPickupInterface
+
 **Purpose:** Item pickup operations
+
 **Implementers:** APickupActor
 
 **Responsibilities:**
+
 - Provide item template
 - Provide quantity
 - Handle pickup request
@@ -738,10 +753,13 @@ Player → Opens Loot/Vendor Interface
 ---
 
 #### IMounteaDroppableInterface
+
 **Purpose:** Item drop operations
+
 **Implementers:** UInventoryManagerComponent, Player/NPC Actors
 
 **Responsibilities:**
+
 - Validate drop request
 - Spawn pickup actor
 - Remove item from inventory
@@ -751,10 +769,13 @@ Player → Opens Loot/Vendor Interface
 ---
 
 #### IMounteaLootableInterface
+
 **Purpose:** Looting system access control
+
 **Implementers:** Actors with InventoryManagerComponent
 
 **Responsibilities:**
+
 - Request loot access
 - Validate looter permissions
 - Provide inventory reference
@@ -765,10 +786,13 @@ Player → Opens Loot/Vendor Interface
 ---
 
 #### IMounteaVendorInterface
+
 **Purpose:** Buy/sell operations
+
 **Implementers:** Vendor NPCs, Merchant Actors
 
 **Responsibilities:**
+
 - Calculate buy price
 - Calculate sell price
 - Validate transaction
@@ -782,10 +806,13 @@ Player → Opens Loot/Vendor Interface
 ### 5.2 UI Interfaces
 
 #### IMounteaInventoryUIInterface
+
 **Purpose:** Bridge between inventory logic and UI
+
 **Implementers:** UInventoryUIComponent
 
 **Responsibilities:**
+
 - Create/destroy inventory widgets
 - Refresh inventory display
 - Handle UI input
@@ -796,10 +823,13 @@ Player → Opens Loot/Vendor Interface
 ---
 
 #### IMounteaEquipmentUIInterface
+
 **Purpose:** Bridge between equipment logic and UI
+
 **Implementers:** UEquipmentUIComponent
 
 **Responsibilities:**
+
 - Create/destroy equipment widgets
 - Refresh equipment display
 - Handle slot interactions
@@ -810,10 +840,13 @@ Player → Opens Loot/Vendor Interface
 ---
 
 #### IMounteaNotificationInterface
+
 **Purpose:** Notification processing and display
+
 **Implementers:** UNotificationManagerComponent
 
 **Responsibilities:**
+
 - Process notification requests
 - Create notification widgets
 - Queue notifications
@@ -826,10 +859,13 @@ Player → Opens Loot/Vendor Interface
 ### 5.3 Widget Interfaces
 
 #### IMounteaInventorySystemBaseWidgetInterface
+
 **Purpose:** Top-level UI wrapper
+
 **Implementers:** UInventoryWrapperWidget
 
 **Responsibilities:**
+
 - Initialize all child widgets
 - Handle widget lifecycle
 - Manage input mode
@@ -839,10 +875,13 @@ Player → Opens Loot/Vendor Interface
 ---
 
 #### IMounteaInventoryWidgetInterface
+
 **Purpose:** Main inventory panel
+
 **Implementers:** UInventoryWidget
 
 **Responsibilities:**
+
 - Display item grid
 - Show categories
 - Handle sorting
@@ -852,10 +891,13 @@ Player → Opens Loot/Vendor Interface
 ---
 
 #### IMounteaInventoryItemSlotWidgetInterface
+
 **Purpose:** Individual inventory slot
+
 **Implementers:** UItemSlotWidget
 
 **Responsibilities:**
+
 - Display item widget
 - Handle drag/drop
 - Show slot state
@@ -865,10 +907,13 @@ Player → Opens Loot/Vendor Interface
 ---
 
 #### IMounteaEquipmentSlotWidgetInterface
+
 **Purpose:** Individual equipment slot
+
 **Implementers:** UEquipmentSlotWidget
 
 **Responsibilities:**
+
 - Display equipped item
 - Show slot type/name
 - Handle equip/unequip
