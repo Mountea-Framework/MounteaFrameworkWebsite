@@ -655,3 +655,222 @@ Player → Opens Loot/Vendor Interface
     └─ [Replication] Both Inventories Update
           └─ FInventoryItemArray replication
 ```
+
+---
+
+## 5. Interface Definitions
+
+### 5.1 Core Interfaces
+
+#### IMounteaAdvancedInventoryInterface
+**Purpose:** Core inventory database operations
+**Implementers:** UInventoryManagerComponent
+
+**Responsibilities:**
+- Add/Remove items
+- Find items by GUID/template/tags
+- Modify item quantity/durability
+- Get inventory state (weight, value, capacity)
+- Sort/filter items
+- Save/load inventory data
+- Validate inventory operations
+- Process inventory notifications
+
+---
+
+#### IMounteaAdvancedEquipmentInterface
+**Purpose:** Equipment slot management and attachment
+**Implementers:** UEquipmentManagerComponent
+
+**Responsibilities:**
+- Equip/unequip items
+- Get equipment slots by name/tag
+- Validate equipment compatibility
+- Get equipped items
+- Check slot states
+- Save/load equipment data
+- Manage quick access slots
+
+---
+
+#### IMounteaCraftingInterface
+**Purpose:** Crafting execution and validation
+**Implementers:** UCraftingComponent
+
+**Responsibilities:**
+- Validate recipe requirements
+- Check ingredient availability
+- Execute crafting recipe
+- Calculate success chance
+- Handle crafting failures
+- Check crafting station requirements
+- Apply tool durability costs
+
+---
+
+#### IMounteaRecipeKnowledgeInterface
+**Purpose:** Recipe storage and learning system
+**Implementers:** URecipeKnowledgeComponent
+
+**Responsibilities:**
+- Learn recipe (permanent or temporary)
+- Forget recipe
+- Check if recipe is known
+- Get all known recipes
+- Get recipes by category/tags
+- Save/load recipe knowledge
+- Handle recipe discovery
+
+---
+
+#### IMounteaPickupInterface
+**Purpose:** Item pickup operations
+**Implementers:** APickupActor
+
+**Responsibilities:**
+- Provide item template
+- Provide quantity
+- Handle pickup request
+- Destroy or update after pickup
+- Show pickup prompt
+- Validate pickup conditions
+
+---
+
+#### IMounteaDroppableInterface
+**Purpose:** Item drop operations
+**Implementers:** UInventoryManagerComponent, Player/NPC Actors
+
+**Responsibilities:**
+- Validate drop request
+- Spawn pickup actor
+- Remove item from inventory
+- Position pickup in world
+- Handle drop permissions
+
+---
+
+#### IMounteaLootableInterface
+**Purpose:** Looting system access control
+**Implementers:** Actors with InventoryManagerComponent
+
+**Responsibilities:**
+- Request loot access
+- Validate looter permissions
+- Provide inventory reference
+- Check loot distance
+- Handle loot state (open/closed)
+- Apply loot filters
+
+---
+
+#### IMounteaVendorInterface
+**Purpose:** Buy/sell operations
+**Implementers:** Vendor NPCs, Merchant Actors
+
+**Responsibilities:**
+- Calculate buy price
+- Calculate sell price
+- Validate transaction
+- Process payment
+- Provide merchant inventory
+- Check vendor gold/currency
+- Apply price multipliers
+
+---
+
+### 5.2 UI Interfaces
+
+#### IMounteaInventoryUIInterface
+**Purpose:** Bridge between inventory logic and UI
+**Implementers:** UInventoryUIComponent
+
+**Responsibilities:**
+- Create/destroy inventory widgets
+- Refresh inventory display
+- Handle UI input
+- Translate UI commands to inventory operations
+- Subscribe to inventory notifications
+- Update item slot visuals
+
+---
+
+#### IMounteaEquipmentUIInterface
+**Purpose:** Bridge between equipment logic and UI
+**Implementers:** UEquipmentUIComponent
+
+**Responsibilities:**
+- Create/destroy equipment widgets
+- Refresh equipment display
+- Handle slot interactions
+- Translate UI commands to equipment operations
+- Update equipped item visuals
+- Show/hide quick access slots
+
+---
+
+#### IMounteaNotificationInterface
+**Purpose:** Notification processing and display
+**Implementers:** UNotificationManagerComponent
+
+**Responsibilities:**
+- Process notification requests
+- Create notification widgets
+- Queue notifications
+- Play notification sounds
+- Apply notification styles
+- Remove expired notifications
+
+---
+
+### 5.3 Widget Interfaces
+
+#### IMounteaInventorySystemBaseWidgetInterface
+**Purpose:** Top-level UI wrapper
+**Implementers:** UInventoryWrapperWidget
+
+**Responsibilities:**
+- Initialize all child widgets
+- Handle widget lifecycle
+- Manage input mode
+- Toggle visibility
+- Coordinate multiple panels
+
+---
+
+#### IMounteaInventoryWidgetInterface
+**Purpose:** Main inventory panel
+**Implementers:** UInventoryWidget
+
+**Responsibilities:**
+- Display item grid
+- Show categories
+- Handle sorting
+- Manage item panel
+- Coordinate sub-widgets
+
+---
+
+#### IMounteaInventoryItemSlotWidgetInterface
+**Purpose:** Individual inventory slot
+**Implementers:** UItemSlotWidget
+
+**Responsibilities:**
+- Display item widget
+- Handle drag/drop
+- Show slot state
+- Trigger tooltip
+- Execute item actions
+
+---
+
+#### IMounteaEquipmentSlotWidgetInterface
+**Purpose:** Individual equipment slot
+**Implementers:** UEquipmentSlotWidget
+
+**Responsibilities:**
+- Display equipped item
+- Show slot type/name
+- Handle equip/unequip
+- Validate equipment drag/drop
+- Show compatibility feedback
