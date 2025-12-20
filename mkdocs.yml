@@ -70,12 +70,14 @@ nav:
             - Dialogue Row Data: Dialoguer/GettingStarted/CreatingDialogueRows.md
             - Export Dialogue: Dialoguer/GettingStarted/ExportingDialogue.md
     - Advanced Inventory & Equipment System:
-        - Overview: AdvancedInventoryEquipmentSystem/Overview.md        
+        - Overview: AdvancedInventoryEquipmentSystem/Overview.md
+        - Architecture: 
+            - System Architecture: AdvancedInventoryEquipmentSystem/Architecture.md
         - Inventory System:
             - Overview: AdvancedInventoryEquipmentSystem/InventorySystem/InventorySystem.md
             - Inventory Component: AdvancedInventoryEquipmentSystem/InventorySystem/InventoryComponent.md
             - Item Templates: AdvancedInventoryEquipmentSystem/InventorySystem/ItemTemplates.md
-            - Item Instances: AdvancedInventoryEquipmentSystem/InventorySystem/ItemInstances.md            
+            - Item Instances: AdvancedInventoryEquipmentSystem/InventorySystem/ItemInstances.md
             - Item Actions: AdvancedInventoryEquipmentSystem/InventorySystem/ItemActions.md
             - Search & Filtering: AdvancedInventoryEquipmentSystem/InventorySystem/Search.md
             - Notifications: AdvancedInventoryEquipmentSystem/InventorySystem/Notifications.md
