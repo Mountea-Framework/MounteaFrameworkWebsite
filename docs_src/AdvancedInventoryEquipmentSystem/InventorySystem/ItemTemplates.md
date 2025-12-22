@@ -85,6 +85,72 @@ bool bHasPrice;               // Enable pricing system
 float BasePrice;              // Base monetary value
 bool bHasWeight;              // Enable weight system
 float Weight;                 // Item weight
+
+// Technical data
+FString JsonManifest;           // Includes Json manifest of the data
+```
+
+#### Json Manifest
+
+Example JSON:
+
+```json
+{
+  "guid": "A1B2C3D4-E5F6-7890-ABCD-EF1234567890",
+  "displayName": "Iron Sword",
+  "category": "Weapon",
+  "subCategory": "Melee",
+  "rarity": "Common",
+  "flags": 15,
+  "maxQuantity": 1,
+  "maxStackSize": 1,
+  "tags": ["Weapon.Melee", "Item.Equipable"],
+  "spawnActor": {
+    "name": "BP_IronSword",
+    "path": "/Game/Items/Actors/BP_IronSword.BP_IronSword_C"
+  },
+  "description": {
+    "short": "A sturdy iron blade",
+    "long": "Forged from quality iron, this sword serves warriors well in battle."
+  },
+  "visuals": {
+    "thumbnail": {
+      "name": "T_IronSword_Icon",
+      "path": "/Game/Items/Textures/T_IronSword_Icon.T_IronSword_Icon"
+    },
+    "cover": {
+      "name": "T_IronSword_Large",
+      "path": "/Game/Items/Textures/T_IronSword_Large.T_IronSword_Large"
+    },
+    "mesh": {
+      "name": "SM_IronSword",
+      "path": "/Game/Items/Meshes/SM_IronSword.SM_IronSword"
+    }
+  },
+  "durability": {
+    "enabled": true,
+    "max": 100.0,
+    "base": 100.0,
+    "penalization": 0.5,
+    "priceCoefficient": 0.8
+  },
+  "economy": {
+    "enabled": true,
+    "basePrice": 150.0,
+    "sellCoefficient": 0.5
+  },
+  "weight": {
+    "enabled": true,
+    "value": 3.5
+  },
+  "attachmentSlots": ["Equipment.MainHand"],
+  "specialAffects": [
+    {
+      "name": "BP_SlashEffect",
+      "path": "/Game/Items/Effects/BP_SlashEffect.BP_SlashEffect_C"
+    }
+  ]
+}
 ```
 
 ## Configuration Setup
