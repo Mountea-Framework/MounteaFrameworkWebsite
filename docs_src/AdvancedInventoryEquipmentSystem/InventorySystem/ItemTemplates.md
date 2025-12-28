@@ -157,7 +157,9 @@ Example JSON:
 
 ### Creating Item Templates
 
-![Item Template Editor](https://cdn2.unrealengine.com/hlod-water-support-in-unreal-engine-5-1-1920x1080-e402b5c30a87.jpg?resize=1&w=1920)
+<p align="center" width="100%" class="preview-container">
+    <img class="preview" width="100%" src="https://raw.githubusercontent.com/Mountea-Framework/MounteaInventoryEquipment/refs/heads/main/DocumentationResources/itemTemplateEditor.webp">
+</p>
 
 Templates are Primary Data Assets created through the Content Browser:
 
@@ -219,7 +221,9 @@ void UMounteaInventoryItemTemplate::PostEditChangeProperty(FPropertyChangedEvent
 
 ### Template Editor Interface
 
-![Item Template Editor](https://cdn2.unrealengine.com/hlod-water-support-in-unreal-engine-5-1-1920x1080-e402b5c30a87.jpg?resize=1&w=1920)
+<p align="center" width="100%" class="preview-container">
+    <img class="preview" width="100%" src="https://raw.githubusercontent.com/Mountea-Framework/MounteaInventoryEquipment/refs/heads/main/DocumentationResources/itemTemplateEditor.webp">
+</p>
 
 The Template Editor provides a comprehensive dual-pane interface for managing item templates efficiently:
 
