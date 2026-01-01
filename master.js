@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const allDetails = Array.from(document.querySelectorAll('details'));
   let isMobile = window.innerWidth <= 1000;
   
-  const cardOrder = ['interaction', 'dialogue', 'inventory', 'director', 'launcher', 'dialoguer', 'inventoryManager'];
+  const cardOrder = ['interaction', 'dialogue', 'inventory', 'director', 'launcher', 'dialoguer', 'inventoryManager', 'buildTool'];
 
   async function loadDesktopCards() {
     const wrapper = document.querySelector('.accordion-wrapper');

@@ -60,6 +60,10 @@ details#inventoryManager {
   --bg: url('/assets/inventoryManagerCover.webp');
 }
 
+details#buildTool {
+  --bg: url('/assets/mounteaUnrealBuilder.webp');
+}
+
 details > * {
   position: relative;
   z-index: 1;
