@@ -153,6 +153,27 @@ Example JSON:
 }
 ```
 
+#### Schema
+
+##### Mutliple Items
+For more than 1 item we have `mnteaitems` format, which is basically nothing else but a wrapper around a list of multiple items.
+
+OpenAPI schema here:
+
+<a href="https://editor.swagger.io/?url=https://raw.githubusercontent.com/Mountea-Framework/MounteaInventoryEquipment/refs/heads/main/DocumentationResources/InventoryItems.yaml" target="_blank" rel="noopener">
+  InventoryItems (open in Swagger Editor)
+</a>
+
+##### Single Item
+For single item we have `mnteaitem` file format, which defines all basic data for specific item.
+
+OpenAPI schema here:
+
+<a href="https://editor.swagger.io/?url=https://raw.githubusercontent.com/Mountea-Framework/MounteaInventoryEquipment/refs/heads/main/DocumentationResources/InventoryItem.yaml" target="_blank" rel="noopener">
+  InventoryItem (open in Swagger Editor)
+</a>
+
+
 ## Configuration Setup
 
 ### Creating Item Templates
