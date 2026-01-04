@@ -1,5 +1,5 @@
 const MobileCardLoader = {
-  cardOrder: ['interaction', 'dialogue', 'inventory', 'director', 'launcher', 'dialoguer', 'inventoryManager'],
+  cardOrder: ['interaction', 'dialogue', 'inventory', 'director', 'launcher', 'dialoguer', 'inventoryManager', 'buildTool'],
   allDetails: [],
   
   async init() {
