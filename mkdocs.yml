@@ -107,6 +107,10 @@ nav:
             - Replication: AdvancedInventoryEquipmentSystem/Configuration/Replication.md
         - K2Nodes:
             - Intro to K2Nodes: AdvancedInventoryEquipmentSystem/K2Nodes/IntroToK2Nodes.md
+            - Get Property By Name: AdvancedInventoryEquipmentSystem/K2Nodes/K2Node_GetPropertyByName.md
+            - Set Property By Name: AdvancedInventoryEquipmentSystem/K2Nodes/K2Node_SetPropertyByName.md
+            - Switch on Command: AdvancedInventoryEquipmentSystem/K2Nodes/K2Node_SwitchOnCommand.md
+            - Switch on Input Tag: AdvancedInventoryEquipmentSystem/K2Nodes/K2Node_SwitchOnInputTag.md
   - Tags: Tags.md
 
 extra_css:
