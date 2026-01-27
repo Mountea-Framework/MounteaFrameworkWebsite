@@ -16,8 +16,7 @@ Use **Get Property by Name** when you want to read a value from an object **with
 
 ## Where to find it
 
-!!! info
-    Blueprint context menu category:
+!!! Blueprint context menu category
 
     **Mountea → Inventory & Equipment → Helpers**
 
