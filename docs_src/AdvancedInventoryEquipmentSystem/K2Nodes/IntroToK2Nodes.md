@@ -150,10 +150,11 @@ You may never create one — but every time you build with Blueprints, you’re 
         <a href="../K2Node_SwitchOnCommand" class="card-link"></a>
     </div>
 
+<!--
     <div class="card next-steps k2node">
         <h4 class="card-title">ProcessWidgetCommand</h4>
         <p class="card-description">Custom node to process Widget Command (using pre-defined widget commands)</p>
         <a href="../K2Node_ProcessWidgetCommand" class="card-link"></a>
     </div>
-
+!-->
 </div>

@@ -6,7 +6,7 @@ It exists for one reason: **UX**.
 
 When commands are plain strings, the system is powerful… but also ridiculously easy to break with a typo. One wrong letter can give you silent failures and hours of debugging.
 
-!!! example "Why this node exists (the real story)"
+!!! question "Why this node exists (the real story)"
     I once lost hours because of a typo like `CreateWidget` vs `CraeteWidget`.  
     Everything compiled. The UI *kind of* worked. But the command never matched.
 
