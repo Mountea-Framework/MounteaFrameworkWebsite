@@ -73,6 +73,9 @@ nav:
         - Overview: AdvancedInventoryEquipmentSystem/Overview.md
         - Architecture: 
             - System Architecture: AdvancedInventoryEquipmentSystem/Architecture/SystemArchitecture.md
+        - Configuration:
+            - Intro: AdvancedInventoryEquipmentSystem/Configuration/IntroToConfiguration.md
+            - First Steps: AdvancedInventoryEquipmentSystem/Configuration/FirstSteps.md
         - Inventory System:
             - Overview: AdvancedInventoryEquipmentSystem/InventorySystem/InventorySystem.md
             - Inventory Component: AdvancedInventoryEquipmentSystem/InventorySystem/InventoryComponent.md
@@ -98,13 +101,7 @@ nav:
             - Grid System: AdvancedInventoryEquipmentSystem/UserInterface/GridSystem.md
             - Item Widgets: AdvancedInventoryEquipmentSystem/UserInterface/ItemWidgets.md
             - Item Preview: AdvancedInventoryEquipmentSystem/UserInterface/ItemPreview.md
-            - Slate Elements: AdvancedInventoryEquipmentSystem/UserInterface/SlateElements.md
-        - Configuration:
-            - Settings: AdvancedInventoryEquipmentSystem/Configuration/Settings.md
-            - Inventory Types: AdvancedInventoryEquipmentSystem/Configuration/InventoryTypes.md
-            - Categories & Rarities: AdvancedInventoryEquipmentSystem/Configuration/ItemCategoriesRarities.md
-            - UI Theming: AdvancedInventoryEquipmentSystem\Configuration\UIThemingGuide.md
-            - Replication: AdvancedInventoryEquipmentSystem/Configuration/Replication.md
+            - Slate Elements: AdvancedInventoryEquipmentSystem/UserInterface/SlateElements.md        
         - K2Nodes:
             - Intro to K2Nodes: AdvancedInventoryEquipmentSystem/K2Nodes/IntroToK2Nodes.md
             - Get Property By Name: AdvancedInventoryEquipmentSystem/K2Nodes/K2Node_GetPropertyByName.md
