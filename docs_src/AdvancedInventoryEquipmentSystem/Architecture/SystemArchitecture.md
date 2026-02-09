@@ -7,19 +7,32 @@
 │                         MOUNTEA INVENTORY & EQUIPMENT SYSTEM                │
 └─────────────────────────────────────────────────────────────────────────────┘
 
+
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                            CONFIGURATION LAYER                              │
 ├─────────────────────────────────────────────────────────────────────────────┤
 │  UMounteaAdvancedInventorySettings                                          │
+|  ├─ UInputMappingContext                                                    |
 │  ├─ UMounteaAdvancedInventorySettingsConfig                                 │
-│  │  ├─ Inventory Types (Player, NPC, Storage, Merchant, Loot, Specialized)  │
+│  │  ├─ Item Types (Player, NPC, Storage, Merchant, Loot, Specialized)       │
 │  │  ├─ Item Rarities                                                        │
 │  │  ├─ Item Categories                                                      │
-│  │  ├─ UI Classes                                                           │
-│  │  └─ Notification Configs                                                 │
-│  └─ UMounteaAdvancedEquipmentSettingsConfig                                 │
-│     ├─ Equipment Slot Definitions                                           │
-│     └─ Attachment Rules                                                     │
+│  │  ├─ Template Configs                                                     │
+│  │  ├─ Notification Configs                                                 │
+│  │  └─ UI Themes                                                            │
+│  ├─ UMounteaAdvancedEquipmentSettingsConfig                                 │
+│  |  ├─ Equipment Slots                                                      │
+|  └─ UMounteaAdvancedInventoryUIConfig                                       |
+|     ├─ Inputs                                                               |
+|     ├─ Wrapper                                                              |
+|     ├─ Inventory                                                            |
+|     ├─ Notifications                                                        |
+|     ├─ Categories                                                           |
+|     ├─ Items                                                                |
+|     ├─ Item                                                                 |
+|     ├─ Item Action                                                          |
+|     ├─ Modals                                                               |
+|     └─ Font                                                                 |
 └─────────────────────────────────────────────────────────────────────────────┘
 
 ┌─────────────────────────────────────────────────────────────────────────────┐
