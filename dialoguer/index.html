@@ -259,6 +259,88 @@
         font-size: 14px;
       }
 
+      .modal-backdrop {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        background: rgba(0, 0, 0, 0.68);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 180ms ease;
+      }
+
+      .modal-backdrop.open {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .modal-panel {
+        width: min(760px, 100%);
+        max-height: 88vh;
+        overflow: auto;
+        border-radius: 14px;
+        border: 1px solid var(--line);
+        background: rgba(10, 10, 13, 0.98);
+        box-shadow: 0 22px 50px rgba(0, 0, 0, 0.45);
+      }
+
+      .modal-header {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 14px 16px;
+        border-bottom: 1px solid var(--line);
+        background: rgba(16, 16, 22, 0.96);
+      }
+
+      .modal-header h2 {
+        margin: 0;
+        font-size: 12px;
+      }
+
+      .modal-close {
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.05);
+        color: var(--text);
+        padding: 6px 12px;
+        cursor: pointer;
+      }
+
+      .modal-body {
+        padding: 18px;
+        color: var(--muted);
+      }
+
+      .modal-body h1 {
+        margin-top: 0;
+        margin-bottom: 12px;
+        color: var(--text);
+        max-width: none;
+        font-size: clamp(24px, 3.2vw, 40px);
+        line-height: 1.08;
+      }
+
+      .modal-body p {
+        line-height: 1.55;
+      }
+
+      .modal-body a {
+        color: var(--text);
+      }
+
+      .modal-state {
+        margin: 0;
+      }
+
       @keyframes morph-light {
         0% {
           opacity: 1;
@@ -409,13 +491,118 @@
             <article class="panel">
               <h3>Legal</h3>
               <div class="legal">
-                <a href="/dialoguer/dialoguer_tos.html">Terms of Service</a>
-                <a href="/dialoguer/dialoguer_policy.html">Data Policy</a>
+                <a
+                  class="legal-link"
+                  data-modal-title="Terms of Service"
+                  href="/dialoguer/dialoguer_tos.html"
+                  >Terms of Service</a
+                >
+                <a
+                  class="legal-link"
+                  data-modal-title="Data Policy"
+                  href="/dialoguer/dialoguer_policy.html"
+                  >Data Policy</a
+                >
               </div>
             </article>
           </section>
         </section>
       </div>
     </main>
+
+    <div class="modal-backdrop" id="legalModal" hidden>
+      <section
+        aria-labelledby="legalModalTitle"
+        aria-modal="true"
+        class="modal-panel"
+        role="dialog"
+      >
+        <header class="modal-header">
+          <h2 id="legalModalTitle">Legal</h2>
+          <button class="modal-close" id="legalModalClose" type="button">
+            Close
+          </button>
+        </header>
+        <div class="modal-body" id="legalModalBody"></div>
+      </section>
+    </div>
+
+    <script>
+      (() => {
+        const modal = document.getElementById("legalModal");
+        const modalBody = document.getElementById("legalModalBody");
+        const modalTitle = document.getElementById("legalModalTitle");
+        const closeBtn = document.getElementById("legalModalClose");
+        const legalLinks = document.querySelectorAll(".legal-link");
+        let closeTimer = null;
+
+        if (!modal || !modalBody || !modalTitle || !closeBtn || !legalLinks.length) {
+          return;
+        }
+
+        const closeModal = () => {
+          modal.classList.remove("open");
+          document.body.style.overflow = "";
+          if (closeTimer) {
+            clearTimeout(closeTimer);
+          }
+          closeTimer = setTimeout(() => {
+            modal.hidden = true;
+            closeTimer = null;
+          }, 180);
+        };
+
+        const openModal = async (url, title) => {
+          if (closeTimer) {
+            clearTimeout(closeTimer);
+            closeTimer = null;
+          }
+          modalTitle.textContent = title || "Legal";
+          modalBody.innerHTML = '<p class="modal-state">Loading...</p>';
+          modal.hidden = false;
+          requestAnimationFrame(() => modal.classList.add("open"));
+          document.body.style.overflow = "hidden";
+
+          try {
+            const response = await fetch(url, { credentials: "same-origin" });
+            if (!response.ok) {
+              throw new Error(`HTTP ${response.status}`);
+            }
+
+            const html = await response.text();
+            const parsed = new DOMParser().parseFromString(html, "text/html");
+            const contentRoot = parsed.querySelector("main") || parsed.body;
+            modalBody.innerHTML = contentRoot
+              ? contentRoot.innerHTML
+              : '<p class="modal-state">No content found.</p>';
+          } catch (error) {
+            modalBody.innerHTML =
+              '<p class="modal-state">Could not load this page inside modal.</p>' +
+              `<p><a href="${url}" target="_blank" rel="noreferrer">Open page in new tab</a></p>`;
+          }
+        };
+
+        legalLinks.forEach((link) => {
+          link.addEventListener("click", (event) => {
+            event.preventDefault();
+            openModal(link.href, link.dataset.modalTitle || link.textContent.trim());
+          });
+        });
+
+        closeBtn.addEventListener("click", closeModal);
+
+        modal.addEventListener("click", (event) => {
+          if (event.target === modal) {
+            closeModal();
+          }
+        });
+
+        document.addEventListener("keydown", (event) => {
+          if (event.key === "Escape" && !modal.hidden) {
+            closeModal();
+          }
+        });
+      })();
+    </script>
   </body>
 </html>
