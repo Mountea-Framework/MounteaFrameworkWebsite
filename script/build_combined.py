@@ -86,6 +86,11 @@ def parse_args() -> argparse.Namespace:
         help="Skip git submodule init/update step.",
     )
     parser.add_argument(
+        "--submodule-remote",
+        action="store_true",
+        help="Update submodules to their remote-tracking branches.",
+    )
+    parser.add_argument(
         "--skip-mkdocs",
         action="store_true",
         help="Skip MkDocs documentation builds.",
@@ -98,7 +103,16 @@ def main() -> int:
     is_ci_mode = args.mode == "ci"
 
     if not args.skip_submodule_update:
-        run_command(["git", "submodule", "update", "--init", "--recursive"])
+        submodule_update_command = [
+            "git",
+            "submodule",
+            "update",
+            "--init",
+            "--recursive",
+        ]
+        if args.submodule_remote:
+            submodule_update_command.append("--remote")
+        run_command(submodule_update_command)
 
     if is_ci_mode:
         run_command(["npm", "ci", "--prefix", str(DIALOGUER_REPO_DIR)])

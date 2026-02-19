@@ -1,19 +1,24 @@
-# MkDocs build output
+# Generated website outputs
+/docs/
+/blog/
 /site/
-/docs/*
-docs/
-/docs_src/site
-site/*
 
-# Python cache
+# Generated Dialoguer bundle output
+/dialoguer/app/
+
+# Python cache and tooling
 __pycache__/
 *.py[cod]
-*.pyo
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
 
 # Virtual environments
 .venv/
-env/
 venv/
+env/
 
 # OS files
 .DS_Store
@@ -26,14 +31,3 @@ Thumbs.db
 # Logs or temporary files
 *.log
 *.tmp
-/blog/assets
-/blog
-
-# Dialoguer build artifacts (generated during CI build)
-/dialoguer/app/assets/
-/dialoguer/app/index.html
-/dialoguer/app/manifest.json
-/dialoguer/app/mounteaDialoguerIcon.ico
-/dialoguer/app/mounteaDialoguerIcon.png
-/dialoguer/app/oauth-callback.html
-/dialoguer/app/robots.txt
