@@ -6,132 +6,416 @@
     <title>Mountea Dialoguer</title>
     <meta
       name="description"
-      content="Mountea Dialoguer: browser-based dialogue editor for game teams."
+      content="Mountea Dialoguer is a browser-based dialogue editor for writing, structuring, and exporting branching conversations."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
     />
     <style>
       :root {
-        --bg: #0c1221;
-        --panel: #131c32;
-        --text: #eef3ff;
-        --muted: #b4c0dd;
-        --brand: #3a78ff;
-        --brand-2: #24b0ff;
-        --line: rgba(255, 255, 255, 0.12);
+        --bg: #030304;
+        --panel: rgba(14, 14, 17, 0.72);
+        --panel-strong: rgba(16, 16, 20, 0.9);
+        --line: rgba(255, 255, 255, 0.15);
+        --text: #f2f2f5;
+        --muted: #b5b5bf;
+        --brand-a: #131318;
+        --brand-b: #282830;
+        --blur: 4px;
       }
 
       * {
         box-sizing: border-box;
       }
 
+      a {
+        background-color: none;
+        color: var(--muted);
+      }
+
       body {
         margin: 0;
-        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-        background:
-          radial-gradient(circle at 20% -10%, rgba(58, 120, 255, 0.25), transparent 40%),
-          radial-gradient(circle at 80% 110%, rgba(36, 176, 255, 0.2), transparent 45%),
-          var(--bg);
+        font-family: "Space Grotesk", sans-serif;
         color: var(--text);
+        background: var(--bg);
       }
 
-      .wrap {
+      .bg {
+        position: fixed;
+        inset: 0;
+        overflow: hidden;
+        pointer-events: none;
+      }
+
+      .bg-motion {
+        position: absolute;
+        inset: 0;
+        animation: bg-shift 14s ease-in-out infinite alternate;
+      }
+
+      .bg-image {
+        position: absolute;
+        inset: -6%;
+        background-position: center;
+        background-size: cover;
+        filter: blur(var(--blur)) saturate(130%);
+        transform-origin: center;
+      }
+
+      .bg-image.light {
+        background-image: url("/assets/Dialoguer/bg_light.png");
+        mix-blend-mode: normal;
+        opacity: 1;
+        animation: morph-light 24s linear infinite;
+      }
+
+      .bg-image.dark {
+        background-image: url("/assets/Dialoguer/bg_dark.png");
+        mix-blend-mode: normal;
+        opacity: 0;
+        animation: morph-dark 24s linear infinite;
+      }
+
+      .bg-mask {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          140deg,
+          rgba(0, 0, 0, 0.74),
+          rgba(5, 5, 8, 0.68) 44%,
+          rgba(3, 3, 5, 0.88)
+        );
+      }
+
+      .layout {
+        position: relative;
         min-height: 100vh;
-        display: grid;
-        place-items: center;
-        padding: 32px 16px;
+        padding: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
 
-      .card {
-        width: min(880px, 100%);
+      .shell {
+        width: min(1080px, 100%);
+      }
+
+      .hero {
         border: 1px solid var(--line);
-        background: linear-gradient(180deg, rgba(19, 28, 50, 0.96), rgba(19, 28, 50, 0.85));
-        border-radius: 20px;
-        padding: 28px;
-        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+        background: linear-gradient(
+          160deg,
+          rgba(17, 17, 21, 0.9),
+          rgba(9, 9, 12, 0.82)
+        );
+        border-radius: 28px;
+        padding: clamp(22px, 5vw, 44px);
+        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.34);
+      }
+
+      .tag {
+        display: inline-flex;
+        gap: 8px;
+        align-items: center;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 7px 12px;
+        font-size: 13px;
+        letter-spacing: 0.03em;
+        color: var(--muted);
+        background: rgba(255, 255, 255, 0.04);
       }
 
       h1 {
-        margin: 0 0 10px;
-        font-size: clamp(30px, 5vw, 52px);
-        line-height: 1.06;
-        letter-spacing: 0.01em;
+        margin: 14px 0 12px;
+        max-width: 16ch;
+        font-size: clamp(34px, 7vw, 66px);
+        line-height: 0.95;
       }
 
-      p {
+      .lead {
         margin: 0;
         color: var(--muted);
-        font-size: 17px;
-        line-height: 1.55;
+        line-height: 1.6;
+        font-size: clamp(16px, 1.5vw, 19px);
       }
 
       .actions {
-        margin-top: 24px;
+        margin-top: 20px;
         display: flex;
         flex-wrap: wrap;
         gap: 10px;
       }
 
       .btn {
-        display: inline-block;
-        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
         border-radius: 999px;
-        padding: 11px 17px;
+        padding: 12px 18px;
         border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.03);
         color: var(--text);
-        background: rgba(255, 255, 255, 0.04);
-        transition: transform 120ms ease, background-color 120ms ease;
+        text-decoration: none;
+        font-weight: 600;
+        transition:
+          transform 130ms ease,
+          border-color 130ms ease,
+          background-color 130ms ease;
       }
 
       .btn:hover {
-        transform: translateY(-1px);
+        transform: translateY(-2px);
+        border-color: rgba(255, 255, 255, 0.35);
+        background: rgba(255, 255, 255, 0.08);
       }
 
       .btn.primary {
-        border-color: rgba(58, 120, 255, 0.6);
-        background: linear-gradient(90deg, var(--brand), var(--brand-2));
+        border-color: rgba(255, 255, 255, 0.2);
+        background: linear-gradient(96deg, var(--brand-a), var(--brand-b));
         color: #fff;
-        font-weight: 700;
+        box-shadow: 0 10px 26px rgba(0, 0, 0, 0.35);
       }
 
-      .meta {
-        margin-top: 18px;
-        font-size: 14px;
-        color: var(--muted);
+      .btn.code {
+        border-color: rgba(255, 255, 255, 0.28);
+        background: linear-gradient(
+          96deg,
+          rgba(38, 38, 48, 0.95),
+          rgba(20, 20, 26, 0.95)
+        );
+        box-shadow:
+          0 0 0 1px rgba(255, 255, 255, 0.08),
+          0 12px 28px rgba(0, 0, 0, 0.4);
       }
 
-      .links {
-        margin-top: 8px;
-        display: flex;
+      code {
+        display: inline-block;
+        padding: 2px 7px;
+        border-radius: 8px;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: #fff;
+        font-weight: 600;
+        font-size: 0.92em;
+        box-shadow:
+          0 0 0 1px rgba(255, 255, 255, 0.04),
+          0 6px 14px rgba(0, 0, 0, 0.35);
+      }
+
+      .grid {
+        margin-top: 14px;
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
         gap: 10px;
+      }
+
+      .panel {
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        padding: 14px;
+        background: var(--panel);
+      }
+
+      .panel h3 {
+        margin: 0 0 8px;
+        font-size: 17px;
+      }
+
+      .panel p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.45;
+        font-size: 14px;
+      }
+
+      .subgrid {
+        margin-top: 10px;
+        display: grid;
+        grid-template-columns: 1.15fr 0.85fr;
+        gap: 10px;
+      }
+
+      .list {
+        margin: 0;
+        padding-left: 18px;
+        color: var(--muted);
+        display: grid;
+        gap: 7px;
+        line-height: 1.4;
+      }
+
+      .legal {
+        margin-top: 6px;
+        display: flex;
+        gap: 12px;
         flex-wrap: wrap;
       }
 
-      .links a {
-        color: var(--text);
+      .legal a {
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      @keyframes morph-light {
+        0% {
+          opacity: 1;
+        }
+        12.5% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0;
+        }
+        62.5% {
+          opacity: 0;
+        }
+        100% {
+          opacity: 1;
+        }
+      }
+
+      @keyframes morph-dark {
+        0% {
+          opacity: 0;
+        }
+        12.5% {
+          opacity: 0;
+        }
+        50% {
+          opacity: 1;
+        }
+        62.5% {
+          opacity: 1;
+        }
+        100% {
+          opacity: 0;
+        }
+      }
+
+      @keyframes bg-shift {
+        0% {
+          transform: translate(-0.55%, -0.35%) scale(1.02);
+        }
+        100% {
+          transform: translate(0.55%, 0.35%) scale(1.02);
+        }
+      }
+
+      @media (max-width: 960px) {
+        .grid,
+        .subgrid {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .bg-motion,
+        .bg-image {
+          animation: none;
+        }
       }
     </style>
   </head>
   <body>
-    <main class="wrap">
-      <section class="card">
-        <h1>Mountea Dialoguer</h1>
-        <p>
-          Browser-based dialogue editor for narrative design teams. Build, test,
-          and export branching conversations for your game pipeline.
-        </p>
+    <div class="bg" aria-hidden="true">
+      <div class="bg-motion">
+        <div class="bg-image light"></div>
+        <div class="bg-image dark"></div>
+      </div>
+      <div class="bg-mask"></div>
+    </div>
 
-        <nav class="actions" aria-label="Dialoguer links">
-          <a class="btn primary" href="/dialoguer/app/">Launch App</a>
-          <a class="btn" href="/docs/Dialoguer/home/">Documentation</a>
-          <a class="btn" href="https://github.com/Mountea-Framework/MounteaDialoguer" target="_blank" rel="noreferrer">GitHub</a>
-          <a class="btn" href="https://discord.gg/pBgErZf" target="_blank" rel="noreferrer">Discord</a>
-        </nav>
+    <main class="layout">
+      <div class="shell">
+        <section class="hero">
+          <h1>Mountea Dialoguer</h1>
+          <p class="lead">
+            Mountea Dialoguer is a browser-first conversation editor for
+            writers, designers, and gameplay teams. Sketch narrative flow in a
+            node graph, organize participants and categories, then export data
+            ready for your production pipeline. This tool is made using
+            <a href="https://reactflow.dev/" target="_blank" rel="noreferrer"
+              >React Flow</a
+            >
+            and provides native import for
+            <a
+              href="https://www.fab.com/listings/8bf33586-fba3-4906-bb89-3ca592a8d97c"
+              target="_blank"
+              rel="noreferrer"
+              >Unreal Engine</a
+            >. However, other integrations are easy to implements thanks to
+            <code>mnteadlg</code> and <code>mnteadlgproj</code> standardized
+            exports from the tool.
+          </p>
 
-        <div class="meta">Legal</div>
-        <div class="links">
-          <a href="/dialoguer/dialoguer_tos.html">Terms of Service</a>
-          <a href="/dialoguer/dialoguer_policy.html">Data Policy</a>
-        </div>
-      </section>
+          <nav class="actions" aria-label="Dialoguer links">
+            <a class="btn primary" href="/dialoguer/app/">Launch App</a>
+            <!--
+            <a class="btn" href="/docs/Dialoguer/home/">Read Documentation</a>
+            <a
+              class="btn code"
+              href="https://github.com/Mountea-Framework/MounteaDialoguer"
+              target="_blank"
+              rel="noreferrer"
+              >View Source</a
+            >
+            <a
+              class="btn"
+              href="https://discord.gg/pBgErZf"
+              target="_blank"
+              rel="noreferrer"
+              >Get Support</a
+            >
+            -->
+          </nav>
+
+          <section class="grid" aria-label="Dialoguer capabilities">
+            <article class="panel">
+              <h3>Visual authoring</h3>
+              <p>
+                Construct conversations with drag-and-drop nodes and clear edge
+                flow, then iterate quickly without leaving the browser.
+              </p>
+            </article>
+            <article class="panel">
+              <h3>Project structure</h3>
+              <p>
+                Keep dialogue teams aligned with participant categories,
+                metadata, and reusable project-level organization.
+              </p>
+            </article>
+            <article class="panel">
+              <h3>Export ready</h3>
+              <p>
+                Output dialogue datasets and supporting files that can be fed
+                directly into gameplay implementation workflows.
+              </p>
+            </article>
+          </section>
+
+          <section class="subgrid">
+            <article class="panel">
+              <h3>Typical workflow</h3>
+              <ol class="list">
+                <li>Create or load a project.</li>
+                <li>Define participants and categories.</li>
+                <li>Author node flow and dialogue rows.</li>
+                <li>Export files for integration and testing.</li>
+              </ol>
+            </article>
+            <article class="panel">
+              <h3>Legal</h3>
+              <div class="legal">
+                <a href="/dialoguer/dialoguer_tos.html">Terms of Service</a>
+                <a href="/dialoguer/dialoguer_policy.html">Data Policy</a>
+              </div>
+            </article>
+          </section>
+        </section>
+      </div>
     </main>
   </body>
 </html>
