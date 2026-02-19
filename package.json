@@ -1,0 +1,10 @@
+{
+  "name": "mountea-framework-website",
+  "private": true,
+  "scripts": {
+    "build": "python script/build_combined.py --mode local --dialoguer-base /dialoguer/app/",
+    "build:ci": "python script/build_combined.py --mode ci --dialoguer-base /dialoguer/app/",
+    "dev": "python script/build_combined.py --mode local --dialoguer-base /dialoguer/app/ --skip-submodule-update && python script/dev_server.py --port 5173",
+    "dev:fast": "python script/build_combined.py --mode local --dialoguer-base /dialoguer/app/ --skip-submodule-update --skip-mkdocs && python script/dev_server.py --port 5173"
+  }
+}

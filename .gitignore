@@ -28,3 +28,12 @@ Thumbs.db
 *.tmp
 /blog/assets
 /blog
+
+# Dialoguer build artifacts (generated during CI build)
+/dialoguer/app/assets/
+/dialoguer/app/index.html
+/dialoguer/app/manifest.json
+/dialoguer/app/mounteaDialoguerIcon.ico
+/dialoguer/app/mounteaDialoguerIcon.png
+/dialoguer/app/oauth-callback.html
+/dialoguer/app/robots.txt
