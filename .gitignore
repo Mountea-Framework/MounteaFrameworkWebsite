@@ -30,10 +30,10 @@ Thumbs.db
 /blog
 
 # Dialoguer build artifacts (generated during CI build)
-/dialoguer/assets/
-/dialoguer/index.html
-/dialoguer/manifest.json
-/dialoguer/mounteaDialoguerIcon.ico
-/dialoguer/mounteaDialoguerIcon.png
-/dialoguer/oauth-callback.html
-/dialoguer/robots.txt
+/dialoguer/app/assets/
+/dialoguer/app/index.html
+/dialoguer/app/manifest.json
+/dialoguer/app/mounteaDialoguerIcon.ico
+/dialoguer/app/mounteaDialoguerIcon.png
+/dialoguer/app/oauth-callback.html
+/dialoguer/app/robots.txt

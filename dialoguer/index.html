@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mountea Dialoguer</title>
+    <meta
+      name="description"
+      content="Mountea Dialoguer: browser-based dialogue editor for game teams."
+    />
+    <style>
+      :root {
+        --bg: #0c1221;
+        --panel: #131c32;
+        --text: #eef3ff;
+        --muted: #b4c0dd;
+        --brand: #3a78ff;
+        --brand-2: #24b0ff;
+        --line: rgba(255, 255, 255, 0.12);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background:
+          radial-gradient(circle at 20% -10%, rgba(58, 120, 255, 0.25), transparent 40%),
+          radial-gradient(circle at 80% 110%, rgba(36, 176, 255, 0.2), transparent 45%),
+          var(--bg);
+        color: var(--text);
+      }
+
+      .wrap {
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        padding: 32px 16px;
+      }
+
+      .card {
+        width: min(880px, 100%);
+        border: 1px solid var(--line);
+        background: linear-gradient(180deg, rgba(19, 28, 50, 0.96), rgba(19, 28, 50, 0.85));
+        border-radius: 20px;
+        padding: 28px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+      }
+
+      h1 {
+        margin: 0 0 10px;
+        font-size: clamp(30px, 5vw, 52px);
+        line-height: 1.06;
+        letter-spacing: 0.01em;
+      }
+
+      p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 17px;
+        line-height: 1.55;
+      }
+
+      .actions {
+        margin-top: 24px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .btn {
+        display: inline-block;
+        text-decoration: none;
+        border-radius: 999px;
+        padding: 11px 17px;
+        border: 1px solid var(--line);
+        color: var(--text);
+        background: rgba(255, 255, 255, 0.04);
+        transition: transform 120ms ease, background-color 120ms ease;
+      }
+
+      .btn:hover {
+        transform: translateY(-1px);
+      }
+
+      .btn.primary {
+        border-color: rgba(58, 120, 255, 0.6);
+        background: linear-gradient(90deg, var(--brand), var(--brand-2));
+        color: #fff;
+        font-weight: 700;
+      }
+
+      .meta {
+        margin-top: 18px;
+        font-size: 14px;
+        color: var(--muted);
+      }
+
+      .links {
+        margin-top: 8px;
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .links a {
+        color: var(--text);
+      }
+    </style>
+  </head>
+  <body>
+    <main class="wrap">
+      <section class="card">
+        <h1>Mountea Dialoguer</h1>
+        <p>
+          Browser-based dialogue editor for narrative design teams. Build, test,
+          and export branching conversations for your game pipeline.
+        </p>
+
+        <nav class="actions" aria-label="Dialoguer links">
+          <a class="btn primary" href="/dialoguer/app/">Launch App</a>
+          <a class="btn" href="/docs/Dialoguer/home/">Documentation</a>
+          <a class="btn" href="https://github.com/Mountea-Framework/MounteaDialoguer" target="_blank" rel="noreferrer">GitHub</a>
+          <a class="btn" href="https://discord.gg/pBgErZf" target="_blank" rel="noreferrer">Discord</a>
+        </nav>
+
+        <div class="meta">Legal</div>
+        <div class="links">
+          <a href="/dialoguer/dialoguer_tos.html">Terms of Service</a>
+          <a href="/dialoguer/dialoguer_policy.html">Data Policy</a>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

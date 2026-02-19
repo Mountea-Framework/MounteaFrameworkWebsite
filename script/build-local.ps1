@@ -1,7 +1,7 @@
 param(
     [ValidateSet("local", "ci")]
     [string]$Mode = "local",
-    [string]$DialoguerBase = "/dialoguer/",
+    [string]$DialoguerBase = "/dialoguer/app/",
     [switch]$SkipMkdocs
 )
 

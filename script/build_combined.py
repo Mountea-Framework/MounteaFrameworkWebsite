@@ -21,19 +21,7 @@ from pathlib import Path
 ROOT_DIR = Path(__file__).resolve().parent.parent
 DIALOGUER_REPO_DIR = ROOT_DIR / "external" / "MounteaDialoguer"
 DIALOGUER_DIST_DIR = DIALOGUER_REPO_DIR / "dist"
-DIALOGUER_TARGET_DIR = ROOT_DIR / "dialoguer"
-
-# Keep generated output in sync with Dialoguer build output.
-GENERATED_TARGET_PATHS = [
-    "assets",
-    "index.html",
-    "manifest.json",
-    "mounteaDialoguerIcon.ico",
-    "mounteaDialoguerIcon.png",
-    "oauth-callback.html",
-    "robots.txt",
-]
-
+DIALOGUER_APP_DIR = ROOT_DIR / "dialoguer" / "app"
 
 def run_command(command: list[str], cwd: Path | None = None) -> None:
     location = cwd or ROOT_DIR
@@ -47,12 +35,8 @@ def run_command(command: list[str], cwd: Path | None = None) -> None:
 
 
 def remove_generated_dialoguer_output() -> None:
-    for relative_path in GENERATED_TARGET_PATHS:
-        path = DIALOGUER_TARGET_DIR / relative_path
-        if path.is_dir():
-            shutil.rmtree(path)
-        elif path.exists():
-            path.unlink()
+    if DIALOGUER_APP_DIR.exists():
+        shutil.rmtree(DIALOGUER_APP_DIR)
 
 
 def copy_dialoguer_dist() -> None:
@@ -61,10 +45,10 @@ def copy_dialoguer_dist() -> None:
             f"Dialoguer dist directory not found: {DIALOGUER_DIST_DIR}"
         )
 
-    DIALOGUER_TARGET_DIR.mkdir(parents=True, exist_ok=True)
+    DIALOGUER_APP_DIR.mkdir(parents=True, exist_ok=True)
 
     for item in DIALOGUER_DIST_DIR.iterdir():
-        destination = DIALOGUER_TARGET_DIR / item.name
+        destination = DIALOGUER_APP_DIR / item.name
         if destination.exists():
             if destination.is_dir():
                 shutil.rmtree(destination)
@@ -93,8 +77,8 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--dialoguer-base",
-        default="/dialoguer/",
-        help="Base path passed to Dialoguer Vite build (default: /dialoguer/).",
+        default="/dialoguer/app/",
+        help="Base path passed to Dialoguer Vite build (default: /dialoguer/app/).",
     )
     parser.add_argument(
         "--skip-submodule-update",

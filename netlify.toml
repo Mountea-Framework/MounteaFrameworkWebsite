@@ -1,5 +1,5 @@
 [build]
-  command = "python script/build_combined.py --mode ci --dialoguer-base /dialoguer/"
+  command = "python script/build_combined.py --mode ci --dialoguer-base /dialoguer/app/"
   publish = "."
 
 [build.environment]

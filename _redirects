@@ -1,3 +1,5 @@
 /dialoguer                 /dialoguer/index.html   200
 /dialoguer/                /dialoguer/index.html   200
+/dialoguer/app             /dialoguer/app/index.html   200
+/dialoguer/app/            /dialoguer/app/index.html   200
 /dialoguer/dialoguer.html  /dialoguer              301
