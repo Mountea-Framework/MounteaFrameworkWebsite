@@ -1,5 +1,5 @@
 [build]
-  command = "python script/build_combined.py --mode ci --dialoguer-base /dialoguer/app/"
+  command = "python script/build_combined.py --mode ci --dialoguer-base /dialoguer/app/ --submodule-remote"
   publish = "."
 
 [build.environment]
