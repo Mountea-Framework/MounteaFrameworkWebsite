@@ -1,0 +1,3 @@
+[submodule "external/MounteaDialoguer"]
+	path = external/MounteaDialoguer
+	url = https://github.com/Mountea-Framework/MounteaDialoguer.git

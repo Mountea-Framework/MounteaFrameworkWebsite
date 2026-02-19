@@ -1,0 +1,165 @@
+#!/usr/bin/env python3
+"""
+Build the full website bundle, including Dialoguer artifacts.
+
+Modes:
+- ci: deterministic install steps for CI providers (npm ci + pip install)
+- local: faster local iteration (skip dependency install when possible)
+"""
+
+from __future__ import annotations
+
+import argparse
+import importlib.util
+import os
+import shutil
+import subprocess
+import sys
+from pathlib import Path
+
+
+ROOT_DIR = Path(__file__).resolve().parent.parent
+DIALOGUER_REPO_DIR = ROOT_DIR / "external" / "MounteaDialoguer"
+DIALOGUER_DIST_DIR = DIALOGUER_REPO_DIR / "dist"
+DIALOGUER_TARGET_DIR = ROOT_DIR / "dialoguer"
+
+# Keep generated output in sync with Dialoguer build output.
+GENERATED_TARGET_PATHS = [
+    "assets",
+    "index.html",
+    "manifest.json",
+    "mounteaDialoguerIcon.ico",
+    "mounteaDialoguerIcon.png",
+    "oauth-callback.html",
+    "robots.txt",
+]
+
+
+def run_command(command: list[str], cwd: Path | None = None) -> None:
+    location = cwd or ROOT_DIR
+    if sys.platform.startswith("win") and command and command[0] == "npm":
+        command = ["npm.cmd", *command[1:]]
+    print(f"[build] {' '.join(command)}")
+    env = dict(os.environ)
+    env.setdefault("PYTHONUTF8", "1")
+    env.setdefault("PYTHONIOENCODING", "utf-8")
+    subprocess.run(command, cwd=str(location), check=True, env=env)
+
+
+def remove_generated_dialoguer_output() -> None:
+    for relative_path in GENERATED_TARGET_PATHS:
+        path = DIALOGUER_TARGET_DIR / relative_path
+        if path.is_dir():
+            shutil.rmtree(path)
+        elif path.exists():
+            path.unlink()
+
+
+def copy_dialoguer_dist() -> None:
+    if not DIALOGUER_DIST_DIR.exists():
+        raise FileNotFoundError(
+            f"Dialoguer dist directory not found: {DIALOGUER_DIST_DIR}"
+        )
+
+    DIALOGUER_TARGET_DIR.mkdir(parents=True, exist_ok=True)
+
+    for item in DIALOGUER_DIST_DIR.iterdir():
+        destination = DIALOGUER_TARGET_DIR / item.name
+        if destination.exists():
+            if destination.is_dir():
+                shutil.rmtree(destination)
+            else:
+                destination.unlink()
+
+        if item.is_dir():
+            shutil.copytree(item, destination)
+        else:
+            shutil.copy2(item, destination)
+
+
+def has_module(module_name: str) -> bool:
+    return importlib.util.find_spec(module_name) is not None
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        description="Build website and Dialoguer bundle together."
+    )
+    parser.add_argument(
+        "--mode",
+        choices=["ci", "local"],
+        default="local",
+        help="Use 'ci' for deterministic installs, 'local' for faster iteration.",
+    )
+    parser.add_argument(
+        "--dialoguer-base",
+        default="/dialoguer/",
+        help="Base path passed to Dialoguer Vite build (default: /dialoguer/).",
+    )
+    parser.add_argument(
+        "--skip-submodule-update",
+        action="store_true",
+        help="Skip git submodule init/update step.",
+    )
+    parser.add_argument(
+        "--skip-mkdocs",
+        action="store_true",
+        help="Skip MkDocs documentation builds.",
+    )
+    return parser.parse_args()
+
+
+def main() -> int:
+    args = parse_args()
+    is_ci_mode = args.mode == "ci"
+
+    if not args.skip_submodule_update:
+        run_command(["git", "submodule", "update", "--init", "--recursive"])
+
+    if is_ci_mode:
+        run_command(["npm", "ci", "--prefix", str(DIALOGUER_REPO_DIR)])
+    else:
+        node_modules_dir = DIALOGUER_REPO_DIR / "node_modules"
+        if node_modules_dir.exists():
+            print("[build] local mode: reusing existing Dialoguer node_modules")
+        else:
+            run_command(["npm", "ci", "--prefix", str(DIALOGUER_REPO_DIR)])
+
+    run_command(
+        [
+            "npm",
+            "run",
+            "build",
+            "--prefix",
+            str(DIALOGUER_REPO_DIR),
+            "--",
+            f"--base={args.dialoguer_base}",
+        ]
+    )
+
+    remove_generated_dialoguer_output()
+    copy_dialoguer_dist()
+
+    if not args.skip_mkdocs:
+        if is_ci_mode:
+            run_command(
+                [sys.executable, "-m", "pip", "install", "mkdocs", "mkdocs-material"]
+            )
+        elif not (has_module("mkdocs") and has_module("material")):
+            print("[build] local mode: installing missing MkDocs dependencies")
+            run_command(
+                [sys.executable, "-m", "pip", "install", "mkdocs", "mkdocs-material"]
+            )
+        run_command(
+            [sys.executable, "-m", "mkdocs", "build", "--config-file", "mkdocs.yml"]
+        )
+        run_command(
+            [sys.executable, "-m", "mkdocs", "build", "--config-file", "blog.yml"]
+        )
+
+    print("[build] Combined build completed successfully.")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

@@ -1,1 +1,3 @@
-/dialoguer    /dialoguer/dialoguer.html   200
+/dialoguer                 /dialoguer/index.html   200
+/dialoguer/                /dialoguer/index.html   200
+/dialoguer/dialoguer.html  /dialoguer              301

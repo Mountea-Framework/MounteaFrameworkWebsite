@@ -1,3 +1,6 @@
 [build]
-  command = "pip install mkdocs mkdocs-material && python -m mkdocs build --config-file mkdocs.yml && python -m mkdocs build --config-file blog.yml"
+  command = "python script/build_combined.py --mode ci --dialoguer-base /dialoguer/"
   publish = "."
+
+[build.environment]
+  NODE_VERSION = "20"

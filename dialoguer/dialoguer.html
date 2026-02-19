@@ -1,31 +1,17 @@
-<html>
+<!doctype html>
+<html lang="en">
   <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="refresh" content="0; url=/dialoguer/" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Mountea Dialoguer</title>
   </head>
-  <body style="padding: 0; margin: 0; height: 100%">
-    <iframe
-      id="mountea-frame"
-      src="https://mountea-framework.github.io/MounteaDialoguer/"
-      style="
-        width: 100%;
-        height: 100%;
-        border: none;
-        padding: 0 !important;
-        margin: 0 !important;
-        display: block;
-      "
-      frameborder="0"
-    >
-    </iframe>
+  <body>
+    <p>
+      Redirecting to <a href="/dialoguer/">Mountea Dialoguer</a>...
+    </p>
     <script>
-      const iframe = document.getElementById("mountea-frame");
-      iframe.addEventListener("load", () => {
-        const iframeOrigin = new URL(iframe.src, window.location.href).origin;
-        iframe.contentWindow.postMessage(
-          { type: "mountea:device", value: "mobile" },
-          iframeOrigin
-        );
-      });
+      window.location.replace("/dialoguer/");
     </script>
   </body>
 </html>
