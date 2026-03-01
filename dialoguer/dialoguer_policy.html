@@ -3,30 +3,54 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dialoguer Data Policy</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/dialoguer/dialoguer.css" />
   </head>
-  <body>
-    <main>
-      <h1 style="size:12px !important; color:var(--text)">Dialoguer Data Policy</h1>
-      <p>
-        This application primarily stores project data locally in your
-        browser/device storage.
-      </p>
-      <p>
-        When optional sync features are enabled, data may be transferred to
-        configured third-party storage services.
-      </p>
-      <p>
-        You control what information is entered, exported, and synchronized.
-        Avoid storing sensitive data unless appropriate safeguards are used.
-      </p>
-      <p>
-        We recommend using secure devices, account protection, and encryption
-        where available.
-      </p>
-      <p>
-        By continuing to use this application, you acknowledge this data
-        handling model.
-      </p>
+  <body class="page-legal">
+    <div class="bg" aria-hidden="true">
+      <div class="bg-motion">
+        <div class="bg-image light"></div>
+        <div class="bg-image dark"></div>
+      </div>
+      <div class="bg-mask"></div>
+    </div>
+
+    <main class="layout">
+      <section class="modal-panel" aria-labelledby="policy-title">
+        <header class="modal-header">
+          <h1 id="policy-title">Dialoguer Data Policy</h1>
+          <a class="modal-close" href="/dialoguer/">Back</a>
+        </header>
+        <article class="modal-body">
+          <p>
+            This application primarily stores project data locally in your
+            browser or device storage.
+          </p>
+          <p>
+            When optional sync features are enabled, data may be transferred to
+            configured third-party storage services.
+          </p>
+          <p>
+            You control what information is entered, exported, and
+            synchronized. Avoid storing sensitive data unless appropriate
+            safeguards are used.
+          </p>
+          <p>
+            We recommend using secure devices, account protection, and
+            encryption where available.
+          </p>
+          <p>
+            By continuing to use this application, you acknowledge this data
+            handling model.
+          </p>
+        </article>
+      </section>
     </main>
   </body>
 </html>
