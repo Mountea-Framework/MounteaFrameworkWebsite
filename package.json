@@ -2,9 +2,9 @@
   "name": "mountea-framework-website",
   "private": true,
   "scripts": {
-    "build": "python script/build_combined.py --mode local --dialoguer-base /dialoguer/app/ --submodule-remote",
-    "build:ci": "python script/build_combined.py --mode ci --dialoguer-base /dialoguer/app/ --submodule-remote",
-    "dev": "python script/build_combined.py --mode local --dialoguer-base /dialoguer/app/ --submodule-remote && python script/dev_server.py --port 5173",
-    "dev:fast": "python script/build_combined.py --mode local --dialoguer-base /dialoguer/app/ --submodule-remote --skip-mkdocs && python script/dev_server.py --port 5173"
+    "build": "python3 script/build_combined.py --mode local --dialoguer-base /dialoguer/app/ --submodule-remote",
+    "build:ci": "python3 script/build_combined.py --mode ci --dialoguer-base /dialoguer/app/ --submodule-remote",
+    "dev": "python3 script/build_combined.py --mode local --dialoguer-base /dialoguer/app/ --submodule-remote && python3 script/dev_server.py --port 5173",
+    "dev:fast": "python3 script/build_combined.py --mode local --dialoguer-base /dialoguer/app/ --submodule-remote --skip-mkdocs && python3 script/dev_server.py --port 5173"
   }
 }
