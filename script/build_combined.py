@@ -37,6 +37,40 @@ def run_command(command: list[str], cwd: Path | None = None) -> None:
     subprocess.run(command, cwd=str(location), check=True, env=env)
 
 
+def install_npm_dependencies(
+    repo_dir: Path,
+    project_name: str,
+    is_ci_mode: bool,
+    allow_ci_fallback: bool = False,
+) -> None:
+    if is_ci_mode:
+        try:
+            run_command(["npm", "ci", "--prefix", str(repo_dir)])
+        except subprocess.CalledProcessError:
+            if not allow_ci_fallback:
+                raise
+            print(
+                f"[build] warning: npm ci failed for {project_name}; "
+                "falling back to npm install"
+            )
+            run_command(["npm", "install", "--prefix", str(repo_dir)])
+        return
+
+    node_modules_dir = repo_dir / "node_modules"
+    if node_modules_dir.exists():
+        print(f"[build] local mode: reusing existing {project_name} node_modules")
+        return
+
+    try:
+        run_command(["npm", "ci", "--prefix", str(repo_dir)])
+    except subprocess.CalledProcessError:
+        print(
+            f"[build] warning: npm ci failed for {project_name}; "
+            "falling back to npm install"
+        )
+        run_command(["npm", "install", "--prefix", str(repo_dir)])
+
+
 def remove_generated_dialoguer_output() -> None:
     if DIALOGUER_APP_DIR.exists():
         shutil.rmtree(DIALOGUER_APP_DIR)
@@ -149,23 +183,13 @@ def main() -> int:
             submodule_update_command.append("--remote")
         run_command(submodule_update_command)
 
-    if is_ci_mode:
-        run_command(["npm", "ci", "--prefix", str(DIALOGUER_REPO_DIR)])
-    else:
-        node_modules_dir = DIALOGUER_REPO_DIR / "node_modules"
-        if node_modules_dir.exists():
-            print("[build] local mode: reusing existing Dialoguer node_modules")
-        else:
-            run_command(["npm", "ci", "--prefix", str(DIALOGUER_REPO_DIR)])
-
-    if is_ci_mode:
-        run_command(["npm", "ci", "--prefix", str(INVENTORY_MANAGER_REPO_DIR)])
-    else:
-        node_modules_dir = INVENTORY_MANAGER_REPO_DIR / "node_modules"
-        if node_modules_dir.exists():
-            print("[build] local mode: reusing existing InventoryManager node_modules")
-        else:
-            run_command(["npm", "ci", "--prefix", str(INVENTORY_MANAGER_REPO_DIR)])
+    install_npm_dependencies(DIALOGUER_REPO_DIR, "Dialoguer", is_ci_mode)
+    install_npm_dependencies(
+        INVENTORY_MANAGER_REPO_DIR,
+        "InventoryManager",
+        is_ci_mode,
+        allow_ci_fallback=True,
+    )
 
     run_command(
         [
