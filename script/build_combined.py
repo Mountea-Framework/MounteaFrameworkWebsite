@@ -10,6 +10,7 @@ Modes:
 from __future__ import annotations
 
 import argparse
+import hashlib
 import importlib.util
 import os
 import shutil
@@ -24,7 +25,7 @@ DIALOGUER_DIST_DIR = DIALOGUER_REPO_DIR / "dist"
 DIALOGUER_APP_DIR = ROOT_DIR / "dialoguer" / "app"
 INVENTORY_MANAGER_REPO_DIR = ROOT_DIR / "external" / "InventoryManager"
 INVENTORY_MANAGER_DIST_DIR = INVENTORY_MANAGER_REPO_DIR / "dist"
-INVENTORY_MANAGER_APP_DIR = ROOT_DIR / "page" / "inventour" / "app"
+INVENTORY_MANAGER_APP_DIR = ROOT_DIR / "inventour" / "app"
 
 def run_command(command: list[str], cwd: Path | None = None) -> None:
     location = cwd or ROOT_DIR
@@ -57,9 +58,18 @@ def install_npm_dependencies(
         return
 
     node_modules_dir = repo_dir / "node_modules"
-    if node_modules_dir.exists():
-        print(f"[build] local mode: reusing existing {project_name} node_modules")
-        return
+    package_lock_path = repo_dir / "package-lock.json"
+    lock_marker_path = node_modules_dir / ".lockhash"
+
+    current_lock_hash = None
+    if package_lock_path.exists():
+        current_lock_hash = hashlib.sha256(package_lock_path.read_bytes()).hexdigest()
+
+    if node_modules_dir.exists() and current_lock_hash and lock_marker_path.exists():
+        cached_lock_hash = lock_marker_path.read_text(encoding="utf-8").strip()
+        if cached_lock_hash == current_lock_hash:
+            print(f"[build] local mode: reusing existing {project_name} node_modules")
+            return
 
     try:
         run_command(["npm", "ci", "--prefix", str(repo_dir)])
@@ -69,6 +79,9 @@ def install_npm_dependencies(
             "falling back to npm install"
         )
         run_command(["npm", "install", "--prefix", str(repo_dir)])
+
+    if current_lock_hash:
+        lock_marker_path.write_text(current_lock_hash, encoding="utf-8")
 
 
 def remove_generated_dialoguer_output() -> None:
@@ -146,8 +159,8 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "--inventory-manager-base",
-        default="/page/inventour/app/",
-        help="Base path passed to InventoryManager Vite build (default: /page/inventour/app/).",
+        default="/inventour/app/",
+        help="Base path passed to InventoryManager Vite build (default: /inventour/app/).",
     )
     parser.add_argument(
         "--skip-submodule-update",
