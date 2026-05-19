@@ -3,3 +3,5 @@
 /dialoguer/app             /dialoguer/app/index.html   200
 /dialoguer/app/            /dialoguer/app/index.html   200
 /dialoguer/dialoguer.html  /dialoguer              301
+/page/inventour/app        /page/inventour/app/index.html   200
+/page/inventour/app/       /page/inventour/app/index.html   200

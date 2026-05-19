@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Build the full website bundle, including Dialoguer artifacts.
+Build the full website bundle, including Dialoguer and InventoryManager artifacts.
 
 Modes:
 - ci: deterministic install steps for CI providers (npm ci + pip install)
@@ -22,6 +22,9 @@ ROOT_DIR = Path(__file__).resolve().parent.parent
 DIALOGUER_REPO_DIR = ROOT_DIR / "external" / "MounteaDialoguer"
 DIALOGUER_DIST_DIR = DIALOGUER_REPO_DIR / "dist"
 DIALOGUER_APP_DIR = ROOT_DIR / "dialoguer" / "app"
+INVENTORY_MANAGER_REPO_DIR = ROOT_DIR / "external" / "InventoryManager"
+INVENTORY_MANAGER_DIST_DIR = INVENTORY_MANAGER_REPO_DIR / "dist"
+INVENTORY_MANAGER_APP_DIR = ROOT_DIR / "page" / "inventour" / "app"
 
 def run_command(command: list[str], cwd: Path | None = None) -> None:
     location = cwd or ROOT_DIR
@@ -39,6 +42,11 @@ def remove_generated_dialoguer_output() -> None:
         shutil.rmtree(DIALOGUER_APP_DIR)
 
 
+def remove_generated_inventory_manager_output() -> None:
+    if INVENTORY_MANAGER_APP_DIR.exists():
+        shutil.rmtree(INVENTORY_MANAGER_APP_DIR)
+
+
 def copy_dialoguer_dist() -> None:
     if not DIALOGUER_DIST_DIR.exists():
         raise FileNotFoundError(
@@ -49,6 +57,28 @@ def copy_dialoguer_dist() -> None:
 
     for item in DIALOGUER_DIST_DIR.iterdir():
         destination = DIALOGUER_APP_DIR / item.name
+        if destination.exists():
+            if destination.is_dir():
+                shutil.rmtree(destination)
+            else:
+                destination.unlink()
+
+        if item.is_dir():
+            shutil.copytree(item, destination)
+        else:
+            shutil.copy2(item, destination)
+
+
+def copy_inventory_manager_dist() -> None:
+    if not INVENTORY_MANAGER_DIST_DIR.exists():
+        raise FileNotFoundError(
+            f"InventoryManager dist directory not found: {INVENTORY_MANAGER_DIST_DIR}"
+        )
+
+    INVENTORY_MANAGER_APP_DIR.mkdir(parents=True, exist_ok=True)
+
+    for item in INVENTORY_MANAGER_DIST_DIR.iterdir():
+        destination = INVENTORY_MANAGER_APP_DIR / item.name
         if destination.exists():
             if destination.is_dir():
                 shutil.rmtree(destination)
@@ -79,6 +109,11 @@ def parse_args() -> argparse.Namespace:
         "--dialoguer-base",
         default="/dialoguer/app/",
         help="Base path passed to Dialoguer Vite build (default: /dialoguer/app/).",
+    )
+    parser.add_argument(
+        "--inventory-manager-base",
+        default="/page/inventour/app/",
+        help="Base path passed to InventoryManager Vite build (default: /page/inventour/app/).",
     )
     parser.add_argument(
         "--skip-submodule-update",
@@ -123,6 +158,15 @@ def main() -> int:
         else:
             run_command(["npm", "ci", "--prefix", str(DIALOGUER_REPO_DIR)])
 
+    if is_ci_mode:
+        run_command(["npm", "ci", "--prefix", str(INVENTORY_MANAGER_REPO_DIR)])
+    else:
+        node_modules_dir = INVENTORY_MANAGER_REPO_DIR / "node_modules"
+        if node_modules_dir.exists():
+            print("[build] local mode: reusing existing InventoryManager node_modules")
+        else:
+            run_command(["npm", "ci", "--prefix", str(INVENTORY_MANAGER_REPO_DIR)])
+
     run_command(
         [
             "npm",
@@ -135,8 +179,22 @@ def main() -> int:
         ]
     )
 
+    run_command(
+        [
+            "npm",
+            "run",
+            "build",
+            "--prefix",
+            str(INVENTORY_MANAGER_REPO_DIR),
+            "--",
+            f"--base={args.inventory_manager_base}",
+        ]
+    )
+
     remove_generated_dialoguer_output()
     copy_dialoguer_dist()
+    remove_generated_inventory_manager_output()
+    copy_inventory_manager_dist()
 
     if not args.skip_mkdocs:
         if is_ci_mode:

@@ -3,3 +3,8 @@
 	url = https://github.com/Mountea-Framework/MounteaDialoguer.git
 	branch = master
 	ignore = all
+[submodule "external/InventoryManager"]
+	path = external/InventoryManager
+	url = https://github.com/Mountea-Framework/InventoryManager.git
+	branch = master
+	ignore = all
