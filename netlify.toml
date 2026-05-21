@@ -4,3 +4,15 @@
 
 [build.environment]
   NODE_VERSION = "20"
+
+[[redirects]]
+  from = "/inventour/app"
+  to = "/inventour/app/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/inventour/app/*"
+  to = "/inventour/app/index.html"
+  status = 200
+  force = true
