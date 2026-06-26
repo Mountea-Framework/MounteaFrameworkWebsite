@@ -1,5 +1,5 @@
 ---
-title: Data Contracts for Blueprints
+title: "Contract-Driven Blueprints: From Payload Frustration to Verified Unreal Data Flow"
 date: 2026-06-25
 authors:
   - DominikMorse
@@ -14,69 +14,86 @@ tags:
   
 ---
 
-# Data Contracts for Blueprints: Eliminating Payload Boilerplate
+# Contract-Driven Blueprints: From Payload Frustration to Verified Unreal Data Flow
 
-Sometimes the best features don't start with a grand architectural vision.
+This started with a small annoyance that kept coming back.
 
-Sometimes they start with frustration.
+While building the Inventory & Equipment framework, I kept creating payload UObject after payload UObject just to move data between gameplay systems and UI. Every new widget seemed to need its own payload class. Most of those classes were almost the same as another one, just different enough to make reuse awkward.
 
-While building the Inventory & Equipment framework, I kept creating payload UObject after payload UObject just to move data between gameplay systems and UI. Every new widget seemed to require another payload class, even though most of them did nothing more than describe **what data a widget expected to receive**.
-
-That raised a simple question:
-
-> Why am I creating a UObject just to describe data?
-
-That question became the foundation of a completely different approach.
+At first, that feels like normal Unreal work.
 
 <!-- more -->
+
+You need a typed object.
+
+Blueprint needs something visible.
+
+The UI needs a clean input.
+
+So you add another payload.
+
+But after doing that enough times, it stops feeling like structure and starts feeling like boilerplate pretending to be architecture.
+
+This is also where my enterprise architecture background keeps leaking into my Unreal work. In enterprise systems, you learn to treat data boundaries very seriously: schemas, contracts, validation, versioning, and predictable integration points are not decoration. They are what keep large systems understandable.
+
+The part that bothered me most was not the typing itself. It was the lack of an explicit contract. The producer and consumer both knew what the payload was supposed to contain, but that agreement lived mostly in naming, convention, and memory.
+
+That is fragile.
+
+Especially once you have several gameplay sources, several UI variants, and maybe even external UI systems that need the same data in a predictable shape.
+
+At some point, the question became hard to ignore:
+
+> Why am I creating a UObject just to describe the shape of data?
+
+That question became the foundation of a different approach: asset-defined, reusable, validated data contracts for Blueprints.
+
+!!! note "Core idea"
+    Treat UI payloads less like throwaway UObject containers and more like explicit data contracts: named, reusable, inspectable, and validated before consumption.
 
 ---
 
 ## The Payload Problem
 
-Consider a typical inventory system.
+Inventory systems are a perfect place to feel this pain.
 
-Gameplay data might live inside an Inventory Component or an Item object and contain everything imaginable:
+Gameplay data might live inside an Inventory Component, an Item object, a data asset, a save game object, or a replicated runtime model. It can contain everything imaginable:
 
 - Item Identifier
 - Display Name
 - Description
+- Icon
 - Weight
 - Stack Count
-- Durability
 - Equipment Type
-- Gameplay Tags
-- Inventory Reference
-- Value
-- Effects
-- ...
+- Price
+- Runtime State
 
-Now imagine several different widgets.
+But each UI element usually needs only a slice of that data.
 
-An inventory slot might only need:
+An inventory slot might need:
 
 - Icon
 - Name
 - Stack Count
 
-A tooltip needs:
+A tooltip might need:
 
 - Name
 - Description
 
-A merchant entry needs:
+A merchant entry might need:
 
 - Name
+- Icon
 - Price
 
-An equipment slot needs:
+An equipment slot might need:
 
 - Icon
 - Equipment Type
 
-Each widget consumes a different subset of exactly the same gameplay data.
-
-Traditionally, this often leads to a growing collection of payload objects:
+The common Unreal answer is to introduce payload objects:
 
 ```text
 UInventorySlotPayload
@@ -87,62 +104,102 @@ UCraftingPayload
 ...
 ```
 
-None of these objects actually *do* anything.
+The problem is that many of these classes do not really do anything.
 
-They're simply containers.
+They are shaped containers. They exist because Blueprint needs something typed and visible. They become the class-per-shape solution to a data-contract problem.
 
-After repeating this pattern enough times, I couldn't help thinking:
+Inheritance does not solve this cleanly either. A shared base payload can help with common fields, but UI data does not usually grow in a neat inheritance tree. It grows sideways. One widget needs title and icon. Another needs title and price. Another needs title, icon, durability, and an item reference. The combinations multiply faster than a clean hierarchy can describe them.
 
-> Surely there has to be a better way.
+That is the inheritance pressure I wanted to get away from.
+
+Not because inheritance is bad.
+
+Because this specific problem is not really an inheritance problem.
+
+It is a contract problem.
 
 ---
 
-## The Idea: Data Contracts
+## The Architectural Intent
 
-Instead of creating payload classes, what if we simply described the shape of the data?
+My goal was not to put JSON into Unreal for the sake of JSON.
 
-Not as code.
+The goal was to bring a more unified and verified process to Unreal data exchange.
 
-Not as USTRUCTs.
+In larger systems, I do not want gameplay and UI to communicate through informal assumptions:
 
-But as reusable assets.
+- "This payload should probably contain this field."
+- "This widget expects this object type."
+- "This action should pass a value with this name."
+- "This data is valid because the previous Blueprint probably built it correctly."
 
-That idea became **JSON Definitions**.
+That kind of trust-based workflow works until the project grows.
 
-A JSON Definition behaves similarly to a JSON Schema or an OpenAPI schema.
+Then UI variants multiply, gameplay sources multiply, integrations multiply, and the payload layer becomes fragile. The issue is not that Unreal cannot handle the data. The issue is that the process is not explicit enough.
 
-It simply describes:
+What I wanted instead was a repeatable Unreal process where:
+
+- producers know exactly what contract they are producing
+- consumers know exactly what contract they require
+- payloads can be validated before use
+- Blueprint interfaces can be generated from the contract
+- the contract itself becomes documentation
+
+That is where JSON Definitions came from.
+
+!!! tip "The process shift"
+    The goal is not to make Unreal feel like enterprise software. The goal is to bring the useful parts of enterprise discipline into Unreal: clear boundaries, verified data, and fewer invisible assumptions.
+
+---
+
+## Data Contracts as Assets
+
+A JSON Definition behaves similarly in spirit to a JSON Schema or an OpenAPI schema.
+
+It describes the shape of data:
 
 - Which properties exist
-- Their types
+- Which types they use
 - Which properties are required
-- Which other definitions are included
+- Which definitions are included
+- What a valid payload is expected to look like
 
 For example:
 
 ```text
 Inventory Slot
- ├ Title
- ├ Icon
- ├ Stack Count
- ├ Inventory Reference
+|-- Title
+|-- Icon
+|-- Stack Count
+|-- Inventory Reference
 ```
 
 Or:
 
 ```text
 Tooltip
- ├ Title
- ├ Description
+|-- Title
+|-- Description
 ```
 
-These definitions become reusable contracts shared between gameplay systems and UI.
+The important part is that the definition is not hidden inside a random payload class.
+
+It is an asset.
+
+It can be named, reused, inspected, validated, composed, and shared between systems.
+
+That changes the role of the payload entirely. Instead of asking "Which UObject class should I create for this widget?", I can ask a better question:
+
+> What contract does this widget need?
+
+!!! example "Contract mindset"
+    A widget should not need to know the full gameplay model. It should only know the contract it consumes.
 
 ---
 
-## Building Larger Definitions
+## Composition Instead of Payload Inheritance
 
-A particularly useful aspect of the system is composition.
+One of the most useful parts of this approach is composition.
 
 Definitions can include other definitions.
 
@@ -150,36 +207,36 @@ For example:
 
 ```text
 Item Metadata
- ├ Name
- ├ Description
+|-- Name
+|-- Description
 
 Equipment Metadata
- ├ Slot
- ├ Durability
+|-- Slot
+|-- Durability
 
 Inventory Entry
- ├ Includes Item Metadata
- ├ Includes Equipment Metadata
- ├ Stack Count
+|-- Includes Item Metadata
+|-- Includes Equipment Metadata
+|-- Stack Count
 ```
 
-Instead of copying properties between payload classes, larger contracts are assembled from smaller reusable pieces.
+Instead of forcing every payload into an inheritance hierarchy, larger contracts can be assembled from smaller reusable contracts.
 
-Even recursive definitions are supported, allowing hierarchical data structures without duplicated schemas.
+That fits UI data much better.
+
+UI data often needs composition, not inheritance. A widget does not always represent a subtype of another widget's payload. It often represents a different projection of the same underlying gameplay data.
+
+This is where the enterprise architecture part of my brain feels much more at home. Define smaller contracts. Compose them. Validate the result. Keep producer and consumer boundaries explicit.
+
+The same thinking applies inside Unreal.
 
 ---
 
 ## Dynamic Blueprint Nodes
 
-At first, JSON generation was the goal.
+The feature became much more interesting once Blueprint entered the picture.
 
-But the feature became much more interesting once Blueprint entered the picture.
-
-Instead of manually creating Blueprint nodes for every payload type, Blueprint nodes can simply read a selected JSON Definition.
-
-The result?
-
-The node automatically generates its pins.
+Instead of creating a custom Blueprint node or payload class for every data shape, Blueprint nodes can read a selected JSON Definition and generate their pins from it.
 
 Selecting:
 
@@ -187,20 +244,20 @@ Selecting:
 Tooltip
 ```
 
-might expose:
+can expose:
 
 ```text
 Title
 Description
 ```
 
-Changing the definition to:
+Changing the selected definition to:
 
 ```text
 Inventory Slot
 ```
 
-immediately changes the node into:
+can expose:
 
 ```text
 Title
@@ -209,13 +266,15 @@ Stack Count
 Inventory Reference
 ```
 
-The Blueprint interface literally changes shape based on the selected definition.
-
-No custom node creation.
+The Blueprint interface changes shape based on the contract.
 
 No generated C++.
 
 No duplicated Blueprint nodes.
+
+No new UObject payload class just to express a slightly different set of fields.
+
+The contract drives the node.
 
 ---
 
@@ -223,57 +282,64 @@ No duplicated Blueprint nodes.
 
 The first custom K2 node is **Construct Object From Definition**.
 
-Given a selected definition, it dynamically creates typed input pins matching that schema.
+Given a selected definition, it dynamically creates typed input pins matching that schema. Gameplay systems connect the values they want to expose, and the node constructs a JSON object that conforms to the selected contract.
 
-Gameplay systems simply connect the values they want to expose.
+That makes the Blueprint graph self-documenting.
 
-The node constructs a JSON object that conforms to the selected contract.
-
-The Blueprint graph becomes self-documenting.
-
-You immediately know:
+You can see:
 
 - what data is expected
-- which fields are available
+- which fields are required
 - which values are being supplied
+- which contract the payload is meant to satisfy
 
-without opening a single payload class.
+without opening a payload class or guessing what another widget expects.
+
+This is where the workflow starts to feel less like "passing some object around" and more like verified Blueprint data flow.
 
 ---
 
 ## Break Object By Definition
 
-The opposite operation is just as useful.
+The opposite operation is just as important.
 
 **Break Object By Definition** accepts:
 
 - A JSON object
 - A JSON Definition
 
-It validates the incoming object against the schema before exposing any data.
+It validates the incoming object against the selected definition before exposing any data.
 
 If validation succeeds:
 
-- Typed output pins become available.
+- typed output pins become available
+- the consumer can safely use the values
 
 If validation fails:
 
-- The node reports validation errors.
-- Blueprint execution can react accordingly.
+- the node reports validation errors
+- Blueprint execution can react accordingly
 
-This means UI systems never consume malformed payloads.
+This is the part I care about most architecturally.
 
-They only consume validated contracts.
+The consumer does not just hope that the payload is correct.
+
+It verifies the contract first.
+
+That small change matters a lot in large UI-heavy systems, because it turns informal data flow into an explicit producer-consumer contract.
+
+!!! success "Verified before consumed"
+    The consumer does not rely on hope, naming, or convention. It receives data only after the payload has been checked against the selected definition.
 
 ---
 
-## Inventory as the Perfect Test Bed
+## Inventory as the Proving Ground
 
-This system was born while developing the Inventory & Equipment framework, so naturally that's where it shines the most.
+This system was born while developing the Inventory & Equipment framework, so naturally that is where it shines first.
 
 Imagine a merchant interface.
 
-The merchant doesn't care whether an item originated from:
+The merchant UI does not need to care whether an item originated from:
 
 - Player Inventory
 - Storage Chest
@@ -285,19 +351,19 @@ The UI only expects a payload matching:
 
 ```text
 Merchant Entry
- ├ Title
- ├ Icon
- ├ Price
- ├ Item Reference
+|-- Title
+|-- Icon
+|-- Price
+|-- Item Reference
 ```
 
-As long as gameplay provides that contract, the widget works.
+As long as gameplay produces that contract, the widget works.
 
-It doesn't know where the data came from.
+It does not know where the data came from.
 
-It doesn't need to.
+It does not need to.
 
-Exactly the same applies to:
+The same idea applies to:
 
 - Inventory Slots
 - Equipment Widgets
@@ -306,48 +372,86 @@ Exactly the same applies to:
 - Tooltips
 - Quickbars
 - Context Menus
+- Modal Windows
 
-Every widget simply defines the contract it expects.
+Every widget defines the contract it expects.
 
 Gameplay produces the contract.
 
 UI consumes the contract.
 
-Both remain completely independent.
+The boundary stays explicit.
+
+---
+
+## External UI Systems
+
+There is another reason this design matters: Unreal is not always the final UI runtime.
+
+Modern Unreal projects may use external UI systems or presentation layers such as Rive.app, Noesis, web-based overlays, custom tooling, or other runtime UI frameworks. Those systems do not benefit from Unreal-specific payload inheritance. They benefit from predictable structured input.
+
+That is exactly what contract-shaped JSON payloads provide.
+
+If Unreal can produce a validated payload from a known definition, an external UI runtime can consume that payload without needing to understand the original gameplay object model.
+
+For example:
+
+```text
+Unreal Gameplay System
+|-- Produces validated Merchant Entry payload
+|-- Sends JSON-shaped data to UI layer
+|-- External UI runtime consumes predictable fields
+```
+
+This reduces custom adapter logic.
+
+It also keeps the integration boundary honest. The external system receives a clear input shape, not a vague object with implicit expectations.
+
+For Rive, Noesis, or any other external UI runtime, this kind of contract-driven payload becomes a practical bridge between Unreal gameplay state and UI presentation.
+
+!!! info "External UI benefit"
+    The same contract that makes Blueprint safer can also become the data boundary for Rive.app, Noesis, web UI, tools, or any other system that prefers predictable structured input.
 
 ---
 
 ## Why JSON?
 
-A common question is:
+A fair question is:
 
 > Why JSON?
 
-Ironically...
+The honest answer is that JSON is not the main feature.
 
-JSON isn't really the feature.
+The definition is the feature.
 
-It just happens to be an excellent transport format.
+JSON is simply a useful transport representation:
 
-The real feature is the definition itself.
+- readable
+- inspectable
+- easy to serialize
+- easy to validate
+- easy for external systems to consume
 
-The definition becomes:
+The real value is that the definition becomes several things at once:
 
 - Documentation
 - Validation
 - Blueprint Interface
 - Contract
 - Payload Generator
+- Integration Boundary
 
-all at the same time.
+That is why JSON makes sense here.
 
-JSON is simply the representation used to move that data around.
+Not because Unreal needs more JSON.
+
+Because Unreal benefits from explicit, verifiable data contracts.
 
 ---
 
 ## Where This Can Go
 
-Although the original motivation was inventory systems, the same approach applies almost anywhere.
+Although the original motivation was inventory systems, the same approach applies almost anywhere structured data needs to move between systems.
 
 Definitions can describe:
 
@@ -361,32 +465,43 @@ Definitions can describe:
 - UI Requests
 - UI Responses
 - Runtime Configuration
+- External UI Inputs
+- Tooling Messages
 
-Anywhere gameplay needs to exchange structured information with UI, definitions can replace dedicated payload objects.
+Anywhere gameplay needs to exchange structured information with UI, tools, or runtime presentation layers, definitions can replace dedicated payload objects.
+
+This is not limited to one framework.
+
+It is a pattern for making Unreal communication more explicit.
 
 ---
 
 ## Final Thoughts
 
-This feature wasn't born because I wanted JSON schemas inside Unreal.
+This feature was not born because I wanted JSON schemas inside Unreal.
 
-It was born because I got tired of creating payload UObjects whose only responsibility was carrying data from one Blueprint to another.
+It was born because I was tired of creating payload UObjects whose only responsibility was carrying data from one Blueprint to another.
 
-JSON Definitions turned that frustration into something far more useful:
+It was born from frustration with payload boilerplate, inheritance pressure, and the class-per-shape problem that appears when UI systems grow.
 
-Reusable, validated, asset-driven data contracts that automatically generate Blueprint interfaces.
+But the useful part is what that frustration turned into:
+
+Reusable, validated, asset-driven data contracts that can generate Blueprint interfaces and define clear producer-consumer boundaries.
 
 Gameplay no longer needs to know which widget consumes the data.
 
 Widgets no longer need to know where the data originated.
 
-Both simply agree on a contract.
+External UI runtimes can receive predictable structured inputs.
 
-Sometimes the best architectural improvements aren't about adding new systems.
+Everyone agrees on the contract.
 
-They're about removing the ones you no longer need.
+That is the direction I want to keep pushing in Unreal: fewer informal assumptions, fewer throwaway payload classes, and more unified, verified processes that scale beyond a single Blueprint graph.
+
+Sometimes the best architectural improvements are not about adding more systems.
+
+Sometimes they are about making the invisible agreements explicit.
 
 ---
 
-If you've built large UI-heavy systems in Unreal, I'd be interested to hear how you've approached payload objects and UI communication. This is still an evolving system, and I'm looking forward to seeing where it leads next.
-
+If you have built large UI-heavy systems in Unreal, especially ones that communicate with external UI layers, I would be interested to hear how you have approached payload objects, validation, and data contracts. This is still an evolving system, and I am looking forward to seeing where it leads next.
