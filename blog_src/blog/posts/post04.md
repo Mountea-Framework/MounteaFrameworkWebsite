@@ -38,7 +38,7 @@ This is also where my enterprise architecture background keeps leaking into my U
 
 The part that bothered me most was not the typing itself. It was the lack of an explicit contract. The producer and consumer both knew what the payload was supposed to contain, but that agreement lived mostly in naming, convention, and memory.
 
-That is fragile.
+That is **fragile**.
 
 Especially once you have several gameplay sources, several UI variants, and maybe even external UI systems that need the same data in a predictable shape.
 
@@ -93,38 +93,36 @@ An equipment slot might need:
 - Icon
 - Equipment Type
 
-The common Unreal answer is to introduce payload objects:
+The common Unreal answer is to introduce more payload objects:
 
 ```text
 UInventorySlotPayload
 UTooltipPayload
 UEquipmentPayload
-UMerchantPayload
-UCraftingPayload
-...
+etc...
 ```
+
+The other option is to go in the opposite direction and create one huge payload that contains every possible field any widget might need.
+
+That does not really solve the problem either.
+
+It creates a wasteful monolith: one object with too many optional properties, unclear ownership, weak intent, and no clean way to tell which fields are actually required for a specific consumer. ANother huge risk is naming, with huge monoliths wer must have all properties names correctly and clearly, so there won't be any confusion possible.
 
 The problem is that many of these classes do not really do anything.
 
 They are shaped containers. They exist because Blueprint needs something typed and visible. They become the class-per-shape solution to a data-contract problem.
 
-Inheritance does not solve this cleanly either. A shared base payload can help with common fields, but UI data does not usually grow in a neat inheritance tree. It grows sideways. One widget needs title and icon. Another needs title and price. Another needs title, icon, durability, and an item reference. The combinations multiply faster than a clean hierarchy can describe them.
+Inheritance does not solve this cleanly either. A shared base payload can help with common fields, but UI data does not usually grow in a neat inheritance tree. It grows sideways. One widget needs title and icon. Another needs title and price. Another needs title, icon, durability, and an item reference. The combinations multiply faster than a clean hierarchy can describe them or, more importantly, maintain them.
 
-That is the inheritance pressure I wanted to get away from.
+That is the inheritance pressure I wanted to get away from. Not because inheritance is bad. Because this specific problem is not really an inheritance problem.
 
-Not because inheritance is bad.
-
-Because this specific problem is not really an inheritance problem.
-
-It is a contract problem.
+It is a *contract problem*. And as such, it has already been solved by people far superior to me.
 
 ---
 
 ## The Architectural Intent
 
-My goal was not to put JSON into Unreal for the sake of JSON.
-
-The goal was to bring a more unified and verified process to Unreal data exchange.
+My goal was not to put JSON into Unreal for the sake of JSON. The goal was to bring a more unified and verified process to Unreal data exchange.
 
 In larger systems, I do not want gameplay and UI to communicate through informal assumptions:
 
@@ -154,9 +152,7 @@ That is where JSON Definitions came from.
 
 ## Data Contracts as Assets
 
-A JSON Definition behaves similarly in spirit to a JSON Schema or an OpenAPI schema.
-
-It describes the shape of data:
+A JSON Definition behaves similarly in spirit to a JSON Schema or an OpenAPI schema. It describes the shape of data:
 
 - Which properties exist
 - Which types they use
@@ -184,9 +180,7 @@ Tooltip
 
 The important part is that the definition is not hidden inside a random payload class.
 
-It is an asset.
-
-It can be named, reused, inspected, validated, composed, and shared between systems.
+It is an asset. It can be named, reused, inspected, validated, composed, and shared between systems.
 
 That changes the role of the payload entirely. Instead of asking "Which UObject class should I create for this widget?", I can ask a better question:
 
@@ -478,29 +472,33 @@ It is a pattern for making Unreal communication more explicit.
 
 ## Final Thoughts
 
-This feature was not born because I wanted JSON schemas inside Unreal.
+I did not start this because I woke up one day thinking Unreal needed JSON schemas.
 
-It was born because I was tired of creating payload UObjects whose only responsibility was carrying data from one Blueprint to another.
+I started it because I was annoyed.
 
-It was born from frustration with payload boilerplate, inheritance pressure, and the class-per-shape problem that appears when UI systems grow.
+I had too many payload objects that existed only because some widget needed a slightly different shape of data. I had too many almost-the-same classes. Too many places where the contract was obvious in my head, but not actually written down anywhere useful.
 
-But the useful part is what that frustration turned into:
+That is the kind of thing that slowly makes a system harder to trust.
 
-Reusable, validated, asset-driven data contracts that can generate Blueprint interfaces and define clear producer-consumer boundaries.
+The nice part is that the solution did not end up being bigger payloads or more inheritance. It ended up being something much simpler to reason about:
 
-Gameplay no longer needs to know which widget consumes the data.
+- define the shape
+- build data against that shape
+- validate it before something consumes it
 
-Widgets no longer need to know where the data originated.
+That is the bit I like.
 
-External UI runtimes can receive predictable structured inputs.
+Gameplay can produce data without caring which widget will use it. UI can consume data without caring where it came from. External UI runtimes can receive predictable inputs without needing to understand Unreal's internal object model.
 
-Everyone agrees on the contract.
+And if the data is wrong, the system can say so.
 
-That is the direction I want to keep pushing in Unreal: fewer informal assumptions, fewer throwaway payload classes, and more unified, verified processes that scale beyond a single Blueprint graph.
+That alone makes the whole workflow feel calmer.
 
-Sometimes the best architectural improvements are not about adding more systems.
+For me, this is the direction I want to keep pushing in Unreal: fewer invisible assumptions, fewer throwaway payload classes, and more small pieces of process that make large systems easier to work with.
 
-Sometimes they are about making the invisible agreements explicit.
+Not because Unreal should become enterprise software.
+
+Because some of those enterprise habits are useful when a project stops being small.
 
 ---
 
