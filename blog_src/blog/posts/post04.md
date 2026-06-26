@@ -52,6 +52,10 @@ That question became the foundation of a different approach: asset-defined, reus
     Treat UI payloads less like throwaway UObject containers and more like explicit data contracts: named, reusable, inspectable, and validated before consumption.
 
 ---
+<p align="center" width="100%" class="preview-container">
+        <img class="preview" width="90%" src="https://raw.githubusercontent.com/Mountea-Framework/MounteaInventoryEquipment/refs/heads/main/DocumentationResources/contractDefinitionWithK2Nodes.webp">
+</p>
+---
 
 ## The Payload Problem
 
