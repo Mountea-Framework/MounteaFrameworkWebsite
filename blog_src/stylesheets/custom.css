@@ -53,6 +53,7 @@ body,
 p {
 	unicode-bidi: isolate;
 	margin: 0.1rem 0 !important;
+	padding-bottom: 0.3rem !important;
 }
 
 /* Header */
@@ -268,6 +269,7 @@ a.md-tag.md-tag-icon:hover {
 
 .md-typeset p {
 	margin: 0 !important;
+	padding-bottom: 0.3rem !important;
 }
 
 .md-typeset a {
@@ -662,6 +664,7 @@ article img:hover {
 
 	.md-typeset p {
 		line-height: 1.3rem;
+		padding-bottom: 0.3rem !important;
 	}
 
 	.md-typeset li {
