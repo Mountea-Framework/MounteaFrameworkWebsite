@@ -13,6 +13,9 @@ The **Mountea Dialogue Manager** component orchestrates dialogue flow and handle
 
 This configuration exact page covers the **main** Dialogue Manager from the scope of the Player. Dialogue system also provides a way to handle an *environmental* dialogue where NPCs talk to each other without any Player input. This setup will be covered later. 
 
+!!! info "Part of a Larger Setup"
+    The Dialogue Manager is one of four components a fully working setup needs, each on a different actor class: `Mountea Dialogue Participant` on the **Pawn**, `Mountea Dialogue Participant User Interface Component` on the **Player Controller**, `Mountea Dialogue Manager` (this page) on the **Player State**, and `Mountea Dialogue Session` on the **Game State**. The Session component holds the actual authoritative, replicated dialogue state and drives traversal - the Manager is the per-player entry point that talks to it, not the thing running the conversation by itself. The editor's **Setup Defaults** tool can add all four automatically for Blueprint-based project classes.
+
 ---
 
 ## 1. What Does It Do
@@ -50,8 +53,8 @@ This configuration exact page covers the **main** Dialogue Manager from the scop
 
 Choose between:
 
-- **Mountea Dialogue Manager** – Basic C++ component.
-- **BP_MounteaDialogueManager** – Pre-configured Blueprint with default widget and settings.
+- **Mountea Dialogue Manager** - Basic C++ component.
+- **BP_MounteaDialogueManager** - Pre-configured Blueprint with default widget and settings.
 
 !!! tip inline "Quick Setup"
     The blueprint version includes a predefined Widget Blueprint and common defaults for faster setup.
@@ -67,21 +70,23 @@ Dialogue Manager has a lot propertis which can be set up and/or read.
 
 | Property                         | Description                                                                                                        |  Default  |
 |----------------------------------|--------------------------------------------------------------------------------------------------------------------| --------- |
-| Dialogue Widget Class            | The UI class used by this manager. Must implement `IMounteaDialogueWBPInterface`.                                  | `nullptr` |
+| Dialogue Widget Class (Deprecated) | The UI class override for this manager. Superseded - assign the widget class via `UMounteaDialogueConfiguration::DefaultDialogueWidgetClass` instead. | `nullptr` |
 | Default Manager State            | The state applied on BeginPlay.                                                                                    | Enabled   |
 | Manager State                    | Read-only value of Manager State. In order to start Dialogue, this value must not be Disabled.                     | Enabled   |
 | Manager Type                     | Defines the type of the Manager, be it `Environmental` or `Player` one.                                            | Player    |
-| Dialogue Objects                 | An array of dialogue objects. Serves purpose of listeners who receive information about UI events (like World UI). | `empty`   |
-| Dialogue Widget                  | Dialogue Widget which has been created.                                                                            | `nullptr` |
+| Dialogue Objects (Deprecated)    | Formerly an array of UI-event listeners. Superseded - attach a `Mountea Dialogue Participant User Interface Component` to each actor instead. | `empty`   |
+| Dialogue Widget (Deprecated)     | Formerly the created Dialogue Widget reference. Superseded - UI is now owned by the `Mountea Dialogue Participant User Interface Component`. | `nullptr` |
 | Dialogue Context                 | Dialogue Context which is used to contain temporary data. Read-only for standard gameplay scenarios.               | `nullptr` |
 | Dialogue Instigator              | Object which is responsible for starting the Dialogue.                                                             | `nullptr` |
 
+!!! warning "UI Properties Are Deprecated"
+    `Dialogue Widget Class`, `Dialogue Objects`, and `Dialogue Widget` still exist on the component for backward compatibility, but the engine marks all three `DeprecatedProperty` in code. New projects should configure the default widget class on `UMounteaDialogueConfiguration` and attach a `Mountea Dialogue Participant User Interface Component` to the Player Controller instead of relying on these - see the UI Widgets documentation for the current approach.
 
 !!! info inline "Default Fallback"
-    Either set this on the component **or** define a default in **Project Settings → Mountea Dialogue System**.
+    Either set this on the component **or** define a default in **Project Settings - Mountea Dialogue System**.
 
 !!! warning inline end "Active State Restriction"
-    You **cannot** set `Active` as the default state—it’s reserved for runtime only.
+    You **cannot** set `Active` as the default state - it's reserved for runtime only.
 
 ---
 

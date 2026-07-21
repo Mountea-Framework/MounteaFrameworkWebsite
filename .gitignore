@@ -31,3 +31,4 @@ Thumbs.db
 # Logs or temporary files
 *.log
 *.tmp
+/inventour/app/assets

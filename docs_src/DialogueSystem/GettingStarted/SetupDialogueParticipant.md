@@ -12,6 +12,12 @@ tags:
 
 The **Mountea Dialogue Participant** component identifies and configures Actors that engage in dialogues, linking them to specific dialogue trees, managing participant state, and handling voice playback support.
 
+!!! info "Part of a Larger Setup"
+    The Participant is one of four components a fully working setup needs, each on a different actor class: `Mountea Dialogue Participant` (this page) on the **Pawn**, `Mountea Dialogue Participant User Interface Component` on the **Player Controller**, `Mountea Dialogue Manager` on the **Player State**, and `Mountea Dialogue Session` on the **Game State**. See [Dialogue Manager Component](SetupDialogueManager.md) for the Manager side of this setup. The editor's **Setup Defaults** tool can add all four automatically for Blueprint-based project classes.
+
+!!! tip "Implementing the Interface Directly"
+    If you don't want to add this component to a particular Actor, you can implement `IMounteaDialogueParticipantInterface` directly on the Actor class itself instead - the rest of the Dialogue System looks for the interface, not specifically for this component, so either approach works.
+
 ---
 
 ## 1. What Does It Do
@@ -26,7 +32,7 @@ The **Mountea Dialogue Participant** component identifies and configures Actors 
 ## 2. Critical Requirements
 
 !!! info inline "Flexible Placement"
-    Unlike the Manager Component, the Participant Component can be attached to **any Actor**—NPCs, environmental objects, and even the Player Pawn itself.
+    Unlike the Manager Component, the Participant Component can be attached to **any Actor**-NPCs, environmental objects, and even the Player Pawn itself.
 
 !!! danger inline end "Player Dialogue"
     Your **Player Pawn** **must** have this component for full functionality and proper interaction with the Dialogue Manager.
@@ -65,8 +71,8 @@ The **Mountea Dialogue Participant** component identifies and configures Actors 
 ### Step 3: Select Component Version
 Choose between:
 
-- **Mountea Dialogue Participant** – Basic C++ component.
-- **BP_MounteaDialogueParticipant** – Pre-configured Blueprint version.
+- **Mountea Dialogue Participant** - Basic C++ component.
+- **BP_MounteaDialogueParticipant** - Pre-configured Blueprint version.
 
 !!! tip "Quick Setup"
     The blueprint version includes default settings for the Dialogue Graph and Audio Component ID to get you up and running faster.

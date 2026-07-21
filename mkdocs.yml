@@ -41,6 +41,7 @@ nav:
           - Dialogue Editor:
             - Dialogue Tree Editor: DialogueSystem/DialogueEditor/DialogueEditor.md
             - Import Dialogue: DialogueSystem/DialogueEditor/ImportDialogue.md
+            - Setup Defaults: DialogueSystem/DialogueEditor/SetupDefaults.md
           - Dialogue Nodes:
             - Dialogue Node Intro: DialogueSystem/DialogueNodes/DialogueNode.md
             - Start Node: DialogueSystem/DialogueNodes/StartNode.md
@@ -59,7 +60,23 @@ nav:
             - Select Random Dialogue Row: DialogueSystem/DialogueDecorators/SelectRandomDialogueRow.md
             - Send Command: DialogueSystem/DialogueDecorators/SendCommand.md
             - Set Node As Start: DialogueSystem/DialogueDecorators/SetNodeAsStart.md
-            - Swap Participants: DialogueSystem/DialogueDecorators/SwapParticipants.md            
+            - Swap Participants: DialogueSystem/DialogueDecorators/SwapParticipants.md
+          - Dialogue Conditions:
+            - Dialogue Condition Intro: DialogueSystem/DialogueConditions/DialogueCondition.md
+            - Only First Time: DialogueSystem/DialogueConditions/OnlyFirstTime.md
+          - UI Widgets:
+            - UI Widgets Intro: DialogueSystem/UIWidgets/UIWidgets.md
+            - Dialogue Widget: DialogueSystem/UIWidgets/DialogueWidget.md
+            - Dialogue Row Widget: DialogueSystem/UIWidgets/DialogueRowWidget.md
+            - Dialogue Option Widget: DialogueSystem/UIWidgets/DialogueOptionWidget.md
+            - Dialogue Options Container: DialogueSystem/UIWidgets/DialogueOptionsContainer.md
+            - Dialogue Skip Widget: DialogueSystem/UIWidgets/DialogueSkipWidget.md
+            - Participant UI Component: DialogueSystem/UIWidgets/ParticipantUIComponent.md
+          - Architecture:
+            - Dialogue Subsystems: DialogueSystem/Architecture/Subsystems.md
+            - Monologue: DialogueSystem/Architecture/Monologue.md
+          - K2Nodes:
+            - Intro to K2Nodes: DialogueSystem/K2Nodes/IntroToK2Nodes.md
     - Dialoguer:
           - Home: Dialoguer/home.md
           - Getting Started:
