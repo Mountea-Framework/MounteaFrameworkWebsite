@@ -26,7 +26,7 @@
     <div class="card-icon">👉🏻</div>
     <h3 class="card-title">Interaction System</h3>
     <p class="card-description">Open-source components based tool for smart Actor to Actor interactions.</p>
-    <a href="/docs/DialogueSystem/GettingStarted/FirstSteps/" class="card-link"></a>
+    <a href="/docs/InteractionSystem/home" class="card-link"></a>
   </div>
 
   <div class="card status-badge status-wip" data-status="Documentation WIP">
