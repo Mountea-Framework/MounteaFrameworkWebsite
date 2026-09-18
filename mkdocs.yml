@@ -125,6 +125,33 @@ nav:
             - Set Property By Name: AdvancedInventoryEquipmentSystem/K2Nodes/K2Node_SetPropertyByName.md
             - Switch on Command: AdvancedInventoryEquipmentSystem/K2Nodes/K2Node_SwitchOnCommand.md
             - Switch on Input Tag: AdvancedInventoryEquipmentSystem/K2Nodes/K2Node_SwitchOnInputTag.md
+    - Interaction System:
+        - Home: InteractionSystem/home.md
+        - Overview: InteractionSystem/Overview.md
+        - Architecture:
+            - System Architecture: InteractionSystem/Architecture/SystemArchitecture.md
+        - Configuration:
+            - Intro to Configuration: InteractionSystem/Configuration/IntroToConfiguration.md
+            - Interactor Runtime Config: InteractionSystem/Configuration/InteractorRuntimeConfig.md
+            - Interactor UI Config: InteractionSystem/Configuration/InteractorUIConfig.md
+            - Interactable Runtime Config: InteractionSystem/Configuration/InteractableRuntimeConfig.md
+            - Interactable UI Config: InteractionSystem/Configuration/InteractableUIConfig.md
+        - Interactor System:
+            - Overview: InteractionSystem/InteractorSystem/InteractorSystem.md
+            - Interactor Component Overlap: InteractionSystem/InteractorSystem/InteractorComponentOverlap.md
+            - Interactor Component Trace: InteractionSystem/InteractorSystem/InteractorComponentTrace.md
+            - Interactor Component Mouse: InteractionSystem/InteractorSystem/InteractorComponentMouse.md
+        - Interactable System:
+            - Overview: InteractionSystem/InteractableSystem/InteractableSystem.md
+            - Press: InteractionSystem/InteractableSystem/InteractableComponentPress.md
+            - Automatic: InteractionSystem/InteractableSystem/InteractableComponentAutomatic.md
+            - Hold: InteractionSystem/InteractableSystem/InteractableComponentHold.md
+            - Mash: InteractionSystem/InteractableSystem/InteractableComponentMash.md
+            - Hover: InteractionSystem/InteractableSystem/InteractableComponentHover.md
+        - User Interface:
+            - Overview: InteractionSystem/UserInterface/UserInterface.md
+        - K2Nodes:
+            - Intro to K2Nodes: InteractionSystem/K2Nodes/IntroToK2Nodes.md
   - Tags: Tags.md
 
 extra_css:
